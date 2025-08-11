@@ -101,14 +101,14 @@ class AgentState(TypedDict):
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd assign1
+git clone https://github.com/Fuse-Internship/adaptive-exam.git
+
 ```
 
 2. Create and activate virtual environment:
 ```bash
-python -m venv adaptive_learning
-source adaptive_learning/bin/activate  # On Windows: adaptive_learning\Scripts\activate
+python -m venv adaptive_questioning
+source adaptive_learning/bin/activate  # On Windows: adaptive_questioning\Scripts\activate
 ```
 
 3. Install dependencies:
