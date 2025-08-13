@@ -5,18 +5,18 @@
 - pip
 - MongoDB running locally or accessible via URI
 - PostgreSQL running locally or accessible via URI
-- (Optional) Streamlit for frontend
+- Streamlit for frontend
 
 ## Clone Repository
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone https://github.com/Fuse-Internship/adaptive-exam.git
+cd adaptive-exam
 ```
 
 ## Create Virtual Environment
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv FuseMachine-AdaptiveExam-venv
+source FuseMachine-AdaptiveExam-venv/bin/activate
 ```
 
 ## Install Backend Dependencies
