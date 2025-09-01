@@ -4,7 +4,7 @@ import logging
 from typing import Dict, Optional
 from pathlib import Path
 import uuid
-from database import DatabaseManager
+from backend.app.database.postgresql.connection import DatabaseManager
 from psycopg2.extras import RealDictCursor
 
 # Set up logging
@@ -16,7 +16,12 @@ class BayesianIRTDataProcessor:
         self.db_manager = db_manager
         
     def get_existing_students(self) -> pd.DataFrame:
+
         """Get existing students from database"""
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            return pd.DataFrame(columns=['student_id', 'name', 'email'])
+    
         query = "SELECT student_id, name, email FROM students"
         try:
             with self.db_manager.conn.cursor(cursor_factory=RealDictCursor) as cursor:
@@ -29,6 +34,10 @@ class BayesianIRTDataProcessor:
     
     def get_existing_questions(self) -> pd.DataFrame:
         """Get existing questions from database"""
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            return pd.DataFrame(columns=['question_id', 'question_text', 'img_url', 'marks', 'type', 
+                                   'n_choices', 'correct_answer', 'parameter_a', 'parameter_b', 'parameter_c'])
         query = """SELECT question_id, question_text, img_url, marks, type, 
                           n_choices, correct_answer, parameter_a, parameter_b, parameter_c 
                    FROM questions"""
@@ -44,6 +53,9 @@ class BayesianIRTDataProcessor:
     
     def get_student_current_theta(self, student_id: int) -> Optional[float]:
         """Get current Bayesian theta estimate for a student"""
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            return None
         query = """
         SELECT theta_mean 
         FROM bayesian_ability_estimates 
@@ -61,7 +73,7 @@ class BayesianIRTDataProcessor:
     
     def process_json_file(self, file_path: str) -> pd.DataFrame:
         """Process JSON file with Bayesian IRT focus"""
-        from helpers import parse_score, parse_marks, parse_datetime, parse_options_metadata, clean_question_text, extract_choice_info, extract_chosen_answer
+        from backend.app.utils.helpers import parse_score, parse_marks, parse_datetime, parse_options_metadata, clean_question_text, extract_choice_info, extract_chosen_answer
         
         with open(file_path) as f:
             data = json.load(f)
@@ -169,6 +181,9 @@ class BayesianIRTDataProcessor:
         if students_df.empty:
             logger.info("No new students to insert")
             return {}
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            return {}
         
         insert_sql = """
         INSERT INTO students (name, email)
@@ -200,6 +215,9 @@ class BayesianIRTDataProcessor:
         """Insert new questions optimized for Bayesian IRT"""
         if questions_df.empty:
             logger.info("No new questions to insert")
+            return {}
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
             return {}
         
         insert_sql = """
@@ -233,6 +251,11 @@ class BayesianIRTDataProcessor:
     
     def create_test_session(self, student_id: int, session_type: str = "assessment") -> int:
         """Create test session for Bayesian analysis"""
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            raise ConnectionError("Database connection is not available")
+
+        
         insert_sql = """
         INSERT INTO test_sessions (student_id, session_type, selection_strategy)
         VALUES (%s, %s, %s)
@@ -253,7 +276,9 @@ class BayesianIRTDataProcessor:
         """Insert responses optimized for Bayesian IRT"""
         if responses_data.empty:
             return
-        
+        if self.db_manager.conn is None:
+            logger.error("Database connection is not available")
+            raise ConnectionError("Database connection is not available")
         insert_sql = """
         INSERT INTO responses (session_id, question_id, student_id, chosen_answer, 
                              is_correct, response_time_seconds, answered_at,
