@@ -2,11 +2,15 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models, schemas
 from database import engine, SessionLocal
+from question_routes import router as question_router
 
 # Create tables automatically
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Include question router
+app.include_router(question_router)
 
 # Dependency: get DB session
 def get_db():
