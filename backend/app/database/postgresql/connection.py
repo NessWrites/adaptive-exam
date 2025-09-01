@@ -6,29 +6,36 @@ from psycopg2.extras import RealDictCursor
 import logging
 from dotenv import load_dotenv
 import os
-
+from typing import Dict, Any
 load_dotenv()
 
 # Set up logging
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
 
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_HOST = os.getenv('DB_HOST')
-DB_PORT = os.getenv('DB_PORT')
-DB_NAME = os.getenv('DB_NAME')
+\
 # Database URL (adjust password if needed)
-DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"dbname={os.getenv('DB_NAME')} user={os.getenv('DB_USER')} password={os.getenv('DB_PASSWORD')} host={os.getenv('DB_HOST')} port={os.getenv('DB_PORT')}"
 
 
+def get_db_connection_params() -> Dict[str, Any]:
+    """Get database connection parameters from environment variables"""
+    load_dotenv()
+
+    return {
+        "host": os.getenv("DB_HOST", "localhost"),
+        "dbname": os.getenv("DB_NAME"),     # psycopg2 expects "dbname"
+        "user": os.getenv("DB_USER"),
+        "password": os.getenv("DB_PASSWORD"),
+        "port": int(os.getenv("DB_PORT", "5432")),
+    }
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 class DatabaseManager:
-    def __init__(self, connection_params: dict[str,str]):
+    def __init__(self, connection_params: dict[str,str | int] ):
         """_summary_
 
 		Args:
@@ -40,7 +47,7 @@ class DatabaseManager:
     def connect(self):
         """Establish Database Connection"""
         try:
-            self.conn = psycopg2.connect(**self.connection_params)
+            self.conn = self.conn = psycopg2.connect(DATABASE_URL)
             self.conn.autocommit = False
             logger.info("Database connection established")
         except Exception as e:
@@ -54,6 +61,9 @@ class DatabaseManager:
     
     def create_table_if_not_exist(self):
         """Create table optimized for Bayesian IRT Analysis"""
+        if self.conn is None:
+            logger.error("Database connection is not available")
+            raise ConnectionError("Database connection is not available")
         create_table_sql = """
         CREATE TABLE IF NOT EXISTS students(
             student_id SERIAL PRIMARY KEY,
@@ -169,11 +179,12 @@ class DatabaseManager:
         """  
         try:
             with self.conn.cursor() as cursor:
-                cursor.execute(create_tables_sql)
+                cursor.execute(create_table_sql)
                 self.conn.commit()
                 logger.info("Bayesian IRT tables created/verified successfully")
         except Exception as e:
-            self.conn.rollback()
+            if self.conn is not None:
+                self.conn.rollback()
             logger.error(f"Failed to create tables: {e}")
             raise
 
