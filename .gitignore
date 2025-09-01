@@ -9,3 +9,7 @@ env/
 .streamlit/
 *.log
 .DS_Store
+my_scraped_data
+docs
+.env
+web_scraper
