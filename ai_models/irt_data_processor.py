@@ -264,9 +264,13 @@ class BayesianIRTDataProcessor:
         try:
             with self.db_manager.conn.cursor() as cursor:
                 cursor.execute(insert_sql, (student_id, session_type, 'random'))
-                session_id = cursor.fetchone()[0]
+                result = cursor.fetchone()
+                if result is None:
+                    raise ValueError("Failed to create test session - no session_id returned")
+                session_id = result[0]
                 self.db_manager.conn.commit()
                 return session_id
+            
         except Exception as e:
             self.db_manager.conn.rollback()
             logger.error(f"Failed to create test session: {e}")
