@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, Float, Text, TIMESTAMP
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
-from database import Base
+from backend.app.database.postgresql.connection  import Base
 
 class Student(Base):
     __tablename__ = "students"
