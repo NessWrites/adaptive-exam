@@ -13,3 +13,4 @@ env/
 *.log
 .DS_Store
 quiz_answer/
+json_quiz.py
