@@ -1,0 +1,16 @@
+item_id,content,options,correct_answer,topic,a,b,c
+1,"What is the primary activation function used in the output layer for binary classification?",A) Sigmoid; B) ReLU; C) Tanh; D) Softmax,A,ANN,1.2,-0.5,0.2
+2,"Which technique is used to prevent overfitting in a neural network?",A) Increasing learning rate; B) Dropout; C) Adding more layers; D) Using a larger dataset,B,ANN,1.5,-0.2,0.1
+3,"In a CNN, what is the main purpose of a pooling layer?",A) To add non-linearity; B) To perform classification; C) To reduce spatial dimensions; D) To increase the number of feature maps,C,CNN,1.8,0.1,0.2
+4,"Which of these is NOT a common layer type in a Convolutional Neural Network?",A) Convolutional Layer; B) Recurrent Layer; C) Pooling Layer; D) Fully Connected Layer,B,CNN,1.3,-1.0,0.25
+5,"Which algorithm is a classic example of a linear model?",A) Decision Tree; B) K-Nearest Neighbors; C) Logistic Regression; D) Support Vector Machine with RBF kernel,C,Linear Models,1.0,-1.5,0.2
+6,"What is the primary goal of MLOps?",A) To write faster Python code; B) To automate and streamline the machine learning lifecycle; C) To create more complex models; D) To visualize data,B,MLOps,2.0,1.5,0.1
+7,"What does 'CI/CD' stand for in the context of MLOps?",A) Continuous Intelligence / Continuous Deployment; B) Continuous Integration / Continuous Delivery; C) Complex Integration / Complex Delivery; D) Code Integration / Code Deployment,B,MLOps,1.6,1.8,0.15
+8,"Which tool is commonly used to containerize an ML application for deployment?",A) Git; B) Docker; C) Jenkins; D) TensorFlow,B,Docker Deployment,1.9,0.8,0.1
+9,"What is the core idea behind 'Agentic AI'?",A) An AI that can write code; B) An AI that operates autonomously to achieve goals; C) An AI that specializes in image recognition; D) An AI that can only follow pre-programmed instructions,B,Agentic AI,2.2,2.0,0.05
+10,"In a Decision Tree, what does 'entropy' measure?",A) The purity of a split; B) The depth of the tree; C) The number of leaves; D) The accuracy of the model,A,Decision Tree,1.4,-0.8,0.2
+11,"Which of the following is an example of an ensemble model?",A) Linear Regression; B) K-Means Clustering; C) Random Forest; D) A single Perceptron,C,Ensemble Models,1.7,0.5,0.1
+12,"Bagging is a technique used in ensemble models primarily to reduce...?",A) Bias; B) Variance; C) Both Bias and Variance; D) Computational cost,B,Ensemble Models,1.8,1.2,0.15
+13,"Gradient Boosting builds trees sequentially, where each new tree corrects the errors of the previous one. True or False?",A) True; B) False,A,Ensemble Models,2.1,1.0,0.0
+14,"What is the name of the optimizer that adapts the learning rate for each parameter?",A) SGD; B) Adam; C) Momentum; D) Adagrad,B,ANN,1.6,0.3,0.2
+15,"Which component of a transformer architecture allows the model to weigh the importance of different words in the input sequence?",A) Positional Encoding; B) Self-Attention Mechanism; C) Feed-Forward Network; D) Layer Normalization,B,Agentic AI,2.5,1.9,0.1
