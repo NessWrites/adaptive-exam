@@ -12,3 +12,4 @@ env/
 .streamlit/
 *.log
 .DS_Store
+quiz_answer/
