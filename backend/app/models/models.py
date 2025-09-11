@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, Float, Text, TIMESTAMP
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
-from backend.app.database.postgresql.connection  import Base
+from ..database.postgresql.connection import Base
 
 class Student(Base):
     __tablename__ = "students"
@@ -54,7 +54,7 @@ class TestSession(Base):
     selection_strategy = Column(String)
     session_type = Column(String(100), default="assessment")
     current_item_pool = Column(JSONB)
-    metadata = Column(JSONB)
+    session_metadata = Column(JSONB)
 
 class Response(Base):
     __tablename__ = "responses"
@@ -113,5 +113,5 @@ class Submission(Base):
     created_at = Column(TIMESTAMP, server_default=func.now())
 
     __table_args__ = (
-        {"schema": "public", "postgresql_unique_constraint": ["student_id", "question_id", "submitted_at"]}
+        {"schema": "public"}
     )
