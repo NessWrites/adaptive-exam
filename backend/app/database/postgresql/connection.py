@@ -13,9 +13,8 @@ load_dotenv()
 logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__name__)
 
-\
 # Database URL (adjust password if needed)
-DATABASE_URL = f"dbname={os.getenv('DB_NAME')} user={os.getenv('DB_USER')} password={os.getenv('DB_PASSWORD')} host={os.getenv('DB_HOST')} port={os.getenv('DB_PORT')}"
+DATABASE_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 
 
 def get_db_connection_params() -> Dict[str, Any]:
