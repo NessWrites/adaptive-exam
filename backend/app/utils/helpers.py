@@ -2,12 +2,12 @@ import pandas as pd
 import json
 import re
 from datetime import datetime, date
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Optional
 
 def format_response(data):
     return {"success": True, "data": data}
 
-def parse_score(score_str: str) -> Tuple FIGURETuple[int, int]:
+def parse_score(score_str: str) -> Tuple[Optional[int], Optional[int]]:
     try:
         obtained, total = score_str.split('/')
         return int(obtained), int(total)
