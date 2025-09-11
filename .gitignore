@@ -11,3 +11,5 @@ env/
 .DS_Store
 json_quiz.py
 quiz_answer/
+bayesian_env
+past_questions/*.json
