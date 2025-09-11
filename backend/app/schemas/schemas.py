@@ -32,7 +32,7 @@ class QuestionCreate(BaseModel):
     img_url: Optional[str] = None
     marks: Optional[int] = None
     type: Optional[str] = Field(None, max_length=100)
-    n_choices: int = Field(..., ge=1, default=1)
+    n_choices: int = Field(default=1, ge=1)
     correct_answer: Optional[int] = None
     parameter_a: Optional[float] = None
     parameter_b: Optional[float] = None
@@ -61,8 +61,8 @@ class TestSessionCreate(BaseModel):
     student_id: int = Field(..., gt=0)
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
-    selection_strategy: str = Field(..., max_length=255, default="random")
-    session_type: str = Field(..., max_length=100, default="assessment")
+    selection_strategy: str = Field(default="random", max_length=255)
+    session_type: str = Field(default="assessment", max_length=100)
     current_item_pool: Optional[List[str]] = None
     metadata: Optional[Dict] = None
 
@@ -133,8 +133,8 @@ class BayesianAbilityEstimateCreate(BaseModel):
     theta_std: Optional[float] = None
     theta_samples: Optional[List[float]] = None
     posterior_summary: Optional[Dict] = None
-    model_version: str = Field(..., max_length=100, default="bayesian_irt_v1")
-    estimation_method: str = Field(..., max_length=100, default="mcmc")
+    model_version: str = Field(default="bayesian_irt_v1", max_length=100)
+    estimation_method: str = Field(default="mcmc", max_length=100)
     n_samples: Optional[int] = None
     convergence_diagnostics: Optional[Dict] = None
 
@@ -163,8 +163,21 @@ class QuestionParameterCreate(BaseModel):
     parameter_c_mean: Optional[float] = None
     parameter_c_std: Optional[float] = None
     parameter_samples: Optional[Dict] = None
-    model_version: str = Field(..., max_length=100, default="bayesian_irt_v1")
-    estimation_method: str = Field(..., max_length=100, default="mcmc")
+    model_version: str = Field(default="bayesian_irt_v1", max_length=100)
+    estimation_method: str = Field(default="mcmc", max_length=100)
+    n_samples: Optional[int] = None
+    convergence_diagnostics: Optional[Dict] = None
+
+class QuestionParameterUpdate(BaseModel):
+    parameter_a_mean: Optional[float] = None
+    parameter_a_std: Optional[float] = None
+    parameter_b_mean: Optional[float] = None
+    parameter_b_std: Optional[float] = None
+    parameter_c_mean: Optional[float] = None
+    parameter_c_std: Optional[float] = None
+    parameter_samples: Optional[Dict] = None
+    model_version: Optional[str] = None
+    estimation_method: Optional[str] = None
     n_samples: Optional[int] = None
     convergence_diagnostics: Optional[Dict] = None
 
@@ -182,6 +195,24 @@ class QuestionParameterOut(BaseModel):
     estimation_method: str
     n_samples: Optional[int]
     convergence_diagnostics: Optional[Dict]
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# Lightweight summary without heavy parameter_samples to avoid large payloads
+class QuestionParameterSummaryOut(BaseModel):
+    param_id: int
+    question_id: str
+    parameter_a_mean: Optional[float]
+    parameter_a_std: Optional[float]
+    parameter_b_mean: Optional[float]
+    parameter_b_std: Optional[float]
+    parameter_c_mean: Optional[float]
+    parameter_c_std: Optional[float]
+    model_version: str
+    estimation_method: str
+    n_samples: Optional[int]
     updated_at: datetime
 
     class Config:
@@ -282,5 +313,4 @@ class PerformanceFeedbackOut(BaseModel):
     class Config:
         from_attributes = True
 
-    def model_dump_json(self, *args, **kwargs) -> str:
-        return super().model_dump_json(*args, **kwargs)
+    
