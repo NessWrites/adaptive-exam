@@ -2,7 +2,7 @@ aesara==2.9.4
 alembic==1.12.1
 annotated-types==0.7.0
 anyio==3.7.1
-arviz==0.22.0
+arviz[preview]==0.22.0
 cachetools==6.2.0
 click==8.2.1
 cloudpickle==3.1.1
