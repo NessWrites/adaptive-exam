@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Union
 from datetime import date, datetime
 import json
 
@@ -33,7 +33,7 @@ class QuestionCreate(BaseModel):
     marks: Optional[int] = None
     type: Optional[str] = Field(None, max_length=100)
     n_choices: int = Field(default=1, ge=1)
-    correct_answer: Optional[int] = None
+    correct_answer: Optional[Union[int, List[int]]] = None  # Changed to support both single and multiple answers
     parameter_a: Optional[float] = None
     parameter_b: Optional[float] = None
     parameter_c: Optional[float] = None
@@ -46,7 +46,7 @@ class QuestionOut(BaseModel):
     marks: Optional[int]
     type: Optional[str]
     n_choices: int
-    correct_answer: Optional[int]
+    correct_answer: Optional[Union[int, List[int]]]  # Changed to support both single and multiple answers
     parameter_a: Optional[float]
     parameter_b: Optional[float]
     parameter_c: Optional[float]
@@ -89,7 +89,7 @@ class ResponseCreate(BaseModel):
     session_id: int = Field(..., gt=0)
     question_id: str = Field(..., max_length=50)
     student_id: int = Field(..., gt=0)
-    chosen_answer: int = Field(..., ge=1)
+    chosen_answer: Union[int, List[int]] = Field(...) 
     is_correct: int = Field(..., ge=0, le=1)
     response_time_seconds: Optional[float] = None
     answered_at: Optional[datetime] = None
@@ -109,23 +109,25 @@ class ResponseCreate(BaseModel):
 
 class ResponseOut(BaseModel):
     response_id: int
+    student_id: int
     session_id: int
     question_id: str
-    student_id: int
-    chosen_answer: int
+    chosen_answer: List[int]  # This should also be List if storing multiple choices
     is_correct: int
-    response_time_seconds: Optional[float]
+    response_time_seconds: Optional[float] = None
     answered_at: datetime
-    theta_before: Optional[float]
-    theta_after: Optional[float]
-    theta_change: Optional[float]
-    confidence_interval_low: Optional[float]
-    confidence_interval_high: Optional[float]
-    item_parameters: Optional[Dict[str, float]]
-    response_metadata: Optional[Dict]
+    theta_before: Optional[float] = None
+    theta_after: Optional[float] = None
+    theta_change: Optional[float] = None
+    confidence_interval_low: Optional[float] = None
+    confidence_interval_high: Optional[float] = None
+    item_parameters: Optional[dict] = None
+    response_metadata: Optional[dict] = None
 
     class Config:
         from_attributes = True
+
+
 
 class BayesianAbilityEstimateCreate(BaseModel):
     student_id: int = Field(..., gt=0)
