@@ -58,6 +58,23 @@ class DatabaseManager:
             self.conn.close()
             logger.info("Database connection is closed")
     
+    def execute_query(self, query: str, params: tuple = None):
+        """Execute a SQL query with optional parameters"""
+        if self.conn is None:
+            self.connect()
+            
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(query, params)
+            self.conn.commit()
+            logger.debug(f"Executed query: {query}")
+        except Exception as e:
+            self.conn.rollback()
+            logger.error(f"Failed to execute query: {e}")
+            raise
+
+    
+    
     def create_table_if_not_exist(self):
         """Create table optimized for Bayesian IRT Analysis"""
         if self.conn is None:
@@ -66,20 +83,20 @@ class DatabaseManager:
         create_table_sql = """
         CREATE TABLE IF NOT EXISTS students(
             student_id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
+            name VARCHAR(255),
+            email VARCHAR(255) UNIQUE NOT NULL,
             enrollment_date DATE DEFAULT CURRENT_DATE
 		);
   
         CREATE TABLE IF NOT EXISTS questions(
             question_id VARCHAR(50) PRIMARY KEY,
+            question_number VARCHAR(50),
             question_text TEXT,
             img_url TEXT,
             marks INTEGER,
             type VARCHAR(100),
             n_choices INTEGER NOT NULL DEFAULT 1,
-            correct_answer INTEGER,
-            options_metadata JSONB,
+            correct_answer JSONB,
             parameter_a FLOAT,
             parameter_b FLOAT,
             parameter_c FLOAT,
@@ -94,18 +111,18 @@ class DatabaseManager:
             start_time TIMESTAMP DEFAULT NOW(),
             end_time TIMESTAMP,
             selection_strategy VARCHAR(255) DEFAULT 'random',
-            selection_type VARCHAR(100) DEFAULT 'assessment',
+            session_type VARCHAR(100) DEFAULT 'assessment',
             current_item_pool JSONB,
-            metadata JSONB
+            session_metadata JSONB
         );
         
         CREATE TABLE IF NOT EXISTS responses (
             response_id SERIAL PRIMARY KEY,
-            session_id INTEGER REFERENCES test_sessions(session_id) ON DELETE CASCADE,
-            question_id VARCHAR(50) REFERENCES questions(question_id),
             student_id INTEGER REFERENCES students(student_id),
-            chosen_answer INTEGER NOT NULL,
-            is_correct INTEGER NOT NULL,
+            session_id INTEGER REFERENCES test_sessions(session_id) ON DELETE CASCADE,
+            question_id VARCHAR(50) REFERENCES questions(question_id) ON DELETE CASCADE,
+            chosen_answer JSONB NOT NULL,
+            is_correct INTEGER,
             response_time_seconds FLOAT,
             answered_at TIMESTAMP DEFAULT NOW(),
             theta_before FLOAT,
@@ -114,7 +131,8 @@ class DatabaseManager:
             confidence_interval_low FLOAT,
             confidence_interval_high FLOAT,
             item_parameters JSONB,
-            response_metadata JSONB
+            response_metadata JSONB,
+            UNIQUE(student_id, question_id)
         );
         
         CREATE TABLE IF NOT EXISTS bayesian_ability_estimates (
@@ -178,7 +196,12 @@ class DatabaseManager:
         """  
         try:
             with self.conn.cursor() as cursor:
-                cursor.execute(create_table_sql)
+                # Split the SQL into individual statements and execute them separately
+                sql_statements = create_table_sql.split(';')
+                for statement in sql_statements:
+                    statement = statement.strip()
+                    if statement:
+                        cursor.execute(statement)
                 self.conn.commit()
                 logger.info("Bayesian IRT tables created/verified successfully")
         except Exception as e:
