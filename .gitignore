@@ -13,3 +13,7 @@ env/
 *.log
 .DS_Store
 *.json
+quiz_answer/
+json_quiz.py
+scrapper/
+quiz_eda.ipynb
