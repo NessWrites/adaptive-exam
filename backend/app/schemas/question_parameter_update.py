@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List, Union
 
 class QuestionParameterBase(BaseModel):
     a: float
@@ -7,7 +7,7 @@ class QuestionParameterBase(BaseModel):
     c: float
 
 class QuestionParameterCreate(QuestionParameterBase):
-    question_id: int   # link to a question
+    question_id: str  # Changed from int to str to match your database schema
 
 class QuestionParameterUpdate(BaseModel):
     a: Optional[float] = None
@@ -16,7 +16,7 @@ class QuestionParameterUpdate(BaseModel):
 
 class QuestionParameterOut(QuestionParameterBase):
     param_id: int
-    question_id: int
+    question_id: str  # Changed from int to str to match your database schema
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # Updated for Pydantic v2
