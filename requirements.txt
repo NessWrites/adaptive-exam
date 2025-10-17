@@ -62,3 +62,4 @@ watchfiles==1.1.0
 websockets==15.0.1
 xarray==2025.9.0
 xarray-einstats==0.9.1
+streamlit
