@@ -97,10 +97,16 @@ class DatabaseManager:
             type VARCHAR(100),
             n_choices INTEGER NOT NULL DEFAULT 1,
             correct_answer JSONB,
+            options JSONB,
+            options_metadata TEXT,
             parameter_a FLOAT,
             parameter_b FLOAT,
             parameter_c FLOAT,
+            parameter_a_2pl FLOAT,
+            parameter_b_2pl FLOAT,
             difficulty_level VARCHAR(50),
+            topic_dimension VARCHAR(100),
+            cognitive_dimension VARCHAR(100),
             created_at TIMESTAMP DEFAULT NOW(),
             updated_at TIMESTAMP DEFAULT NOW()
         );
@@ -142,11 +148,12 @@ class DatabaseManager:
             theta_std FLOAT,
             theta_samples JSONB,
             posterior_summary JSONB,
-            model_version VARCHAR(100) DEFAULT 'bayesian_irt_v1',
+            version VARCHAR(100) DEFAULT 'bayesian_irt_v1',
             estimation_method VARCHAR(100) DEFAULT 'mcmc',
             n_samples INTEGER,
             convergence_diagnostics JSONB,
-            updated_at TIMESTAMP DEFAULT NOW()
+            updated_at TIMESTAMP DEFAULT NOW(),
+            UNIQUE(student_id, version)
         );
         
         CREATE TABLE IF NOT EXISTS question_parameters (
@@ -159,11 +166,12 @@ class DatabaseManager:
             parameter_c_mean FLOAT,
             parameter_c_std FLOAT,
             parameter_samples JSONB,
-            model_version VARCHAR(100) DEFAULT 'bayesian_irt_v1',
+            version VARCHAR(100) DEFAULT 'bayesian_irt_v1',
             estimation_method VARCHAR(100) DEFAULT 'mcmc',
             n_samples INTEGER,
             convergence_diagnostics JSONB,
-            updated_at TIMESTAMP DEFAULT NOW()
+            updated_at TIMESTAMP DEFAULT NOW(),
+            UNIQUE(question_id, version)
         );
         
          -- Legacy submissions table for backward compatibility
