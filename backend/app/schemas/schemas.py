@@ -34,10 +34,13 @@ class QuestionCreate(BaseModel):
     type: Optional[str] = Field(None, max_length=100)
     n_choices: int = Field(default=1, ge=1)
     correct_answer: Optional[Union[int, List[int]]] = None  # Changed to support both single and multiple answers
+    options: Optional[List[Dict[str, Any]]] = None  # Question options as list of dictionaries
     parameter_a: Optional[float] = None
     parameter_b: Optional[float] = None
     parameter_c: Optional[float] = None
     difficulty_level: Optional[str] = Field(None, max_length=50)
+    topic_dimension: Optional[str] = Field(None, max_length=100)
+    cognitive_dimension: Optional[str] = Field(None, max_length=100)
 
 class QuestionOut(BaseModel):
     question_id: str
@@ -47,10 +50,15 @@ class QuestionOut(BaseModel):
     type: Optional[str]
     n_choices: int
     correct_answer: Optional[Union[int, List[int]]]  # Changed to support both single and multiple answers
-    parameter_a: Optional[float]
-    parameter_b: Optional[float]
-    parameter_c: Optional[float]
+    options: Optional[List[Dict[str, Any]]]  # Question options as list of dictionaries
+    parameter_a: Optional[float]  # 3PL discrimination
+    parameter_b: Optional[float]  # 3PL difficulty
+    parameter_c: Optional[float]  # 3PL guessing
+    parameter_a_2pl: Optional[float]  # 2PL discrimination
+    parameter_b_2pl: Optional[float]  # 2PL difficulty
     difficulty_level: Optional[str]
+    topic_dimension: Optional[str]
+    cognitive_dimension: Optional[str]
     created_at: datetime
     updated_at: datetime
 
@@ -135,7 +143,7 @@ class BayesianAbilityEstimateCreate(BaseModel):
     theta_std: Optional[float] = None
     theta_samples: Optional[List[float]] = None
     posterior_summary: Optional[Dict] = None
-    model_version: str = Field(default="bayesian_irt_v1", max_length=100)
+    version: str = Field(default="bayesian_irt_v1", max_length=100)
     estimation_method: str = Field(default="mcmc", max_length=100)
     n_samples: Optional[int] = None
     convergence_diagnostics: Optional[Dict] = None
@@ -147,7 +155,7 @@ class BayesianAbilityEstimateOut(BaseModel):
     theta_std: Optional[float]
     theta_samples: Optional[List[float]]
     posterior_summary: Optional[Dict]
-    model_version: str
+    version: str
     estimation_method: str
     n_samples: Optional[int]
     convergence_diagnostics: Optional[Dict]
@@ -165,7 +173,7 @@ class QuestionParameterCreate(BaseModel):
     parameter_c_mean: Optional[float] = None
     parameter_c_std: Optional[float] = None
     parameter_samples: Optional[Dict] = None
-    model_version: str = Field(default="bayesian_irt_v1", max_length=100)
+    version: str = Field(default="bayesian_irt_v1", max_length=100)
     estimation_method: str = Field(default="mcmc", max_length=100)
     n_samples: Optional[int] = None
     convergence_diagnostics: Optional[Dict] = None
@@ -178,7 +186,7 @@ class QuestionParameterUpdate(BaseModel):
     parameter_c_mean: Optional[float] = None
     parameter_c_std: Optional[float] = None
     parameter_samples: Optional[Dict] = None
-    model_version: Optional[str] = None
+    version: Optional[str] = None
     estimation_method: Optional[str] = None
     n_samples: Optional[int] = None
     convergence_diagnostics: Optional[Dict] = None
@@ -193,7 +201,7 @@ class QuestionParameterOut(BaseModel):
     parameter_c_mean: Optional[float]
     parameter_c_std: Optional[float]
     parameter_samples: Optional[Dict]
-    model_version: str
+    version: str
     estimation_method: str
     n_samples: Optional[int]
     convergence_diagnostics: Optional[Dict]
@@ -212,7 +220,7 @@ class QuestionParameterSummaryOut(BaseModel):
     parameter_b_std: Optional[float]
     parameter_c_mean: Optional[float]
     parameter_c_std: Optional[float]
-    model_version: str
+    version: str
     estimation_method: str
     n_samples: Optional[int]
     updated_at: datetime
@@ -262,7 +270,7 @@ class AbilityEstimateCreate(BaseModel):
     theta_confidence_high: float = Field(..., ge=-5.0, le=5.0)
     percentile_score: float = Field(..., ge=0.0, le=100.0)
     theta_history: Optional[Dict[str, float]] = None
-    irt_model_version: str = Field(..., max_length=50)
+    irt_version: str = Field(..., max_length=50)
 
     @field_validator('theta_confidence_low', 'theta_confidence_high')
     def validate_confidence_bounds(cls, v: float, info) -> float:
@@ -282,7 +290,7 @@ class AbilityEstimateOut(BaseModel):
     theta_confidence_high: float
     percentile_score: float
     theta_history: Optional[Dict[str, float]]
-    irt_model_version: str
+    irt_version: str
     updated_at: datetime
 
     class Config:
