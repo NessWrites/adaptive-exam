@@ -270,7 +270,31 @@ async def compute_bayesian_ability_estimates_2pl(
         # Additional validation for 2PL stability
         validation = validate_data_for_2pl(bayesian_data['response_matrix'])
         if validation['warnings']:
-            logger.warning(f"Data validation warnin...(truncated 8214 characters)...ta estimates")
+            logger.warning(f"Data validation warnings: {validation['warnings']}")
+        
+        # Run the appropriate 2PL model based on parameters
+        if use_simple_model:
+            logger.info("Using simple 2PL model")
+            results = run_simple_2pl_model(bayesian_data)
+        else:
+            logger.info("Using adaptive 2PL model")
+            results = run_adaptive_2pl_model(bayesian_data)
+        
+        model_used = results.get('model_used', 'unknown')
+        logger.info(f"Model used: {model_used}")
+        
+        # Validate results
+        if 'theta_estimates' not in results:
+            raise HTTPException(
+                status_code=500,
+                detail="Model failed to produce theta estimates"
+            )
+        
+        theta_estimates = results["theta_estimates"]
+        theta_stds = results.get("theta_stds", [0.1] * len(theta_estimates))
+        
+        # Check for issues
+        if np.any(np.isnan(theta_estimates)) or np.any(np.isinf(theta_estimates)):
             raise HTTPException(
                 status_code=500,
                 detail="Numerical instability in ability estimates"
@@ -315,6 +339,43 @@ async def compute_bayesian_ability_estimates_2pl(
             raise HTTPException(status_code=500, detail="No valid estimates could be created")
         
         logger.info(f"✅ Successfully created {estimates_created} ability estimates using {model_used}")
+        
+        # Update question parameters in the Questions table if available
+        parameters_updated = 0
+        if 'difficulty_estimates' in results and 'discrimination_estimates' in results:
+            difficulty_estimates = results['difficulty_estimates']
+            discrimination_estimates = results['discrimination_estimates']
+            
+            logger.info(f"Updating 2PL question parameters for {len(bayesian_data['question_ids'])} questions")
+            
+            for i, question_id in enumerate(bayesian_data['question_ids']):
+                try:
+                    # Get parameter estimates (clip to reasonable ranges)
+                    a_val = float(np.clip(discrimination_estimates[i], 0.01, 5.0)) if np.isfinite(discrimination_estimates[i]) else 1.0
+                    b_val = float(np.clip(difficulty_estimates[i], -5.0, 5.0)) if np.isfinite(difficulty_estimates[i]) else 0.0
+                    
+                    # Update the Questions table with 2PL parameters
+                    db_question = db.query(models.Question).filter(
+                        models.Question.question_id == question_id
+                    ).first()
+                    
+                    if db_question:
+                        db_question.parameter_a_2pl = a_val
+                        db_question.parameter_b_2pl = b_val
+                        db_question.updated_at = func.now()
+                        logger.info(f"Updated Question {question_id}: a_2pl={a_val:.3f}, b_2pl={b_val:.3f}")
+                        parameters_updated += 1
+                    else:
+                        logger.warning(f"Question {question_id} not found in Questions table")
+                    
+                except Exception as e:
+                    logger.error(f"Failed to update parameters for question {question_id}: {e}")
+                    continue
+            
+            logger.info(f"Updated {parameters_updated} question parameters")
+        else:
+            logger.warning("No question parameters found in 2PL model results")
+        
         db.commit()
         
         # Return results
@@ -522,7 +583,7 @@ async def compute_adaptive_2pl_with_relaxed_preprocessing(
                         db_param.parameter_a_mean = a_val
                         db_param.parameter_b_mean = b_val
                         db_param.parameter_c_mean = 0.0  # 2PL model has no guessing parameter
-                        db_param.model_version = "adaptive_2pl_v1"
+                        db_param.version = "adaptive_2pl_v1"
                         db_param.estimation_method = "mcmc"
                         db_param.updated_at = func.now()
                     else:
@@ -532,21 +593,21 @@ async def compute_adaptive_2pl_with_relaxed_preprocessing(
                             parameter_a_mean=a_val,
                             parameter_b_mean=b_val,
                             parameter_c_mean=0.0,  # 2PL model has no guessing parameter
-                            model_version="adaptive_2pl_v1",
+                            version="adaptive_2pl_v1",
                             estimation_method="mcmc"
                         )
                         db.add(db_param)
                     
-                    # Also update the main Questions table
+                    # Also update the main Questions table with 2PL parameters
                     db_question = db.query(models.Question).filter(
                         models.Question.question_id == question_id
                     ).first()
                     if db_question:
-                        db_question.parameter_a = a_val
-                        db_question.parameter_b = b_val
-                        db_question.parameter_c = 0.0  # 2PL model has no guessing parameter
+                        # Store 2PL parameters separately
+                        db_question.parameter_a_2pl = a_val
+                        db_question.parameter_b_2pl = b_val
                         db_question.updated_at = func.now()
-                        logger.info(f"Updated Question {question_id}: a={a_val:.3f}, b={b_val:.3f}")
+                        logger.info(f"Updated Question {question_id}: a_2pl={a_val:.3f}, b_2pl={b_val:.3f}")
                     else:
                         logger.warning(f"Question {question_id} not found in Questions table")
                     
