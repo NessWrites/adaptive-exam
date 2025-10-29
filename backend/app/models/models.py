@@ -22,10 +22,16 @@ class Question(Base):
     type = Column(String(100))
     n_choices = Column(Integer, nullable=False, default=1)
     correct_answer = Column(JSONB)
-    parameter_a = Column(Float)
-    parameter_b = Column(Float)
-    parameter_c = Column(Float)
+    options = Column(JSONB)  # Store question options as JSON
+    options_metadata = Column(Text)  # Store options_metadata from JSON files
+    parameter_a = Column(Float)  # 3PL discrimination
+    parameter_b = Column(Float)  # 3PL difficulty
+    parameter_c = Column(Float)  # 3PL guessing
+    parameter_a_2pl = Column(Float)  # 2PL discrimination
+    parameter_b_2pl = Column(Float)  # 2PL difficulty
     difficulty_level = Column(String(50))
+    topic_dimension = Column(String(100))
+    cognitive_dimension = Column(String(100))
     created_at = Column(TIMESTAMP, server_default=func.now())
     updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
 
@@ -39,7 +45,7 @@ class BayesianAbilityEstimate(Base):
     theta_std = Column(Float)
     theta_samples = Column(JSONB)
     posterior_summary = Column(JSONB)
-    model_version = Column(String(100), default="bayesian_irt_v1")
+    version = Column(String(100), default="bayesian_irt_v1")
     estimation_method = Column(String(100), default="mcmc")
     n_samples = Column(Integer)
     convergence_diagnostics = Column(JSONB)
@@ -91,7 +97,7 @@ class QuestionParameter(Base):
     parameter_c_mean = Column(Float)
     parameter_c_std = Column(Float)
     parameter_samples = Column(JSONB)
-    model_version = Column(String(100), default="bayesian_irt_v1")
+    version = Column(String(100), default="bayesian_irt_v1")
     estimation_method = Column(String(100), default="mcmc")
     n_samples = Column(Integer)
     convergence_diagnostics = Column(JSONB)
