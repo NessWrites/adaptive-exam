@@ -84,7 +84,7 @@ async def upload_json_data(file: UploadFile = File(...), db: Session = Depends(g
                 composite_key = (
                     f"{row.get('question_number', '') or ''}|{row.get('question_text', '') or ''}|{row.get('img_url', '') or ''}|"
                     f"{row.get('marks', '') or ''}|{row.get('type', '') or ''}|{row.get('n_choices', '') or ''}|"
-                    f"{row.get('correct_answer', '[]') or '[]'}"
+                    f"{row.get('correct_answer', '[]') or '[]'}|{row.get('topic_dimension', '') or ''}|{row.get('cognitive_dimension', '') or ''}"
                 )
                 all_question_mapping[composite_key] = row['question_id']
         
@@ -100,7 +100,7 @@ async def upload_json_data(file: UploadFile = File(...), db: Session = Depends(g
             q_composite_key = (
                 f"{response.get('question_number', '') or ''}|{response.get('question_text', '') or ''}|{response.get('img_url', '') or ''}|"
                 f"{response.get('marks', '') or ''}|{response.get('type', '') or ''}|{response.get('n_choices', '') or ''}|"
-                f"{json.dumps(response.get('correct_answer', []) or [])}"
+                f"{json.dumps(response.get('correct_answer', []) or [])}|{response.get('topic_dimension', '') or ''}|{response.get('cognitive_dimension', '') or ''}"
             )
             
             question_id = all_question_mapping.get(q_composite_key)
@@ -269,7 +269,7 @@ async def upload_multiple_json_data(files: List[UploadFile] = File(...), db: Ses
 						composite_key = (
 							f"{row.get('question_number', '') or ''}|{row.get('question_text', '') or ''}|{row.get('img_url', '') or ''}|"
 							f"{row.get('marks', '') or ''}|{row.get('type', '') or ''}|{row.get('n_choices', '') or ''}|"
-							f"{row.get('correct_answer', '[]') or '[]'}"
+							f"{row.get('correct_answer', '[]') or '[]'}|{row.get('topic_dimension', '') or ''}|{row.get('cognitive_dimension', '') or ''}"
 						)
 						all_question_mapping[composite_key] = row['question_id']
 				
@@ -285,7 +285,7 @@ async def upload_multiple_json_data(files: List[UploadFile] = File(...), db: Ses
 					q_composite_key = (
 						f"{response.get('question_number', '') or ''}|{response.get('question_text', '') or ''}|{response.get('img_url', '') or ''}|"
 						f"{response.get('marks', '') or ''}|{response.get('type', '') or ''}|{response.get('n_choices', '') or ''}|"
-						f"{json.dumps(response.get('correct_answer', []) or [])}"
+						f"{json.dumps(response.get('correct_answer', []) or [])}|{response.get('topic_dimension', '') or ''}|{response.get('cognitive_dimension', '') or ''}"
 					)
 					
 					question_id = all_question_mapping.get(q_composite_key)
