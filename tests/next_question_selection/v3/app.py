@@ -441,33 +441,61 @@ if page == "Take Test":
         # Test completion page
         st.success("🎉 Test Completed!")
         st.balloons()
-        
-        # Get diagnostic report
-        diagnostic_report = cat.get_diagnostic_report()
-        
-        # Save results
-        results = cat.export_results()
-        results_file = save_results(results)
-        
-        st.header("📊 Your Multidimensional Ability Profile")
-        
-        # Create visualizations
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            radar_fig = create_radar_chart(diagnostic_report['diagnostic_profile'])
-            st.plotly_chart(radar_fig, use_container_width=True)
-        
-        with col2:
-            bars_fig = create_dimension_bars(diagnostic_report['diagnostic_profile'])
-            st.plotly_chart(bars_fig, use_container_width=True)
-        
-        # Content coverage chart
-        coverage_fig = create_content_coverage_chart(
-            diagnostic_report['content_coverage']['topics'],
-            diagnostic_report['content_coverage']['cognitive_levels']
-        )
-        st.plotly_chart(coverage_fig, use_container_width=True)
+
+        if st.session_state.get('model_type') == 'Conventional':
+            # Conventional completion: show summary and comparison (no IRT diagnostics)
+            st.header("📊 Conventional Test Summary")
+            stats = cat.get_test_statistics()
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric("Total Questions", stats['total_questions'])
+                st.metric("Correct Answers", stats['correct_answers'])
+                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
+
+            with col2:
+                st.metric("Average Difficulty", f"{stats['average_difficulty']:.2f}")
+                st.write(f"Range: {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
+
+            with col3:
+                st.write("**Topic Distribution:**")
+                for topic, count in stats['topic_distribution'].items():
+                    st.write(f"• {topic}: {count}")
+
+            st.markdown("---")
+            st.subheader("🆚 Why We Prefer IRT (3PL)")
+            st.write("- Adaptive selection matches difficulty to ability")
+            st.write("- Fewer questions needed for accurate estimates")
+            st.write("- Rich diagnostic feedback across dimensions")
+
+        else:
+            # IRT completion: diagnostics and export
+            diagnostic_report = cat.get_diagnostic_report()
+
+            # Save results
+            results = cat.export_results()
+            results_file = save_results(results)
+
+            st.header("📊 Your Multidimensional Ability Profile")
+
+            # Create visualizations
+            col1, col2 = st.columns(2)
+
+            with col1:
+                radar_fig = create_radar_chart(diagnostic_report['diagnostic_profile'])
+                st.plotly_chart(radar_fig, use_container_width=True)
+
+            with col2:
+                bars_fig = create_dimension_bars(diagnostic_report['diagnostic_profile'])
+                st.plotly_chart(bars_fig, use_container_width=True)
+
+            # Content coverage chart
+            coverage_fig = create_content_coverage_chart(
+                diagnostic_report['content_coverage']['topics'],
+                diagnostic_report['content_coverage']['cognitive_levels']
+            )
+            st.plotly_chart(coverage_fig, use_container_width=True)
         
         # Detailed results
         st.header("📋 Detailed Results")
