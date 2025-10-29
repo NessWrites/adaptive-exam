@@ -90,10 +90,12 @@ class BayesianIRTDataProcessor:
 
         def create_composite_key(row, answer_is_json=False):
             correct_answer_str = row['correct_answer'] if answer_is_json else json.dumps(row.get('correct_answer') or [])
+            topic_dimension = row.get('topic_dimension', '')
+            cognitive_dimension = row.get('cognitive_dimension', '')
             return (
                 f"{row.get('question_number', '')}|{row.get('question_text', '')}|{row.get('img_url', '')}|"
                 f"{row.get('marks', '')}|{row.get('type', '')}|{row.get('n_choices', '')}|"
-                f"{correct_answer_str}"
+                f"{correct_answer_str}|{topic_dimension}|{cognitive_dimension}"
             )
 
         all_questions_db['composite_key'] = all_questions_db.apply(lambda row: create_composite_key(row, answer_is_json=True), axis=1)
@@ -160,9 +162,11 @@ class BayesianIRTDataProcessor:
         if self.db_manager.conn is None:
             logger.error("Database connection is not available")
             return pd.DataFrame(columns=['question_id','question_number', 'question_text', 'img_url', 'marks', 'type', 
-                                   'n_choices', 'correct_answer', 'parameter_a', 'parameter_b', 'parameter_c'])
+                                   'n_choices', 'correct_answer', 'options', 'parameter_a', 'parameter_b', 'parameter_c', 
+                                   'topic_dimension', 'cognitive_dimension'])
         query = """SELECT question_id, question_number, question_text, img_url, marks, type, 
-                          n_choices, correct_answer, parameter_a, parameter_b, parameter_c 
+                          n_choices, correct_answer, options, parameter_a, parameter_b, parameter_c, 
+                          topic_dimension, cognitive_dimension 
                    FROM questions"""
         try:
             with self.db_manager.conn.cursor(cursor_factory=RealDictCursor) as cursor:
@@ -173,11 +177,13 @@ class BayesianIRTDataProcessor:
                 else:
                     # Return empty DataFrame with correct column names
                     return pd.DataFrame(columns=['question_id', 'question_number','question_text', 'img_url', 'marks', 'type', 
-                                               'n_choices', 'correct_answer', 'parameter_a', 'parameter_b', 'parameter_c'])
+                                               'n_choices', 'correct_answer', 'options', 'parameter_a', 'parameter_b', 'parameter_c',
+                                               'topic_dimension', 'cognitive_dimension'])
         except Exception as e:
             logger.error(f"Failed to fetch existing questions: {e}")
             return pd.DataFrame(columns=['question_id', 'question_number','question_text', 'img_url', 'marks', 'type', 
-                                       'n_choices', 'correct_answer', 'parameter_a', 'parameter_b', 'parameter_c'])
+                                       'n_choices', 'correct_answer', 'options', 'parameter_a', 'parameter_b', 'parameter_c',
+                                       'topic_dimension', 'cognitive_dimension'])
     
     def get_student_current_theta(self, student_id: int) -> Optional[float]:
         """Get current Bayesian theta estimate for a student"""
@@ -203,8 +209,19 @@ class BayesianIRTDataProcessor:
         try:
             with open(file_path, 'r') as f:
                 data = json.load(f)
+            
+            # Validate that data is a dictionary
+            if not isinstance(data, dict):
+                logger.error(f"Invalid JSON structure: expected dictionary, got {type(data)}")
+                return pd.DataFrame()
+            
             rows = []
             for student, student_data in data.items():
+                # Validate that student_data is a dictionary
+                if not isinstance(student_data, dict):
+                    logger.warning(f"Invalid student data structure for {student}: expected dictionary, got {type(student_data)}")
+                    continue
+                    
                 email = student_data.get('email', '')
                 student_name = student_data.get('name', '')
                 questions = student_data.get('questions', [])
@@ -212,6 +229,11 @@ class BayesianIRTDataProcessor:
                     logger.warning(f"Student {email} has {len(questions)} questions, expected 50")
                 question_numbers = set()
                 for question in questions:
+                    # Validate that question is a dictionary
+                    if not isinstance(question, dict):
+                        logger.warning(f"Invalid question structure for student {email}: expected dictionary, got {type(question)}")
+                        continue
+                        
                     question_number = question.get('question_number', '')
                     if question_number in question_numbers:
                         logger.warning(f"Duplicate question_number {question_number} for student {email}")
@@ -221,6 +243,27 @@ class BayesianIRTDataProcessor:
                     marks_value = parse_marks(marks_text)
                     n_choices, correct_answer = extract_choice_info(question)
                     chosen_answer = extract_chosen_answer(question, n_choices, correct_answer)
+                    # Extract and preprocess options_metadata to keep only labels
+                    options_metadata = question.get('options_metadata', '[]')
+                    try:
+                        if isinstance(options_metadata, str):
+                            options_list = json.loads(options_metadata)
+                        else:
+                            options_list = options_metadata
+                        
+                        # Extract only the "label" values from each option
+                        if isinstance(options_list, list):
+                            # Keep only unique labels (remove duplicates)
+                            unique_labels = []
+                            for opt in options_list:
+                                if isinstance(opt, dict) and 'label' in opt:
+                                    label = opt.get('label', '').strip()
+                                    if label and label not in unique_labels:
+                                        unique_labels.append(label)
+                            options_list = unique_labels
+                    except (json.JSONDecodeError, TypeError):
+                        options_list = []
+                    
                     row = {
                         'email': email,
                         'student_name': student_name,
@@ -233,7 +276,11 @@ class BayesianIRTDataProcessor:
                         'is_correct': question.get('is_correct', False),
                         'n_choices': n_choices,
                         'correct_answer': correct_answer,
-                        'chosen_answer': chosen_answer
+                        'chosen_answer': chosen_answer,
+                        'options': options_list,
+                        'options_metadata': json.dumps(options_list),  # Store cleaned labels as JSON string
+                        'topic_dimension': question.get('topic_dimension', ''),
+                        'cognitive_dimension': question.get('cognitive_dimension', '')
                     }
                     rows.append(row)
             processed_data = pd.DataFrame(rows)
@@ -264,19 +311,23 @@ class BayesianIRTDataProcessor:
         existing_composites = set()
         if not existing_questions.empty and 'question_number' in existing_questions.columns:
             for _, row in existing_questions.iterrows():
+                topic_dimension = row.get('topic_dimension', '')
+                cognitive_dimension = row.get('cognitive_dimension', '')
                 composite_key = (
                     f"{row['question_number'] or ''}|{row['question_text'] or ''}|{row['img_url'] or ''}|"
                     f"{row['marks'] or ''}|{row['type'] or ''}|{row['n_choices'] or ''}|"
-                    f"{row['correct_answer'] or '[]'}"
+                    f"{row['correct_answer'] or '[]'}|{topic_dimension}|{cognitive_dimension}"
                 )
                 existing_composites.add(composite_key)
         
         new_questions_map = {}
         for _, row in data.iterrows():
+            topic_dimension = row.get('topic_dimension', '')
+            cognitive_dimension = row.get('cognitive_dimension', '')
             composite_key = (
                 f"{row['question_number'] or ''}|{row['question_text'] or ''}|{row['img_url'] or ''}|"
                 f"{row['marks'] or ''}|{row['type'] or ''}|{row['n_choices'] or ''}|"
-                f"{json.dumps(row['correct_answer'] or [])}"
+                f"{json.dumps(row['correct_answer'] or [])}|{topic_dimension}|{cognitive_dimension}"
             )
             if composite_key not in existing_composites and composite_key not in new_questions_map:
                 question_id = f"Q{hashlib.md5(composite_key.encode()).hexdigest()[:8]}"
@@ -288,7 +339,10 @@ class BayesianIRTDataProcessor:
                     'marks': row['marks'],
                     'type': row['type'],
                     'n_choices': row['n_choices'],
-                    'correct_answer': json.dumps(row['correct_answer'])
+                    'correct_answer': json.dumps(row['correct_answer']),
+                    'options_metadata': row.get('options_metadata', ''),
+                    'topic_dimension': topic_dimension,
+                    'cognitive_dimension': cognitive_dimension
                 }
         
         new_questions_df = pd.DataFrame(list(new_questions_map.values()))
@@ -333,8 +387,8 @@ class BayesianIRTDataProcessor:
             return
 
         query = """
-        INSERT INTO questions (question_id, question_number, question_text, img_url, marks, type, n_choices, correct_answer)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO questions (question_id, question_number, question_text, img_url, marks, type, n_choices, correct_answer, options, options_metadata, topic_dimension, cognitive_dimension)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (question_id) DO NOTHING
         """
         try:
@@ -344,7 +398,10 @@ class BayesianIRTDataProcessor:
                 values = [
                     (row['question_id'], row['question_number'], row['question_text'],
                      row['img_url'], row['marks'], row['type'],
-                     row['n_choices'], row['correct_answer'])
+                     row['n_choices'], row['correct_answer'], 
+                     json.dumps(row.get('options', [])),
+                     row.get('options_metadata', ''),
+                     row.get('topic_dimension'), row.get('cognitive_dimension'))
                     for _, row in questions_df.iterrows()
                 ]
                 cursor.executemany(query, values)
