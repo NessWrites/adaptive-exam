@@ -5,22 +5,32 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from cat_logic import MIRTCATSimulator
+from conventional_test import ConventionalTestSimulator
 from pathlib import Path
 import json
 import datetime
 
 st.set_page_config(layout="wide", page_title="MIRT CAT System", page_icon="🧠")
 
-def initialize_mirt_cat():
-    base_dir = Path(__file__).resolve().parent.parent  # go up from v3/ to project/
-    qbank_path = base_dir / "qbank.csv"
-    multidimensional_qbank_path = base_dir / "multidimensional_qbank.csv"
-
-    print("Resolved paths:")
-    print(qbank_path, qbank_path.exists())
-    print(multidimensional_qbank_path, multidimensional_qbank_path.exists())
-
-    return MIRTCATSimulator(qbank_path, multidimensional_qbank_path)
+def initialize_mirt_cat(model_type='3PL'):
+    """Initialize the MIRT CAT system with database connection.
+    
+    Args:
+        model_type: '2PL', '3PL', or 'Conventional' to select the test type
+    """
+    try:
+        if model_type == 'Conventional':
+            return ConventionalTestSimulator()
+        else:
+            return MIRTCATSimulator(model_type=model_type)
+    except Exception as e:
+        st.error(f"Failed to initialize test system: {e}")
+        st.error("Please check your database configuration and ensure:")
+        st.error("1. PostgreSQL is running")
+        st.error("2. .env file exists with correct DB_PASSWORD")
+        st.error("3. Database 'adaptive_exam_db' exists")
+        st.error("4. User has proper permissions")
+        st.stop()
 
 
 def save_results(results):
@@ -185,26 +195,46 @@ if page == "Take Test":
     st.markdown("""
     This is an advanced **Multidimensional Computerized Adaptive Test (MIRT CAT)** that measures your ability across:
     - **1 General AI/ML Factor** (overall competency)
-    - **6 Topic-Specific Factors** (ANN, CNN, Ensemble Models, Linear Models, MLOps, Statistics)
-    - **3 Cognitive Level Factors** (Knowledge, Application, Analysis)
+    - **Topic-Specific Factors** (dynamically loaded from database)
+    - **Cognitive Level Factors** (Knowledge, Application, Analysis)
     
     The system uses sophisticated psychometric models to provide detailed diagnostic profiles.
+    **Test Length:** 20 questions with balanced topic coverage.
     """)
     st.markdown("---")
-
+    
+    # Model selection dropdown (show before initialization to allow choice)
+    model_type = st.selectbox(
+        "Select Test Model:",
+        options=['Conventional', '2PL', '3PL'],
+        index=2,  # Default to 3PL
+        key='model_selection',
+        help="Conventional: Random selection. 2PL: 2-Parameter Logistic. 3PL: 3-Parameter Logistic"
+    )
+    
     # Initialize or get the session state
-    if 'mirt_cat_session' not in st.session_state:
-        with st.spinner("Initializing MIRT CAT System..."):
-            st.session_state.mirt_cat_session = initialize_mirt_cat()
-            next_item, reason = st.session_state.mirt_cat_session.select_next_item()
-            st.session_state.current_item = next_item
-            st.session_state.mirt_cat_session.log.append({'initial_reason': reason})
-            st.session_state.test_finished = False
+    if 'mirt_cat_session' not in st.session_state or st.session_state.get('model_type') != model_type:
+        try:
+            with st.spinner("Initializing MIRT CAT System..."):
+                st.session_state.model_type = model_type
+                st.session_state.mirt_cat_session = initialize_mirt_cat(model_type=model_type)
+                next_item, reason = st.session_state.mirt_cat_session.select_next_item()
+                if next_item is None:
+                    st.error("Failed to select next item. Please try refreshing.")
+                    st.stop()
+                st.session_state.current_item = next_item
+                st.session_state.mirt_cat_session.log.append({'initial_reason': reason})
+                st.session_state.test_finished = False
+        except Exception as e:
+            st.error(f"Initialization failed: {str(e)}")
+            import traceback
+            st.code(traceback.format_exc())
+            st.stop()
 
     # Get current state
-    cat = st.session_state.mirt_cat_session
-    item = st.session_state.current_item
-    total_questions = cat.test_length
+    cat = st.session_state.mirt_cat_session if 'mirt_cat_session' in st.session_state else None
+    item = st.session_state.current_item if 'current_item' in st.session_state else None
+    total_questions = cat.test_length if cat else 20
 
     if not st.session_state.test_finished and item is not None:
         # Create three columns for layout
@@ -216,30 +246,89 @@ if page == "Take Test":
             st.write(f"#### Question {current_q_num} of {total_questions}")
             st.progress(current_q_num / total_questions)
 
+            # Display question text
             st.subheader(item['content'])
-            options = [opt.strip() for opt in item['options'].split(';')]
+            
+            # Display question image if available
+            if item.get('img_url'):
+                try:
+                    st.image(item['img_url'], use_container_width=True, caption="Question Diagram")
+                except Exception as e:
+                    st.warning(f"Could not load image: {e}")
+            
+            # Handle options - parse options_metadata (now just a list of labels)
+            import json
+            
+            options = []
+            options_metadata = item.get('options_metadata', '')
+            
+            if options_metadata:
+                try:
+                    # options_metadata is now just a JSON array of label strings
+                    options = json.loads(options_metadata) if isinstance(options_metadata, str) else options_metadata
+                except (json.JSONDecodeError, TypeError) as e:
+                    print(f"Error parsing options_metadata: {e}")
+                    options = []
+            
+            # Fallback: generate generic options if none found
+            if not options:
+                n_choices = item.get('n_choices', 4)
+                options = [f"{chr(65+i)}" for i in range(n_choices)]
+            
+            # Helper function to render option (can be text or image)
+            def render_option(opt):
+                """Check if option is an image URL and render accordingly"""
+                if isinstance(opt, str):
+                    # Check if it's an image URL
+                    if opt.startswith('http') and any(opt.lower().endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']):
+                        return opt  # Return URL for image
+                return opt
+            
+            # Create option display items
+            option_displays = []
+            for i, opt in enumerate(options):
+                display_label = f"{chr(65+i)}. {opt}" if not opt.startswith('http') else f"{chr(65+i)}. [Image]"
+                option_displays.append((display_label, opt))
 
             with st.form(key=f"mirt_q_{item['item_id']}"):
-                if item['question_type'] == 'MCQ-Single':
+                if item['question_type'] == 'single' or item.get('n_choices', 4) == 1:
+                    # Single choice - display as radio buttons
+                    option_values = []
+                    for i, opt in enumerate(options):
+                        option_values.append(opt)
+                        # If option is an image URL, display it
+                        if opt.startswith('http') and any(opt.lower().endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']):
+                            try:
+                                st.image(opt, width=200, caption=f"Option {chr(65+i)}")
+                            except Exception:
+                                st.write(f"Option {chr(65+i)}: [Image]")
+                        else:
+                            st.write(f"{chr(65+i)}. {opt}")
+                    
                     user_choice = st.radio(
                         "Select your answer:",
-                        options=options,
-                        format_func=lambda x: x.split(') ', 1)[1] if ') ' in x else x
+                        options=option_values,
+                        key=f"q_{item['item_id']}_radio",
+                        format_func=lambda x: f"Option {chr(65+option_values.index(x))}"
                     )
-                elif item['question_type'] == 'MCQ-Multiple':
+                else:
                     user_choice = st.multiselect(
                         "Select all correct answers:",
                         options=options,
-                        format_func=lambda x: x.split(') ', 1)[1] if ') ' in x else x
+                        key=f"q_{item['item_id']}_multi"
                     )
                 
                 submitted = st.form_submit_button("Submit Answer", type="primary")
 
                 if submitted:
-                    if item['question_type'] == 'MCQ-Single':
-                        user_answer_keys = [user_choice.split(')')[0]] if user_choice and ')' in user_choice else []
+                    # Convert user choice to index (0-based)
+                    if item['question_type'] == 'single':
+                        # Find the index of the selected option
+                        user_answer_index = options.index(user_choice)
+                        user_answer_keys = [user_answer_index]
                     else:
-                        user_answer_keys = [choice.split(')')[0] for choice in user_choice if ')' in choice]
+                        # Multiple choice - get indices
+                        user_answer_keys = [options.index(choice) for choice in user_choice if choice in options]
 
                     cat.administer_item(item['item_id'], user_answer_keys)
                     
@@ -256,45 +345,86 @@ if page == "Take Test":
                     st.rerun()
 
         with col2:
-            # Real-time ability estimates
-            st.info("#### 🎯 Current Ability Estimates")
-            
-            # General ability (most important)
-            general_theta = cat.theta_vector[0]
-            st.metric("General AI/ML Ability", f"{general_theta:.3f}")
-            
-            # Show top 3 topic strengths/weaknesses
-            topic_thetas = cat.theta_vector[1:7]
-            topic_names = cat.topic_dimensions
-            topic_data = list(zip(topic_names, topic_thetas))
-            topic_data.sort(key=lambda x: x[1], reverse=True)
-            
-            st.write("**Top Topic Strengths:**")
-            for i, (topic, theta) in enumerate(topic_data[:3]):
-                st.write(f"{i+1}. {topic}: {theta:.2f}")
+            if st.session_state.get('model_type') == 'Conventional':
+                # Conventional test statistics
+                st.info("#### 📊 Test Statistics")
+                
+                stats = cat.get_test_statistics()
+                st.metric("Questions Answered", f"{len(cat.administered_items)}/{cat.test_length}")
+                st.metric("Correct Answers", f"{stats['correct_answers']}/{stats['total_questions']}")
+                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
+                
+                if stats['total_questions'] > 0:
+                    st.write("**Difficulty Analysis:**")
+                    st.write(f"Average Difficulty: {stats['average_difficulty']:.2f}")
+                    st.write(f"Range: {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
+                    
+                    st.write("**Topic Distribution:**")
+                    for topic, count in stats['topic_distribution'].items():
+                        st.write(f"• {topic}: {count}")
+            else:
+                # Real-time ability estimates for IRT models
+                st.info("#### 🎯 Current Ability Estimates")
+                
+                # General ability (most important)
+                general_theta = cat.theta_vector[0]
+                st.metric("General AI/ML Ability", f"{general_theta:.3f}")
+                
+                # Show top 3 topic strengths/weaknesses
+                topic_thetas = cat.theta_vector[1:7]
+                topic_names = cat.topic_dimensions
+                topic_data = list(zip(topic_names, topic_thetas))
+                topic_data.sort(key=lambda x: x[1], reverse=True)
+                
+                st.write("**Top Topic Strengths:**")
+                for i, (topic, theta) in enumerate(topic_data[:3]):
+                    st.write(f"{i+1}. {topic}: {theta:.2f}")
             
             # Content coverage progress
             st.markdown("---")
-            st.write("#### 📊 Content Balance")
-            
-            # Topic coverage
-            st.write("**Topic Coverage:**")
-            for topic, count in cat.topic_counts.items():
-                color = "🟢" if count >= cat.min_items_per_topic else "🔴"
-                st.write(f"{color} {topic}: {count}/{cat.min_items_per_topic}")
-            
-            # Cognitive level coverage
-            st.write("**Cognitive Levels:**")
-            for level, count in cat.cognitive_counts.items():
-                st.write(f"• {level}: {count}")
+            if st.session_state.get('model_type') == 'Conventional':
+                st.write("#### 📊 Random Selection Info")
+                st.write("**Note:** Questions are selected randomly without considering:")
+                st.write("• Student ability level")
+                st.write("• Item difficulty optimization")
+                st.write("• Content balance")
+                st.write("• Adaptive feedback")
+            else:
+                st.write("#### 📊 Content Balance")
+                
+                # Topic coverage
+                st.write("**Topic Coverage:**")
+                for topic, count in cat.topic_counts.items():
+                    color = "🟢" if count >= cat.min_items_per_topic else "🔴"
+                    st.write(f"{color} {topic}: {count}/{cat.min_items_per_topic}")
+                
+                # Cognitive level coverage
+                st.write("**Cognitive Levels:**")
+                for level, count in cat.cognitive_counts.items():
+                    st.write(f"• {level}: {count}")
 
         with col3:
             # Item information and test log
             st.info("#### 🔍 Current Item Info")
+            st.markdown(f"**Model:** {st.session_state.get('model_type', '3PL')}")
             st.markdown(f"**Topic:** {item['topic']}")
             st.markdown(f"**Cognitive Level:** {item['cognitive_level']}")
-            st.markdown(f"**Difficulty (b):** {item['b']:.2f}")
-            st.markdown(f"**Discrimination (a):** {item['a']:.2f}")
+            
+            if st.session_state.get('model_type') == 'Conventional':
+                st.markdown("**Selection:** Random")
+                st.markdown(f"**Question:** {len(cat.administered_items) + 1} of {cat.test_length}")
+                st.markdown(f"**Difficulty (b):** {item.get('b', 0):.2f}")
+                st.markdown(f"**Discrimination (a):** {item.get('a', 0):.2f}")
+                st.markdown(f"**Guessing (c):** {item.get('c', 0):.2f}")
+            elif st.session_state.get('model_type') == '2PL':
+                b_2pl = item.get('b_2pl') or item.get('b', 0)
+                a_2pl = item.get('a_2pl') or item.get('a', 0)
+                st.markdown(f"**Difficulty (b):** {b_2pl:.2f}")
+                st.markdown(f"**Discrimination (a):** {a_2pl:.2f}")
+            else:
+                st.markdown(f"**Difficulty (b):** {item.get('b', 0):.2f}")
+                st.markdown(f"**Discrimination (a):** {item.get('a', 0):.2f}")
+                st.markdown(f"**Guessing (c):** {item.get('c', 0):.2f}")
             
             st.markdown("---")
             st.write("#### 📝 Recent Activity")
@@ -342,62 +472,157 @@ if page == "Take Test":
         # Detailed results
         st.header("📋 Detailed Results")
         
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.subheader("🌟 General Ability")
-            general_score = diagnostic_report['theta_estimates']['General']
-            general_se = diagnostic_report['standard_errors']['General']
-            st.metric("General AI/ML Ability", 
-                     f"{general_score:.3f}", 
-                     help=f"Standard Error: ±{general_se:.3f}")
-            st.write(f"**Interpretation:** {diagnostic_report['diagnostic_profile']['General Ability']['interpretation']}")
-        
-        with col2:
-            st.subheader("📚 Topic Strengths")
-            topic_profile = diagnostic_report['diagnostic_profile']['Topic Abilities']
-            topic_scores = [(topic, data['score']) for topic, data in topic_profile.items()]
-            topic_scores.sort(key=lambda x: x[1], reverse=True)
+        if st.session_state.get('model_type') == 'Conventional':
+            # Conventional test results
+            stats = cat.get_test_statistics()
             
-            for topic, score in topic_scores[:3]:
-                interpretation = topic_profile[topic]['interpretation']
-                st.write(f"**{topic}:** {score:.3f} ({interpretation})")
-        
-        with col3:
-            st.subheader("🧠 Cognitive Profile")
-            cognitive_profile = diagnostic_report['diagnostic_profile']['Cognitive Abilities']
-            for level, data in cognitive_profile.items():
-                st.write(f"**{level}:** {data['score']:.3f} ({data['interpretation']})")
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.subheader("📊 Test Summary")
+                st.metric("Total Questions", stats['total_questions'])
+                st.metric("Correct Answers", stats['correct_answers'])
+                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
+            
+            with col2:
+                st.subheader("📈 Difficulty Analysis")
+                st.metric("Average Difficulty", f"{stats['average_difficulty']:.2f}")
+                st.write(f"**Range:** {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
+                st.write("**Note:** Difficulty values are from IRT parameters but not used for selection")
+            
+            with col3:
+                st.subheader("📚 Topic Distribution")
+                for topic, count in stats['topic_distribution'].items():
+                    st.write(f"• {topic}: {count}")
+            
+            # Comparison with IRT
+            st.markdown("---")
+            st.subheader("🆚 Why IRT Models Are Better")
+            
+            comparison_col1, comparison_col2 = st.columns(2)
+            
+            with comparison_col1:
+                st.write("**❌ Conventional Test Limitations:**")
+                st.write("• Random question selection")
+                st.write("• No ability estimation")
+                st.write("• Unbalanced difficulty")
+                st.write("• No adaptive feedback")
+                st.write("• Limited diagnostic value")
+            
+            with comparison_col2:
+                st.write("**✅ IRT Model Advantages:**")
+                st.write("• Adaptive question selection")
+                st.write("• Real-time ability estimation")
+                st.write("• Optimal difficulty matching")
+                st.write("• Detailed diagnostic profiles")
+                st.write("• Efficient testing (fewer questions)")
+        else:
+            # IRT model results
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.subheader("🌟 General Ability")
+                general_score = diagnostic_report['theta_estimates']['General']
+                general_se = diagnostic_report['standard_errors']['General']
+                st.metric("General AI/ML Ability", 
+                         f"{general_score:.3f}", 
+                         help=f"Standard Error: ±{general_se:.3f}")
+                st.write(f"**Interpretation:** {diagnostic_report['diagnostic_profile']['General Ability']['interpretation']}")
+            
+            with col2:
+                st.subheader("📚 Topic Strengths")
+                topic_profile = diagnostic_report['diagnostic_profile']['Topic Abilities']
+                topic_scores = [(topic, data['score']) for topic, data in topic_profile.items()]
+                topic_scores.sort(key=lambda x: x[1], reverse=True)
+                
+                for topic, score in topic_scores[:3]:
+                    interpretation = topic_profile[topic]['interpretation']
+                    st.write(f"**{topic}:** {score:.3f} ({interpretation})")
+            
+            with col3:
+                st.subheader("🧠 Cognitive Profile")
+                cognitive_profile = diagnostic_report['diagnostic_profile']['Cognitive Abilities']
+                for level, data in cognitive_profile.items():
+                    st.write(f"**{level}:** {data['score']:.3f} ({data['interpretation']})")
         
         # Detailed diagnostic interpretation
         st.header("🔍 Diagnostic Interpretation")
         
-        with st.expander("📈 Strengths and Development Areas", expanded=True):
-            general_theta = diagnostic_report['theta_estimates']['General']
+        if st.session_state.get('model_type') == 'Conventional':
+            # Conventional test interpretation
+            st.info("**Note:** Conventional tests provide limited diagnostic information compared to IRT models.")
             
-            # Strengths
-            strengths = []
-            development_areas = []
+            with st.expander("📊 Test Analysis", expanded=True):
+                stats = cat.get_test_statistics()
+                
+                st.write("**Overall Performance:**")
+                if stats['accuracy'] >= 0.8:
+                    st.success(f"Strong performance: {stats['accuracy']:.1%} accuracy")
+                elif stats['accuracy'] >= 0.6:
+                    st.warning(f"Moderate performance: {stats['accuracy']:.1%} accuracy")
+                else:
+                    st.error(f"Needs improvement: {stats['accuracy']:.1%} accuracy")
+                
+                st.write("**Difficulty Analysis:**")
+                avg_diff = stats['average_difficulty']
+                if avg_diff > 1.0:
+                    st.write(f"Test was relatively difficult (avg difficulty: {avg_diff:.2f})")
+                elif avg_diff < -1.0:
+                    st.write(f"Test was relatively easy (avg difficulty: {avg_diff:.2f})")
+                else:
+                    st.write(f"Test had moderate difficulty (avg difficulty: {avg_diff:.2f})")
+                
+                st.write("**Topic Coverage:**")
+                for topic, count in stats['topic_distribution'].items():
+                    st.write(f"• {topic}: {count} questions")
             
-            for topic, data in topic_profile.items():
-                relative_score = data['relative_to_general']
-                if relative_score > 0.5:
-                    strengths.append(f"**{topic}** (θ = {data['score']:.2f}, +{relative_score:.2f} above general)")
-                elif relative_score < -0.5:
-                    development_areas.append(f"**{topic}** (θ = {data['score']:.2f}, {relative_score:.2f} below general)")
-            
-            if strengths:
-                st.write("**🌟 Relative Strengths:**")
-                for strength in strengths:
-                    st.write(f"• {strength}")
-            
-            if development_areas:
-                st.write("\n**📈 Development Opportunities:**")
-                for area in development_areas:
-                    st.write(f"• {area}")
-            
-            if not strengths and not development_areas:
-                st.write("Your abilities are well-balanced across all topic areas relative to your general ability level.")
+            with st.expander("🆚 IRT vs Conventional Comparison", expanded=True):
+                st.write("**Why IRT Models Are Superior:**")
+                st.write("""
+                1. **Adaptive Selection**: IRT models select questions based on your current ability level
+                2. **Efficient Testing**: Fewer questions needed for accurate assessment
+                3. **Real-time Feedback**: Continuous ability estimation during the test
+                4. **Detailed Diagnostics**: Comprehensive analysis of strengths and weaknesses
+                5. **Optimal Difficulty**: Questions matched to your ability level for maximum information
+                6. **Content Balance**: Ensures balanced coverage across topics and cognitive levels
+                """)
+                
+                st.write("**Conventional Test Limitations:**")
+                st.write("""
+                1. **Random Selection**: Questions chosen without considering your ability
+                2. **Fixed Difficulty**: May be too easy or too hard for your level
+                3. **No Adaptation**: Same questions regardless of your performance
+                4. **Limited Feedback**: Only final score, no diagnostic information
+                5. **Inefficient**: May require more questions for accurate assessment
+                """)
+        else:
+            # IRT model interpretation
+            with st.expander("📈 Strengths and Development Areas", expanded=True):
+                general_theta = diagnostic_report['theta_estimates']['General']
+                
+                # Strengths
+                strengths = []
+                development_areas = []
+                
+                for topic, data in topic_profile.items():
+                    relative_score = data['relative_to_general']
+                    if relative_score > 0.5:
+                        strengths.append(f"**{topic}** (θ = {data['score']:.2f}, +{relative_score:.2f} above general)")
+                    elif relative_score < -0.5:
+                        development_areas.append(f"**{topic}** (θ = {data['score']:.2f}, {relative_score:.2f} below general)")
+                
+                if strengths:
+                    st.write("**🌟 Relative Strengths:**")
+                    for strength in strengths:
+                        st.write(f"• {strength}")
+                
+                if development_areas:
+                    st.write("\n**📈 Development Opportunities:**")
+                    for area in development_areas:
+                        st.write(f"• {area}")
+                
+                if not strengths and not development_areas:
+                    st.write("Your abilities are well-balanced across all topic areas relative to your general ability level.")
         
         # Test statistics
         st.header("📊 Test Statistics")
@@ -435,6 +660,10 @@ if page == "Take Test":
         
         # Restart option
         if st.button("🔄 Take Another Test"):
+            # Close database connection before restarting
+            if 'mirt_cat_session' in st.session_state:
+                st.session_state.mirt_cat_session.close_database_connection()
+            
             for key in list(st.session_state.keys()):
                 if key.startswith('mirt_cat'):
                     del st.session_state[key]
@@ -620,9 +849,10 @@ elif page == "System Info":
         4. For first item: random selection from top 5 most informative
         
         **Content Constraints:**
-        - Test Length: 15 items
+        - Test Length: 20 items
         - Minimum per topic: 2 items
-        - Topics: ANN, CNN, Ensemble Models, Linear Models, MLOps, Statistics
+        - Topics: Dynamically loaded from database
+        - Cognitive Levels: Knowledge, Application, Analysis
         """)
     
     with st.expander("Ability Estimation"):
@@ -645,16 +875,18 @@ elif page == "System Info":
     
     # Load and display item bank statistics if available
     try:
-        qbank = pd.read_csv('qbank.csv')
-        multidimensional_qbank = pd.read_csv('multidimensional_qbank.csv')
+        # Try to connect to database and get statistics
+        from cat_logic import MIRTCATSimulator
+        cat_sim = MIRTCATSimulator()
+        qbank = cat_sim.full_qbank
         
         col1, col2 = st.columns(2)
         
         with col1:
             st.subheader("Item Bank Statistics")
             st.metric("Total Items", len(qbank))
-            st.metric("Topics Covered", qbank['topic'].nunique())
-            st.metric("Cognitive Levels", qbank['cognitive_level'].nunique())
+            st.metric("Topics Covered", qbank['topic_dimension'].nunique())
+            st.metric("Cognitive Levels", qbank['cognitive_dimension'].nunique())
             
             # Difficulty distribution
             fig_difficulty = px.histogram(qbank, x='b', title="Item Difficulty Distribution",
@@ -676,13 +908,13 @@ elif page == "System Info":
             st.write(f"Range: {qbank['c'].min():.3f} - {qbank['c'].max():.3f}")
             
             # Topic distribution
-            fig_topics = px.pie(qbank['topic'].value_counts().reset_index(), 
-                              values='count', names='topic', 
+            fig_topics = px.pie(qbank['topic_dimension'].value_counts().reset_index(), 
+                              values='count', names='topic_dimension', 
                               title="Items by Topic")
             st.plotly_chart(fig_topics, use_container_width=True)
         
-    except FileNotFoundError:
-        st.warning("Item bank files not found. Please ensure qbank.csv and multidimensional_qbank.csv are available.")
+    except Exception as e:
+        st.warning(f"Database connection failed: {e}. Please ensure the database is properly configured.")
     
     st.header("🔧 Technical Requirements")
     
@@ -695,9 +927,10 @@ elif page == "System Info":
         - scipy >= 1.10.0
         - plotly >= 5.15.0
         
-        **Data Files Required:**
-        - `qbank.csv` (original question bank)
-        - `multidimensional_qbank.csv` (Q-matrix)
+        **Database Required:**
+        - PostgreSQL database with questions table
+        - IRT parameters (a, b, c) must be populated
+        - topic_dimension and cognitive_dimension columns
         
         **Output Files Generated:**
         - `examinee_results.csv` (all test results)
