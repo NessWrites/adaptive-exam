@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import List, Dict, Optional, Any, Union
 from datetime import date, datetime
 import json
-
+#correction
 class StudentCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     email: EmailStr
