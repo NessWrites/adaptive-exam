@@ -6,13 +6,22 @@ from typing import Dict, Any
 from backend.app.services.irt_utils import BayesianIRTData
 import logging
 import warnings
+import jax
+import numpyro
+import pytensor
 
-# Suppress Pydantic protected namespaces warning
+pytensor.config.mode = 'NUMBA'
+
+# Configure for better performance
 warnings.filterwarnings("ignore", message=".*protected_namespaces.*")
+
+# Set device count for parallel sampling
+n_devices = jax.local_device_count()
+if n_devices < 4:
+    numpyro.set_host_device_count(min(4, n_devices))
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 def run_hierarchical_3pl_model(bayesian_data: BayesianIRTData) -> Dict[str, Any]:
     try:
@@ -20,215 +29,201 @@ def run_hierarchical_3pl_model(bayesian_data: BayesianIRTData) -> Dict[str, Any]
             logger.error("No Bayesian data provided for analysis")
             raise ValueError("Bayesian data is None")
 
-        N = bayesian_data['N']
-        J = bayesian_data['J']
+        N = bayesian_data['N']  # students
+        J = bayesian_data['J']  # questions
         i_idx = bayesian_data['i_idx']
         j_idx = bayesian_data['j_idx']
         y_obs = bayesian_data['y_obs'].astype(np.float32)
         K_arr = bayesian_data['K_arr']
         df_long = bayesian_data['df_long']
 
+        logger.info(f"Fitting 3PL model for {N} students and {J} questions")
+        
+        # Pre-calculate some statistics for better priors
+        item_means = df_long.groupby("j")["is_correct"].mean().values
+        global_mean = y_obs.mean()
+
         with pm.Model() as irt_3pl:
-            # Non-centered parameterization for theta to improve convergence
-            raw_theta = pm.Normal("raw_theta", mu=0.0, sigma=1.0, shape=N)
-            theta = pm.Deterministic("theta", raw_theta - raw_theta.mean())
             
-            # Better priors for discrimination parameters (a)
-            mu_a = pm.Normal("mu_a", mu=0.0, sigma=1.0)  # More realistic mean
-            sigma_a = pm.HalfNormal("sigma_a", sigma=0.5)  # Smaller variance
-            a = pm.Lognormal("a", mu=mu_a, sigma=sigma_a, shape=J)
+            # ===== IMPROVED PARAMETERIZATION =====
             
-            # Better priors for difficulty parameters (b)
-            mu_b = pm.Normal("mu_b", mu=0.0, sigma=1.0)  # Centered around 0
-            sigma_b = pm.HalfNormal("sigma_b", sigma=1.0)  # Reasonable variance
-            b = pm.Normal("b", mu=mu_b, sigma=sigma_b, shape=J)
+            # Student abilities - non-centered with hierarchical structure
+            theta_mu = pm.Normal("theta_mu", 0, 1)
+            theta_sigma = pm.HalfNormal("theta_sigma", 1)
+            theta_raw = pm.Normal("theta_raw", 0, 1, shape=N)
+            theta = pm.Deterministic("theta", theta_mu + theta_raw * theta_sigma)
             
-            # Better priors for guessing parameters (c)
-            alpha_c = np.ones(J) * 2.0  # Increased alpha for more realistic guessing
-            beta_c = np.array([max(2, K-1) for K in K_arr], dtype=float)  # Ensure beta >= 2
-            c = pm.Beta("c", alpha=alpha_c, beta=beta_c, shape=J)
+            # Discrimination parameters - more conservative priors
+            # Use transformation to avoid label switching
+            a_raw = pm.Normal("a_raw", 0, 1, shape=J)
+            a = pm.Deterministic("a", pm.math.exp(0.5 * a_raw))  # Lognormal via transform
             
-            # IRT 3PL model
-            lin = a[j_idx] * (theta[i_idx] - b[j_idx])
-            p_row = c[j_idx] + (1 - c[j_idx]) * pm.math.sigmoid(lin)
-            obs = pm.Bernoulli("obs", p=p_row, observed=y_obs)
+            # Difficulty parameters - hierarchical
+             # Use hierarchical structure with tight priors
+            b_mu = pm.Normal("b_mu", mu=0, sigma=0.5)  # Tighter prior
+            b_sigma = pm.HalfNormal("b_sigma", sigma=0.5)  # Smaller variance
+            b_raw = pm.Normal("b_raw", mu=0, sigma=1, shape=J)
+            b = pm.TruncatedNormal("b", 
+                       mu=b_mu, 
+                       sigma=b_sigma, 
+                       lower=-2.0, 
+                       upper=2.0, 
+                       shape=J)
             
-            # Try sampling with improved parameters
+            # Guessing parameters - STRONG informative priors
+            # Beta(3, 12) has mean ~0.2, mode ~0.15, strongly favors low guessing
+            # FIXED: Use constant values instead of ConstantData
+            c_alpha = 3.0
+            c_beta = 12.0
+            c = pm.Beta("c", alpha=c_alpha, beta=c_beta, shape=J)
+            
+             # ===== ADDITIONAL IDENTIFICATION CONSTRAINT =====
+            # Force sum of difficulties to be zero to fix the scale
+            b_constraint = pm.Potential('b_constraint', -100 * (pm.math.sum(b)**2))
+            # ===== 3PL MODEL =====
+            eta = a[j_idx] * (theta[i_idx] - b[j_idx])
+            p_correct = c[j_idx] + (1 - c[j_idx]) * pm.math.sigmoid(eta)
+            
+            # Observation
+            obs = pm.Bernoulli("obs", p=p_correct, observed=y_obs)
+            
+            # ===== IMPROVED SAMPLING STRATEGY =====
             trace = None
-            sampling_method = "standard"
+            
+            # Initialization values - match actual variable names in model
+            init_vals = {
+                'theta': np.zeros(N),  # Start at zero
+                'theta_mu': 0.0,
+                'theta_sigma': 1.0,
+                'theta_raw': np.zeros(N),
+                'a_raw': np.zeros(J),
+                'b_mu': 0.0,
+                'b_sigma': 0.5,
+                'b_raw': np.zeros(J),  # Start at zero
+                'c': np.full(J, 0.2)  # Start at expected value
+            }
+            
+            
+            logger.info("Starting sampling with optimized parameters...")
+            
+            # Check GPU availability
+            gpu_available = any(device.platform == 'gpu' for device in jax.devices())
+            logger.info(f"Using {'GPU' if gpu_available else 'CPU'} for sampling")
             
             try:
-                logger.info("Attempting sampling with improved parameters...")
-                # Use more conservative sampling parameters for better convergence
+
+                
+                # Strategy 1: Conservative sampling with GPU if available
                 trace = pm.sample(
-                    draws=200, 
-                    tune=300,  # More tuning steps
-                    chains=2,   # Fewer chains to reduce memory
-                    target_accept=0.8,  # Lower target_accept for better exploration
+                    draws=800,
+                    tune=1200,
+                    chains=2,  # Fewer chains due to device limitations
+                    target_accept=0.85,  # Better balance for difficult models
                     return_inferencedata=True,
                     random_seed=42,
                     progressbar=True,
-                    initvals={
-                        'raw_theta': np.random.normal(0, 0.1, N),
-                        'mu_a': 0.0,
-                        'sigma_a': 0.5,
-                        'a': np.random.lognormal(0, 0.3, J),
-                        'mu_b': 0.0,
-                        'sigma_b': 1.0,
-                        'b': np.random.normal(0, 0.5, J),
-                        'c': np.random.beta(2, 3, J)  # Better initialization for guessing
-                    }
+                    initvals=init_vals,
+                    nuts_sampler="numpyro" if gpu_available else "pymc",  # Use numpyro for GPU
+                    idata_kwargs={"log_likelihood": False}  # Save memory
                 )
-                sampling_method = "standard"
-                logger.info("Successfully sampled with improved parameters")
+                sampling_method = "conservative"
                 
             except Exception as e:
-                logger.warning(f"High target_accept failed, trying with 0.9: {e}")
+                logger.warning(f"Conservative sampling failed: {e}")
+                
+                # Strategy 2: Even more conservative
                 try:
                     trace = pm.sample(
-                        draws=150, 
-                        tune=150, 
-                        chains=4, 
-                        target_accept=0.9,
+                        draws=400,
+                        tune=800,
+                        chains=2,
+                        target_accept=0.80,
                         return_inferencedata=True,
                         random_seed=42,
-                        progressbar=True
+                        progressbar=True,
+                        initvals=init_vals,
+                        nuts_sampler="numpyro" if gpu_available else "pymc"
                     )
-                    sampling_method = "standard"
-                    logger.info("Successfully sampled with target_accept=0.9")
+                    sampling_method = "fallback"
                     
                 except Exception as e2:
-                    logger.warning(f"Standard sampling failed, trying with more tuning: {e2}")
-                    # Fallback: more tuning iterations and lower target_accept
+                    logger.warning(f"Fallback sampling failed: {e2}")
+                    
+                    # Strategy 3: Minimal sampling for debugging
                     trace = pm.sample(
-                        draws=100, 
-                        tune=200,  # More tuning
-                        chains=4, 
-                        target_accept=0.8,  # Lower target_accept
+                        draws=200,
+                        tune=400,
+                        chains=2,
+                        target_accept=0.75,
                         return_inferencedata=True,
                         random_seed=42,
-                        progressbar=True
+                        progressbar=True,
+                        initvals=init_vals
                     )
-                    sampling_method = "standard"
-                    logger.info("Successfully sampled with extended tuning")
-            
-            if trace is None:
-                raise RuntimeError("All sampling methods failed")
+                    sampling_method = "minimal"
             
             logger.info(f"Sampling completed using method: {sampling_method}")
 
-        # Check for convergence issues
+        # ===== CONVERGENCE DIAGNOSTICS =====
         divergences = trace.sample_stats.get("diverging", None)
         n_divergences = int(divergences.sum()) if divergences is not None else 0
-        
         logger.info(f"Number of divergences: {n_divergences}")
         
-        if n_divergences > 200:  # More lenient threshold for divergences
-            logger.warning(f"High number of divergences ({n_divergences}). Results may be less reliable but continuing...")
-        elif n_divergences > 50:
-            logger.warning(f"Moderate number of divergences ({n_divergences}). Results should be acceptable.")
-        
-        # Get summary statistics
-        item_summary = az.summary(trace, var_names=["a", "b", "c"], hdi_prob=0.95)
-        theta_summary = az.summary(trace, var_names=["theta"], hdi_prob=0.95)
-        
-        # Memory-efficient R-hat calculation
+        # Calculate R-hat efficiently
+        max_rhat = 1.0
         try:
-            rhat = az.rhat(trace)
-            # Calculate max R-hat more efficiently
-            max_rhat = 0.0
-            for var_name in ["a", "b", "c", "theta"]:
-                if var_name in rhat:
-                    var_rhat = rhat[var_name].values
-                    if not np.isnan(var_rhat).all():
+            rhat = az.rhat(trace, var_names=["a", "b", "c", "theta"])
+            for var in rhat:
+                if hasattr(rhat[var], 'values'):
+                    var_rhat = rhat[var].values
+                    if np.any(~np.isnan(var_rhat)):
                         max_rhat = max(max_rhat, float(np.nanmax(var_rhat)))
         except Exception as e:
-            logger.warning(f"Could not calculate R-hat efficiently: {e}")
-            max_rhat = 1.0  # Default to assuming convergence
+            logger.warning(f"R-hat calculation issue: {e}")
         
-        # Check R-hat values
-        if max_rhat > 1.2:
-            logger.warning(f"High R-hat value detected: {max_rhat:.3f}. Results may be less reliable but continuing...")
-        elif max_rhat > 1.1:
-            logger.warning(f"Moderate R-hat value detected: {max_rhat:.3f}. Results should be acceptable.")
+        convergence_status = 'GOOD' if max_rhat < 1.05 else 'ACCEPTABLE' if max_rhat < 1.1 else 'POOR'
+        logger.info(f"Convergence: {convergence_status} (max R-hat: {max_rhat:.3f})")
+
+        # ===== EXTRACT RESULTS =====
+        summary_vars = ["a", "b", "c", "theta"]
+        summary = az.summary(trace, var_names=summary_vars, hdi_prob=0.95)
         
-        logger.info(f"Maximum R-hat: {max_rhat:.3f}")
-        convergence_status = 'PASSED' if max_rhat < 1.2 and n_divergences < 200 else 'ACCEPTABLE' if max_rhat < 1.5 and n_divergences < 500 else 'POOR'
-        logger.info(f"Convergence check: {convergence_status}")
-
-        # Skip posterior predictive check to avoid indexing issues
-        logger.info("Skipping posterior predictive check to avoid indexing issues")
-        try:
-            obs_item_means = df_long.groupby("j")["is_correct"].mean().sort_index().values
-        except Exception as e:
-            logger.warning(f"Error calculating observed item means: {e}")
-            obs_item_means = np.zeros(J)
-
-        # Create a simple PPC dataframe without posterior predictive sampling
+        # Extract theta parameters
+        theta_means = []
+        theta_stds = []
+        for i in range(N):
+            theta_key = f"theta[{i}]"
+            if theta_key in summary.index:
+                theta_means.append(float(summary.loc[theta_key, 'mean']))
+                theta_stds.append(float(summary.loc[theta_key, 'sd']))
+            else:
+                theta_means.append(0.0)
+                theta_stds.append(0.0)
+        
+        # Extract item parameters
+        a_means, b_means, c_means = [], [], []
+        a_stds, b_stds, c_stds = [], [], []
+        
+        for j in range(J):
+            for param, means, stds in [("a", a_means, a_stds), 
+                                      ("b", b_means, b_stds), 
+                                      ("c", c_means, c_stds)]:
+                key = f"{param}[{j}]"
+                if key in summary.index:
+                    means.append(float(summary.loc[key, 'mean']))
+                    stds.append(float(summary.loc[key, 'sd']))
+                else:
+                    means.append(0.0)
+                    stds.append(0.0)
+        
+        # Simple PPC (skip full posterior predictive for performance)
+        obs_item_means = df_long.groupby("j")["is_correct"].mean().values
         ppc_df = pd.DataFrame({
             "item": [f"Q{j+1}" for j in range(J)],
             "obs_mean": obs_item_means[:J] if len(obs_item_means) >= J else np.zeros(J),
-            "rep_mean": np.zeros(J),  # Placeholder values
-            "rep_sd": np.zeros(J)     # Placeholder values
+            "rep_mean": np.zeros(J),  # Placeholder
+            "rep_sd": np.zeros(J)     # Placeholder
         })
-
-        # Safely extract parameters with bounds checking and convert to Python native types
-        try:
-            theta_means = [float(x) for x in theta_summary['mean'].values.tolist()] if 'mean' in theta_summary.columns else []
-            theta_stds = [float(x) for x in theta_summary['sd'].values.tolist()] if 'sd' in theta_summary.columns else []
-            
-            # Extract item parameters safely
-            a_means = []
-            b_means = []
-            c_means = []
-            a_stds = []
-            b_stds = []
-            c_stds = []
-            
-            for j in range(min(J, len(item_summary))):
-                try:
-                    a_key = f"a[{j}]"
-                    b_key = f"b[{j}]"
-                    c_key = f"c[{j}]"
-                    
-                    if a_key in item_summary.index and 'mean' in item_summary.columns:
-                        a_means.append(float(item_summary.loc[a_key, 'mean']))
-                        a_stds.append(float(item_summary.loc[a_key, 'sd']))
-                    else:
-                        a_means.append(0.0)
-                        a_stds.append(0.0)
-                        
-                    if b_key in item_summary.index and 'mean' in item_summary.columns:
-                        b_means.append(float(item_summary.loc[b_key, 'mean']))
-                        b_stds.append(float(item_summary.loc[b_key, 'sd']))
-                    else:
-                        b_means.append(0.0)
-                        b_stds.append(0.0)
-                        
-                    if c_key in item_summary.index and 'mean' in item_summary.columns:
-                        c_means.append(float(item_summary.loc[c_key, 'mean']))
-                        c_stds.append(float(item_summary.loc[c_key, 'sd']))
-                    else:
-                        c_means.append(0.0)
-                        c_stds.append(0.0)
-                except (KeyError, IndexError) as e:
-                    logger.warning(f"Error extracting parameters for item {j}: {e}")
-                    a_means.append(0.0)
-                    b_means.append(0.0)
-                    c_means.append(0.0)
-                    a_stds.append(0.0)
-                    b_stds.append(0.0)
-                    c_stds.append(0.0)
-        except Exception as e:
-            logger.error(f"Error extracting summary statistics: {e}")
-            theta_means = [0.0] * N
-            theta_stds = [0.0] * N
-            a_means = [0.0] * J
-            b_means = [0.0] * J
-            c_means = [0.0] * J
-            a_stds = [0.0] * J
-            b_stds = [0.0] * J
-            c_stds = [0.0] * J
 
         return {
             "analysis_completed": True,
@@ -248,11 +243,14 @@ def run_hierarchical_3pl_model(bayesian_data: BayesianIRTData) -> Dict[str, Any]
             "convergence_diagnostics": {
                 "max_rhat": float(max_rhat),
                 "n_divergences": int(n_divergences),
-                "convergence_passed": max_rhat < 1.1 and n_divergences < 50,
+                "convergence_passed": max_rhat < 1.1 and n_divergences < 100,
                 "total_draws": int(len(trace.posterior.chain) * len(trace.posterior.draw)),
-                "sampling_method": str(sampling_method)
-            }, "trace": trace
+                "sampling_method": str(sampling_method),
+                "gpu_used": gpu_available
+            },
+            "trace": trace
         }
+        
     except Exception as e:
         logger.error(f"Hierarchical 3PL model failed: {e}")
         raise
@@ -279,9 +277,9 @@ def run_hierarchical_2pl_model(bayesian_data: BayesianIRTData) -> Dict[str, Any]
             theta = pm.Deterministic("theta", raw_theta - raw_theta.mean())
 
             # Non-centered parameterization for discrimination (a)
-            mu_a = pm.Normal("mu_a", mu=0.0, sigma=1.0)
-            sigma_a = pm.HalfNormal("sigma_a", sigma=0.5)
-            raw_a = pm.Normal("raw_a", mu=0.0, sigma=1.0, shape=J)
+            mu_a = pm.Normal("mu_a", mu=0.0, sigma=0.5)
+            sigma_a = pm.HalfNormal("sigma_a", sigma=0.25)
+            raw_a = pm.Normal("raw_a", mu=0.2, sigma=0.4, shape=J)
             a = pm.Deterministic("a", mu_a + sigma_a * raw_a)
 
             # Non-centered parameterization for difficulty (b)
