@@ -136,7 +136,7 @@ async def update_question_parameters_from_bayesian_irt(db: Session = Depends(get
                 "parameter_b_std": float(question_params["b_stds"][j]),
                 "parameter_c_mean": float(question_params["c_means"][j]),
                 "parameter_c_std": float(question_params["c_stds"][j]),
-                "model_version": "bayesian_irt_v1",
+                "version": "bayesian_irt_v1",
                 "estimation_method": "mcmc",
                 "n_samples": int(len(a_samples)),
                 "convergence_diagnostics": irt_results["convergence_diagnostics"]
@@ -192,7 +192,7 @@ async def update_question_parameters_from_bayesian_irt(db: Session = Depends(get
                 "theta_std": float(theta_stds[i]),
                 "theta_samples": theta_samples,
                 "posterior_summary": posterior_summary,
-                "model_version": "bayesian_irt_v1",
+                "version": "bayesian_irt_v1",
                 "estimation_method": "mcmc",
                 "n_samples": int(len(theta_samples)),
                 "convergence_diagnostics": convergence_diagnostics
