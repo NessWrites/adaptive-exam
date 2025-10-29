@@ -20,3 +20,12 @@ quiz_eda.ipynb
 .env
 instructions
 bayesian_env
+*.csv
+run_mirt_cat.sh
+setup_mirt_cat.py
+test_gpu_final.py
+test_pymc_gpu_sampling.py
+conventional_test.py
+test_database_connection.py
+test_env_loading.py
+OPTIONS_METADATA_CHANGES.md
