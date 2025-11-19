@@ -226,6 +226,4 @@ $$
 L(\boldsymbol{\theta}) = \prod_{i} P_i^{u_i} (1-P_i)^{1-u_i}
 $$
 
----
 
-# End of Document
