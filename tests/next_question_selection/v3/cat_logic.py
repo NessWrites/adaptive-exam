@@ -244,8 +244,8 @@ class MIRTCATSimulator:
         b = item_row['b']
         c = item_row.get('c', 0)  # Use c parameter for 3PL
         
-        # Calculate the linear combination
-        linear_combination = np.sum(a_vector * theta_vector) - 1.7 * b
+        # Calculate the linear predictor correctly (apply D only once outside)
+        linear_combination = np.sum(a_vector * theta_vector) - b
         
         # Apply 3PL formula
         probability = c + (1 - c) / (1 + np.exp(-1.7 * linear_combination))
@@ -261,8 +261,8 @@ class MIRTCATSimulator:
         a_vector = np.array([item_row[dim] * a_2pl for dim in self.all_dimensions])
         b_2pl = item_row.get('b_2pl') or item_row.get('b', 0)  # Use 3PL 'b' if 2PL not available
         
-        # Calculate the linear combination
-        linear_combination = np.sum(a_vector * theta_vector) - 1.7 * b_2pl
+        # Calculate the linear predictor correctly (apply D only once outside)
+        linear_combination = np.sum(a_vector * theta_vector) - b_2pl
         
         # Apply 2PL formula (no guessing parameter)
         probability = 1 / (1 + np.exp(-1.7 * linear_combination))
@@ -473,23 +473,79 @@ class MIRTCATSimulator:
         # user_answer_keys from Streamlit is 0-based (e.g., [1] means second option)
         correct_answer = item['correct_answer']
         
-        # Parse correct_answer (which is 1-based in database)
+        # Parse correct_answer robustly
+        option_texts = []
+        try:
+            # Build option texts from the row for text matching fallback
+            n_choices = item.get('n_choices', 4)
+            options_meta = item.get('options_metadata')
+            if options_meta:
+                import json as _json
+                option_texts = _json.loads(options_meta) if isinstance(options_meta, str) else list(options_meta)
+            if not option_texts:
+                option_texts = [f"{chr(65+i)}" for i in range(n_choices)]
+        except Exception:
+            option_texts = []
+
+        def letter_to_index(token: str) -> int | None:
+            if not isinstance(token, str):
+                return None
+            s = token.strip()
+            if not s:
+                return None
+            # Take first alphabetic character if present
+            import re
+            m = re.search(r"[A-Za-z]", s)
+            if not m:
+                return None
+            ch = m.group(0).upper()
+            if 'A' <= ch <= 'Z':
+                return ord(ch) - ord('A')
+            return None
+
+        correct_answer_list = []
         if isinstance(correct_answer, list):
-            # Convert from 1-based to 0-based
-            correct_answer_list = [int(x) - 1 for x in correct_answer]
+            for x in correct_answer:
+                # Try numeric 1-based -> 0-based
+                try:
+                    correct_answer_list.append(int(x) - 1)
+                    continue
+                except Exception:
+                    pass
+                # Try letter mapping
+                li = letter_to_index(str(x))
+                if li is not None:
+                    correct_answer_list.append(li)
+                    continue
+                # Try text match to options
+                if option_texts and str(x) in option_texts:
+                    correct_answer_list.append(option_texts.index(str(x)))
+            if not correct_answer_list:
+                correct_answer_list = [0]
         elif isinstance(correct_answer, (int, float)):
             correct_answer_list = [int(correct_answer) - 1]
-        else:
-            # Try to parse string or other format
+        elif isinstance(correct_answer, str):
+            # Try JSON first
             try:
                 import json
-                parsed = json.loads(str(correct_answer)) if isinstance(correct_answer, str) else correct_answer
+                parsed = json.loads(correct_answer)
                 if isinstance(parsed, list):
-                    correct_answer_list = [int(x) - 1 for x in parsed]
+                    correct_answer_list = [int(v) - 1 for v in parsed]
                 else:
                     correct_answer_list = [int(parsed) - 1]
-            except:
-                correct_answer_list = [0]  # Default to first option
+            except Exception:
+                # Try letter mapping
+                li = letter_to_index(correct_answer)
+                if li is not None:
+                    correct_answer_list = [li]
+                else:
+                    # Try exact text match to options
+                    if option_texts and correct_answer in option_texts:
+                        correct_answer_list = [option_texts.index(correct_answer)]
+                    else:
+                        correct_answer_list = [0]
+        else:
+            correct_answer_list = [0]
         
         # user_answer_keys is already 0-based from Streamlit
         if isinstance(user_answer_keys, (int, float)):
@@ -533,6 +589,10 @@ class MIRTCATSimulator:
             'item_topic': item['topic'],
             'item_cognitive_level': item['cognitive_level'],
             'item_difficulty_b': item['b'],
+            'item_discrimination_a': item.get('a'),
+            'item_guessing_c': item.get('c'),
+            'correct_answer_indices': correct_answer_list,
+            'user_answer_indices': user_answer_list,
             'response_correct': 'Yes' if is_correct else 'No',
             'theta_before': theta_before,
             'theta_after': theta_after,

@@ -37,28 +37,51 @@ def save_results(results):
     """Save examinee results to CSV file."""
     results_file = Path('examinee_results.csv')
     
-    # Flatten the results for CSV storage
-    flat_results = {
-        'timestamp': results['timestamp'],
-        'total_items': len(results['administered_items']),
-        'administered_items': ';'.join(map(str, results['administered_items'])),
-        'responses': ';'.join(map(str, results['responses']))
-    }
+    rows = []
+    timestamp = results['timestamp']
+    model_type = results.get('model_type')
+    detailed_log = results.get('detailed_log')
     
-    # Add theta estimates for all dimensions
-    for i, dim_name in enumerate(results['dimension_names']):
-        flat_results[f'theta_{dim_name}'] = results['theta_vector'][i]
-        flat_results[f'se_{dim_name}'] = results['theta_se_vector'][i]
+    if detailed_log:
+        # Write one row per administered item
+        for entry in detailed_log:
+            if 'q_num' not in entry:
+                continue
+            row = {
+                'timestamp': timestamp,
+                'model_type': model_type,
+                'q_num': entry.get('q_num'),
+                'item_id': entry.get('item_id'),
+                'topic': entry.get('item_topic'),
+                'cognitive_level': entry.get('item_cognitive_level'),
+                'a': entry.get('item_discrimination_a'),
+                'b': entry.get('item_difficulty_b'),
+                'c': entry.get('item_guessing_c'),
+                'response_correct': entry.get('response_correct'),
+            }
+            # Include theta metrics when available (IRT only)
+            if 'theta_before' in entry and 'theta_after' in entry and 'theta_change' in entry:
+                try:
+                    row['theta_before_general'] = float(entry['theta_before'][0])
+                    row['theta_after_general'] = float(entry['theta_after'][0])
+                    row['theta_change_general'] = float(entry['theta_change'][0])
+                except Exception:
+                    pass
+            rows.append(row)
+    else:
+        # Fallback: single summary row
+        row = {
+            'timestamp': timestamp,
+            'model_type': model_type,
+            'total_items': len(results.get('administered_items', [])),
+            'administered_items': ';'.join(map(str, results.get('administered_items', []))),
+            'responses': ';'.join(map(str, results.get('responses', []))),
+        }
+        if 'score_percent' in results:
+            row['score_percent'] = results['score_percent']
+        rows.append(row)
     
-    # Add content coverage
-    for topic, count in results['topic_counts'].items():
-        flat_results[f'topic_count_{topic}'] = count
-    
-    for level, count in results['cognitive_counts'].items():
-        flat_results[f'cognitive_count_{level}'] = count
-    
-    # Create DataFrame and append to file
-    df = pd.DataFrame([flat_results])
+    df = pd.DataFrame(rows)
     
     if results_file.exists():
         existing_df = pd.read_csv(results_file)
@@ -346,22 +369,12 @@ if page == "Take Test":
 
         with col2:
             if st.session_state.get('model_type') == 'Conventional':
-                # Conventional test statistics
-                st.info("#### 📊 Test Statistics")
-                
-                stats = cat.get_test_statistics()
-                st.metric("Questions Answered", f"{len(cat.administered_items)}/{cat.test_length}")
-                st.metric("Correct Answers", f"{stats['correct_answers']}/{stats['total_questions']}")
-                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
-                
-                if stats['total_questions'] > 0:
-                    st.write("**Difficulty Analysis:**")
-                    st.write(f"Average Difficulty: {stats['average_difficulty']:.2f}")
-                    st.write(f"Range: {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
-                    
-                    st.write("**Topic Distribution:**")
-                    for topic, count in stats['topic_distribution'].items():
-                        st.write(f"• {topic}: {count}")
+                # Conventional: show only overall score (percentage correct)
+                total_answered = len(cat.administered_items)
+                correct = sum(cat.responses) if total_answered > 0 else 0
+                accuracy = (correct / total_answered * 100.0) if total_answered > 0 else 0.0
+                st.info("#### 🧮 Overall Score")
+                st.metric("Score", f"{accuracy:.1f}%")
             else:
                 # Real-time ability estimates for IRT models
                 st.info("#### 🎯 Current Ability Estimates")
@@ -380,16 +393,9 @@ if page == "Take Test":
                 for i, (topic, theta) in enumerate(topic_data[:3]):
                     st.write(f"{i+1}. {topic}: {theta:.2f}")
             
-            # Content coverage progress
-            st.markdown("---")
-            if st.session_state.get('model_type') == 'Conventional':
-                st.write("#### 📊 Random Selection Info")
-                st.write("**Note:** Questions are selected randomly without considering:")
-                st.write("• Student ability level")
-                st.write("• Item difficulty optimization")
-                st.write("• Content balance")
-                st.write("• Adaptive feedback")
-            else:
+            # Content coverage (hide entirely for Conventional)
+            if st.session_state.get('model_type') != 'Conventional':
+                st.markdown("---")
                 st.write("#### 📊 Content Balance")
                 
                 # Topic coverage
@@ -404,38 +410,32 @@ if page == "Take Test":
                     st.write(f"• {level}: {count}")
 
         with col3:
-            # Item information and test log
-            st.info("#### 🔍 Current Item Info")
-            st.markdown(f"**Model:** {st.session_state.get('model_type', '3PL')}")
-            st.markdown(f"**Topic:** {item['topic']}")
-            st.markdown(f"**Cognitive Level:** {item['cognitive_level']}")
-            
-            if st.session_state.get('model_type') == 'Conventional':
-                st.markdown("**Selection:** Random")
-                st.markdown(f"**Question:** {len(cat.administered_items) + 1} of {cat.test_length}")
-                st.markdown(f"**Difficulty (b):** {item.get('b', 0):.2f}")
-                st.markdown(f"**Discrimination (a):** {item.get('a', 0):.2f}")
-                st.markdown(f"**Guessing (c):** {item.get('c', 0):.2f}")
-            elif st.session_state.get('model_type') == '2PL':
-                b_2pl = item.get('b_2pl') or item.get('b', 0)
-                a_2pl = item.get('a_2pl') or item.get('a', 0)
-                st.markdown(f"**Difficulty (b):** {b_2pl:.2f}")
-                st.markdown(f"**Discrimination (a):** {a_2pl:.2f}")
-            else:
-                st.markdown(f"**Difficulty (b):** {item.get('b', 0):.2f}")
-                st.markdown(f"**Discrimination (a):** {item.get('a', 0):.2f}")
-                st.markdown(f"**Guessing (c):** {item.get('c', 0):.2f}")
-            
-            st.markdown("---")
-            st.write("#### 📝 Recent Activity")
-            
-            # Show last few responses
-            if cat.log:
-                recent_logs = cat.log[-3:] if len(cat.log) >= 3 else cat.log
-                for log_entry in reversed(recent_logs):
-                    if 'q_num' in log_entry:
-                        correct_emoji = "✅" if log_entry['response_correct'] == 'Yes' else "❌"
-                        st.write(f"Q{log_entry['q_num']}: {correct_emoji} {log_entry['item_topic']}")
+            if st.session_state.get('model_type') != 'Conventional':
+                # Item information and recent activity (IRT models only)
+                st.info("#### 🔍 Current Item Info")
+                st.markdown(f"**Model:** {st.session_state.get('model_type', '3PL')}")
+                st.markdown(f"**Topic:** {item['topic']}")
+                st.markdown(f"**Cognitive Level:** {item['cognitive_level']}")
+                
+                if st.session_state.get('model_type') == '2PL':
+                    b_2pl = item.get('b_2pl') or item.get('b', 0)
+                    a_2pl = item.get('a_2pl') or item.get('a', 0)
+                    st.markdown(f"**Difficulty (b):** {b_2pl:.2f}")
+                    st.markdown(f"**Discrimination (a):** {a_2pl:.2f}")
+                else:
+                    st.markdown(f"**Difficulty (b):** {item.get('b', 0):.2f}")
+                    st.markdown(f"**Discrimination (a):** {item.get('a', 0):.2f}")
+                    st.markdown(f"**Guessing (c):** {item.get('c', 0):.2f}")
+                
+                st.markdown("---")
+                st.write("#### 📝 Recent Activity")
+                
+                if cat.log:
+                    recent_logs = cat.log[-3:] if len(cat.log) >= 3 else cat.log
+                    for log_entry in reversed(recent_logs):
+                        if 'q_num' in log_entry:
+                            correct_emoji = "✅" if log_entry['response_correct'] == 'Yes' else "❌"
+                            st.write(f"Q{log_entry['q_num']}: {correct_emoji} {log_entry['item_topic']}")
 
     else:
         # Test completion page
@@ -443,31 +443,16 @@ if page == "Take Test":
         st.balloons()
 
         if st.session_state.get('model_type') == 'Conventional':
-            # Conventional completion: show summary and comparison (no IRT diagnostics)
-            st.header("📊 Conventional Test Summary")
-            stats = cat.get_test_statistics()
-
-            col1, col2, col3 = st.columns(3)
-
-            with col1:
-                st.metric("Total Questions", stats['total_questions'])
-                st.metric("Correct Answers", stats['correct_answers'])
-                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
-
-            with col2:
-                st.metric("Average Difficulty", f"{stats['average_difficulty']:.2f}")
-                st.write(f"Range: {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
-
-            with col3:
-                st.write("**Topic Distribution:**")
-                for topic, count in stats['topic_distribution'].items():
-                    st.write(f"• {topic}: {count}")
-
-            st.markdown("---")
-            st.subheader("🆚 Why We Prefer IRT (3PL)")
-            st.write("- Adaptive selection matches difficulty to ability")
-            st.write("- Fewer questions needed for accurate estimates")
-            st.write("- Rich diagnostic feedback across dimensions")
+            # Conventional completion: show only overall score (percentage correct)
+            total_answered = len(cat.administered_items)
+            correct = sum(cat.responses) if total_answered > 0 else 0
+            accuracy = (correct / total_answered * 100.0) if total_answered > 0 else 0.0
+            st.header("🧮 Overall Score")
+            st.metric("Score", f"{accuracy:.1f}%")
+            # Save results
+            if hasattr(cat, 'export_results'):
+                results = cat.export_results()
+                save_results(results)
 
         else:
             # IRT completion: diagnostics and export
@@ -501,49 +486,12 @@ if page == "Take Test":
         st.header("📋 Detailed Results")
         
         if st.session_state.get('model_type') == 'Conventional':
-            # Conventional test results
-            stats = cat.get_test_statistics()
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.subheader("📊 Test Summary")
-                st.metric("Total Questions", stats['total_questions'])
-                st.metric("Correct Answers", stats['correct_answers'])
-                st.metric("Accuracy", f"{stats['accuracy']:.1%}")
-            
-            with col2:
-                st.subheader("📈 Difficulty Analysis")
-                st.metric("Average Difficulty", f"{stats['average_difficulty']:.2f}")
-                st.write(f"**Range:** {stats['difficulty_range'][0]:.2f} - {stats['difficulty_range'][1]:.2f}")
-                st.write("**Note:** Difficulty values are from IRT parameters but not used for selection")
-            
-            with col3:
-                st.subheader("📚 Topic Distribution")
-                for topic, count in stats['topic_distribution'].items():
-                    st.write(f"• {topic}: {count}")
-            
-            # Comparison with IRT
-            st.markdown("---")
-            st.subheader("🆚 Why IRT Models Are Better")
-            
-            comparison_col1, comparison_col2 = st.columns(2)
-            
-            with comparison_col1:
-                st.write("**❌ Conventional Test Limitations:**")
-                st.write("• Random question selection")
-                st.write("• No ability estimation")
-                st.write("• Unbalanced difficulty")
-                st.write("• No adaptive feedback")
-                st.write("• Limited diagnostic value")
-            
-            with comparison_col2:
-                st.write("**✅ IRT Model Advantages:**")
-                st.write("• Adaptive question selection")
-                st.write("• Real-time ability estimation")
-                st.write("• Optimal difficulty matching")
-                st.write("• Detailed diagnostic profiles")
-                st.write("• Efficient testing (fewer questions)")
+            # Conventional completion: show only overall score
+            total_answered = len(cat.administered_items)
+            correct = sum(cat.responses) if total_answered > 0 else 0
+            accuracy = (correct / total_answered * 100.0) if total_answered > 0 else 0.0
+            st.header("🧮 Overall Score")
+            st.metric("Score", f"{accuracy:.1f}%")
         else:
             # IRT model results
             col1, col2, col3 = st.columns(3)
@@ -573,57 +521,10 @@ if page == "Take Test":
                 for level, data in cognitive_profile.items():
                     st.write(f"**{level}:** {data['score']:.3f} ({data['interpretation']})")
         
-        # Detailed diagnostic interpretation
-        st.header("🔍 Diagnostic Interpretation")
-        
-        if st.session_state.get('model_type') == 'Conventional':
-            # Conventional test interpretation
-            st.info("**Note:** Conventional tests provide limited diagnostic information compared to IRT models.")
+        # Detailed diagnostic interpretation (IRT models only)
+        if st.session_state.get('model_type') != 'Conventional':
+            st.header("🔍 Diagnostic Interpretation")
             
-            with st.expander("📊 Test Analysis", expanded=True):
-                stats = cat.get_test_statistics()
-                
-                st.write("**Overall Performance:**")
-                if stats['accuracy'] >= 0.8:
-                    st.success(f"Strong performance: {stats['accuracy']:.1%} accuracy")
-                elif stats['accuracy'] >= 0.6:
-                    st.warning(f"Moderate performance: {stats['accuracy']:.1%} accuracy")
-                else:
-                    st.error(f"Needs improvement: {stats['accuracy']:.1%} accuracy")
-                
-                st.write("**Difficulty Analysis:**")
-                avg_diff = stats['average_difficulty']
-                if avg_diff > 1.0:
-                    st.write(f"Test was relatively difficult (avg difficulty: {avg_diff:.2f})")
-                elif avg_diff < -1.0:
-                    st.write(f"Test was relatively easy (avg difficulty: {avg_diff:.2f})")
-                else:
-                    st.write(f"Test had moderate difficulty (avg difficulty: {avg_diff:.2f})")
-                
-                st.write("**Topic Coverage:**")
-                for topic, count in stats['topic_distribution'].items():
-                    st.write(f"• {topic}: {count} questions")
-            
-            with st.expander("🆚 IRT vs Conventional Comparison", expanded=True):
-                st.write("**Why IRT Models Are Superior:**")
-                st.write("""
-                1. **Adaptive Selection**: IRT models select questions based on your current ability level
-                2. **Efficient Testing**: Fewer questions needed for accurate assessment
-                3. **Real-time Feedback**: Continuous ability estimation during the test
-                4. **Detailed Diagnostics**: Comprehensive analysis of strengths and weaknesses
-                5. **Optimal Difficulty**: Questions matched to your ability level for maximum information
-                6. **Content Balance**: Ensures balanced coverage across topics and cognitive levels
-                """)
-                
-                st.write("**Conventional Test Limitations:**")
-                st.write("""
-                1. **Random Selection**: Questions chosen without considering your ability
-                2. **Fixed Difficulty**: May be too easy or too hard for your level
-                3. **No Adaptation**: Same questions regardless of your performance
-                4. **Limited Feedback**: Only final score, no diagnostic information
-                5. **Inefficient**: May require more questions for accurate assessment
-                """)
-        else:
             # IRT model interpretation
             with st.expander("📈 Strengths and Development Areas", expanded=True):
                 general_theta = diagnostic_report['theta_estimates']['General']
@@ -652,39 +553,51 @@ if page == "Take Test":
                 if not strengths and not development_areas:
                     st.write("Your abilities are well-balanced across all topic areas relative to your general ability level.")
         
-        # Test statistics
-        st.header("📊 Test Statistics")
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            st.metric("Total Items", len(cat.administered_items))
-        with col2:
-            correct_responses = sum(cat.responses)
-            st.metric("Correct Answers", f"{correct_responses}/{len(cat.responses)}")
-        with col3:
-            accuracy = correct_responses / len(cat.responses) if cat.responses else 0
-            st.metric("Accuracy", f"{accuracy:.1%}")
-        with col4:
-            avg_se = np.mean(list(diagnostic_report['standard_errors'].values()))
-            st.metric("Avg. Standard Error", f"{avg_se:.3f}")
-        
-        # Detailed log
-        with st.expander("📝 Detailed Test Log"):
-            for entry in cat.log:
-                if 'q_num' in entry:
-                    st.write(f"**Question {entry['q_num']}:** {entry['item_content'][:80]}...")
-                    col1, col2, col3 = st.columns(3)
-                    with col1:
-                        st.write(f"Topic: {entry['item_topic']}")
-                        st.write(f"Cognitive Level: {entry['item_cognitive_level']}")
-                    with col2:
-                        correct_color = "green" if entry['response_correct'] == 'Yes' else "red"
-                        st.markdown(f"Response: <span style='color:{correct_color}'>{entry['response_correct']}</span>", 
-                                  unsafe_allow_html=True)
-                    with col3:
-                        theta_change = entry['theta_change'][0]  # General factor change
-                        st.write(f"General θ Change: {theta_change:+.3f}")
-                    st.write("---")
+        # Test statistics and detailed log (IRT models only)
+        if st.session_state.get('model_type') != 'Conventional':
+            st.header("📊 Test Statistics")
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.metric("Total Items", len(cat.administered_items))
+            with col2:
+                correct_responses = sum(cat.responses)
+                st.metric("Correct Answers", f"{correct_responses}/{len(cat.responses)}")
+            with col3:
+                accuracy = correct_responses / len(cat.responses) if cat.responses else 0
+                st.metric("Accuracy", f"{accuracy:.1%}")
+            with col4:
+                avg_se = np.mean(list(diagnostic_report['standard_errors'].values()))
+                st.metric("Avg. Standard Error", f"{avg_se:.3f}")
+            
+            with st.expander("📝 Detailed Test Log"):
+                for entry in cat.log:
+                    if 'q_num' in entry:
+                        st.write(f"**Question {entry['q_num']}:** {entry['item_content'][:80]}...")
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            st.write(f"Topic: {entry['item_topic']}")
+                            st.write(f"Cognitive Level: {entry['item_cognitive_level']}")
+                            # Item parameters
+                            a_val = entry.get('item_discrimination_a')
+                            b_val = entry.get('item_difficulty_b')
+                            c_val = entry.get('item_guessing_c')
+                            st.write(f"a: {a_val if a_val is not None else '-'}")
+                            st.write(f"b: {b_val if b_val is not None else '-'}")
+                            st.write(f"c: {c_val if c_val is not None else '-'}")
+                        with col2:
+                            correct_color = "green" if entry['response_correct'] == 'Yes' else "red"
+                            st.markdown(f"Response: <span style='color:{correct_color}'>{entry['response_correct']}</span>", 
+                                      unsafe_allow_html=True)
+                        with col3:
+                            theta_change = entry['theta_change'][0]  # General factor change
+                            st.write(f"General θ Change: {theta_change:+.3f}")
+                        # Debug answers
+                        ca = entry.get('correct_answer_indices')
+                        ua = entry.get('user_answer_indices')
+                        if ca is not None and ua is not None:
+                            st.write(f"Correct idx: {ca} | Your idx: {ua}")
+                        st.write("---")
         
         # Restart option
         if st.button("🔄 Take Another Test"):
