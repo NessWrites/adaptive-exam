@@ -1,0 +1,446 @@
+{
+  "2. 2. A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "3. 3. An acoustic engineer is designing a noise-canceling system.  They decompose a sound wave into orthogonal components.  What does the orthogonality of these components signify in terms of the sound waves?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "4. 4. A digital image is represented as a matrix. Using Singular Value Decomposition (SVD), you find that the first few singular values capture most of the image's information. What is the practical application of this?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Analysis"
+  },
+  "7. 7.  A company's profit P (in dollars) from selling x units of a product is given by P(x) = -0.01x^2 + 300x - 200000. How many units should the company sell to maximize profit?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "9. 9. The rate of water flow into a tank is given by R(t) = 100*t liters per minute, where t is in minutes. How much water enters the tank between t = 1 and t = 5 minutes?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "10. 10. Suppose you have a 60% chance of passing this exam and you are given 4 chances, each having similar but different questions. Assuming that each exam is independent of other, what is the probability that you will pass the majority of the time?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "11. 11. A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Analysis"
+  },
+  "12. 12. You are tasked to create a statistical distribution based estimate for a server. If the average rate is 5 requests per minute, what is the probability of receiving exactly 7 requests in a minute?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "13. 13. A continuous random variable T has a uniform distribution between 0 and 10. What is the expected value of T?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "14. 14. For a standard normal distribution, what is the value of the third central moment?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Knowledge"
+  },
+  "15. 15. A large population has a mean weight of 150 lbs and a standard deviation of 20 lbs. If you take a random sample of 100 individuals, what is the approximate standard deviation of the sample mean?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Application"
+  },
+  "16. 16. If X and Y are uncorrelated variable then this implies:": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Knowledge"
+  },
+  "17. 17. A software company is running an A/B test to compare two versions of their homepage: Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "18. 18. What is the result of [1, 2, 3] + \"4\"": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "19. 19. Given: a = [1,2,3,4,5,6]. Here, which of the following will remove element 4 from the list?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "21. 21. Which function overloads the > operator?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "22. 22. What is the output of the following code\nnew_list = [2*x for x in range(1,5)]\nprint(new_list)": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Application"
+  },
+  "23. 23. You want to extract all email addresses from a webpage's HTML content. What Python module is most suitable for this task?": {
+    "topic_dimension": "Natural Language Processing",
+    "cognitive_dimension": "Knowledge"
+  },
+  "24. 24. If Z is a NumPy array, what does the following code do?\nZ[(4 < Z) & (Z < 8)] *= -1": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "25. 25. You have a large dataset in a CSV file and need to calculate the average sales per product category. Which Pandas function would you use?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "26. 26. What command implies that we are making two figures side-by-side ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "27. 27. Which of the following commands would you use to save the version of all the modules installed in your current environment?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "29. 29. In a recommendation system, users and items can be represented as nodes in a graph, and their interactions (e.g., ratings, purchases) as edges. Which graph algorithm approach could be used to find similar items for a given user?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Knowledge"
+  },
+  "30. 30. A web browser maintains a history of pages visited by the user. When the user clicks the \"Back\" button, the browser loads the most recently visited page. Which data structure would be best suited to implement this functionality?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Analysis"
+  },
+  "31. 31. A beginner programmer is tasked with implementing a sorting algorithm to arrange a small list of numbers in ascending order. She implemented a simple sorting algorithm that repeatedly compares the adjacent elements in a list and swaps them if they are out of order, continuing until the list is fully sorted. What is this algorithm called?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "32. 32. In git, which of the following commands (in sequence)  are used when we want to reflect a change of file from the local working directory to the staging area and finally to the repository?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "33. 33. In which phase of SDLC, the cost of changes is least?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "34. 34. When designing a relational database, what is the primary purpose of defining a \"primary key\"?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "35. 35. The given Query can also be replaced with_______:\nSELECT name, course_id  \nFROM instructor, teaches  \nWHERE instructor_ID= teaches_ID;": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "36. 36. GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "37. 37. What is the next number in this sequence of numbers: 77,49,36,18, __ ?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "38. 38. Consider a sentence from an ML paper: \u201cOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.\u201d What does \u201ccircumvents\u201d imply in this context?": {
+    "topic_dimension": "ANN",
+    "cognitive_dimension": "Analysis"
+  },
+  "39. 39. \"Three individuals, X, Y, and Z, are standing in a line, facing forward. Each is wearing a hat that is either red or blue. They cannot see their own hat.\nSomeone announces, 'At least one of you is wearing a red hat.'\nX says, 'I do not know the color of my hat.'\nY says, 'I do not know the color of my hat.'\nZ then says, 'I know the color of my hat.'\nWhat color is Z's hat,": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Analysis"
+  },
+  "41. 41. A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "42. 42. A 3D graphics programmer is calculating the diffuse reflection of light from a surface.  This involves projecting the light vector onto the surface normal.  If the projection of the light vector onto the normal vector is the zero vector, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "43. 43. Eigenvectors of a matrix represent:": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Knowledge"
+  },
+  "44. 44. A lottery ticket costs $2. There's a 1% chance of winning $100, a 5% chance of winning $10, and a 94% chance of winning nothing. Let X be the random variable representing your profit. What is the expected profit from buying one ticket?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "45. 45. A manufacturing process produces items with varying dimensions. The Central Limit Theorem is used to analyze the distribution of sample means. Why is this useful?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "46. 46. In an airport baggage claim system, luggage is processed in the order it arrives. Each piece of luggage is loaded onto a conveyor belt, and the first piece loaded is the first to be delivered to passengers.  Which data structure would be best suited to model this luggage delivery system?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "47. 47. A data scientist needs to visualise clusters or groups of data points of six dimensional data. He uses a certain dimensionality reduction technique to reduce the dimensions to two. Which of the following would be the best visualisation method in order to identify the visual clusters in the reduced dataset and identify potential outliers?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Analysis"
+  },
+  "49. 49. A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Application"
+  },
+  "50. 50. What is the primary objective of the least squares method?": {
+    "topic_dimension": "Linear Models",
+    "cognitive_dimension": "Knowledge"
+  },
+  "4. 4. What is the key purpose of truncating singular values in SVD?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Knowledge"
+  },
+  "5. 5. What is the primary objective of the least squares method?": {
+    "topic_dimension": "Linear Models",
+    "cognitive_dimension": "Knowledge"
+  },
+  "6. 6. There is a function  \ud835\udc53(\ud835\udc65)  whose value at  \ud835\udc65=2  is  5 . Suppose,  \ud835\udc53 \u2032(2)=4  and  \ud835\udc53 \u2033(2)=2 . What is the approximate value of the function at x=3?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "7. 7. How many turning points are there on a graph of y = ex  + sin(x) + 2x?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "9. 9.  A car's velocity is given by v(t)=3*t^2 meters/second, where t is time in seconds. How far does the car travel (in meters) from t=1 to t=2 seconds?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "11. 11. A laboratory fluid test is  98%  effective in detecting a certain disease when it is, in fact, present. However, if a healthy person is tested, then, with probability  .02 , the test result will predict that he or she has the disease. If  .5%  of the population actually has the disease, what is the probability that a person has the disease given that the test result is positive?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "12. 12. A factory produces items with a 2% defect rate. If 200 items are produced, what is the approximate probability of finding exactly 5 defective items?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "13. 13. A fair six-sided die is rolled. Let X be the random variable representing the number rolled. What is the expected value of X (E[X])?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "17. 17. A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "21. 21. You are designing a system for managing different types of media (audio, video, images). You define a base class Media with a play() method. Which OOP principle allows you to implement specific play() behavior for each media type in their respective subclasses (e.g., Audio, Video, Image)?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "22. 22. The list all_numbers contains numbers from 1 to 100. Which of the following code creates a new list even_numbers that contains all even numbers filtered from the list all_numbers.": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Application"
+  },
+  "24. 24. A is a 2X2 invertible matrix. How do you calculate the inverse of A using NumPy?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Knowledge"
+  },
+  "25. 25. How do you select a particular row, for example row 0, and then return all the columns that have a value more than 50?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Application"
+  },
+  "26. 26. A data scientist needs to visualise clusters or groups of data points of six dimensional data. He uses a certain dimensionality reduction technique to reduce the dimensions to two. Which of the following would be the best visualisation method in order to identify the visual clusters in the reduced dataset and identify potential outliers?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Analysis"
+  },
+  "27. 27. Which of the following command would you use to install all dependencies based on requirement.txt file?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "30. 30.  In an airport baggage claim system, luggage is processed in the order it arrives. Each piece of luggage is loaded onto a conveyor belt, and the first piece loaded is the first to be delivered to passengers.  Which data structure would be best suited to model this luggage delivery system?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "31. 31. A library wants to organize its collection of books in alphabetical order by title. Each time a new book is added to the collection, it needs to be placed in the correct position while minimizing the time taken to reorder the entire collection. Which sorting algorithm would be best suited for this task if the collection is already mostly sorted, and new books are added one at a time?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Analysis"
+  },
+  "33. 33. In which phase of the software development lifecycle, the cost of changes is minimum?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "34. 34. What does the term \"normalization\" refer to in relational databases?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "35. 35. Which one of the following given statements possibly contains the error?": {
+    "topic_dimension": "General ML Concepts",
+    "cognitive_dimension": "Analysis"
+  },
+  "36. 36. GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "42. 42. A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "43. 43. An acoustic engineer is designing a noise-canceling system.  They decompose a sound wave into orthogonal components.  What does the orthogonality of these components signify in terms of the sound waves?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Knowledge"
+  },
+  "44. 44. A digital image is represented as a matrix. Using Singular Value Decomposition (SVD), you find that the first few singular values capture most of the image's information. What is the practical application of this?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Analysis"
+  },
+  "46. 46. During the training of a neural network, you use gradient descent to minimize a loss function. What does this process involve?": {
+    "topic_dimension": "ANN",
+    "cognitive_dimension": "Knowledge"
+  },
+  "47. 47. A rain gauge measures the rainfall rate r(t)= 2*t mm/hour, where t is time in hours. What is the total rainfall (in mm) from t=0 to t=3 hours?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "48. 48. In a certain locality, 6% of men have diabetes and 3% of women have diabetes. The total population is divided in the ratio 3:2 in favour of women. If a person is selected at random from among all those with diabetes, what is the probability that the person is a man?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "49. 49. A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Analysis"
+  },
+  "50. 50. Which of the following are keywords in python ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "2. A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "3. A 3D graphics programmer is calculating the diffuse reflection of light from a surface.  This involves projecting the light vector onto the surface normal.  If the projection of the light vector onto the normal vector is the zero vector, what does this imply?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "4. Eigenvectors of a matrix represent:": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Knowledge"
+  },
+  "5. A sensor's readings are known to have a linear relationship with the actual values, but with some noise. You have a set of measured data points (xi\u200b,y,\u200b) and want to find the best-fit line y=mx+c to calibrate the sensor. What is the goal of using least squares in this context?": {
+    "topic_dimension": "Linear Models",
+    "cognitive_dimension": "Analysis"
+  },
+  "7. During the training of a neural network, you use gradient descent to minimize a loss function. What does this process involve?": {
+    "topic_dimension": "ANN",
+    "cognitive_dimension": "Analysis"
+  },
+  "9.  A rain gauge measures the rainfall rate r(t)= 2*t mm/hour, where t is time in hours. What is the total rainfall (in mm) from t=0 to t=3 hours?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Application"
+  },
+  "10. In a certain locality, 6% of men have diabetes and 3% of women have diabetes. The total population is divided in the ratio 3:2 in favour of women. If a person is selected at random from among all those with diabetes, what is the probability that the person is a man?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "11. A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Analysis"
+  },
+  "13. A lottery ticket costs $2. There's a 1% chance of winning $100, a 5% chance of winning $10, and a 94% chance of winning nothing. Let X be the random variable representing your profit. What is the expected profit from buying one ticket?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Application"
+  },
+  "14. What\u2019s the Standard deviation for the following sample data 2,4,6,8,10 and 12": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Application"
+  },
+  "15.  A manufacturing process produces items with varying dimensions. The Central Limit Theorem is used to analyze the distribution of sample means. Why is this useful?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "16. If X and Y are uncorrelated variable then this implies:": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Knowledge"
+  },
+  "17. A software company is running an A/B test to compare two versions of their homepage: Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "18. Which of the following are keywords in python ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "19. Suppose d = {\u201cBen\u201d:40, \u201cTen\u201d:45}. To obtain the number of entries in the dictionary, which command do we use?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "21. You are designing a system with different types of sensors. Using Object-Oriented Programming (OOP) principles, how would you best represent these sensors?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Analysis"
+  },
+  "23. \n\nYou want to extract all email addresses from a webpage's HTML content. What Python module is most suitable for this task?": {
+    "topic_dimension": "Natural Language Processing",
+    "cognitive_dimension": "Knowledge"
+  },
+  "24. If Z is a NumPy array, What does the following code do?\nZ[(4 < Z) & (Z < 8)] *= -1": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "25. You have a large dataset in a CSV file and need to calculate the average sales per product category. Which Pandas function would you use?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Application"
+  },
+  "26. What command implies that we are making two figures side-by-side ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "27. Which of the following commands would you use to save the version of all the modules installed in your current environment ?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "28. What is the space complexity for deleting a linked list?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Knowledge"
+  },
+  "29. Which of the following algorithm always manages to reach the final goal state with the least cost path?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "30. A web browser maintains a history of pages visited by the user. When the user clicks the \"Back\" button, the browser loads the most recently visited page. Which data structure would be best suited to implement this functionality?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Analysis"
+  },
+  "31. You need to efficiently find a specific record in a large sorted database. Which algorithm would you use?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "32. In git, which of the following commands (in sequence)  are used when we want to reflect a change of file from the local working directory to the staging area and finally to the repository?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "33. In which phase of SDLC, the cost of changes is least?": {
+    "topic_dimension": "MLOps",
+    "cognitive_dimension": "Knowledge"
+  },
+  "34. When designing a relational database, what is the primary purpose of defining a \"primary key\"?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "36. GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "37. What is the next number in this sequence of numbers: 21,13,34,47,71,18, ?": {
+    "topic_dimension": "Math",
+    "cognitive_dimension": "Analysis"
+  },
+  "38. We present a novel neural architecture, Sparse Attentive Feature Aggregation (SAFA), designed to enhance feature representation in high-dimensional image data. SAFA utilizes a sparse attention mechanism, focusing on salient image regions while minimizing computational overhead. This is achieved through a learnable gating function that dynamically selects relevant feature channels. By applying a localized attention kernel, SAFA aggregates contextual information within these salient regions, leading to improved object detection and segmentation performance. Experiments on benchmark datasets demonstrate that SAFA outperforms existing attention mechanisms, particularly in scenarios with complex object occlusions and varying illumination conditions.How does SAFA minimize computational overhead?": {
+    "topic_dimension": "CNN",
+    "cognitive_dimension": "Knowledge"
+  },
+  "41. A software company is running an A/B test to compare two versions of their homepage: Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "42. Which function overloads the > operator?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "43. A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?": {
+    "topic_dimension": "Statistics",
+    "cognitive_dimension": "Analysis"
+  },
+  "44. Given: a = [1,2,3,4,5,6]. Here, which of the following will remove element 4 from the list?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "45. The list all_numbers contains numbers from 1 to 100. Which of the following code creates a new list even_numbers that contains all even numbers filtered from the list all_numbers.": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Application"
+  },
+  "47. What command implies that we are making two figures side-by-side ?": {
+    "topic_dimension": "Other",
+    "cognitive_dimension": "Knowledge"
+  },
+  "48. In a recommendation system, users and items can be represented as nodes in a graph, and their interactions (e.g., ratings, purchases) as edges. Which graph algorithm approach could be used to find similar items for a given user?": {
+    "topic_dimension": "Unsupervised Learning",
+    "cognitive_dimension": "Knowledge"
+  },
+  "49. Consider a sentence from an ML paper: \u201cOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.\u201d What does \u201ccircumvents\u201d imply in this context?": {
+    "topic_dimension": "General ML Concepts",
+    "cognitive_dimension": "Analysis"
+  },
+  "50. \"Three individuals, X, Y, and Z, are standing in a line, facing forward. Each is wearing a hat that is either red or blue. They cannot see their own hat.\n\nSomeone announces, 'At least one of you is wearing a red hat.'\nX says, 'I do not know the color of my hat.'\nY says, 'I do not know the color of my hat.'\nZ then says, 'I know the color of my hat.'\n\nWhat color is Z's hat?": {
+    "topic_dimension": "Probabilities",
+    "cognitive_dimension": "Analysis"
+  }
+}
