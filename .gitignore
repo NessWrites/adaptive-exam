@@ -12,9 +12,9 @@ env/
 .streamlit/
 *.log
 .DS_Store
-*.json
 quiz_answer/
 json_quiz.py
+scrapper/question_files/
 quiz_eda.ipynb
 .env
 instructions
