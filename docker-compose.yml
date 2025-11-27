@@ -2,43 +2,72 @@ version: "3.9"
 
 services:
   db:
-    image: postgres:15
-    container_name: adaptive_exam_db
+    image: postgres:16-alpine
+    container_name: adaptive_exam_postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME:-adaptive_exam_db}
-      POSTGRES_USER: ${DB_USER:-fusemachines}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-your_strong_password}
-    ports:
-      - "55432:5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 5
 
-  app:
+  backend:
     build:
       context: .
-      dockerfile: Dockerfile.app
-    container_name: adaptive_exam_app
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: ${DB_NAME:-adaptive_exam_db}
-      DB_USER: ${DB_USER:-fusemachines}
-      DB_PASSWORD: ${DB_PASSWORD:-your_strong_password}
-      STREAMLIT_SERVER_PORT: ${STREAMLIT_SERVER_PORT:-8501}
+      dockerfile: ./backend/Dockerfile
+    container_name: adaptive_exam_fastapi
+    restart: unless-stopped
+    env_file: .env
     depends_on:
       db:
         condition: service_healthy
     ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+      - ./ai_models:/app/ai_models
+    working_dir: /app/backend
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - PYTHONPATH=/app
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: adaptive_exam_streamlit
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy  # ← Wait for db to be healthy
+      backend:
+        condition: service_started  # ← Wait for backend to start
+    ports:
       - "8501:8501"
-    # Uncomment to enable live code reload in development
-    # volumes:
-    #   - .:/app
+    volumes:
+      - ./frontend:/app
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - BACKEND_URL=http://backend:8000  # ← Added for API calls
 
 volumes:
-  pgdata:
+  postgres_data:

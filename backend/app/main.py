@@ -1,15 +1,15 @@
 # backend/main.py
 from fastapi import FastAPI
-from .app.database.postgresql.connection import engine
-from .app.models import models
-from .app.routes.students_route import router as students_router
-from .app.routes.questions_route import router as questions_router
-from .app.routes.test_sessions_route import router as test_sessions_router
-from .app.routes.responses_route import router as responses_router
-from .app.routes.bayesian_ability_estimates_route import router as bayesian_ability_estimates_router
-from .app.routes.question_parameters_route import router as question_parameters_router
-from .app.routes.submissions_route import router as submissions_router
-from .app.routes.data_upload_route import router as data_upload_router
+from .database.postgresql.connection import engine
+from .models import models
+from .routes.students_route import router as students_router
+from .routes.questions_route import router as questions_router
+from .routes.test_sessions_route import router as test_sessions_router
+from .routes.responses_route import router as responses_router
+from .routes.bayesian_ability_estimates_route import router as bayesian_ability_estimates_router
+from .routes.question_parameters_route import router as question_parameters_router
+from .routes.submissions_route import router as submissions_router
+from .routes.data_upload_route import router as data_upload_router
 
 # Create database tables if they don't exist
 models.Base.metadata.create_all(bind=engine)

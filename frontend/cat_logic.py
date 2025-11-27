@@ -56,7 +56,7 @@ class MIRTCATSimulator:
         
         # Database connection parameters
         self.db_params = {
-            "host": os.getenv("DB_HOST", "localhost"),
+            "host": os.getenv("DB_HOST", "db"),
             "dbname": os.getenv("DB_NAME", "adaptive_exam_db"),
             "user": os.getenv("DB_USER"),
             "password": os.getenv("DB_PASSWORD"),
