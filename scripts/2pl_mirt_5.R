@@ -2,7 +2,8 @@ library(mirt)
 # ============================================================================
 ##Step 1 Load the data
 # ============================================================================
-data <- read.csv("D:/Internship/IRT/adaptive-exam/data/student_matrix_apr5_set.csv")
+data <- read.csv("data/student_matrix_apr5_set.csv")
+
 data <- data[,-1]
 
 
