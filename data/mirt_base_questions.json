@@ -229,7 +229,7 @@
             "7^5 / 5!"
         ],
         "correct_answer": "e^(\u22125)\u22175^7 / 7!",
-        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743753475875.png"
+        "image_url": null
     },
     {
         "unique_id": 13,
@@ -959,7 +959,7 @@
             "[3, \u22124\u200b]^T"
         ],
         "correct_answer": "[\u22124, 3\u200b]^T",
-        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743752386776.png"
+        "image_url": null
     },
         {
     "unique_id": 51,
