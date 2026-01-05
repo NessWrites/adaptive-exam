@@ -1,0 +1,1348 @@
+[
+    {
+    "unique_id": 1,
+    "a": [
+        0.7523154641,
+        0.0
+    ],
+    "b": -0.4404106655,
+    "domain": "Mathematics",
+    "concept_tag": "Linear Algebra / Transformations",
+    "question_text": "The orthogonal basis vectors î̂ and î̂ are transformed by T to a new set of orthogonal basis vectors 3î̂ − 2î̂ and 4î̂ + 6î̂, respectively. Find the transformation matrix T.",
+    "options": [
+        "[[3, -4], [2, 6]]",
+        "[[3, 4], [-2, 6]]",
+        "[[3, -2], [4, 6]]",
+        "[[3, -2], [-4, 6]]"
+    ],
+    "correct_answer": "[[3, 4], [-2, 6]]",
+    "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743752386776.png"
+    },
+
+
+    {
+        "unique_id": 2,
+        "a": [
+            1.9802515324,
+            0.0
+        ],
+        "b": -0.6875646303,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Matrix Rank",
+        "question_text": "A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?",
+        "options": [
+            "The sensor network is perfectly calibrated.",
+            "Some sensor signals are linearly dependent.",
+            "The sensor network can capture all possible signals.",
+            "The sensor network is overdetermined."
+        ],
+        "correct_answer": "Some sensor signals are linearly dependent.",
+        "image_url": null
+    },
+    {
+        "unique_id": 3,
+        "a": [
+            1.1449109143,
+            0.0
+        ],
+        "b": -0.6528719376,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Orthogonality",
+        "question_text": "An acoustic engineer is designing a noise-canceling system.  They decompose a sound wave into orthogonal components.  What does the orthogonality of these components signify in terms of the sound waves?",
+        "options": [
+            "The components have the same frequency.",
+            "The components are linearly dependent.",
+            "The components represent independent, non-overlapping sound sources.",
+            "The components have the same amplitude."
+        ],
+        "correct_answer": "The components represent independent, non-overlapping sound sources.",
+        "image_url": null
+    },
+    {
+        "unique_id": 4,
+        "a": [
+            1.5867942971,
+            0.0
+        ],
+        "b": -0.5489014647,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / SVD",
+        "question_text": "A digital image is represented as a matrix. Using Singular Value Decomposition (SVD), you find that the first few singular values capture most of the image's information. What is the practical application of this?",
+        "options": [
+            "Enhancing image resolution by selecting significant singular values",
+            "Compressing the image by discarding less significant values.",
+            "Detecting edges in the image through decomposition",
+            "Rotating the image."
+        ],
+        "correct_answer": "Compressing the image by discarding less significant values.",
+        "image_url": null
+    },
+    {
+        "unique_id": 5,
+        "a": [
+            1.7802717162,
+            0.0
+        ],
+        "b": -0.6892354505,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Least Squares",
+        "question_text": "A sensor's readings are known to have a linear relationship with the actual values, but with some noise. You have a set of measured data points (x,y,) and want to find the best-fit line y=mx+c to calibrate the sensor. What is the goal of using least squares in this context?",
+        "options": [
+            "To find the exact line that passes through all data points.",
+            "To minimize the sum of the squared differences between the measured and predicted values.",
+            "To maximize the correlation between the measured and predicted values.",
+            "To find the median of the measured values."
+        ],
+        "correct_answer": "To minimize the sum of the squared differences between the measured and predicted values.",
+        "image_url": null
+    },
+    {
+        "unique_id": 6,
+        "a": [
+            0.6429814126,
+            0.0
+        ],
+        "b": -0.017415994,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Partial Derivatives",
+        "question_text": "Given function f(x, y) = sin(x) * y ^ 2 . Compute f_{xy}",
+        "options": [
+            "-sin(x) * y^2",
+            "cos(x) * 2y",
+            "2sin(x)",
+            "None of the above"
+        ],
+
+        "correct_answer": "cos(x) * 2y",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743753112484.png"
+    },
+    {
+        "unique_id": 7,
+        "a": [
+            1.6537495105,
+            0.0
+        ],
+        "b": -0.5152622071,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Optimization",
+        "question_text": "A company's profit P (in dollars) from selling x units of a product is given by P(x) = -0.01x^2 + 300x - 200000. How many units should the company sell to maximize profit?",
+        "options": [
+            "10000 units",
+            "15000 units",
+            "20000 units",
+            "25000 units"
+        ],
+        "correct_answer": "15000 units",
+        "image_url": null
+    },
+    {
+        "unique_id": 8,
+        "a": [
+            1.282415977,
+            0.0
+        ],
+        "b": -0.0217263094,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Gradient Vector",
+        "question_text": "For a function w=g(x,y,z)= exyz + xy\u00b2, Determine the gradient vector?",
+          "options": [
+            "yzexyz+y², xzexyz+2xy, xyexyz",
+            "xyexyz, xzexyz+2xy, yxexyz+y²",
+            "yxex+y², xze+2xy, xye²",
+            "-yxex+y², -xze+2xy, -xye²"
+        ],
+        "correct_answer": "xyexyz, xzexyz+2xy, yxexyz+y²",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743753296111.png"
+    },
+    {
+        "unique_id": 9,
+        "a": [
+            1.8286960149,
+            0.0
+        ],
+        "b": 0.0078082688,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Integration",
+        "question_text": "The rate of water flow into a tank is given by R(t) = 100*t liters per minute, where t is in minutes. How much water enters the tank between t = 1 and t = 5 minutes?",
+        "options": [
+            "1200 liters",
+            "1500 liters",
+            "1800 liters",
+            "2400 liters",
+            "2500 liters"
+        ],
+        "correct_answer": "1200 liters",
+        "image_url": null
+    },
+    {
+        "unique_id": 10,
+        "a": [
+            1.1621567152,
+            0.0
+        ],
+        "b": -0.1178488846,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Binomial Distribution",
+        "question_text": "Suppose you have a 60% chance of passing this exam and you are given 4 chances, each having similar but different questions. Assuming that each exam is independent of other, what is the probability that you will pass the majority of the time?",
+        "options": [
+            "0.6*0.6*0.6*0.6",
+            "0.6*0.6*0.6*0.4",
+            "4C3*0.6^3*0.4 + 4C4 * 0.6^4",
+            "4C3*0.4^3*0.6 + 4C4 * 0.4^4"
+        ],
+        "correct_answer": "4C3*0.6^3*0.4 + 4C4 * 0.6^4",
+        "image_url": null
+    },
+    {
+        "unique_id": 11,
+        "a": [
+            0.5024499764,
+            0.0
+        ],
+        "b": -1.6148857315,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Bayes Theorem",
+        "question_text": "A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?",
+        "options": [
+            "It ignores the prior probability.",
+            "It multiplies the prior probability by the likelihood of the content given spam.",
+            "It calculates the conditional probability of the email being spam given its content.",
+            "It ignores the probability of being spam and just takes the filter's accuracy into consideration."
+        ],
+        "correct_answer": "It calculates the conditional probability of the email being spam given its content.",
+        "image_url": null
+    },
+    {
+        "unique_id": 12,
+        "a": [
+            1.3436669044,
+            0.0
+        ],
+        "b": -0.3568847195,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Poisson Distribution",
+        "question_text": "You are tasked to create a statistical distribution based estimate for a server. If the average rate is 5 requests per minute, what is the probability of receiving exactly 7 requests in a minute?",
+        "options": [
+            "e^(\u22127) \u2217 7^5 / 5!",
+            "5^7 / 7!",
+            "e^(\u22125)\u22175^7 / 7!",
+            "7^5 / 5!"
+        ],
+        "correct_answer": "e^(\u22125)\u22175^7 / 7!",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743753475875.png"
+    },
+    {
+        "unique_id": 13,
+        "a": [
+            1.3203035017,
+            0.0
+        ],
+        "b": -0.9380524659,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Uniform Distribution",
+        "question_text": "A continuous random variable T has a uniform distribution between 0 and 10. What is the expected value of T?",
+        "options": [
+            "2.5",
+            "5",
+            "7.5",
+            "10"
+        ],
+        "correct_answer": "5",
+        "image_url": null
+    },
+    {
+        "unique_id": 14,
+        "a": [
+            2.1754166112,
+            0.0
+        ],
+        "b": -0.0930865128,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Moments",
+        "question_text": "For a standard normal distribution, what is the value of the third central moment?",
+        "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+        ],
+        "correct_answer": "0",
+        "image_url": null
+    },
+    {
+        "unique_id": 15,
+        "a": [
+            2.2033212571,
+            0.0
+        ],
+        "b": 0.0249848052,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Central Limit Theorem",
+        "question_text": "A large population has a mean weight of 150 lbs and a standard deviation of 20 lbs. If you take a random sample of 100 individuals, what is the approximate standard deviation of the sample mean?",
+        "options": [
+            "2 lbs",
+            "20 lbs",
+            "0.2 lbs",
+            "15 lbs"
+        ],
+        "correct_answer": "2 lbs",
+        "image_url": null
+    },
+    {
+        "unique_id": 16,
+        "a": [
+            1.3644552171,
+            0.0
+        ],
+        "b": -1.2731446478,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Correlation",
+        "question_text": "If X and Y are uncorrelated variable then this implies",
+        "options": [
+            "There\u2019s a linear relationship between X & Y",
+            "Absence of any linear relationship between X & Y",
+            "Absence of any quadratic or other polynomial relationship between X & Y",
+            "The absence of logarithmic or trigonometric relationship between two variables"
+        ],
+        "correct_answer": "Absence of any linear relationship between X & Y",
+        "image_url": null
+    },
+    {
+        "unique_id": 17,
+        "a": [
+            0.9379643738,
+            0.0
+        ],
+        "b": 0.415312319,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Hypothesis Testing",
+        "question_text": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+        "options": [
+            "There is a 2% chance that the observed user behavior would occur if the new homepage (Version B) is better than the current homepage (Version A).",
+            "There is a 2% chance that the new homepage (Version B) is better than the current homepage (Version A).",
+            "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+            "There is a 2% chance that the new homepage (Version B) is worse than the current homepage (Version A)."
+        ],
+        "correct_answer": "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+        "image_url": null
+    },
+    {
+        "unique_id": 18,
+        "a": [
+            0.0,
+            0.647746189
+        ],
+        "b": -1.6804865578,
+        "domain": "Technical",
+        "concept_tag": "Python / Data Types",
+        "question_text": "What is the result of [1, 2, 3] + \"4\"",
+        "options": [
+            "[1, 2, 3, 4]",
+            "[1, 2, 3, '4']",
+            "\"1234\"",
+            "A TypeError"
+        ],
+        "correct_answer": "A TypeError",
+        "image_url": null
+    },
+    {
+        "unique_id": 19,
+        "a": [
+            0.0,
+            2.0540130011
+        ],
+        "b": 2.3653834054,
+        "domain": "Technical",
+        "concept_tag": "Python / Lists",
+        "question_text": "Given a = [1,2,3,4,5,6]. Here, which of the following will remove element 4 from the list?",
+        "options": [
+            "a[3:4] = [ ]",
+            "a.pop(3)",
+            "a[3] = [ ]",
+            "a.remove(4)"
+        ],
+        "correct_answer": [
+            "a.remove(4)",
+            "a[3:4] = [ ]",
+            "a.pop(3)"
+        ],
+        "image_url": null
+    },
+    {
+        "unique_id": 20,
+        "a": [
+            0.0,
+            0.5511583018
+        ],
+        "b": 1.3350456238,
+        "domain": "Technical",
+        "concept_tag": "Python / Exception Handling",
+        "question_text": "What is the output of the following code snippet?",
+        "options": [
+            "Division by zero is not allowed.",
+            "The variables is/are not defined.",
+            "Error occurred during division.",
+            "Syntax error."
+        ],
+        "correct_answer": "The variables is/are not defined.",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755344662.png"
+    },
+    {
+        "unique_id": 21,
+        "a": [
+            0.0,
+            1.4937741818
+        ],
+        "b": -0.273045648,
+        "domain": "Technical",
+        "concept_tag": "Python / Operator Overloading",
+        "question_text": "Which function overloads the > operator?",
+        "options": [
+            "__more__()",
+            "_greater_than()",
+            "__gt__()",
+            "__ge__()",
+            "_gt_()"
+        ],
+        "correct_answer": "__gt__()",
+        "image_url": null
+    },
+    {
+        "unique_id": 22,
+        "a": [
+            0.0,
+            1.1338434043
+        ],
+        "b": -0.5889587911,
+        "domain": "Technical",
+        "concept_tag": "Python / List Comprehension",
+        "question_text": "What is the output of the following codenew_list = [2*x for x in range(1,5)]print(new_list)",
+        "options": [
+            "[0, 1, 4, 9, 16, 25]",
+            "[2, 4, 6, 8, 10]",
+            "[0, 2, 4, 6, 8, 10]",
+            "[2, 4, 6, 8]"
+        ],
+        "correct_answer": "[2, 4, 6, 8]",
+        "image_url": null
+    },
+    {
+        "unique_id": 23,
+        "a": [
+            0.0,
+            1.2175225491
+        ],
+        "b": -0.2654863761,
+        "domain": "Technical",
+        "concept_tag": "Python / Regular Expressions",
+        "question_text": "You want to extract all email addresses from a webpage's HTML content. What Python module is most suitable for this task?",
+        "options": [
+            "Pandas",
+            "RegEx",
+            "Pytorch",
+            "Requests"
+        ],
+        "correct_answer": "RegEx",
+        "image_url": null
+    },
+    {
+        "unique_id": 24,
+        "a": [
+            0.0,
+            0.5831080746
+        ],
+        "b": 0.1833888582,
+        "domain": "Technical",
+        "concept_tag": "Python / NumPy",
+        "question_text": "If Z is a NumPy array, what does the following code do?Z[(4 < Z) & (Z < 8)] *= -1",
+        "options": [
+            "Set all elements to -1",
+            "Negate all elements between 4 and 8 exclusively",
+            "Set all elements between 4 and 8 to -1",
+            "Multiply all elements greater than 4 and less than or equal to 9 by -1"
+        ],
+        "correct_answer": "Negate all elements between 4 and 8 exclusively",
+        "image_url": null
+    },
+    {
+        "unique_id": 25,
+        "a": [
+            0.0,
+            1.7113116705
+        ],
+        "b": -1.0162914655,
+        "domain": "Technical",
+        "concept_tag": "Python / Pandas",
+        "question_text": "You have a large dataset in a CSV file and need to calculate the average sales per product category. Which Pandas function would you use?",
+        "options": [
+            "data.filter(mean())",
+            "data.pivot_table()",
+            "data.groupby().mean()",
+            "data.apply(mean())"
+        ],
+        "correct_answer": "data.groupby().mean()",
+        "image_url": null
+    },
+    {
+        "unique_id": 26,
+        "a": [
+            0.0,
+            1.3734783157
+        ],
+        "b": -0.314649402,
+        "domain": "Technical",
+        "concept_tag": "Python / Matplotlib",
+        "question_text": "What command implies that we are making two figures side-by-side ?",
+        "options": [
+            "plt.subplot(2,1,1)",
+            "plt.subplot(0,2,1)",
+            "plt.subplot(1,2,1)",
+            "plt.subplot(0,0,2)"
+        ],
+        "correct_answer": "plt.subplot(1,2,1)",
+        "image_url": null
+    },
+    {
+        "unique_id": 27,
+        "a": [
+            0.0,
+            1.8265593378
+        ],
+        "b": -0.355429449,
+        "domain": "Technical",
+        "concept_tag": "Python / Package Management",
+        "question_text": "Which of the following commands would you use to save the version of all the modules installed in your current environment?",
+        "options": [
+            "Python -m venv requirements.txt",
+            "venv freeze >> requirements.txt",
+            "pip --requirements >> requirements.txt",
+            "pip freeze >> requirements.txt"
+        ],
+        "correct_answer": "pip freeze >> requirements.txt",
+        "image_url": null
+    },
+    {
+        "unique_id": 28,
+        "a": [
+            0.0,
+            1.4303088625
+        ],
+        "b": 0.3141263197,
+        "domain": "Technical",
+        "concept_tag": "Data Structures / Linked Lists",
+        "question_text": "You are working with a data structure as shown below where data points are stored in nodes and each node points to the next node. What is the space complexity for deleting a point C from this data structure?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "Either O(1) or O(n)",
+            "O(log n)"
+        ],
+        "correct_answer": "O(1)",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755867074.png"
+    },
+    {
+        "unique_id": 29,
+        "a": [
+            0.0,
+            0.9359149932
+        ],
+        "b": -0.4333477968,
+        "domain": "Technical",
+        "concept_tag": "Algorithms / Graph Algorithms",
+        "question_text": "In a recommendation system, users and items can be represented as nodes in a graph, and their interactions (e.g., ratings, purchases) as edges. Which graph algorithm approach could be used to find similar items for a given user?",
+        "options": [
+            "Topological sort: Order the nodes in a directed acyclic graph (DAG) based on dependencies",
+            "PageRank: Ranks nodes based on the number and quality of incoming links",
+            "Graph clustering/community detection: Groups nodes into clusters based on their connectivity",
+            "Depth-First Search (DFS): Traverses a graph by exploring as far as possible along each branch before backtracking"
+        ],
+        "correct_answer": "Graph clustering/community detection: Groups nodes into clusters based on their connectivity",
+        "image_url": null
+    },
+    {
+        "unique_id": 30,
+        "a": [
+            0.0,
+            1.4793064376
+        ],
+        "b": -1.3531587697,
+        "domain": "Technical",
+        "concept_tag": "Data Structures / Stack",
+        "question_text": "A web browser maintains a history of pages visited by the user. When the user clicks the \"Back\" button, the browser loads the most recently visited page. Which data structure would be best suited to implement this functionality?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Hash",
+            "Heap"
+        ],
+        "correct_answer": "Stack",
+        "image_url": null
+    },
+    {
+        "unique_id": 31,
+        "a": [
+            0.0,
+            1.1623327837
+        ],
+        "b": -0.8683036182,
+        "domain": "Technical",
+        "concept_tag": "Algorithms / Sorting",
+        "question_text": "A beginner programmer is tasked with implementing a sorting algorithm to arrange a small list of numbers in ascending order. She implemented a simple sorting algorithm that repeatedly compares the adjacent elements in a list and swaps them if they are out of order, continuing until the list is fully sorted. What is this algorithm called?",
+        "options": [
+            "Nearest neighbor Sort",
+            "Quick Sort",
+            "Bubble sort",
+            "Insertion sort"
+        ],
+        "correct_answer": "Bubble sort",
+        "image_url": null
+    },
+    {
+        "unique_id": 32,
+        "a": [
+            0.0,
+            1.0627920165
+        ],
+        "b": -0.0187649601,
+        "domain": "Technical",
+        "concept_tag": "Git / Version Control",
+        "question_text": "In git, which of the following commands (in sequence)  are used when we want to reflect a change of file from the local working directory to the staging area and finally to the repository?",
+        "options": [
+            "git add -> git commit",
+            "git reset -> git add",
+            "git commit -> git push",
+            "git merge -> git push"
+        ],
+        "correct_answer": "git add -> git commit",
+        "image_url": null
+    },
+    {
+        "unique_id": 33,
+        "a": [
+            0.0,
+            1.8369521566
+        ],
+        "b": -1.1863411136,
+        "domain": "Technical",
+        "concept_tag": "Software Engineering / SDLC",
+        "question_text": "In which phase of SDLC, the cost of changes is least?",
+        "options": [
+            "Early Stage of Requirement Analysis.",
+            "At the last stage of implementation.",
+            "After completion of the project.",
+            "At the testing phase."
+        ],
+        "correct_answer": "Early Stage of Requirement Analysis.",
+        "image_url": null
+    },
+    {
+        "unique_id": 34,
+        "a": [
+            0.0,
+            0.2320851633
+        ],
+        "b": -3.414874036,
+        "domain": "Technical",
+        "concept_tag": "Database / Relational Design",
+        "question_text": "When designing a relational database, what is the primary purpose of defining a \"primary key\"?",
+        "options": [
+            "To uniquely identify each record within a table.",
+            "To uniquely identify each record within a table.",
+            "To generate unique numbers for each instance",
+            "To store large amounts of text data."
+        ],
+        "correct_answer": "To uniquely identify each record within a table.",
+        "image_url": null
+    },
+    {
+        "unique_id": 35,
+        "a": [
+            0.0,
+            0.8930977305
+        ],
+        "b": -0.691503707,
+        "domain": "Technical",
+        "concept_tag": "Database / SQL",
+        "question_text": "The given Query can also be replaced with_______SELECT name, course_id  FROM instructor, teaches  WHERE instructor_ID= teaches_ID;",
+        "options": [
+            "Select name,course_id from teaches,instructor where instructor_id=course_id;",
+            "Select name, course_id from instructor natural join teaches;",
+            "Select name, course_id from instructor;",
+            "Select course_id from instructor join teaches;"
+        ],
+        "correct_answer": "Select name, course_id from instructor natural join teaches;",
+        "image_url": null
+    },
+    {
+        "unique_id": 36,
+        "a": [
+            0.0,
+            1.8593832665
+        ],
+        "b": -0.211183686,
+        "domain": "Technical",
+        "concept_tag": "Computer Architecture / GPU",
+        "question_text": "GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow?",
+        "options": [
+            "Single Instruction Single Data (SISD)",
+            "Single Instruction Multiple Data (SIMD)",
+            "Multiple Instruction Single Data (MISD)",
+            "Multiple Instruction Multiple Data (MIMD)"
+        ],
+        "correct_answer": "Single Instruction Multiple Data (SIMD)",
+        "image_url": null
+    },
+    {
+        "unique_id": 37,
+        "a": [
+            0.6393896601,
+            0.0
+        ],
+        "b": 0.3779074038,
+        "domain": "Mathematics",
+        "concept_tag": "Logic / Pattern Recognition",
+        "question_text": "What is the next number in this sequence of numbers 77,49,36,18, __ ?",
+        "options": [
+            "11",
+            "7",
+            "8",
+            "3"
+        ],
+        "correct_answer": "8",
+        "image_url": null
+    },
+    {
+        "unique_id": 38,
+        "a": [
+            0.0,
+            1.4506081683
+        ],
+        "b": -0.2454041652,
+        "domain": "Technical",
+        "concept_tag": "Machine Learning / Research Comprehension",
+        "question_text": "Consider a sentence from an ML paper \u00e2\u0080\u009cOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.\u00e2\u0080\u009d What does \u00e2\u0080\u009ccircumvents\u00e2\u0080\u009d imply in this context?",
+        "options": [
+            "Completely replaces",
+            "Avoids or bypasses",
+            "Enhances or Amplifies",
+            "Reduces or Attenuate"
+        ],
+        "correct_answer": "Avoids or bypasses",
+        "image_url": null
+    },
+    {
+        "unique_id": 39,
+        "a": [
+            0.5359312616,
+            0.0
+        ],
+        "b": -2.0625867156,
+        "domain": "Mathematics",
+        "concept_tag": "Logic / Deductive Reasoning",
+        "question_text": "\"Three individuals, X, Y, and Z, are standing in a line, facing forward. Each is wearing a hat that is either red or blue. They cannot see their own hat.Someone announces, 'At least one of you is wearing a red hat.'X says, 'I do not know the color of my hat.'Y says, 'I do not know the color of my hat.'Z then says, 'I know the color of my hat.'What color is Z's hat,",
+        "options": [
+            "Red",
+            "Blue"
+        ],
+        "correct_answer": "Red",
+        "image_url": null
+    },
+    {
+        "unique_id": 40,
+        "a": [
+            0.2883541278,
+            0.0
+        ],
+        "b": 3.0,
+        "domain": "Mathematics",
+        "concept_tag": "Logic / Puzzles",
+        "question_text": "Guess the correct answer.",
+        "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+        ],
+        "correct_answer": "A",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755967770.png"
+    },
+    {
+        "unique_id": 41,
+        "a": [
+            0.7422141098,
+            0.0
+        ],
+        "b": 0.3328327152,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Graphics",
+        "question_text": "A 3D graphics programmer is calculating the diffuse reflection of light from a surface.  This involves projecting the light vector onto the surface normal.  If the projection of the light vector onto the normal vector is the zero vector, what does this imply?",
+        "options": [
+            "The light source is directly above (perpendicular) the surface.",
+            "The light source is behind the surface.",
+            "The light source is grazing the surface (parallel to the surface).",
+            "The surface is perfectly reflective."
+        ],
+        "correct_answer": "The light source is grazing the surface (parallel to the surface).",
+        "image_url": null
+    },
+    {
+        "unique_id": 42,
+        "a": [
+            1.9060192092,
+            0.0
+        ],
+        "b": -0.9359388536,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Eigenvectors",
+        "question_text": "Eigenvectors of a matrix represent",
+        "options": [
+            "(a) The matrix's inverse.",
+            "(b) The matrix's determinant.",
+            "(c) Directions along which the linear transformation acts by scaling.",
+            "(d) The matrix's transpose times its inverse."
+        ],
+        "correct_answer": "(c) Directions along which the linear transformation acts by scaling.",
+        "image_url": null
+    },
+    {
+        "unique_id": 43,
+        "a": [
+            1.9981647936,
+            0.0
+        ],
+        "b": -0.0442023179,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Expected Value",
+        "question_text": "A lottery ticket costs $2. There's a 1% chance of winning $100, a 5% chance of winning $10, and a 94% chance of winning nothing. Let X be the random variable representing your profit. What is the expected profit from buying one ticket?",
+        "options": [
+            "-$0.50",
+            "$0",
+            "$0.50",
+            "$1.00"
+        ],
+        "correct_answer": "-$0.50",
+        "image_url": null
+    },
+    {
+        "unique_id": 44,
+        "a": [
+            1.4357557705,
+            0.0
+        ],
+        "b": -0.7688064014,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Central Limit Theorem",
+        "question_text": "A manufacturing process produces items with varying dimensions. The Central Limit Theorem is used to analyze the distribution of sample means. Why is this useful?",
+        "options": [
+            "To determine the exact dimensions of each item.",
+            "To estimate the population mean and confidence intervals.",
+            "To eliminate all variations in dimensions.",
+            "To calculate the sample variance."
+        ],
+        "correct_answer": "To estimate the population mean and confidence intervals.",
+        "image_url": null
+    },
+    {
+        "unique_id": 45,
+        "a": [
+            0.0,
+            1.1558545493
+        ],
+        "b": -1.8319167998,
+        "domain": "Technical",
+        "concept_tag": "Data Structures / Queue",
+        "question_text": "In an airport baggage claim system, luggage is processed in the order it arrives. Each piece of luggage is loaded onto a conveyor belt, and the first piece loaded is the first to be delivered to passengers.  Which data structure would be best suited to model this luggage delivery system?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Heap",
+            "Priority Queue"
+        ],
+        "correct_answer": "Queue",
+        "image_url": null
+    },
+    {
+        "unique_id": 46,
+        "a": [
+            0.0,
+            1.2224181093
+        ],
+        "b": -0.7367309395,
+        "domain": "Technical",
+        "concept_tag": "Python / Data Visualization",
+        "question_text": "A data scientist needs to visualise clusters or groups of data points of six dimensional data. He uses a certain dimensionality reduction technique to reduce the dimensions to two. Which of the following would be the best visualisation method in order to identify the visual clusters in the reduced dataset and identify potential outliers?",
+        "options": [
+            "Density Plot",
+            "Bar Chart",
+            "Heatmap",
+            "Scatter Plot"
+        ],
+        "correct_answer": "Scatter Plot",
+        "image_url": null
+    },
+    {
+    "unique_id": 47,
+    "a": [
+        0.0,
+        1.073403865
+    ],
+    "b": 0.1804622217,
+    "domain": "Technical",
+    "concept_tag": "Python / String Operations",
+    "question_text": "What is the output of the following?\n\ns = \"we are humans\"\nprint(tuple(s.split()))",
+    "options": [
+        "('we', 'are', 'humans')",
+        "(we, are, humans)",
+        "('we', 'humans')",
+        "'we are humans'"
+    ],
+    "correct_answer": "('we', 'are', 'humans')",
+    "image_url": null
+    },
+
+    {
+        "unique_id": 48,
+        "a": [
+            0.0,
+            1.6710901152
+        ],
+        "b": -0.5187947735,
+        "domain": "Technical",
+        "concept_tag": "Statistics / Hypothesis Testing",
+        "question_text": "A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?",
+        "options": [
+            "Linear regression.",
+            "Hypothesis testing (e.g., t-test).",
+            "Analysis of variance (ANOVA).",
+            "Principal component analysis."
+        ],
+        "correct_answer": "Hypothesis testing (e.g., t-test).",
+        "image_url": null
+    },
+    {
+        "unique_id": 49,
+        "a": [
+            1.9937804052,
+            0.0
+        ],
+        "b": -1.1009697928,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Least Squares",
+        "question_text": "What is the primary objective of the least squares method?",
+        "options": [
+            "Maximize the accuracy of least squares prediction",
+            "Minimize the sum of squared differences between observed and predicted values",
+            "Maximize the correlation between variables",
+            "Minimize the determinant of the design matrix"
+        ],
+        "correct_answer": "Minimize the sum of squared differences between observed and predicted values",
+        "image_url": null
+    },
+    {
+        "unique_id": 50,
+        "a": [
+            0.5477780238,
+            0.0
+        ],
+        "b": 0.1862834582,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Rotation",
+        "question_text": " A robotic arm's end effector is at position v = [3, 4]^T in a 2D plane. \nTo rotate the arm's end effector by pi/2 radians counterclockwise using a rotation matrix R, \nwhat is the new position v' of the end effector after this rotation?",
+        "options": [
+            "[4,  \u22123\u200b]^T",
+            "[\u22124, 3\u200b]^T",
+            "[\u22123, 4\u200b]^T",
+            "[3, \u22124\u200b]^T"
+        ],
+        "correct_answer": "[\u22124, 3\u200b]^T",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743752386776.png"
+    },
+        {
+    "unique_id": 51,
+    "a": [0.8778309069, 0.0],
+    "b": -1.4519209058,
+    "domain": "Mathematics",
+    "concept_tag": "Calculus / Derivatives",
+    "question_text": "The derivative of x^2 * ln(x) is:",
+    "options": [
+        "2x ln(x) + x",
+        "x^2 ln(x)",
+        "2x ln(x) - x",
+        "ln(x) + x^2"
+    ],
+    "correct_answer": "2x ln(x) + x",
+    "image_url": null
+    },
+
+    {
+        "unique_id": 52,
+        "a": [
+            0.0,
+            0.7615889384
+        ],
+        "b": -0.4454496391,
+        "domain": "Technical",
+        "concept_tag": "Machine Learning / Neural Networks",
+        "question_text": "During the training of a neural network, you use gradient descent to minimize a loss function. What does this process involve?",
+        "options": [
+            "Finding the integral of the loss function",
+            "Finding the points where the derivative of the loss function is zero.",
+            "Approximating the loss function with a linear function.",
+            "Randomly changing the model's parameters."
+        ],
+        "correct_answer": "Finding the points where the derivative of the loss function is zero.",
+        "image_url": null
+    },
+    {
+        "unique_id": 53,
+        "a": [
+            0.8599067666,
+            0.0
+        ],
+        "b": -0.0711635708,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Integration",
+        "question_text": "A rain gauge measures the rainfall rate r(t)= 2*t mm/hour, where t is time in hours. What is the total rainfall (in mm) from t=0 to t=3 hours?",
+        "options": [
+            "6 mm",
+            "9 mm",
+            "12 mm",
+            "18 mm"
+        ],
+        "correct_answer": "9 mm",
+        "image_url": null
+    },
+    {
+        "unique_id": 54,
+        "a": [
+            0.7853317067,
+            0.0
+        ],
+        "b": 0.5351853496,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Conditional Probability",
+        "question_text": "In a certain locality, 6% of men have diabetes and 3% of women have diabetes. The total population is divided in the ratio 32 in favour of women. If a person is selected at random from among all those with diabetes, what is the probability that the person is a man?",
+        "options": [
+            "4/7",
+            "3/7",
+            "5/9",
+            "2/3"
+        ],
+        "correct_answer": "4/7",
+        "image_url": null
+    },
+    {
+        "unique_id": 55,
+        "a": [
+            1.1590210987,
+            0.0
+        ],
+        "b": -1.0114444791,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Standard Deviation",
+        "question_text": "What\u2019s the Standard deviation for the following sample data 2,4,6,8,10 and 12",
+        "options": [
+            "4.42",
+            "2.42",
+            "3.42",
+            "5.42"
+        ],
+        "correct_answer": "3.42",
+        "image_url": null
+    },
+    {
+        "unique_id": 56,
+        "a": [
+            0.5419879944,
+            0.0
+        ],
+        "b": 0.5838367915,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Hypothesis Testing",
+        "question_text": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+        "options": [
+            "There is a 2% chance that the observed user behavior would occur if the new homepage (Version B) is better than the current homepage (Version A).",
+            "There is a 2% chance that the new homepage (Version B) is better than the current homepage (Version A).",
+            "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+            "There is a 2% chance that the new homepage (Version B) is worse than the current homepage (Version A)."
+        ],
+        "correct_answer": "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+        "image_url": null
+    },
+    {
+        "unique_id": 57,
+        "a": [
+            0.0,
+            1.6504120282
+        ],
+        "b": 0.4022609806,
+        "domain": "Technical",
+        "concept_tag": "Python / Programming",
+        "question_text": "Which of the following are keywords in python ?",
+        "options": [
+            "yield",
+            "assert",
+            "with",
+            "next"
+        ],
+        "correct_answer": [
+            "yield",
+            "assert",
+            "with"
+        ],
+        "image_url": null
+    },
+    {
+        "unique_id": 58,
+        "a": [
+            0.0,
+            1.7741933218
+        ],
+        "b": -0.5635470531,
+        "domain": "Technical",
+        "concept_tag": "Python / Data Structures",
+        "question_text": "Suppose d = {\"Ben\": 40, \"Ten\": 45}. To obtain the number of entries in the dictionary, which command do we use?",
+        "options": [
+            "d.size()",
+            "len(d)",
+            "size(d)",
+            "d.len()"
+        ],
+        "correct_answer": "len(d)",
+        "image_url": null
+    },
+    {
+        "unique_id": 59,
+        "a": [
+            0.0,
+            0.1549376809
+        ],
+        "b": 2.9706474626,
+        "domain": "Technical",
+        "concept_tag": "Python / Debugging",
+        "question_text": "Debug the code ",
+        "options": [
+            "Error in line 1",
+            "Error in 6",
+            "Error in line 14",
+            "No Error, the works"
+        ],
+        "correct_answer": "Error in 6",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755344662.png"
+    },
+    {
+        "unique_id": 60,
+        "a": [
+            0.0,
+            1.3418147755
+        ],
+        "b": -1.0445557768,
+        "domain": "Technical",
+        "concept_tag": "Programming / OOP",
+        "question_text": "You are designing a system with different types of sensors. Using Object-Oriented Programming (OOP) principles, how would you best represent these sensors?",
+        "options": [
+            "Creating a single function to handle all sensor types.",
+            "Designing a class hierarchy of sensors",
+            "Storing sensor data in a dictionary",
+            "Using a global variable to represent an object for each sensor."
+        ],
+        "correct_answer": "Designing a class hierarchy of sensors",
+        "image_url": null
+    },
+    {
+        "unique_id": 61,
+        "a": [
+            0.0,
+            1.5939278479
+        ],
+        "b": -0.0753287693,
+        "domain": "Technical",
+        "concept_tag": "Data Structures / Complexity",
+        "question_text": "What is the space complexity for deleting a linked list?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "Either O(1) or O(n)",
+            "O(log n)"
+        ],
+        "correct_answer": "O(1)",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755867074.png"
+    },
+    {
+        "unique_id": 62,
+        "a": [
+            0.0,
+            0.9781856845
+        ],
+        "b": -0.5322294249,
+        "domain": "Technical",
+        "concept_tag": "Algorithms / Search",
+        "question_text": "Which of the following algorithm always manages to reach the final goal state with the least cost path?",
+        "options": [
+            "Breadth-First Search",
+            "Modest Search",
+            "A* Search",
+            "Greedy Search"
+        ],
+        "correct_answer": "A* Search",
+        "image_url": null
+    },
+    {
+        "unique_id": 63,
+        "a": [
+            0.0,
+            1.6201805562
+        ],
+        "b": -1.1726522764,
+        "domain": "Technical",
+        "concept_tag": "Algorithms / Binary Search",
+        "question_text": "You need to efficiently find a specific record in a large sorted database. Which algorithm would you use?",
+        "options": [
+            "Linear Search",
+            "Efficient Bubble Search",
+            "Binary Search",
+            "Insertion Sort"
+        ],
+        "correct_answer": "Binary Search",
+        "image_url": null
+    },
+    {
+        "unique_id": 64,
+        "a": [
+            0.2269370567,
+            0.0
+        ],
+        "b": -1.9574323156,
+        "domain": "Mathematics",
+        "concept_tag": "Logic / Pattern Recognition",
+        "question_text": "What is the next number in this sequence of numbers 21,13,34,47,71,18, ?",
+        "options": [
+            "81",
+            "85",
+            "89",
+            "91"
+        ],
+        "correct_answer": "89",
+        "image_url": null
+    },
+    {
+        "unique_id": 65,
+        "a": [
+            0.0,
+            0.7302457251
+        ],
+        "b": -0.0214105369,
+        "domain": "Technical",
+        "concept_tag": "Machine Learning / Research Comprehension",
+        "question_text": "We present a novel neural architecture, Sparse Attentive Feature Aggregation (SAFA), designed to enhance feature representation in high-dimensional image data. SAFA utilizes a sparse attention mechanism, focusing on salient image regions while minimizing computational overhead. This is achieved through a learnable gating function that dynamically selects relevant feature channels. By applying a localized attention kernel, SAFA aggregates contextual information within these salient regions, leading to improved object detection and segmentation performance. Experiments on benchmark datasets demonstrate that SAFA outperforms existing attention mechanisms, particularly in scenarios with complex object occlusions and varying illumination conditions.How does SAFA minimize computational overhead?",
+        "options": [
+            "By using a dense localized attention mechanism.",
+            "By applying a sparse attention mechanism.",
+            "By increasing the number of feature channels through selection.",
+            "By simply applying the problem in complex object occlusion and varying illumination condition"
+        ],
+        "correct_answer": "By applying a sparse attention mechanism.",
+        "image_url": null
+    },
+    {
+        "unique_id": 66,
+        "a": [
+            0.0,
+            0.611417273
+        ],
+        "b": -0.5135583077,
+        "domain": "Technical",
+        "concept_tag": "Logic / Reasoning",
+        "question_text": "Determine the tribe of each islander.",
+        "options": [
+            "Truth-tellers: B  Liars: A, C",
+            "Truth-tellers: A,B  Liars: C",
+            "Truth-tellers: A  Liars: B, C",
+            "Truth-tellers: A,C  Liars: B"
+        ],
+        "correct_answer": "Truth-tellers: A,C  Liars: B",
+        "image_url": null
+    },
+    {
+        "unique_id": 67,
+        "a": [
+            0.0,
+            0.1983431381
+        ],
+        "b": -0.4115142302,
+        "domain": "Technical",
+        "concept_tag": "Logic / Puzzles",
+        "question_text": "Puzzle",
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "correct_answer": "2",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743755967770.png"
+    },
+    {
+        "unique_id": 68,
+        "a": [
+            0.0,
+            1.4129730772
+        ],
+        "b": -2.2865864729,
+        "domain": "Technical",
+        "concept_tag": "Python / List Comprehension",
+        "question_text": "The list all_numbers contains numbers from 1 to 100. Which of the following code creates a new list even_numbers that contains all even numbers filtered from the list all_numbers.",
+        "options": [
+            "even_numbers = [i for i in all_numbers if i%2==2]",
+            "even_numbers = [i for i in all_numbers if i%2==1]",
+            "even_numbers = [i for i in all_numbers if i%2==0]",
+            "even_numbers = [i for i in all_numbers if i%2==0.5]"
+        ],
+        "correct_answer": "even_numbers = [i for i in all_numbers if i%2==0]",
+        "image_url": null
+    },
+    {
+        "unique_id": 69,
+        "a": [
+            0.0,
+            0.4990635759
+        ],
+        "b": 1.2754688411,
+        "domain": "Technical",
+        "concept_tag": "Python / Exception Handling",
+        "question_text": "What is the output of the following code snippet.\ny = 0\ntry:\nresult = x/y\nprint (result)\nexcept ZeroDivisionError:\nprint(\"Division by zero is not allowed.\")\nexcept NameError:\nprint(\"The variables is/are not defined.\")\nexcept:\nprint(\"Error occurred during division\")",
+        "options": [
+            "Division by zero is not allowed.",
+            "The variables is/are not defined.",
+            "Error occurred during division.",
+            "Syntax error."
+        ],
+        "correct_answer": "The variables is/are not defined.",
+        "image_url": "https://s3.amazonaws.com/fuseclassroom-resources-prod/quiz/image/60c84a9ac0f08d0098f132ce/1743756894836.png"
+    },
+    {
+        "unique_id": 70,
+        "a": [
+            0.0,
+            1.114421932
+        ],
+        "b": -0.3672380317,
+        "domain": "Technical",
+        "concept_tag": "Machine Learning / Research Comprehension",
+        "question_text": "Consider a sentence from an ML paper \u201cOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.\u201d What does \u201ccircumvents\u201d imply in this context?",
+        "options": [
+            "Completely replaces",
+            "Avoids or bypasses",
+            "Enhances or Amplifies",
+            "Reduces or Attenuate"
+        ],
+        "correct_answer": "Avoids or bypasses",
+        "image_url": null
+    }
+]
