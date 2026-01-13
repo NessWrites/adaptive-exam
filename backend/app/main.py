@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.config import settings
+from backend.app.core.config import settings
 from backend.app.routes import exam, health
 
 # Initialize FastAPI app
