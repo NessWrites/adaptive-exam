@@ -4,7 +4,6 @@ from typing import Optional, List, Dict, Any
 # Request Models
 class StartExamRequest(BaseModel):
     item_bank_path: Optional[str] = ""
-    min_items: int = 10
     max_items: int = 40
     target_se: float = 0.30
 

@@ -20,7 +20,6 @@ class Settings(BaseSettings):
     
     # Exam Settings
     DEFAULT_ITEM_BANK_PATH: str = os.getenv('BASE_ITEM_PATH')
-    DEFAULT_MIN_ITEMS: int = 10
     DEFAULT_MAX_ITEMS: int = 40
     DEFAULT_TARGET_SE: float = 0.30
 
