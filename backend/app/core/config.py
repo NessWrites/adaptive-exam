@@ -1,27 +1,29 @@
-from pathlib import Path
 from pydantic_settings import BaseSettings
+from functools import lru_cache
+from pathlib import Path
+import os
+import dotenv
 from dotenv import load_dotenv
-import os 
-root = Path(__file__).resolve().parents[3]
-load_dotenv(dotenv_path=root/ ".env")
+
+root = Path(__file__).resolve().parent.parent.parent.parent
+load_dotenv(dotenv_path=root / ".env")
 
 
 class Settings(BaseSettings):
-    # API Settings
-    API_TITLE: str = "MIRT CAT Exam API"
-    API_VERSION: str = "1.0.0"
-    API_DEBUG: bool = True
+    """Application settings"""
     
-    # CORS Settings
-    CORS_ORIGINS: list = ["*"]
-    CORS_CREDENTIALS: bool = True
-    CORS_METHODS: list = ["*"]
-    CORS_HEADERS: list = ["*"]
+    DATABASE_URL: str=os.getenv('DATABASE_URL')
+    DEBUG: bool = False
     
-    # Exam Settings
-    DEFAULT_ITEM_BANK_PATH: str = os.getenv('BASE_ITEM_PATH')
-    DEFAULT_MAX_ITEMS: int = 40
-    DEFAULT_TARGET_SE: float = 0.30
+    # Exam configuration
+    N_ADAPTIVE_QUESTIONS: int = 40
+    
+    
 
 
-settings = Settings()
+
+
+@lru_cache()
+def get_settings() -> Settings:
+    """Get cached settings instance"""
+    return Settings()
