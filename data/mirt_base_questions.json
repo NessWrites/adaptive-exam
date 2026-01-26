@@ -1344,5 +1344,395 @@
         ],
         "correct_answer": "Avoids or bypasses",
         "image_url": null
+    },
+    {
+        "unique_id": 261,
+        "a": [
+            1.1050708548042527,
+            0.0
+        ],
+        "b": 1.7104302979488533,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Uniform Distribution",
+        "question_text": "For a uniform distribution with a minimum value of X and a maximum value of Y, where X and Y are random variables, what is the probability that a randomly selected value from this distribution falls within the interval [0, 3]? Given that Y = 10 and X is uniformly distributed over [0, 10].",
+        "options": [
+            "The probability is calculated as (3 - X) / (Y - X) since X is a random variable.",
+            "The probability is calculated as (3 - 0) / (10 - X) = 3 / (10 - X).",
+            "The probability is calculated as (3 - X) / 10 since X is a random variable.",
+            "The probability is calculated as (3 - 0) / (10 - 0) = 3/10."
+        ],
+        "correct_answer": "The probability is calculated as (3 - 0) / (10 - 0) = 3/10.",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 326,
+        "a": [
+            0.0,
+            1.4586812619399057
+        ],
+        "b": 1.4950605566077662,
+        "domain": "Technical",
+        "concept_tag": "Programming / OOP",
+        "question_text": "Given a class hierarchy where Animal is the parent class and Dog, Cat, and Bird are child classes, which of the following statements about the inheritance of methods is CORRECT?",
+        "options": [
+            "If a child class overrides a method, all other child classes that inherit from it will automatically inherit the override.",
+            "When you override a method in a child class, you can still invoke the parent class's method using 'super()'.",
+            "You can call a method from a child class in a parent class using 'this'.",
+            "If a method is defined in a parent class with the 'final' keyword, it cannot be overridden in any child classes."
+        ],
+        "correct_answer": "When you override a method in a child class, you can still invoke the parent class's method using 'super()'.",
+        "question_type": "MCQ"
+    },
+     {
+        "unique_id": 195,
+        "a": [
+            0.9836561560593442,
+            0.0
+        ],
+        "b": -1.1979189900864209,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Eigenvectors",
+        "question_text": "What is an eigenvector of a matrix?",
+        "options": [
+            "A vector that, when multiplied by the matrix, results in a vector with the same direction but different magnitude.",
+            "A vector that, when multiplied by the matrix, results in the zero vector.",
+            "A nonzero vector that, when multiplied by the matrix, results in a scaled version of itself.",
+            "A vector that, when multiplied by the matrix, results in a vector with a different direction and magnitude."
+        ],
+        "correct_answer": "A nonzero vector that, when multiplied by the matrix, results in a scaled version of itself.",
+        "question_type": "MCQ"
+    },
+        {
+        "unique_id": 152,
+        "a": [
+            0.0,
+            2.539088657437951
+        ],
+        "b": 1.7322225659483266,
+        "domain": "Technical",
+        "concept_tag": "Software Engineering / SDLC",
+        "question_text": "In the context of Agile software development, which of the following is the primary goal of the 'Definition of Done' (DoD)?",
+        "options": [
+            "To establish a shared understanding of what it means for a task to be completed",
+            "To clearly define the scope of work for each iteration",
+            "To prioritize features based on business value",
+            "To create a detailed project schedule"
+        ],
+        "correct_answer": "To establish a shared understanding of what it means for a task to be completed",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 223,
+        "a": [
+            1.7100248429266576,
+            0.0
+        ],
+        "b": 2.0259751671862127,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Integration",
+        "question_text": "Evaluate the integral of the function f(x) = sin(x) / (1 + cos^2(x)) from 0 to pi/2.",
+        "options": [
+            "tan(x) | from 0 to pi/2",
+            "\u03c0/4",
+            "log(1 + \u221a2)",
+            "\u03c0/2"
+        ],
+        "correct_answer": "\u03c0/2",
+        "question_type": "MCQ"
+    },
+        {
+        "unique_id": 81,
+        "a": [
+            0.0,
+            0.8258714783397627
+        ],
+        "b": -2.0421320347194722,
+        "domain": "Technical",
+        "concept_tag": "Data Structures / Complexity",
+        "question_text": "Which data structure is used to store a collection of unique values?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Linked List",
+            "Set"
+        ],
+        "correct_answer": "Set",
+        "question_type": "MCQ"
+    },
+     {
+        "unique_id": 196,
+        "a": [
+            0.7826558377227741,
+            0.0
+        ],
+        "b": -0.5443696376912266,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Eigenvectors",
+        "question_text": "An eigenvector of a square matrix A is a non-zero vector v such that Av = \u03bbv. If v is an eigenvector of A, what does \u03bb represent?",
+        "options": [
+            "A column vector in the matrix A",
+            "A scalar value that the matrix A multiplies v by",
+            "A row vector in the matrix A",
+            "An identity matrix"
+        ],
+        "correct_answer": "A scalar value that the matrix A multiplies v by",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 268,
+        "a": [
+            0.5442239779029087,
+            0.0
+        ],
+        "b": 0.5972146630308689,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Least Squares",
+        "question_text": "A researcher wants to model the relationship between the number of hours studied and exam scores. Using least squares, we find that the regression equation is y = 2x + 3. What is the expected score for a student who studied 5 hours?",
+        "options": [
+            "19",
+            "15",
+            "17",
+            "13"
+        ],
+        "correct_answer": "13",
+        "question_type": "MCQ"
+    },  
+    {
+        "unique_id": 282,
+        "a": [
+            1.2120416177507494,
+            0.0
+        ],
+        "b": -0.5693817049766464,
+        "domain": "Mathematics",
+        "concept_tag": "Statistics / Correlation",
+        "question_text": "What does a positive correlation coefficient indicate in a dataset?",
+        "options": [
+            "That there is no relationship between variables.",
+            "That variables are moving in the same direction.",
+            "That variables are moving in opposite directions.",
+            "That the relationship is not significant."
+        ],
+        "correct_answer": "That variables are moving in the same direction.",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 204,
+        "a": [
+            2.2886938676801356,
+            0.0
+        ],
+        "b": -1.3561546130636666,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Matrix Rank",
+        "question_text": "What is the rank of a square matrix if it has no zero rows or columns?",
+        "options": [
+            "The rank is equal to the number of rows in the matrix",
+            "The rank is equal to the number of non-zero elements in the matrix",
+            "The rank is equal to the number of columns in the matrix",
+            "The rank is always 1"
+        ],
+        "correct_answer": "The rank is equal to the number of columns in the matrix",
+        "question_type": "MCQ"
+    },
+    {
+    
+        "unique_id": 209,
+        "a": [
+            0.8705709968884154,
+            0.0
+        ],
+        "b": 2.7202687474957057,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Derivatives",
+        "question_text": "Given the function f(x) = (2x^2 + 3x - 5) / (x^2 - 4), find the derivative of f(x) at the point x = 2, where f'(2) = A/(x^2 - 4)^2. What is the value of A?",
+        "options": [
+            "17/25",
+            "23/25",
+            "13/25",
+            "11/25"
+        ],
+        "correct_answer": "13/25",
+        "question_type": "MCQ"
+    },
+     {
+        "unique_id": 313,
+        "a": [
+            0.0,
+            1.119625487847175
+        ],
+        "b": 1.628705741900671,
+        "domain": "Technical",
+        "concept_tag": "Python / Data Visualization",
+        "question_text": "A Python programmer wants to create an interactive dashboard using Plotly. They decide to use a combination of Plotly Express and Dash. What is the main reason for using both Plotly Express and Dash in this scenario?",
+        "options": [
+            "To create a complex layout with multiple subplots",
+            "To leverage the performance benefits of Plotly Express and the interactivity features of Dash",
+            "To create a simple line chart and a scatter plot with hover-over text",
+            "To use a specific plot type that is only available in Plotly"
+        ],
+        "correct_answer": "To leverage the performance benefits of Plotly Express and the interactivity features of Dash",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 321,
+        "a": [
+            0.0,
+            0.9980482433490144
+        ],
+        "b": 0.13080619940772786,
+        "domain": "Technical",
+        "concept_tag": "Python / String Operations",
+        "question_text": "Given a string 'Hello World', how can you extract the word 'World' from the string, excluding the first 5 characters?",
+        "options": [
+            "string = 'Hello World'; word = string[6:11]",
+            "string = 'Hello World'; word = string[5:10]",
+            "string = 'Hello World'; word = string[-5:10]",
+            "string = 'Hello World'; word = string[5:15]"
+        ],
+        "correct_answer": "string = 'Hello World'; word = string[5:10]",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 189,
+        "a": [
+            0.8570611725854633,
+            0.0
+        ],
+        "b": 1.7861119115084292,
+        "domain": "Mathematics",
+        "concept_tag": "Linear Algebra / Least Squares",
+        "question_text": "Consider a set of data points in a least squares problem that lies on a plane, but the normal vector to the plane is not orthogonal to any of the column vectors of the design matrix A. Which of the following is true?",
+        "options": [
+            "There exists a unique solution to the normal equations A^T A x = A^T b.",
+            "The system is inconsistent, and there is no solution.",
+            "The normal equations A^T A x = A^T b must be modified to A^T A x = A^T b + c for some vector c.",
+            "The system is consistent but may have infinitely many solutions."
+        ],
+        "correct_answer": "The system is consistent but may have infinitely many solutions.",
+        "question_type": "MCQ"
+    },
+     {
+        "unique_id": 208,
+        "a": [
+            2.3497450218413882,
+            0.0
+        ],
+        "b": 0.1624363931337082,
+        "domain": "Mathematics",
+        "concept_tag": "Calculus / Gradient Vector",
+        "question_text": "Find the gradient vector of the function f(x, y) = 3x^2 + 2y^2 at the point (1, 2).",
+        "options": [
+            "\u2207f(1, 2) = (3, 4)",
+            "\u2207f(1, 2) = (12, 8)",
+            "\u2207f(1, 2) = (9, 6)",
+            "\u2207f(1, 2) = (6, 12)"
+        ],
+        "correct_answer": "\u2207f(1, 2) = (12, 8)",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 254,
+        "a": [
+            0.6892458614890682,
+            0.0
+        ],
+        "b": 1.23688152529107,
+        "domain": "Mathematics",
+        "concept_tag": "Probability / Poisson Distribution",
+        "question_text": "A call center receives an average of 10 customer calls per hour. If the probability of a customer call being an emergency is 0.1, and the call center needs to determine the probability that at least 5 calls are emergency calls within a 2-hour period, what is the probability of this event?",
+        "options": [
+            "The probability of at least 5 emergency calls within a 2-hour period is approximately 0.245",
+            "The probability of at least 5 emergency calls within a 2-hour period is approximately 0.082",
+            "The probability of at least 5 emergency calls within a 2-hour period is approximately 0.382",
+            "The probability of at least 5 emergency calls within a 2-hour period is approximately 0.921"
+        ],
+        "correct_answer": "The probability of at least 5 emergency calls within a 2-hour period is approximately 0.245",
+        "question_type": "MCQ"
+    },
+    {
+        "unique_id": 234,
+        "a": [
+            0.3962451666580306,
+            0.0
+        ],
+        "b": 1.3349486716793573,
+        "domain": "Mathematics",
+        "concept_tag": "Logic / Puzzles",
+        "question_text": "Five houses are located in a row containing different numbers of books, different numbers of computers, and different numbers of pianos. Each house has a different number of books, a different number of computers, and a different number of pianos.",
+        "options": [
+            "The house with 10 computers is located next to the house with 200 books, and the house with 25 pianos is located next to the house with 15 computers.",
+            "The house with 200 books is located next to the house with 5 computers, and the house with 15 pianos is located next to the house with 300 books.",
+            "The house with 5 computers is located next to the house with 15 pianos, and the house with 300 books is located next to the house with 20 computers.",
+            "The house with 25 pianos is located next to the house with 10 computers, and the house with 200 books is located next to the house with 5 pianos."
+        ],
+        "correct_answer": "The house with 10 computers is located nexat to the house with 200 books, and the house with 25 pianos is located next to the house with 15 computers.",
+        "question_type": "MCQ"
+    },
+    {
+        "question_text": "Which of the following are ways to implement dependency injection in a Python class?",
+        "options": [
+            "Using a factory function to create objects",
+            "Using a constructor with parameters",
+            "Using a singleton pattern to ensure a single instance",
+            "Using a setter method to inject dependencies"
+        ],
+        "correct_answer": [
+            "Using a constructor with parameters",
+            "Using a setter method to inject dependencies"
+        ],
+        "unique_id": 366,
+        "domain": "Technical",
+        "concept_tag": "Programming / OOP",
+        "a": [
+            0.0,
+            1.72
+        ],
+        "b": 0.68,
+        "question_type": "MSQ"
+    },
+     {
+        "question_text": "Given a list of students with their grades, which methods can be used to sort the list in descending order by grade?",
+        "options": [
+            "a = sorted(a, key=lambda x: x[1], reverse=True)",
+            "a = a.sort()",
+            "a = a.sort(key=lambda x: x[1], reverse=True)",
+            "a.sort(reverse=True)"
+        ],
+        "correct_answer": [
+            "a = sorted(a, key=lambda x: x[1], reverse=True)",
+            "a.sort(reverse=True)"
+        ],
+        "unique_id": 369,
+        "domain": "Technical",
+        "concept_tag": "Python / Lists",
+        "a": [
+            0.0,
+            1.95
+        ],
+        "b": 1.96,
+        "question_type": "MSQ"
+    },
+     {
+        "question_text": "What are the main purposes of the Git stash feature in version control?",
+        "options": [
+            "To temporarily save changes made in the working directory for later use",
+            "To revert changes made in the previous commit",
+            "To manage conflicts between different branches in a Git repository",
+            "To track changes made in a specific branch without committing them"
+        ],
+        "correct_answer": [
+            "To temporarily save changes made in the working directory for later use",
+            "To track changes made in a specific branch without committing them"
+        ],
+        "unique_id": 372,
+        "domain": "Technical",
+        "concept_tag": "Git / Version Control",
+        "a": [
+            0.0,
+            1.11
+        ],
+        "b": 0.53,
+        "question_type": "MSQ"
     }
 ]

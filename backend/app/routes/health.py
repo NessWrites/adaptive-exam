@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from backend.app.core.config import settings
-from backend.app.services.session import session_manager
+from backend.app.services.exam_service import session_manager
 
 router = APIRouter(tags=["health"])
 
