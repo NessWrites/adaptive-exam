@@ -4,40 +4,49 @@ from sqlalchemy.orm import Session
 from backend.app.database.postgresql.connection import get_db
 from backend.app.services.exam_service import ExamService
 from backend.app.schemas.exam_schema import (
-    SessionCreateRequest,
-    AnswerSubmitRequest,
+     SubmitAnswerRequest,
     StartExamResponse,
     SubmitAnswerResponse,
-    ResultsResponse
+    ResultsResponse,
+    QuestionResponse,
+    AnswerFeedback
 )
 
-router = APIRouter(prefix="/exam", tags=["Adaptive Exam"])
+router = APIRouter(prefix="/exam", tags=["Optimized Adaptive Exam"])
 
 
-@router.post("/start", response_model=StartExamResponse, status_code=status.HTTP_201_CREATED)
-async def start_exam(
-    request: SessionCreateRequest,
-    db: Session = Depends(get_db)
-):
+@router.get("/start", response_model=StartExamResponse)
+def start_exam(db: Session = Depends(get_db)):
     """
-    Start a new adaptive exam session and get the first question.
+    Start exam - GET request, no parameters needed.
+    Questions fixed at 40, session auto-created.
     
-    - **user_id**: Optional identifier for the user
-    - **n_questions**: Number of adaptive questions (default: 40)
-    
-    Returns session information, initial ability estimates, and the first question.
     """
+    
     exam_service = ExamService(db)
     
     try:
+        # Fixed at 40 questions, no user_id
         result = exam_service.start_exam_with_first_question(
-            user_id=request.user_id,
-            n_questions=request.n_questions
+            user_id=None,
+            n_questions=40  # Fixed
         )
         
-        return StartExamResponse(**result)
+        # Simplified response - just session_id and question
+        return StartExamResponse(
+            session_id=result['session']['session_id'],
+            question=QuestionResponse(
+                unique_id=result['question']['unique_id'],
+                question_text=result['question']['question_text'],
+                options=result['question']['options'],
+                image_url=result['question']['image_url'],
+                question_type=result['question']['question_type']
+            )
+        )
     
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to start exam: {str(e)}"
@@ -45,18 +54,14 @@ async def start_exam(
 
 
 @router.post("/submit-answer", response_model=SubmitAnswerResponse)
-async def submit_answer(
-    request: AnswerSubmitRequest,
+def submit_answer(
+    request: SubmitAnswerRequest,
     db: Session = Depends(get_db)
 ):
     """
-    Submit answer for the current question.
-    
-    - **session_id**: Exam session ID
-    - **user_answer**: User's answer (single letter or list of letters)
-    
-    Returns feedback with correctness, updated ability estimates, and the next question.
-    If exam is complete, returns completion status instead of next question.
+    Submit answer and get next question.
+    During the exam, theta estimates are not returned to avoid confusion.
+    Only final results will include ability estimates.  
     """
     exam_service = ExamService(db)
     
@@ -66,7 +71,30 @@ async def submit_answer(
             user_answer=request.user_answer
         )
         
-        return SubmitAnswerResponse(**result)
+        # Simplified feedback - no theta during exam
+        feedback = AnswerFeedback(
+            is_correct=result['feedback']['is_correct'],
+            correct_answer=result['feedback']['correct_answer'],
+            question_num=result['feedback']['question_num']
+            # Removed: theta_math, theta_tech, total_questions
+        )
+        
+        # Next question (if any)
+        next_question = None
+        if result.get('next_question'):
+            next_question = QuestionResponse(
+                unique_id=result['next_question']['unique_id'],
+                question_text=result['next_question']['question_text'],
+                options=result['next_question']['options'],
+                image_url=result['next_question']['image_url'],
+                question_type=result['next_question']['question_type']
+            )
+        
+        return SubmitAnswerResponse(
+            feedback=feedback,
+            next_question=next_question,
+            exam_completed=result['exam_completed']
+        )
     
     except ValueError as e:
         raise HTTPException(
@@ -74,6 +102,8 @@ async def submit_answer(
             detail=str(e)
         )
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to submit answer: {str(e)}"
@@ -81,15 +111,12 @@ async def submit_answer(
 
 
 @router.get("/results/{session_id}", response_model=ResultsResponse)
-async def get_results(
+def get_results(
     session_id: int,
     db: Session = Depends(get_db)
 ):
     """
-    Get final exam results and ability estimates.
-    
-    Returns detailed results including accuracy, ability estimates, and interpretations.
-    Only available after exam is completed.
+    Get final results for a completed exam session.
     """
     exam_service = ExamService(db)
     

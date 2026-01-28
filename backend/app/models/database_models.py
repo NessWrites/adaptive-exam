@@ -4,7 +4,6 @@ from sqlalchemy.sql import func
 from backend.app.database.postgresql.connection import Base
 
 
-
 class Question(Base):
     """Question/Item bank model"""
     __tablename__ = "questions"
@@ -19,8 +18,9 @@ class Question(Base):
     question_type = Column(String(10))  # 'MCQ' or 'MSQ'
     a_values = Column(JSON, nullable=False)  # [a1, a2] discrimination parameters
     b_value = Column(Float, nullable=False)  # difficulty parameter
+    # Timestamps - let database handle defaults
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
 
 class ExamSession(Base):
@@ -38,8 +38,9 @@ class ExamSession(Base):
     theta_se_tech = Column(Float, default=1.0)
     math_count = Column(Integer, default=0)
     tech_count = Column(Integer, default=0)
+    # Timestamps - let database handle defaults
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     completed_at = Column(DateTime(timezone=True))
     
     # Relationships

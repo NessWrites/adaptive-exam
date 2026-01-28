@@ -1,18 +1,17 @@
 """
-Adaptive Exam - Streamlit Application
-Interactive exam interface for 2D MIRT Adaptive Testing System
+Optimized Adaptive Exam - Streamlit Application
+Updated for optimized API (GET /start, simplified responses)
 """
 import streamlit as st
 import requests
 from typing import Optional, Dict, Any, List
-import time
 
 # API Configuration
 API_BASE_URL = "http://127.0.0.1:8000"
 
 # Page configuration
 st.set_page_config(
-    page_title="Adaptive Exam System",
+    page_title="Adaptive Exam",
     page_icon="📝",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -41,20 +40,6 @@ st.markdown("""
         color: #262730;
         margin-bottom: 1.5rem;
     }
-    .feedback-correct {
-        background-color: #d4edda;
-        color: #155724;
-        padding: 1rem;
-        border-radius: 5px;
-        border-left: 5px solid #28a745;
-    }
-    .feedback-incorrect {
-        background-color: #f8d7da;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 5px;
-        border-left: 5px solid #dc3545;
-    }
     .progress-text {
         font-size: 1.1rem;
         color: #555;
@@ -63,7 +48,7 @@ st.markdown("""
     .ability-score {
         font-size: 1.5rem;
         font-weight: bold;
-        padding: 1rem;
+        padding: 1.5rem;
         border-radius: 8px;
         text-align: center;
         margin: 0.5rem 0;
@@ -71,25 +56,26 @@ st.markdown("""
     .math-score {
         background-color: #e3f2fd;
         color: #1976d2;
+        border: 2px solid #1976d2;
     }
     .tech-score {
         background-color: #f3e5f5;
         color: #7b1fa2;
+        border: 2px solid #7b1fa2;
     }
 </style>
 """, unsafe_allow_html=True)
 
 
 class ExamAPI:
-    """API client for Adaptive Exam System"""
+    """API client for Optimized Adaptive Exam System"""
     
     @staticmethod
-    def start_exam(n_questions: int = 40, user_id: Optional[str] = None) -> Dict[str, Any]:
-        """Start a new exam session"""
+    def start_exam() -> Dict[str, Any]:
+        """Start a new exam - GET request, no parameters"""
         try:
-            response = requests.post(
+            response = requests.get(
                 f"{API_BASE_URL}/exam/start",
-                json={"n_questions": n_questions, "user_id": user_id},
                 timeout=10
             )
             response.raise_for_status()
@@ -136,20 +122,14 @@ def initialize_session_state():
         st.session_state.session_id = None
     if 'current_question' not in st.session_state:
         st.session_state.current_question = None
-    if 'user_answer' not in st.session_state:
-        st.session_state.user_answer = None
-    if 'feedback' not in st.session_state:
-        st.session_state.feedback = None
+    if 'question_num' not in st.session_state:
+        st.session_state.question_num = 1
     if 'exam_completed' not in st.session_state:
         st.session_state.exam_completed = False
-    if 'session_info' not in st.session_state:
-        st.session_state.session_info = None
-    if 'show_feedback' not in st.session_state:
-        st.session_state.show_feedback = False
 
 
 def display_welcome_page():
-    """Display welcome page with exam configuration"""
+    """Display welcome page"""
     st.markdown('<div class="main-header">📝 Adaptive Exam System</div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -160,28 +140,18 @@ def display_welcome_page():
     - 💻 **Technology** - Technical knowledge and concepts
     
     #### How it works:
-    1. Questions are selected based on your current ability estimate
-    2. Difficulty adapts to your performance in real-time
-    3. More informative questions are prioritized
-    4. Your ability is estimated using advanced psychometric models
+    1. You will answer **40 questions** total
+    2. Questions adapt to your performance in real-time
+    3. Each answer helps us better estimate your ability
+    4. You'll get immediate feedback on each question
+    5. Final results show your ability in both domains
+    
+    #### Instructions:
+    - Read each question carefully
+    - Select your answer(s)
+    - Click "Submit Answer" to continue
+    - You cannot go back to previous questions
     """)
-    
-    st.divider()
-    
-    # Exam configuration
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        user_id = st.text_input("👤 Enter Your Name (Optional)", placeholder="John Doe")
-    
-    with col2:
-        n_questions = st.number_input(
-            "📊 Number of Questions",
-            min_value=5,
-            max_value=100,
-            value=40,
-            step=5
-        )
     
     st.divider()
     
@@ -190,30 +160,31 @@ def display_welcome_page():
     with col2:
         if st.button("🚀 Start Exam", use_container_width=True, type="primary"):
             with st.spinner("Initializing exam..."):
-                response = ExamAPI.start_exam(n_questions=n_questions, user_id=user_id or None)
+                response = ExamAPI.start_exam()
                 
                 if response:
                     st.session_state.exam_started = True
-                    st.session_state.session_id = response['session']['session_id']
+                    st.session_state.session_id = response['session_id']
                     st.session_state.current_question = response['question']
-                    st.session_state.session_info = response['session']
+                    st.session_state.question_num = 1
                     st.rerun()
 
 
-def display_question(question: Dict[str, Any]):
+def display_question(question: Dict[str, Any], question_num: int):
     """Display current question"""
     st.markdown('<div class="question-box">', unsafe_allow_html=True)
     
     # Question header
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.markdown(f'<div class="progress-text">Question {question["question_num"]} of {question["total_questions"]}</div>', 
-                   unsafe_allow_html=True)
-    with col2:
-        st.markdown(f'**Type:** {question["question_type"]}')
+    st.markdown(
+        f'<div class="progress-text">Question {question_num} of 40</div>', 
+        unsafe_allow_html=True
+    )
     
     # Question text
-    st.markdown(f'<div class="question-text">{question["question_text"]}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="question-text">{question["question_text"]}</div>', 
+        unsafe_allow_html=True
+    )
     
     # Image if present
     if question.get('image_url'):
@@ -230,7 +201,7 @@ def display_question(question: Dict[str, Any]):
             "Select your answer:",
             options=list(options_dict.keys()),
             format_func=lambda x: f"{x}. {options_dict[x]}",
-            key=f"mcq_{question['unique_id']}"
+            key=f"mcq_{question['unique_id']}_{question_num}"
         )
         
         return selected
@@ -243,7 +214,10 @@ def display_question(question: Dict[str, Any]):
         options_dict = {chr(65 + i): opt for i, opt in enumerate(question['options'])}
         
         for letter, option_text in options_dict.items():
-            if st.checkbox(f"{letter}. {option_text}", key=f"msq_{question['unique_id']}_{letter}"):
+            if st.checkbox(
+                f"{letter}. {option_text}", 
+                key=f"msq_{question['unique_id']}_{question_num}_{letter}"
+            ):
                 selected.append(letter)
         
         return selected if selected else None
@@ -251,86 +225,46 @@ def display_question(question: Dict[str, Any]):
     return None
 
 
-def display_feedback(feedback: Dict[str, Any]):
-    """Display answer feedback"""
-    if feedback['is_correct']:
-        st.markdown('<div class="feedback-correct">', unsafe_allow_html=True)
-        st.markdown("### ✅ Correct!")
-    else:
-        st.markdown('<div class="feedback-incorrect">', unsafe_allow_html=True)
-        st.markdown("### ❌ Incorrect")
-        
-        # Show correct answer
-        correct = feedback['correct_answer']
-        if isinstance(correct, list):
-            correct_str = ", ".join(correct)
-        else:
-            correct_str = correct
-        st.markdown(f"**Correct answer:** {correct_str}")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Current ability estimates
-    st.divider()
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown('<div class="ability-score math-score">', unsafe_allow_html=True)
-        st.markdown("🔢 **Math Ability**")
-        st.markdown(f"{feedback['theta_math']:.2f}")
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown('<div class="ability-score tech-score">', unsafe_allow_html=True)
-        st.markdown("💻 **Tech Ability**")
-        st.markdown(f"{feedback['theta_tech']:.2f}")
-        st.markdown('</div>', unsafe_allow_html=True)
-
-
 def display_exam_page():
-    """Display exam questions page"""
+    """Display exam questions page - no feedback shown"""
     st.markdown('<div class="main-header">📝 Exam In Progress</div>', unsafe_allow_html=True)
     
     # Progress bar
-    if st.session_state.session_info:
-        progress = st.session_state.current_question['question_num'] / st.session_state.current_question['total_questions']
-        st.progress(progress)
+    progress = st.session_state.question_num / 40
+    st.progress(progress)
     
-    # Show feedback if answer was just submitted
-    if st.session_state.show_feedback and st.session_state.feedback:
-        display_feedback(st.session_state.feedback)
-        
-        if st.button("➡️ Next Question", use_container_width=True, type="primary"):
-            st.session_state.show_feedback = False
-            st.rerun()
-        return
-    
-    # Display question
+    # Display question directly (no feedback step)
     if st.session_state.current_question:
-        user_answer = display_question(st.session_state.current_question)
+        user_answer = display_question(
+            st.session_state.current_question, 
+            st.session_state.question_num
+        )
         
         st.divider()
         
         # Submit button
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("✓ Submit Answer", use_container_width=True, type="primary", 
-                        disabled=(user_answer is None)):
+            if st.button(
+                "✓ Submit Answer", 
+                use_container_width=True, 
+                type="primary",
+                disabled=(user_answer is None)
+            ):
                 if user_answer:
-                    with st.spinner("Submitting answer..."):
+                    with st.spinner("Loading next question..."):
                         response = ExamAPI.submit_answer(
                             st.session_state.session_id,
                             user_answer
                         )
                         
                         if response:
-                            st.session_state.feedback = response['feedback']
-                            st.session_state.show_feedback = True
-                            
+                            # No feedback display - just move to next question
                             if response['exam_completed']:
                                 st.session_state.exam_completed = True
                             else:
                                 st.session_state.current_question = response['next_question']
+                                st.session_state.question_num = response['feedback']['question_num'] + 1
                             
                             st.rerun()
 
@@ -380,20 +314,20 @@ def display_results_page():
         st.markdown("### 🔢 Mathematics")
         math_ability = results['math_ability']
         
-        st.metric(
-            "Ability Score (θ)",
-            f"{math_ability['value']:.2f}",
-            help="Higher values indicate greater ability"
-        )
+        # Display score box
+        st.markdown('<div class="ability-score math-score">', unsafe_allow_html=True)
+        st.markdown(f"**Ability Score (θ)**<br>{math_ability['value']:.2f}", unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
         st.metric(
             "Standard Error",
-            f"{math_ability['standard_error']:.2f}",
+            f"{math_ability['standard_error']:.3f}",
             help="Lower values indicate more precise estimates"
         )
         
-        # Interpretation
+        # Interpretation with emoji
         interpretation = math_ability['interpretation']
-        color = {
+        emoji = {
             'Exceptional': '🟢',
             'Above Average': '🔵',
             'Average': '🟡',
@@ -401,26 +335,26 @@ def display_results_page():
             'Needs Improvement': '🔴'
         }.get(interpretation, '⚪')
         
-        st.markdown(f"**Level:** {color} {interpretation}")
+        st.markdown(f"### {emoji} {interpretation}")
     
     with col2:
         st.markdown("### 💻 Technology")
         tech_ability = results['tech_ability']
         
-        st.metric(
-            "Ability Score (θ)",
-            f"{tech_ability['value']:.2f}",
-            help="Higher values indicate greater ability"
-        )
+        # Display score box
+        st.markdown('<div class="ability-score tech-score">', unsafe_allow_html=True)
+        st.markdown(f"**Ability Score (θ)**<br>{tech_ability['value']:.2f}", unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
         st.metric(
             "Standard Error",
-            f"{tech_ability['standard_error']:.2f}",
+            f"{tech_ability['standard_error']:.3f}",
             help="Lower values indicate more precise estimates"
         )
         
-        # Interpretation
+        # Interpretation with emoji
         interpretation = tech_ability['interpretation']
-        color = {
+        emoji = {
             'Exceptional': '🟢',
             'Above Average': '🔵',
             'Average': '🟡',
@@ -428,7 +362,7 @@ def display_results_page():
             'Needs Improvement': '🔴'
         }.get(interpretation, '⚪')
         
-        st.markdown(f"**Level:** {color} {interpretation}")
+        st.markdown(f"### {emoji} {interpretation}")
     
     st.divider()
     
@@ -441,18 +375,23 @@ def display_results_page():
         - **Standard Deviation:** 1
         
         **Interpretation:**
-        - **> +1.5:** Exceptional ability
-        - **+0.5 to +1.5:** Above average
-        - **-0.5 to +0.5:** Average
-        - **-1.5 to -0.5:** Below average
-        - **< -1.5:** Needs improvement
+        - **> +1.5:** 🟢 Exceptional ability
+        - **+0.5 to +1.5:** 🔵 Above average
+        - **-0.5 to +0.5:** 🟡 Average
+        - **-1.5 to -0.5:** 🟠 Below average
+        - **< -1.5:** 🔴 Needs improvement
         
         ### Standard Error
         The uncertainty in your ability estimate. Lower values mean we're more confident in your score.
+        Typical range: 0.3 to 1.0
+        
+        ### Accuracy
+        The percentage of questions you answered correctly. Note that in adaptive testing, this is less 
+        important than your theta score, as harder questions are worth "more" in determining ability.
         
         ### About 2D-MIRT
-        This exam uses a two-dimensional model that separately estimates your mathematics and technology abilities,
-        allowing for a more nuanced understanding of your strengths and areas for improvement.
+        This exam uses a two-dimensional model that separately estimates your mathematics and technology 
+        abilities, allowing for a more nuanced understanding of your strengths and areas for improvement.
         """)
     
     # Restart button
@@ -471,24 +410,16 @@ def display_sidebar():
     with st.sidebar:
         st.markdown("## 📊 Session Info")
         
-        if st.session_state.exam_started and st.session_state.session_info:
+        if st.session_state.exam_started:
             st.markdown(f"**Session ID:** {st.session_state.session_id}")
+            st.markdown(f"**Total Questions:** 40")
             
-            if st.session_state.session_info.get('user_id'):
-                st.markdown(f"**User:** {st.session_state.session_info['user_id']}")
-            
-            st.markdown(f"**Questions:** {st.session_state.session_info['n_questions']}")
-            
-            if st.session_state.current_question:
-                st.markdown(f"**Progress:** {st.session_state.current_question['question_num']}/{st.session_state.current_question['total_questions']}")
-            
-            st.divider()
-            
-            # Current abilities (if exam in progress)
-            if not st.session_state.exam_completed and st.session_state.feedback:
-                st.markdown("### Current Estimates")
-                st.markdown(f"🔢 Math: **{st.session_state.feedback['theta_math']:.2f}**")
-                st.markdown(f"💻 Tech: **{st.session_state.feedback['theta_tech']:.2f}**")
+            if not st.session_state.exam_completed:
+                st.markdown(f"**Current:** Question {st.session_state.question_num}/40")
+                
+                # Progress percentage
+                progress_pct = (st.session_state.question_num / 40) * 100
+                st.markdown(f"**Progress:** {progress_pct:.0f}%")
         
         st.divider()
         
@@ -512,13 +443,19 @@ def display_sidebar():
             st.markdown("""
             **Adaptive Exam System**
             
-            Version 1.0.0
+            Version 2.0 (Optimized)
             
-            Built with:
+            **Features:**
+            - 40 adaptive questions
+            - 2D-MIRT algorithm
+            - Immediate feedback
+            - Real-time adaptation
+            
+            **Built with:**
             - FastAPI (Backend)
             - Streamlit (Frontend)
-            - 2D-MIRT Algorithm
-            - PostgreSQL
+            - PostgreSQL (Database)
+            - Python IRT Engine
             """)
 
 

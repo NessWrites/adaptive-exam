@@ -1,83 +1,63 @@
-from pydantic import BaseModel, Field
+"""
+Optimized API Schemas - Refined based on user feedback
+"""
+from pydantic import BaseModel
 from typing import List, Optional, Union
-from datetime import datetime
 
 
-# Request Schemas
-class SessionCreateRequest(BaseModel):
-    """Request to start a new exam session"""
-    user_id: Optional[str] = None
-    n_questions: int = Field(default=40, ge=1, le=100)
+# ============================================================================
+# Response Schemas - Optimized
+# ============================================================================
 
-
-class AnswerSubmitRequest(BaseModel):
-    """Request to submit an answer"""
-    session_id: int
-    user_answer: Union[str, List[str]]  # Single answer or multiple for MSQ
-
-
-# Response Schemas
-class SessionInfo(BaseModel):
-    """Basic session information"""
-    session_id: int
-    user_id: Optional[str]
-    status: str
-    current_question_num: int
-    n_questions: int
-    theta_math: float
-    theta_tech: float
-    math_count: int
-    tech_count: int
-    created_at: datetime
-
-
-class QuestionData(BaseModel):
-    """Question data to send to client"""
+class QuestionResponse(BaseModel):
+    """Question data - essentials only"""
     unique_id: int
     question_text: str
-    options: Optional[List[str]]
+    options: List[str]
     image_url: Optional[str]
-    question_type: str
-    question_num: int
-    total_questions: int
+    question_type: str  # MCQ or MSQ
 
 
 class StartExamResponse(BaseModel):
-    """Response when starting exam - includes session and first question"""
-    session: SessionInfo
-    question: QuestionData
+    """Start exam - just session_id and question"""
+    session_id: int
+    question: QuestionResponse
 
 
 class AnswerFeedback(BaseModel):
-    """Feedback after submitting an answer"""
+    """Feedback after answer - no theta (confusing during exam)"""
     is_correct: bool
     correct_answer: Union[str, List[str]]
-    theta_math: float
-    theta_tech: float
     question_num: int
-    total_questions: int
+    # Removed: theta_math, theta_tech, total_questions
+
+
+class SubmitAnswerRequest(BaseModel):
+    """Submit answer request"""
+    session_id: int
+    user_answer: Union[str, List[str]]
 
 
 class SubmitAnswerResponse(BaseModel):
-    """Response after submitting answer - includes feedback and next question (or completion)"""
+    """Submit answer response"""
     feedback: AnswerFeedback
-    next_question: Optional[QuestionData] = None
-    exam_completed: bool = False
+    next_question: Optional[QuestionResponse]
+    exam_completed: bool
 
 
 class AbilityEstimate(BaseModel):
-    """Ability estimate for a dimension"""
+    """Ability estimate for results"""
     value: float
     standard_error: float
     interpretation: str
 
 
 class ResultsResponse(BaseModel):
-    """Final exam results"""
+    """Final results - keep everything"""
     session_id: int
     total_questions: int
     correct_answers: int
     accuracy: float
     math_ability: AbilityEstimate
     tech_ability: AbilityEstimate
-    completed_at: datetime
+    
