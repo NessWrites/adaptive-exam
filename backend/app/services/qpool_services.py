@@ -75,7 +75,7 @@ class QPoolService:
         try:
             async with httpx.AsyncClient(timeout=self.timeout) as client:
                 response = await client.post(
-                    f"{self.base_url}/qpool/paraphrase",  # Adjust endpoint as needed
+                    f"{self.base_url}/qpool/generate",
                     json=payload
                 )
                 response.raise_for_status()
@@ -84,7 +84,13 @@ class QPoolService:
         except httpx.TimeoutException:
             raise Exception(f"QPool API timeout after {self.timeout}s")
         except httpx.HTTPError as e:
-            raise Exception(f"QPool API error: {str(e)}")
+            error_detail = ""
+            if hasattr(e, 'response') and e.response is not None:
+                try:
+                    error_detail = f", Response: {e.response.text}"
+                except:
+                    error_detail = f", Status: {e.response.status_code}"
+            raise Exception(f"QPool API error: {str(e)}{error_detail}")
         except Exception as e:
             raise Exception(f"Failed to paraphrase question: {str(e)}")
     
@@ -104,6 +110,22 @@ class QPoolService:
     ) -> Dict[str, Any]:
         """
         Synchronous version of paraphrase_question for use in non-async contexts
+        
+        Args:
+            question_id: Unique identifier for the question
+            base_stem: Original question text
+            base_answer: Correct answer
+            difficulty: Question difficulty level
+            concept_tags: List of concept tags
+            is_template: Whether this is a template question
+            template_config: Template configuration if applicable
+            transformations: List of transformations to apply (default: ["paraphrase"])
+            variants: Number of variants to generate (default: 1)
+            scenario_domains: Domains for scenario generation
+            generate_distractors: Whether to generate distractors
+        
+        Returns:
+            Dict containing paraphrased question and distractors
         """
         
         if transformations is None:
@@ -128,17 +150,29 @@ class QPoolService:
         }
         
         try:
+            print(f"[QPOOL] Calling API: {self.base_url}/qpool/generate")
+            print(f"[QPOOL] Payload: {payload}")
+            
             with httpx.Client(timeout=self.timeout) as client:
                 response = client.post(
-                    f"{self.base_url}/qpool/generatevuc",
+                    f"{self.base_url}/qpool/generate",
                     json=payload
                 )
+                
+                print(f"[QPOOL] Response status: {response.status_code}")
+                
                 response.raise_for_status()
                 return response.json()
         
         except httpx.TimeoutException:
             raise Exception(f"QPool API timeout after {self.timeout}s")
         except httpx.HTTPError as e:
-            raise Exception(f"QPool API error: {str(e)}")
+            error_detail = ""
+            if hasattr(e, 'response') and e.response is not None:
+                try:
+                    error_detail = f", Response: {e.response.text}"
+                except:
+                    error_detail = f", Status: {e.response.status_code}"
+            raise Exception(f"QPool API error: {str(e)}{error_detail}")
         except Exception as e:
             raise Exception(f"Failed to paraphrase question: {str(e)}")
