@@ -1,6 +1,6 @@
 """
-Updated ExamService with Pretest Item Support
-50 questions total: 40 operational + 10 pretest
+Updated ExamService with QPool Integration
+Supports paraphrasing questions and generating distractors on-the-fly
 """
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
@@ -11,22 +11,29 @@ from datetime import datetime
 
 from backend.app.models.database_models import Question, ExamSession, Response
 from backend.app.services.irt_engine import IRTEngine
+from backend.app.services.qpool_services import QPoolService
 from backend.app.core.config import get_settings
 
 settings = get_settings()
 
 
 class ExamService:
-    """Business logic for adaptive examination with pretest items"""
+    """Business logic for adaptive examination with pretest items and QPool integration"""
     
     # EXAM CONFIGURATION
     TOTAL_QUESTIONS = 50          # Total questions in exam
     OPERATIONAL_QUESTIONS = 40    # Scored questions (adaptive)
     PRETEST_QUESTIONS = 10        # Unscored questions (random)
     
+    # QPOOL CONFIGURATION
+    USE_QPOOL = True              # Enable/disable QPool paraphrasing
+    QPOOL_PROBABILITY = 0.5       # Probability of paraphrasing (0.5 = 50% of tech questions)
+    QPOOL_TECH_ONLY = True        # Only paraphrase tech questions (not math)
+    
     def __init__(self, db: Session):
         self.db = db
         self.irt = IRTEngine()
+        self.qpool = QPoolService()  # Initialize QPool service
     
     # ========================================================================
     # SESSION MANAGEMENT
@@ -36,7 +43,7 @@ class ExamService:
         """Create a new exam session"""
         session = ExamSession(
             user_id=user_id,
-            n_questions=n_questions,  # Always 50 now
+            n_questions=n_questions,
             status="in_progress",
             current_question_num=0,
             theta_math=0.0,
@@ -58,19 +65,146 @@ class ExamService:
         return self.db.query(ExamSession).filter(
             ExamSession.session_id == session_id
         ).first()
+    
     # ========================================================================
-    # ITEM SELECTION (MODIFIED FOR PRETEST)
+    # QPOOL INTEGRATION - NEW METHODS
+    # ========================================================================
+    
+    def _should_paraphrase(self, question: Question) -> bool:
+        """
+        Decide whether to paraphrase this question using QPool
+        
+        RULE: Only paraphrase TECH questions with 50% probability
+        Math questions are NEVER paraphrased
+        
+        Returns:
+            bool: True if should paraphrase, False otherwise
+        """
+        if not self.USE_QPOOL:
+            return False
+        
+        # CRITICAL: Only paraphrase tech questions
+        if self.QPOOL_TECH_ONLY and question.domain != 'tech':
+            return False
+        
+        # 50% probability for tech questions
+        return random.random() < self.QPOOL_PROBABILITY
+    
+    def _paraphrase_question(self, question: Question) -> Question:
+        """
+        Paraphrase a question using QPool API
+        
+        Args:
+            question: Original question from database
+        
+        Returns:
+            Question: Modified question object with paraphrased content
+                     (NOT saved to database, just modified in memory)
+        """
+        
+        try:
+            # Prepare concept tags
+            concept_tags = [question.concept_tag] if question.concept_tag else []
+            
+            # Map difficulty from IRT b_value
+            difficulty = self._map_difficulty(question.b_value)
+            
+            # Call QPool API
+            print(f"[QPOOL] Paraphrasing Q{question.unique_id} (TECH question)...")
+            result = self.qpool.paraphrase_question_sync(
+                question_id=f"Q_{question.unique_id}",
+                base_stem=question.question_text,
+                base_answer=question.correct_answer,
+                difficulty=difficulty,
+                concept_tags=concept_tags,
+                generate_distractors=True
+            )
+            
+            # Parse QPool response
+            # Response format: {"question_id": "Q_CALC_001", "variants": [...]}
+            variants = result.get('variants', [])
+            
+            if not variants:
+                print(f"[QPOOL] ✗ No variants returned, using original")
+                return question
+            
+            # Select a random variant from the returned variants
+            selected_variant = random.choice(variants)
+            
+            # Extract paraphrased content from selected variant
+            paraphrased_stem = selected_variant.get('variant_stem') or selected_variant.get('stem', question.question_text)
+            paraphrased_answer = selected_variant.get('answer', question.correct_answer)
+            distractors = selected_variant.get('distractors', [])
+            
+            # Build new options: correct answer + distractors
+            if distractors:
+                # Combine correct answer with distractors
+                all_options = [paraphrased_answer] + distractors
+                # Shuffle to randomize position of correct answer
+                random.shuffle(all_options)
+                paraphrased_options = all_options
+            else:
+                # No distractors provided, use original options
+                paraphrased_options = question.options
+            
+            # Create a modified copy of the question (in-memory only)
+            modified_question = Question(
+                unique_id=question.unique_id,
+                domain=question.domain,
+                concept_tag=question.concept_tag,
+                question_text=paraphrased_stem,  # Paraphrased text
+                options=paraphrased_options,      # Paraphrased options with distractors
+                correct_answer=paraphrased_answer,  # Keep correct answer
+                image_url=question.image_url,
+                question_type=question.question_type,
+                a_values=question.a_values,      # Keep IRT parameters
+                b_value=question.b_value,        # Keep IRT parameters
+                calibration_status=question.calibration_status
+            )
+            
+            print(f"[QPOOL] ✓ Successfully paraphrased Q{question.unique_id}")
+            print(f"[QPOOL]   Original: {question.question_text[:50]}...")
+            print(f"[QPOOL]   Paraphrased: {paraphrased_stem[:50]}...")
+            
+            return modified_question
+        
+        except Exception as e:
+            # If QPool fails, fall back to original question
+            print(f"[QPOOL] ✗ Failed to paraphrase Q{question.unique_id}: {str(e)}")
+            print(f"[QPOOL] Falling back to original question")
+            return question
+    
+    def _map_difficulty(self, b_value: float) -> str:
+        """
+        Map IRT b-value to difficulty string for QPool
+        
+        Args:
+            b_value: IRT difficulty parameter
+        
+        Returns:
+            str: "easy", "medium", or "hard"
+        """
+        if b_value < -0.5:
+            return "easy"
+        elif b_value < 0.5:
+            return "medium"
+        else:
+            return "hard"
+    
+    # ========================================================================
+    # ITEM SELECTION (MODIFIED FOR QPOOL)
     # ========================================================================
     
     def select_next_question(self, session_id: int) -> Optional[Question]:
         """
         Select next question - either operational (adaptive) or pretest (random).
+        Optionally paraphrase using QPool.
         
         LOGIC:
         1. Count how many pretest items already given
         2. Decide if this position should be pretest
-        3. If yes → select random pretest item
-        4. If no → select adaptive operational item
+        3. Select either pretest or operational item
+        4. Optionally paraphrase using QPool
         """
         
         session = self.get_session(session_id)
@@ -91,12 +225,19 @@ class ExamService:
             pretest_count
         )
         
+        # Select base question
         if should_be_pretest:
             print(f"[PRETEST] Position {session.current_question_num + 1}/50")
-            return self._select_pretest_item(session_id)
+            base_question = self._select_pretest_item(session_id)
         else:
             print(f"[OPERATIONAL] Position {session.current_question_num + 1}/50")
-            return self._select_operational_item(session_id)
+            base_question = self._select_operational_item(session_id)
+        
+        # Decide whether to paraphrase
+        if self._should_paraphrase(base_question):
+            return self._paraphrase_question(base_question)
+        else:
+            return base_question
     
     def _should_insert_pretest(self, current_q_num: int, pretest_given: int) -> bool:
         """
@@ -180,14 +321,13 @@ class ExamService:
         
         # Query OPERATIONAL items only
         query = self.db.query(Question).filter(
-            Question.calibration_status == 'operational'  # CRITICAL FILTER!
+            Question.calibration_status == 'operational'
         )
         
         if used_ids:
             query = query.filter(~Question.unique_id.in_(used_ids))
         
         # Content balancing (for operational items only)
-        # We want 20 math + 20 tech out of 40 operational
         target_math = self.OPERATIONAL_QUESTIONS // 2  # 20
         target_tech = self.OPERATIONAL_QUESTIONS // 2  # 20
         
@@ -231,7 +371,7 @@ class ExamService:
         return best_item
     
     # ========================================================================
-    # THETA UPDATE (MODIFIED - IGNORE PRETEST)
+    # THETA UPDATE (UNCHANGED - IGNORE PRETEST)
     # ========================================================================
     
     def update_theta(self, session_id: int):
@@ -249,8 +389,8 @@ class ExamService:
             Question, Response.question_id == Question.unique_id
         ).filter(
             Response.session_id == session_id,
-            Response.is_correct.isnot(None),  # Answered (not -1)
-            Question.calibration_status == 'operational'  # IGNORE PRETEST!
+            Response.is_correct.isnot(None),
+            Question.calibration_status == 'operational'
         ).all()
         
         if not responses:
@@ -279,7 +419,7 @@ class ExamService:
               f"θ_math={theta[0]:.2f}, θ_tech={theta[1]:.2f}")
     
     # ========================================================================
-    # ANSWER PROCESSING
+    # ANSWER PROCESSING (UNCHANGED)
     # ========================================================================
     
     def submit_answer(self, session_id: int, question_id: int, user_answer) -> Dict:
@@ -305,7 +445,7 @@ class ExamService:
             response.user_answer = user_answer
             response.is_correct = is_correct
         else:
-            # Create new response (shouldn't happen but handle it)
+            # Create new response
             response = Response(
                 session_id=session_id,
                 question_id=question_id,
@@ -319,7 +459,7 @@ class ExamService:
         if question.calibration_status == 'operational':
             self.update_theta(session_id)
             
-            # Update domain count (ONLY for operational)
+            # Update domain count
             if question.domain == 'math':
                 session.math_count += 1
             else:
@@ -343,25 +483,13 @@ class ExamService:
         }
     
     # ========================================================================
-    # RESULTS (MODIFIED - COUNT ONLY OPERATIONAL)
+    # RESULTS (UNCHANGED)
     # ========================================================================
     
     def get_results(self, session_id: int) -> Dict:
-        """
-        Calculate final results.
-        
-        Accuracy: Based on ALL 50 questions (40 operational + 10 pretest)
-        Theta: Based on ONLY 40 operational questions (calibrated items)
-        
-        This gives students full transparency on their performance while
-        ensuring ability estimates are based on validated items only.
-        """
+        """Calculate final results"""
         
         session = self.get_session(session_id)
-        
-        # ========================================================================
-        # OPERATIONAL ITEMS (for theta calculation)
-        # ========================================================================
         
         # Count correct operational items
         operational_correct = self.db.query(Response).join(
@@ -380,44 +508,28 @@ class ExamService:
             Question.calibration_status == 'operational'
         ).count()
         
-        # Operational accuracy (for reference, not returned)
-        operational_accuracy = (operational_correct / operational_total * 100) if operational_total > 0 else 0
-        
-        # ========================================================================
-        # ALL QUESTIONS (for overall accuracy)
-        # ========================================================================
-        
-        # Count correct answers across ALL questions (operational + pretest)
+        # Count correct answers across ALL questions
         total_correct = self.db.query(Response).filter(
             Response.session_id == session_id,
             Response.is_correct == True
         ).count()
         
-        # Total questions answered (should be 50)
+        # Total questions answered
         total_questions = self.db.query(Response).filter(
             Response.session_id == session_id,
-            Response.is_correct.isnot(None)  # Only answered questions
+            Response.is_correct.isnot(None)
         ).count()
         
-        # Overall accuracy (all 50 questions)
+        # Overall accuracy
         overall_accuracy = (total_correct / total_questions * 100) if total_questions > 0 else 0
-        
-        # ========================================================================
-        # RETURN RESULTS
-        # ========================================================================
         
         return {
             'session_id': session_id,
-            'total_questions': total_questions,  # 50 total
-            'correct_answers': total_correct,    # Correct out of 50
-            'accuracy': overall_accuracy,        # Percentage out of 50
-            
-            # Breakdown (optional - shows the split)
-            'operational_questions': operational_total,    # 40
-            'operational_correct': operational_correct,    # Correct operational
-            
-            
-            # Ability estimates (based on 40 operational only)
+            'total_questions': total_questions,
+            'correct_answers': total_correct,
+            'accuracy': overall_accuracy,
+            'operational_questions': operational_total,
+            'operational_correct': operational_correct,
             'math_ability': {
                 'value': session.theta_math,
                 'standard_error': session.theta_se_math,
@@ -428,12 +540,11 @@ class ExamService:
                 'standard_error': session.theta_se_tech,
                 'interpretation': self._interpret_theta(session.theta_tech)
             },
-            
             'completed_at': session.completed_at.isoformat() if session.completed_at else None
         }
     
     # ========================================================================
-    # HELPER METHODS
+    # HELPER METHODS (UNCHANGED)
     # ========================================================================
     
     def _get_administered_items(self, session_id: int) -> List[int]:
@@ -459,7 +570,7 @@ class ExamService:
             return "Needs Improvement"
     
     # ========================================================================
-    # COMPLETE EXAM WORKFLOW
+    # COMPLETE EXAM WORKFLOW (UNCHANGED)
     # ========================================================================
     
     def start_exam_with_first_question(self, user_id: Optional[str] = None, n_questions: int = 50):
@@ -468,7 +579,7 @@ class ExamService:
         # Create session
         session = self.create_session(user_id, n_questions)
         
-        # Select first question (will be operational, not pretest)
+        # Select first question (may be paraphrased by QPool)
         first_question = self.select_next_question(session.session_id)
         
         if not first_question:
@@ -479,7 +590,7 @@ class ExamService:
             session_id=session.session_id,
             question_id=first_question.unique_id,
             question_num=1,
-            is_correct=None  # Not answered yet
+            is_correct=None
         )
         self.db.add(response)
         self.db.commit()
@@ -518,7 +629,7 @@ class ExamService:
                 'exam_completed': True
             }
         
-        # Get next question
+        # Get next question (may be paraphrased by QPool)
         next_question = self.select_next_question(session_id)
         
         if next_question:
