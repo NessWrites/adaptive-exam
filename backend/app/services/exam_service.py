@@ -173,6 +173,7 @@ class ExamService:
         2. Not already used in this session
         3. Maximum Fisher Information (adaptive)
         4. Content balancing (50/50 math/tech)
+        5. Randomize ties (within 5% of max info)
         """
         
         session = self.get_session(session_id)
@@ -180,18 +181,16 @@ class ExamService:
         
         # Query OPERATIONAL items only
         query = self.db.query(Question).filter(
-            Question.calibration_status == 'operational'  # CRITICAL FILTER!
+            Question.calibration_status == 'operational'
         )
         
         if used_ids:
             query = query.filter(~Question.unique_id.in_(used_ids))
         
-        # Content balancing (for operational items only)
-        # We want 20 math + 20 tech out of 40 operational
+        # Content balancing
         target_math = self.OPERATIONAL_QUESTIONS // 2  # 20
         target_tech = self.OPERATIONAL_QUESTIONS // 2  # 20
         
-        # Count OPERATIONAL items given so far
         operational_count = self.db.query(Response).join(
             Question, Response.question_id == Question.unique_id
         ).filter(
@@ -203,7 +202,6 @@ class ExamService:
         math_needed = target_math - session.math_count
         tech_needed = target_tech - session.tech_count
         
-        # Apply domain constraint if needed
         if tech_needed > 0 and math_needed == 0:
             query = query.filter(Question.domain == 'tech')
         elif math_needed > 0 and tech_needed == 0:
@@ -214,21 +212,31 @@ class ExamService:
         if not candidates:
             raise ValueError("No operational items available for selection")
         
-        # Select by maximum Fisher Information (adaptive)
+        # Calculate Fisher Information for all candidates
         theta = np.array([session.theta_math, session.theta_tech])
         
-        best_item = None
-        max_info = -float('inf')
-        
+        items_with_info = []
         for item in candidates:
             info = self.irt.fisher_information_matrix(theta, item.a_values, item.b_value)
-            if info > max_info:
-                max_info = info
-                best_item = item
+            items_with_info.append((item, info))
         
-        print(f"  → Selected operational Q{best_item.unique_id} ({best_item.concept_tag}), Info={max_info:.3f}")
+        # Sort by Fisher Information (highest first)
+        items_with_info.sort(key=lambda x: x[1], reverse=True)
         
-        return best_item
+        # Get max information
+        max_info = items_with_info[0][1]
+        
+        # RANDOMIZE TIES: Select randomly from items within 5% of max info
+        threshold = max_info * 0.95
+        top_items = [(item, info) for item, info in items_with_info if info >= threshold]
+        
+        # Randomly select from top items
+        selected_item, selected_info = random.choice(top_items)
+        
+        print(f"  → Selected operational Q{selected_item.unique_id} ({selected_item.concept_tag}), "
+            f"Info={selected_info:.3f} (max={max_info:.3f}, ties={len(top_items)})")
+        
+        return selected_item
     
     # ========================================================================
     # THETA UPDATE (MODIFIED - IGNORE PRETEST)

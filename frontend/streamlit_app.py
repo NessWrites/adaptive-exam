@@ -1,6 +1,6 @@
 """
-Optimized Adaptive Exam - Streamlit Application
-Updated for optimized API (GET /start, simplified responses)
+Adaptive Exam with Pretest Support - Streamlit Application
+50 questions total: 40 operational (scored) + 10 pretest (calibration)
 """
 import streamlit as st
 import requests
@@ -63,12 +63,19 @@ st.markdown("""
         color: #7b1fa2;
         border: 2px solid #7b1fa2;
     }
+    .info-note {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 5px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 
 class ExamAPI:
-    """API client for Optimized Adaptive Exam System"""
+    """API client for Adaptive Exam System with Pretest Support"""
     
     @staticmethod
     def start_exam() -> Dict[str, Any]:
@@ -130,21 +137,20 @@ def initialize_session_state():
 
 def display_welcome_page():
     """Display welcome page"""
-    st.markdown('<div class="main-header">📝 Adaptive Exam System</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Adaptive Exam System</div>', unsafe_allow_html=True)
     
     st.markdown("""
     ### Welcome to the Adaptive Examination Platform
     
     This exam uses **2D Multidimensional Item Response Theory (MIRT)** to adaptively assess your abilities in:
-    - 🔢 **Mathematics** - Problem solving and quantitative reasoning
-    - 💻 **Technology** - Technical knowledge and concepts
+    - **Mathematics** - Problem solving and quantitative reasoning
+    - **Technology** - Technical knowledge and concepts
     
     #### How it works:
-    1. You will answer **40 questions** total
+    1. You will answer **50 questions** total
     2. Questions adapt to your performance in real-time
     3. Each answer helps us better estimate your ability
-    4. You'll get immediate feedback on each question
-    5. Final results show your ability in both domains
+    4. Final results show your ability in both domains
     
     #### Instructions:
     - Read each question carefully
@@ -153,12 +159,20 @@ def display_welcome_page():
     - You cannot go back to previous questions
     """)
     
+    # Info note about scoring
+    st.markdown("""
+    <div class="info-note">
+    <strong>Note:</strong> Your final score is based on 40 scored questions. 
+    Some questions are used for research purposes and do not affect your score.
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.divider()
     
     # Start button
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        if st.button("🚀 Start Exam", use_container_width=True, type="primary"):
+        if st.button("Start Exam", use_container_width=True, type="primary"):
             with st.spinner("Initializing exam..."):
                 response = ExamAPI.start_exam()
                 
@@ -176,7 +190,7 @@ def display_question(question: Dict[str, Any], question_num: int):
     
     # Question header
     st.markdown(
-        f'<div class="progress-text">Question {question_num} of 40</div>', 
+        f'<div class="progress-text">Question {question_num} of 50</div>', 
         unsafe_allow_html=True
     )
     
@@ -227,10 +241,10 @@ def display_question(question: Dict[str, Any], question_num: int):
 
 def display_exam_page():
     """Display exam questions page - no feedback shown"""
-    st.markdown('<div class="main-header">📝 Exam In Progress</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Exam In Progress</div>', unsafe_allow_html=True)
     
     # Progress bar
-    progress = st.session_state.question_num / 40
+    progress = st.session_state.question_num / 50
     st.progress(progress)
     
     # Display question directly (no feedback step)
@@ -246,7 +260,7 @@ def display_exam_page():
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button(
-                "✓ Submit Answer", 
+                "Submit Answer", 
                 use_container_width=True, 
                 type="primary",
                 disabled=(user_answer is None)
@@ -271,7 +285,7 @@ def display_exam_page():
 
 def display_results_page():
     """Display final results page"""
-    st.markdown('<div class="main-header">🎉 Exam Completed!</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Exam Completed</div>', unsafe_allow_html=True)
     
     with st.spinner("Loading results..."):
         results = ExamAPI.get_results(st.session_state.session_id)
@@ -281,14 +295,15 @@ def display_results_page():
         return
     
     # Overall performance
-    st.markdown("## 📊 Your Performance")
+    st.markdown("## Your Performance")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.metric(
-            "Total Questions",
-            results['total_questions']
+            "Scored Questions",
+            results['total_questions'],
+            help="Questions that counted toward your score"
         )
     
     with col2:
@@ -303,15 +318,24 @@ def display_results_page():
             f"{results['accuracy']:.1f}%"
         )
     
+    # Info about pretest items
+    st.markdown("""
+    <div class="info-note">
+    <strong>Scoring Note:</strong> You answered 50 questions total. 
+    Your score is based on 40 scored questions. The remaining 10 questions 
+    were used for research and quality improvement.
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.divider()
     
     # Ability estimates
-    st.markdown("## 🎯 Ability Estimates")
+    st.markdown("## Ability Estimates")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("### 🔢 Mathematics")
+        st.markdown("### Mathematics")
         math_ability = results['math_ability']
         
         # Display score box
@@ -325,20 +349,11 @@ def display_results_page():
             help="Lower values indicate more precise estimates"
         )
         
-        # Interpretation with emoji
-        interpretation = math_ability['interpretation']
-        emoji = {
-            'Exceptional': '🟢',
-            'Above Average': '🔵',
-            'Average': '🟡',
-            'Below Average': '🟠',
-            'Needs Improvement': '🔴'
-        }.get(interpretation, '⚪')
-        
-        st.markdown(f"### {emoji} {interpretation}")
+        # Interpretation
+        st.markdown(f"### {math_ability['interpretation']}")
     
     with col2:
-        st.markdown("### 💻 Technology")
+        st.markdown("### Technology")
         tech_ability = results['tech_ability']
         
         # Display score box
@@ -352,22 +367,13 @@ def display_results_page():
             help="Lower values indicate more precise estimates"
         )
         
-        # Interpretation with emoji
-        interpretation = tech_ability['interpretation']
-        emoji = {
-            'Exceptional': '🟢',
-            'Above Average': '🔵',
-            'Average': '🟡',
-            'Below Average': '🟠',
-            'Needs Improvement': '🔴'
-        }.get(interpretation, '⚪')
-        
-        st.markdown(f"### {emoji} {interpretation}")
+        # Interpretation
+        st.markdown(f"### {tech_ability['interpretation']}")
     
     st.divider()
     
     # Understanding your scores
-    with st.expander("📖 Understanding Your Scores"):
+    with st.expander("Understanding Your Scores"):
         st.markdown("""
         ### Ability Score (θ - theta)
         - **Range:** Typically -3 to +3
@@ -375,30 +381,35 @@ def display_results_page():
         - **Standard Deviation:** 1
         
         **Interpretation:**
-        - **> +1.5:** 🟢 Exceptional ability
-        - **+0.5 to +1.5:** 🔵 Above average
-        - **-0.5 to +0.5:** 🟡 Average
-        - **-1.5 to -0.5:** 🟠 Below average
-        - **< -1.5:** 🔴 Needs improvement
+        - **> +1.5:** Exceptional ability
+        - **+0.5 to +1.5:** Above average
+        - **-0.5 to +0.5:** Average
+        - **-1.5 to -0.5:** Below average
+        - **< -1.5:** Needs improvement
         
         ### Standard Error
         The uncertainty in your ability estimate. Lower values mean we're more confident in your score.
         Typical range: 0.3 to 1.0
         
         ### Accuracy
-        The percentage of questions you answered correctly. Note that in adaptive testing, this is less 
-        important than your theta score, as harder questions are worth "more" in determining ability.
+        The percentage of **scored questions** you answered correctly. Note that in adaptive testing, 
+        this is less important than your theta score, as harder questions are worth "more" in determining ability.
         
         ### About 2D-MIRT
         This exam uses a two-dimensional model that separately estimates your mathematics and technology 
         abilities, allowing for a more nuanced understanding of your strengths and areas for improvement.
+        
+        ### About Pretest Items
+        Some questions in this exam are being tested for future use. These questions do not affect your 
+        score but help us improve the exam quality over time. You won't know which questions are pretest 
+        items - just answer all questions to the best of your ability.
         """)
     
     # Restart button
     st.divider()
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        if st.button("🔄 Take Another Exam", use_container_width=True, type="primary"):
+        if st.button("Take Another Exam", use_container_width=True, type="primary"):
             # Reset session state
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
@@ -408,47 +419,48 @@ def display_results_page():
 def display_sidebar():
     """Display sidebar with session information"""
     with st.sidebar:
-        st.markdown("## 📊 Session Info")
+        st.markdown("## Session Info")
         
         if st.session_state.exam_started:
             st.markdown(f"**Session ID:** {st.session_state.session_id}")
-            st.markdown(f"**Total Questions:** 40")
+            st.markdown(f"**Total Questions:** 50")
             
             if not st.session_state.exam_completed:
-                st.markdown(f"**Current:** Question {st.session_state.question_num}/40")
+                st.markdown(f"**Current:** Question {st.session_state.question_num}/50")
                 
                 # Progress percentage
-                progress_pct = (st.session_state.question_num / 40) * 100
+                progress_pct = (st.session_state.question_num / 50) * 100
                 st.markdown(f"**Progress:** {progress_pct:.0f}%")
         
         st.divider()
         
         # API Status
-        st.markdown("## 🔌 API Status")
+        st.markdown("## API Status")
         try:
             response = requests.get(f"{API_BASE_URL}/health", timeout=2)
             if response.status_code == 200:
-                st.success("✅ Connected")
+                st.success("Connected")
             else:
-                st.error("❌ API Error")
+                st.error("API Error")
         except:
-            st.error("❌ Disconnected")
+            st.error("Disconnected")
         
         st.markdown(f"**URL:** `{API_BASE_URL}`")
         
         st.divider()
         
         # About
-        with st.expander("ℹ️ About"):
+        with st.expander("About"):
             st.markdown("""
             **Adaptive Exam System**
             
-            Version 2.0 (Optimized)
+            Version 3.0 (With Pretest)
             
             **Features:**
-            - 40 adaptive questions
+            - 50 total questions
+            - 40 scored (adaptive)
+            - 10 pretest (calibration)
             - 2D-MIRT algorithm
-            - Immediate feedback
             - Real-time adaptation
             
             **Built with:**
@@ -456,6 +468,13 @@ def display_sidebar():
             - Streamlit (Frontend)
             - PostgreSQL (Database)
             - Python IRT Engine
+            
+            **Pretest Items:**
+            Some questions help us improve 
+            the exam but don't affect your 
+            score. This is standard practice 
+            in professional testing (GRE, 
+            GMAT, etc.)
             """)
 
 
