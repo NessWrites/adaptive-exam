@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from backend.app.database.postgresql.connection import get_db
 from backend.app.services.exam_service import ExamService
 from backend.app.schemas.exam_schema import (
-     SubmitAnswerRequest,
+    SubmitAnswerRequest,
     StartExamResponse,
     SubmitAnswerResponse,
     ResultsResponse,
@@ -20,7 +20,6 @@ def start_exam(db: Session = Depends(get_db)):
     """
     Start exam - GET request, no parameters needed.
     Questions fixed at 40, session auto-created.
-    
     """
     
     exam_service = ExamService(db)
@@ -29,18 +28,27 @@ def start_exam(db: Session = Depends(get_db)):
         # Fixed at 40 questions, no user_id
         result = exam_service.start_exam_with_first_question(
             user_id=None,
-            n_questions=40  # Fixed
+            n_questions=50  # 40 operational + 10 pretest = 50 total
         )
         
-        # Simplified response - just session_id and question
+        # result = {
+        #     'session': <ExamSession object>,
+        #     'question': <Question object>
+        # }
+        
+        # Extract session (it's an ORM object, not a dict)
+        session = result['session']
+        question = result['question']
+        
+        # Build response using dot notation for ORM objects
         return StartExamResponse(
-            session_id=result['session']['session_id'],
+            session_id=session.session_id,  # Use dot notation
             question=QuestionResponse(
-                unique_id=result['question']['unique_id'],
-                question_text=result['question']['question_text'],
-                options=result['question']['options'],
-                image_url=result['question']['image_url'],
-                question_type=result['question']['question_type']
+                unique_id=question.unique_id,
+                question_text=question.question_text,
+                options=question.options,
+                image_url=question.image_url,
+                question_type=question.question_type
             )
         )
     
@@ -71,23 +79,29 @@ def submit_answer(
             user_answer=request.user_answer
         )
         
-        # Simplified feedback - no theta during exam
+        # result = {
+        #     'feedback': dict,
+        #     'next_question': <Question object> or None,
+        #     'exam_completed': bool
+        # }
+        
+        # Build feedback (feedback is already a dict)
         feedback = AnswerFeedback(
             is_correct=result['feedback']['is_correct'],
             correct_answer=result['feedback']['correct_answer'],
             question_num=result['feedback']['question_num']
-            # Removed: theta_math, theta_tech, total_questions
         )
         
-        # Next question (if any)
+        # Build next question if exists (it's an ORM object)
         next_question = None
         if result.get('next_question'):
+            q = result['next_question']
             next_question = QuestionResponse(
-                unique_id=result['next_question']['unique_id'],
-                question_text=result['next_question']['question_text'],
-                options=result['next_question']['options'],
-                image_url=result['next_question']['image_url'],
-                question_type=result['next_question']['question_type']
+                unique_id=q.unique_id,
+                question_text=q.question_text,
+                options=q.options,
+                image_url=q.image_url,
+                question_type=q.question_type
             )
         
         return SubmitAnswerResponse(
@@ -122,6 +136,7 @@ def get_results(
     
     try:
         results = exam_service.get_results(session_id)
+        # results is already a dict with the correct structure
         return ResultsResponse(**results)
     
     except ValueError as e:

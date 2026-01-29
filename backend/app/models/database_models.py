@@ -1,24 +1,27 @@
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON,ARRAY,Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from backend.app.database.postgresql.connection import Base
 
-
 class Question(Base):
-    """Question/Item bank model"""
     __tablename__ = "questions"
     
-    unique_id = Column(Integer, primary_key=True, index=True)
-    domain = Column(String(100), nullable=False)  # 'math' or 'tech'
+    unique_id = Column(Integer, primary_key=True, index=True,autoincrement=True)
+    domain = Column(String(100), nullable=False)
     concept_tag = Column(String(200))
     question_text = Column(Text, nullable=False)
-    options = Column(JSON)  # List of options
-    correct_answer = Column(JSON)  # Can be string or list for MSQ
+    options = Column(JSON)
+    correct_answer = Column(JSON)
     image_url = Column(Text)
-    question_type = Column(String(10))  # 'MCQ' or 'MSQ'
-    a_values = Column(JSON, nullable=False)  # [a1, a2] discrimination parameters
-    b_value = Column(Float, nullable=False)  # difficulty parameter
-    # Timestamps - let database handle defaults
+    question_type = Column(String(10))
+    
+    # IRT Parameters
+    a_values = Column(ARRAY(Float), nullable=False)  # # [0,0] for pretest
+    b_value = Column(Float, nullable=False)  # 0 for pretest
+    
+    # CALIBRATION STATUS (NEW!)
+    calibration_status = Column(String(20), default='operational', index=True)
+    # 'operational', 'pretest', 'pilot'  
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
@@ -56,7 +59,7 @@ class Response(Base):
     question_id = Column(Integer, ForeignKey("questions.unique_id"), nullable=False)
     question_num = Column(Integer, nullable=False)  # Order in exam
     user_answer = Column(JSON)  # Can be string or list
-    is_correct = Column(Integer)  # 1 for correct, 0 for incorrect
+    is_correct = Column(Boolean)  # 1 for correct, 0 for incorrect
     theta_math_after = Column(Float)
     theta_tech_after = Column(Float)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

@@ -52,12 +52,23 @@ class AbilityEstimate(BaseModel):
     interpretation: str
 
 
+
 class ResultsResponse(BaseModel):
-    """Final results - keep everything"""
+    """
+    Final results with comprehensive breakdown
+    
+    """
     session_id: int
-    total_questions: int
-    correct_answers: int
-    accuracy: float
+    total_questions: int           # 50 total
+    correct_answers: int           # Correct out of 50
+    accuracy: float                # Percentage out of 50
+    
+    # Breakdown
+    operational_questions: int     # 40 operational
+    operational_correct: int       # Correct operational
+        
+    # Ability estimates (from 40 operational only)
     math_ability: AbilityEstimate
     tech_ability: AbilityEstimate
     
+    completed_at: Optional[str] = None

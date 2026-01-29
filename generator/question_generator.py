@@ -12,8 +12,9 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 class RateLimitException(Exception):
     pass
 
-class QuestionGenerator:
-    """Generates IRT-calibrated multiple choice questions using LLM."""
+
+class PretestQuestionGenerator:
+    """Generates questions in strict database format with pretest status."""
     
     TECHNICAL_TOPICS = {
         'Python', 'Programming', 'Data Structures', 'Algorithms',
@@ -26,26 +27,47 @@ class QuestionGenerator:
         'Calculus', 'Mathematics'
     }
     
-    DIFFICULTY_RANGES = {
-        'very_easy': (-3, -1),
-        'easy': (-1, 0),
-        'moderate': (0, 1),
-        'difficult': (1, 2),
-        'very_difficult': (2, 3)
+    # Domain mapping for database
+    DOMAIN_MAPPING = {
+        'Python': 'programming',
+        'Programming': 'programming',
+        'Data Structures': 'computer_science',
+        'Algorithms': 'computer_science',
+        'Machine Learning': 'data_science',
+        'Database': 'computer_science',
+        'Git': 'programming',
+        'Software Engineering': 'computer_science',
+        'Computer Architecture': 'computer_science',
+        'Probability': 'math',
+        'Statistics': 'math',
+        'Logic': 'math',
+        'Linear Algebra': 'math',
+        'Calculus': 'math',
+        'Mathematics': 'math'
     }
 
-    def __init__(self, irt_params_df, existing_questions_file=None):
-        self.irt_params = irt_params_df
-        self.irt_params['main_topic'] = (
-            self.irt_params['concept_tag']
-            .str.split('/')
-            .str[0]
-            .str.strip()
-        )
+    def __init__(self, irt_params_df=None, existing_questions_file=None):
+        """
+        Initialize generator. Can work with or without IRT params.
         
-        self.available_topics = self.irt_params['main_topic'].unique().tolist()
+        Args:
+            irt_params_df: Optional DataFrame with IRT parameters for reference
+            existing_questions_file: Optional file to check for duplicates
+        """
+        self.irt_params = irt_params_df
         self.existing_questions = self._load_existing_questions(existing_questions_file)
-        self.topic_stats = self._compute_topic_stats()
+        
+        if irt_params_df is not None:
+            self.irt_params['main_topic'] = (
+                self.irt_params['concept_tag']
+                .str.split('/')
+                .str[0]
+                .str.strip()
+            )
+            self.available_topics = self.irt_params['main_topic'].unique().tolist()
+        else:
+            # Use predefined topics if no IRT params provided
+            self.available_topics = list(self.TECHNICAL_TOPICS | self.CONCEPTUAL_TOPICS)
 
     def _load_existing_questions(self, filepath):
         """Load existing questions to prevent duplicates."""
@@ -60,98 +82,85 @@ class QuestionGenerator:
             print(f"Loaded {len(questions)} existing questions")
         return questions
 
-    def _compute_topic_stats(self):
-        """Compute statistical summary for each topic."""
-        stats = {}
-        for topic in self.available_topics:
-            topic_data = self.irt_params[self.irt_params['main_topic'] == topic]
-            stats[topic] = {
-                'count': len(topic_data),
-                'subtags': topic_data['concept_tag'].unique().tolist(),
-                'a1_mean': topic_data['a1'].mean(),
-                'a2_mean': topic_data['a2'].mean(),
-                'b_mean': topic_data['b'].mean(),
-                'a1_range': (topic_data['a1'].min(), topic_data['a1'].max()),
-                'a2_range': (topic_data['a2'].min(), topic_data['a2'].max()),
-                'b_range': (topic_data['b'].min(), topic_data['b'].max()),
-            }
-        return stats
-
     @staticmethod
     def _normalize_text(text):
+        """Normalize text for duplicate detection."""
         return ' '.join(text.lower().split())
 
-    def get_primary_dimension(self, topic):
-        """Determine whether topic uses a1 (conceptual) or a2 (technical)."""
-        if topic in self.TECHNICAL_TOPICS:
-            return 'a2'
-        elif topic in self.CONCEPTUAL_TOPICS:
-            return 'a1'
+    def _get_domain(self, topic):
+        """Get database domain for a topic."""
+        return self.DOMAIN_MAPPING.get(topic, 'general')
+
+    def _get_concept_tag(self, topic, subtag=None):
+        """Generate concept tag for database."""
+        if subtag:
+            return subtag
         
-        topic_data = self.irt_params[self.irt_params['main_topic'] == topic]
-        if len(topic_data) > 0:
-            return 'a2' if topic_data['a2'].mean() > topic_data['a1'].mean() else 'a1'
-        return 'a2'
+        # Default concept tags if not provided
+        default_tags = {
+            'Python': 'python/basics',
+            'Programming': 'programming/fundamentals',
+            'Data Structures': 'data_structures/arrays',
+            'Algorithms': 'algorithms/sorting',
+            'Machine Learning': 'ml/supervised_learning',
+            'Database': 'database/sql',
+            'Git': 'git/version_control',
+            'Software Engineering': 'software_eng/design_patterns',
+            'Computer Architecture': 'comp_arch/processors',
+            'Probability': 'probability/distributions',
+            'Statistics': 'statistics/inference',
+            'Logic': 'logic/propositional',
+            'Linear Algebra': 'linear_algebra/matrices',
+            'Calculus': 'calculus/derivatives',
+            'Mathematics': 'mathematics/general'
+        }
+        return default_tags.get(topic, f'{topic.lower()}/general')
 
-    @staticmethod
-    def describe_difficulty(b_param):
-        if b_param < -1: return "very easy"
-        elif b_param < 0: return "easy"
-        elif b_param < 1: return "moderate"
-        elif b_param < 2: return "difficult"
-        return "very difficult"
-
-    def _build_prompt(self, subtag, topic, b_param, dimension, a_param):
-        difficulty_desc = self.describe_difficulty(b_param)
-        difficulty_guide = self._get_difficulty_guidance(b_param)
+    def _build_prompt(self, topic, concept_tag, difficulty_level):
+        """Build LLM prompt for question generation."""
+        difficulty_guidance = {
+            'easy': 'Basic recall or simple definition. Straightforward application.',
+            'moderate': 'Requires reasoning or connecting concepts. Multiple steps needed.',
+            'difficult': 'Complex problem requiring deep understanding. Combines multiple concepts.'
+        }
         
-        return f"""Create a {difficulty_desc} multiple-choice question about: {subtag}
+        guidance = difficulty_guidance.get(difficulty_level, difficulty_guidance['moderate'])
+        
+        return f"""Create a {difficulty_level} multiple-choice question about: {topic}
 
-Main Topic: {topic}
-Difficulty: {b_param:.2f} ({difficulty_desc})
-Discrimination (dimension {dimension}): {a_param:.2f}
+Concept: {concept_tag}
+Difficulty: {difficulty_level}
 
 Requirements:
-- Question: 1-2 sentences, direct and clear
-- Options: A, B, C, D (one correct)
-- Difficulty level: {difficulty_guide}
+- Question: 1-2 clear sentences
+- Exactly 4 options: A, B, C, D (one correct)
+- Difficulty: {guidance}
 - No special characters, backslashes, or LaTeX
-- Make distractors plausible
+- Make distractors plausible but clearly wrong
 - Focus on {topic} concepts
+- Question should be self-contained
 
-Return only valid JSON:
+Return ONLY valid JSON with NO markdown formatting:
 {{
-  "question": "question text here",
+  "question_text": "clear question here",
   "options": {{
-    "A": "option A",
-    "B": "option B",
-    "C": "option C",
-    "D": "option D"
+    "A": "option A text",
+    "B": "option B text",
+    "C": "option C text",
+    "D": "option D text"
   }},
   "correct_answer": "A",
-  "explanation": "brief explanation"
+  "explanation": "brief explanation of why the answer is correct"
 }}"""
 
-    @staticmethod
-    def _get_difficulty_guidance(b_param):
-        if b_param < -1:
-            return "Basic recall or simple definition"
-        elif b_param < 0:
-            return "Direct application of concept"
-        elif b_param < 1:
-            return "Requires reasoning or multiple steps"
-        elif b_param < 2:
-            return "Combines multiple concepts"
-        return "Advanced understanding needed"
-
-    def _call_llm(self, prompt, temperature, max_retries=3):
+    def _call_llm(self, prompt, temperature=0.7, max_retries=3):
         """Make API call with retry logic."""
         for attempt in range(max_retries):
             try:
                 response = client.chat.completions.create(
                     model="llama-3.1-8b-instant",
                     messages=[
-                        {"role": "system", "content": "You are an expert test writer. Return only valid JSON with no markdown or extra text."},
+                        {"role": "system", "content": "You are an expert test writer. Return ONLY valid JSON with no markdown, no code blocks, no extra text."},
                         {"role": "user", "content": prompt}
                     ],
                     temperature=temperature + (attempt * 0.1),
@@ -170,6 +179,7 @@ Return only valid JSON:
 
     def _parse_json_response(self, content):
         """Parse LLM response with fallback cleaning."""
+        # Remove markdown code blocks
         content = content.replace("```json", "").replace("```", "").strip()
         
         try:
@@ -193,9 +203,26 @@ Return only valid JSON:
             options[correct], options[new_position] = options[new_position], options[correct]
             question_data['correct_answer'] = new_position
 
-    def generate_question(self, topic, subtag, dimension, a_param, b_param, temperature=0.7):
-        """Generate a single question with specified IRT parameters."""
-        prompt = self._build_prompt(subtag, topic, b_param, dimension, a_param)
+    def generate_pretest_question(self, topic, concept_tag=None, difficulty_level='moderate', 
+                                   min_responses_needed=100, temperature=0.7):
+        """
+        Generate a single question in strict database format.
+        
+        Args:
+            topic: Main topic area
+            concept_tag: Specific concept tag (generated if None)
+            difficulty_level: 'easy', 'moderate', or 'difficult'
+            min_responses_needed: Number of responses needed for calibration
+            temperature: LLM temperature
+            
+        Returns:
+            Dict in database format with pretest status
+        """
+        if concept_tag is None:
+            concept_tag = self._get_concept_tag(topic)
+        
+        domain = self._get_domain(topic)
+        prompt = self._build_prompt(topic, concept_tag, difficulty_level)
         
         for attempt in range(3):
             try:
@@ -205,69 +232,113 @@ Return only valid JSON:
                 
                 question_data = self._parse_json_response(content)
                 
-                if not all(key in question_data for key in ['question', 'options', 'correct_answer', 'explanation']):
+                # Validate structure
+                required_keys = ['question_text', 'options', 'correct_answer', 'explanation']
+                if not all(key in question_data for key in required_keys):
                     print(f"  [WARNING] Invalid structure, retrying...")
                     continue
                 
-                if self._normalize_text(question_data['question']) in self.existing_questions:
+                # Check for duplicates
+                if self._normalize_text(question_data['question_text']) in self.existing_questions:
                     print(f"  [WARNING] Duplicate detected, retrying...")
                     continue
                 
-                # Add IRT parameters
-                question_data['main_topic'] = topic
-                question_data['concept_tag'] = subtag
-                question_data['dimension'] = dimension
-                question_data['a1'] = a_param if dimension == 'a1' else 0.0
-                question_data['a2'] = a_param if dimension == 'a2' else 0.0
-                question_data['b'] = b_param
-                
+                # Randomize answer position
                 self._randomize_answer_position(question_data)
-                self.existing_questions.add(self._normalize_text(question_data['question']))
                 
-                return question_data
+                # Format in STRICT DATABASE FORMAT
+                db_question = {
+                    # Core fields
+                    'domain': domain,
+                    'concept_tag': concept_tag,
+                    'question_text': question_data['question_text'],
+                    'options': question_data['options'],
+                    'correct_answer': question_data['correct_answer'],
+                    'question_type': 'MCQ',
+                    
+                    # PLACEHOLDER IRT parameters (will be calibrated)
+                    'a_values': [0.0, 0.0],  # [a1, a2] - will be estimated
+                    'b_value': 0.0,           # difficulty - will be estimated
+                    
+                    # PRETEST STATUS
+                    'calibration_status': 'pretest',
+                }
+                
+                # Track as existing
+                self.existing_questions.add(self._normalize_text(question_data['question_text']))
+                
+                return db_question
             
             except RateLimitException:
                 raise
             except Exception as e:
-                print(f"  [ERROR] Attempt {attempt + 1} failed: {str(e)[:50]}")
+                print(f"  [ERROR] Attempt {attempt + 1} failed: {str(e)[:100]}")
         
         return None
 
-    def generate_batch(self, n_questions, topic=None, variance_factor=0.2, 
-                      difficulty_distribution=None, sampling_strategy='hybrid', hybrid_split=0.5):
-        """Generate multiple questions with specified strategy."""
+    def generate_batch(self, n_questions, topic=None, difficulty_distribution=None, 
+                      min_responses_needed=100):
+        """
+        Generate multiple questions in database format.
+        
+        Args:
+            n_questions: Number of questions to generate
+            topic: Specific topic (random if None)
+            difficulty_distribution: Dict of {'easy': 0.2, 'moderate': 0.5, 'difficult': 0.3}
+            min_responses_needed: Responses needed for calibration
+            
+        Returns:
+            List of questions in database format
+        """
         questions = []
         failed_count = 0
         
-        use_json = self._determine_sampling_strategy(n_questions, sampling_strategy, hybrid_split)
+        # Default difficulty distribution
+        if difficulty_distribution is None:
+            difficulty_distribution = {
+                'easy': 0.20,
+                'moderate': 0.50,
+                'difficult': 0.30
+            }
+        
+        # Generate difficulty levels for all questions
+        difficulty_levels = np.random.choice(
+            list(difficulty_distribution.keys()),
+            size=n_questions,
+            p=list(difficulty_distribution.values())
+        )
         
         for i in range(n_questions):
+            # Select topic
             current_topic = topic or np.random.choice(self.available_topics)
             
             if current_topic not in self.available_topics:
                 print(f"\n[ERROR] Topic '{current_topic}' not found")
-                return []
+                return questions
             
-            topic_items = self.irt_params[self.irt_params['main_topic'] == current_topic]
-            subtag = np.random.choice(topic_items['concept_tag'].unique())
-            dimension = self.get_primary_dimension(current_topic)
+            # Get concept tag
+            if self.irt_params is not None:
+                topic_items = self.irt_params[self.irt_params['main_topic'] == current_topic]
+                if len(topic_items) > 0:
+                    concept_tag = np.random.choice(topic_items['concept_tag'].unique())
+                else:
+                    concept_tag = self._get_concept_tag(current_topic)
+            else:
+                concept_tag = self._get_concept_tag(current_topic)
             
-            from_json = use_json[i]
-            strategy_label = "JSON" if from_json else "IND"
+            difficulty = difficulty_levels[i]
             
-            a_param, b_param = self._sample_parameters(
-                topic_items, dimension, from_json, 
-                variance_factor, difficulty_distribution
-            )
-            
-            difficulty_desc = self.describe_difficulty(b_param)
-            print(f"\n[{i+1}/{n_questions}] [{strategy_label}] {current_topic} ({dimension}, {difficulty_desc}, b={b_param:.2f})", end=" ")
+            print(f"\n[{i+1}/{n_questions}] {current_topic} ({difficulty})", end=" ")
             
             try:
-                question = self.generate_question(current_topic, subtag, dimension, a_param, b_param)
+                question = self.generate_pretest_question(
+                    topic=current_topic,
+                    concept_tag=concept_tag,
+                    difficulty_level=difficulty,
+                    min_responses_needed=min_responses_needed
+                )
                 
                 if question:
-                    question['sampling_strategy'] = 'json_based' if from_json else 'independent'
                     questions.append(question)
                     print("[OK]")
                 else:
@@ -283,71 +354,8 @@ Return only valid JSON:
         
         return questions
 
-    def _determine_sampling_strategy(self, n_questions, strategy, hybrid_split):
-        """Create array indicating which questions use JSON vs independent sampling."""
-        if strategy == 'hybrid':
-            n_from_json = int(n_questions * hybrid_split)
-            n_independent = n_questions - n_from_json
-            use_json = np.array([True] * n_from_json + [False] * n_independent)
-            np.random.shuffle(use_json)
-        elif strategy == 'json_based':
-            use_json = np.array([True] * n_questions)
-        else:
-            use_json = np.array([False] * n_questions)
-        return use_json
-
-    def _sample_parameters(self, topic_items, dimension, from_json, variance_factor, difficulty_distribution):
-        """Sample IRT parameters based on strategy."""
-        if len(topic_items) > 0:
-            sample = topic_items.sample(1).iloc[0]
-            base_a = sample['a1'] if dimension == 'a1' else sample['a2']
-            
-            a_param = np.clip(
-                np.random.normal(base_a, abs(base_a) * variance_factor + 0.1), 
-                0.1, 3.0
-            )
-            
-            if from_json:
-                b_param = np.clip(
-                    np.random.normal(sample['b'], abs(sample['b']) * variance_factor + 0.3), 
-                    -3, 3
-                )
-            else:
-                if difficulty_distribution:
-                    target_difficulty = np.random.choice(
-                        list(self.DIFFICULTY_RANGES.keys()),
-                        p=list(difficulty_distribution.values())
-                    )
-                    b_min, b_max = self.DIFFICULTY_RANGES[target_difficulty]
-                    b_param = np.random.uniform(b_min, b_max)
-                else:
-                    b_param = np.random.uniform(-3, 3)
-        else:
-            a_param = np.random.uniform(0.5, 2.5)
-            b_param = np.random.uniform(-3, 3)
-        
-        return a_param, b_param
-
-    def display_question(self, question_data, question_number=None):
-        """Print question in readable format."""
-        print("\n" + "-" * 80)
-        if question_number:
-            print(f"Question {question_number}")
-        print(f"Topic: {question_data['main_topic']} -> {question_data['concept_tag']}")
-        print(f"Dimension: {question_data['dimension']} = {question_data[question_data['dimension']]:.2f}")
-        print(f"Difficulty: {self.describe_difficulty(question_data['b'])} (b={question_data['b']:.2f})")
-        print("-" * 80)
-        print(f"\n{question_data['question']}\n")
-        
-        for opt in ['A', 'B', 'C', 'D']:
-            marker = " [CORRECT]" if opt == question_data['correct_answer'] else ""
-            print(f"{opt}. {question_data['options'][opt]}{marker}")
-        
-        print(f"\nExplanation: {question_data['explanation']}")
-        print("-" * 80)
-
-    def save_questions(self, questions, filename='generated_questions_mirt.json'):
-        """Append questions to JSON file."""
+    def save_questions(self, questions, filename='pretest_questions.json'):
+        """Save questions to JSON file."""
         existing = []
         if os.path.exists(filename):
             try:
@@ -363,121 +371,167 @@ Return only valid JSON:
             json.dump(all_questions, f, indent=2)
         
         print(f"[OK] Saved {len(all_questions)} total questions ({len(questions)} new)")
+        return filename
 
-    def list_topics(self):
-        """Display available topics with stats."""
-        print(f"\nAvailable Topics ({len(self.available_topics)}):")
-        for idx, topic in enumerate(sorted(self.available_topics), 1):
-            stats = self.topic_stats[topic]
-            dimension = self.get_primary_dimension(topic)
-            topic_type = "Technical" if topic in self.TECHNICAL_TOPICS else "Conceptual"
-            print(f"{idx:3}. {topic:<30} (n={stats['count']:3}, dim={dimension}, {topic_type})")
-            print(f"     b_range: [{stats['b_range'][0]:.2f}, {stats['b_range'][1]:.2f}]")
-            for subtag in sorted(stats['subtags'])[:3]:
-                print(f"       -> {subtag}")
-            if len(stats['subtags']) > 3:
-                print(f"       ... and {len(stats['subtags']) - 3} more")
+    def display_question(self, question_data, question_number=None):
+        """Display question in readable format."""
+        print("\n" + "-" * 80)
+        if question_number:
+            print(f"Question {question_number}")
+        print(f"Domain: {question_data['domain']}")
+        print(f"Topic: {question_data['main_topic']} -> {question_data['concept_tag']}")
+        print(f"Difficulty: {question_data['difficulty_level']}")
+        print(f"Status: {question_data['calibration_status']}")
+        print(f"IRT Params: a_values={question_data['a_values']}, b_value={question_data['b_value']}")
+        print(f"Responses: {question_data['current_responses']}/{question_data['min_responses_needed']}")
+        print("-" * 80)
+        print(f"\n{question_data['question_text']}\n")
+        
+        for opt in ['A', 'B', 'C', 'D']:
+            marker = " [CORRECT]" if opt == question_data['correct_answer'] else ""
+            print(f"{opt}. {question_data['options'][opt]}{marker}")
+        
+        print(f"\nExplanation: {question_data['explanation']}")
+        print("-" * 80)
 
 
-def load_irt_params(json_file):
-    """Load MIRT parameters from JSON file."""
-    with open(json_file, 'r') as f:
-        data = json.load(f)
+def generate_new_questions_llm(n_questions=50, topics=None, output_file='pretest_questions.json'):
+    """
+    Generate new questions using LLM in strict database format.
     
-    df = pd.DataFrame(data)
+    Args:
+        n_questions: Number of questions to generate (default: 50)
+        topics: List of topics to cover (default: all available)
+        output_file: Output filename
+        
+    Returns:
+        List of questions in database format
+    """
+    print("="*80)
+    print("Pretest Question Generator")
+    print("="*80)
     
-    if 'concept_tag' not in df.columns:
-        df['concept_tag'] = 'general'
-    if 'a1' not in df.columns:
-        df['a1'] = df.get('a', 1.0)
-    if 'a2' not in df.columns:
-        df['a2'] = 0.0
+    # Optional: Load existing IRT params for reference
+    json_filename = os.path.join('data', '2pl_mirt.json')
+    irt_params = None
     
-    return df[['item', 'a1', 'a2', 'b', 'concept_tag']]
+    if os.path.exists(json_filename):
+        try:
+            print(f"\nLoading IRT params from {json_filename}...")
+            with open(json_filename, 'r') as f:
+                data = json.load(f)
+            irt_params = pd.DataFrame(data)
+            if 'concept_tag' not in irt_params.columns:
+                irt_params['concept_tag'] = 'general'
+            if 'a1' not in irt_params.columns:
+                irt_params['a1'] = irt_params.get('a', 1.0)
+            if 'a2' not in irt_params.columns:
+                irt_params['a2'] = 0.0
+            irt_params = irt_params[['item', 'a1', 'a2', 'b', 'concept_tag']]
+            print(f"[OK] Loaded {len(irt_params)} IRT parameters for reference")
+        except Exception as e:
+            print(f"[WARNING] Could not load IRT params: {e}")
+            print("[INFO] Proceeding without IRT reference")
+    
+    # Initialize generator
+    generator = PretestQuestionGenerator(
+        irt_params_df=irt_params,
+        existing_questions_file=output_file
+    )
+    
+    # Use provided topics or default set
+    if topics is None:
+        topics = [
+            'Calculus', 'Linear Algebra', 'Probability', 'Statistics',
+            'Algorithms', 'Data Structures', 'Python', 'Machine Learning',
+            'Database', 'Software Engineering'
+        ]
+    
+    # Filter to available topics
+    available = set(generator.available_topics)
+    topics = [t for t in topics if t in available]
+    
+    print(f"\n[INFO] Generating {n_questions} questions across {len(topics)} topics")
+    print(f"[INFO] Topics: {', '.join(topics)}")
+    
+    # Balanced difficulty distribution
+    difficulty_dist = {
+        'easy': 0.25,
+        'moderate': 0.50,
+        'difficult': 0.25
+    }
+    
+    new_questions = []
+    
+    try:
+        # Generate questions for each topic
+        questions_per_topic = max(1, n_questions // len(topics))
+        
+        for topic in topics:
+            print(f"\n{'='*80}")
+            print(f"Topic: {topic}")
+            print(f"{'='*80}")
+            
+            topic_questions = generator.generate_batch(
+                n_questions=questions_per_topic,
+                topic=topic,
+                difficulty_distribution=difficulty_dist,
+                min_responses_needed=100  # Need 100 responses to calibrate
+            )
+            
+            new_questions.extend(topic_questions)
+            
+            if len(new_questions) >= n_questions:
+                new_questions = new_questions[:n_questions]
+                break
+        
+        # Save questions
+        if new_questions:
+            filename = generator.save_questions(new_questions, output_file)
+            
+            print(f"\n{'='*80}")
+            print(f"✓ Added {len(new_questions)} pretest questions")
+            print(f"✓ Saved to: {filename}")
+            print(f"{'='*80}")
+            
+            # Display sample questions
+            print("\nSample Questions:")
+            for i, q in enumerate(new_questions[:3], 1):
+                generator.display_question(q, question_number=i)
+            
+            return new_questions
+        else:
+            print("\n[ERROR] No questions generated")
+            return []
+    
+    except RateLimitException as e:
+        print(f"\n[RATE LIMIT] {e}")
+        print(f"[INFO] Saving {len(new_questions)} questions generated so far...")
+        if new_questions:
+            generator.save_questions(new_questions, output_file)
+        return new_questions
+    
+    except Exception as e:
+        print(f"\n[ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        return []
 
 
 def main():
-    print("="*80)
-    print("IRT Question Generator")
-    print("="*80)
+    """Main function to generate pretest questions."""
     
-    json_filename = os.path.join('data', '2pl_mirt.json')
+    # Example 1: Generate 50 questions
+    questions = generate_new_questions_llm(
+        n_questions=50,
+        topics=['Calculus', 'Python', 'Algorithms', 'Statistics', 'Machine Learning'],
+        output_file='pretest_questions.json'
+    )
     
-    try:
-        print(f"\nLoading parameters from {json_filename}...")
-        irt_params = load_irt_params(json_filename)
-        print(f"[OK] Loaded {len(irt_params)} parameters")
-        
-        generator = QuestionGenerator(
-            irt_params,
-            existing_questions_file='generated_questions_mirt.json'
-        )
-        
-        generator.list_topics()
-        
-        target_topics = [
-            'Data Structures', 'Algorithms', 'Database', 'Git',
-            'Software Engineering', 'Computer Architecture',
-            'Linear Algebra', 'Calculus', 'Logic',
-            'Probability', 'Statistics', 'Machine Learning',
-            'Python', 'Programming'
-        ]
-        
-        available = set(generator.available_topics)
-        target_topics = [t for t in target_topics if t in available]
-        print(f"\n[OK] Proceeding with {len(target_topics)} topics")
-        
-        all_questions = []
-        questions_per_topic = 20
-        
-        balanced_difficulty = {
-            'very_easy': 0.05,
-            'easy': 0.15,
-            'moderate': 0.30,
-            'difficult': 0.35,
-            'very_difficult': 0.15
-        }
-        
-        for i, topic in enumerate(target_topics, 1):
-            print(f"\n{'='*80}")
-            print(f"Topic {i}/{len(target_topics)}: {topic}")
-            print(f"{'='*80}")
-            
-            try:
-                topic_questions = generator.generate_batch(
-                    n_questions=questions_per_topic,
-                    topic=topic,
-                    difficulty_distribution=balanced_difficulty,
-                    sampling_strategy='hybrid',
-                    hybrid_split=0.5,
-                    variance_factor=0.2
-                )
-                
-                all_questions.extend(topic_questions)
-                print(f"[OK] Generated {len(topic_questions)} questions")
-            
-            except RateLimitException:
-                print(f"\n[RATE LIMIT] Reached limit. Saving {len(all_questions)} questions...")
-                break
-        
-        if all_questions:
-            generator.save_questions(all_questions, 'generated_topic_questions_mirt.json')
-            
-            # Show samples
-            print("\n" + "="*80)
-            print("Sample Questions")
-            print("="*80)
-            for topic in target_topics[:5]:
-                topic_qs = [q for q in all_questions if q['main_topic'] == topic]
-                if topic_qs:
-                    generator.display_question(topic_qs[0])
-    
-    except FileNotFoundError:
-        print(f"[ERROR] File not found: {json_filename}")
-    except Exception as e:
-        print(f"[ERROR] {e}")
-        import traceback
-        traceback.print_exc()
+    print(f"\n{'='*80}")
+    print(f"Generation Complete!")
+    print(f"Total questions: {len(questions)}")
+    print(f"{'='*80}")
 
 
 if __name__ == "__main__":
