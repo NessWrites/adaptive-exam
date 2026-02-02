@@ -138,14 +138,69 @@ class ExamService:
             
             # Build new options: correct answer + distractors
             if distractors:
-                # Combine correct answer with distractors
-                all_options = [paraphrased_answer] + distractors
-                # Shuffle to randomize position of correct answer
-                random.shuffle(all_options)
-                paraphrased_options = all_options
+                # CRITICAL: The database stores the correct_answer as an index/position
+                # We need to keep the correct answer at the SAME index it was originally
+                # and fill other positions with shuffled distractors
+                
+                # Get the original correct answer index
+                # correct_answer in DB is stored as the index (e.g., 0, 1, 2)
+                # or as text/letter that maps to an index
+                original_correct = question.correct_answer
+                
+                # Determine the original index
+                if isinstance(original_correct, int):
+                    # Direct index
+                    original_index = original_correct
+                elif isinstance(original_correct, str) and len(original_correct) == 1:
+                    # Letter like "A", "B", "C"
+                    original_index = ord(original_correct.upper()) - ord('A')
+                elif isinstance(original_correct, str):
+                    # Text - find it in original options
+                    try:
+                        original_index = question.options.index(original_correct)
+                    except ValueError:
+                        # Can't find it, default to 0
+                        original_index = 0
+                        print(f"[QPOOL] ⚠️  Could not find original answer in options, defaulting to index 0")
+                elif isinstance(original_correct, list):
+                    # List format - use first element
+                    if original_correct and isinstance(original_correct[0], str) and len(original_correct[0]) == 1:
+                        original_index = ord(original_correct[0].upper()) - ord('A')
+                    else:
+                        original_index = 0
+                else:
+                    original_index = 0
+                
+                print(f"[QPOOL] Original correct answer at index: {original_index}")
+                
+                # Shuffle distractors
+                shuffled_distractors = distractors.copy()
+                random.shuffle(shuffled_distractors)
+                
+                # Build options with correct answer at SAME position
+                total_options_needed = len(distractors) + 1  # distractors + correct answer
+                paraphrased_options = []
+                distractor_idx = 0
+                
+                for i in range(total_options_needed):
+                    if i == original_index:
+                        # Put correct answer at its original position
+                        paraphrased_options.append(paraphrased_answer)
+                    else:
+                        # Put shuffled distractor
+                        if distractor_idx < len(shuffled_distractors):
+                            paraphrased_options.append(shuffled_distractors[distractor_idx])
+                            distractor_idx += 1
+                
+                # Keep correct_answer unchanged - it still points to the same index
+                final_correct_answer = question.correct_answer
+                
+                print(f"[QPOOL] Kept correct answer at original position {original_index}")
+                print(f"[QPOOL] Shuffled {len(shuffled_distractors)} distractors into other positions")
             else:
                 # No distractors provided, use original options
                 paraphrased_options = question.options
+                final_correct_answer = question.correct_answer
             
             # Create a modified copy of the question (in-memory only)
             modified_question = Question(
@@ -153,14 +208,23 @@ class ExamService:
                 domain=question.domain,
                 concept_tag=question.concept_tag,
                 question_text=paraphrased_stem,  # Paraphrased text
-                options=paraphrased_options,      # Paraphrased options with distractors
-                correct_answer=paraphrased_answer,  # Keep correct answer
+                options=paraphrased_options,      # Shuffled options
+                correct_answer=final_correct_answer,  # Text of correct answer (not index!)
                 image_url=question.image_url,
                 question_type=question.question_type,
                 a_values=question.a_values,      # Keep IRT parameters
                 b_value=question.b_value,        # Keep IRT parameters
                 calibration_status=question.calibration_status
             )
+            
+            # Debug logging
+            print(f"[QPOOL] ✓ Successfully paraphrased Q{question.unique_id}")
+            print(f"[QPOOL]   Original: {question.question_text[:50]}...")
+            print(f"[QPOOL]   Paraphrased: {paraphrased_stem[:50]}...")
+            print(f"[QPOOL]   Options: {paraphrased_options}")
+            print(f"[QPOOL]   Correct answer kept at same index (unchanged)")
+            
+            return modified_question
             
             print(f"[QPOOL] ✓ Successfully paraphrased Q{question.unique_id}")
             print(f"[QPOOL]   Original: {question.question_text[:50]}...")

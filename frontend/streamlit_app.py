@@ -190,11 +190,18 @@ def display_question(question: Dict[str, Any], question_num: int):
     """Display current question"""
     st.markdown('<div class="question-box">', unsafe_allow_html=True)
     
-    # Question header with progress
-    st.markdown(
-        f'<div class="progress-text">Question {question_num} of 50</div>', 
-        unsafe_allow_html=True
-    )
+    # Question header with progress and unique_id
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.markdown(
+            f'<div class="progress-text">Question {question_num} of 50</div>', 
+            unsafe_allow_html=True
+        )
+    with col2:
+        st.markdown(
+            f'<div class="progress-text" style="text-align: right; color: #888;">ID: {question["unique_id"]}</div>', 
+            unsafe_allow_html=True
+        )
     
     # Question text
     st.markdown(
@@ -366,7 +373,7 @@ def display_results_page():
     
     # Ability estimates
     st.markdown("## Ability Estimates")
-    st.markdown("*Based on 40 operational questions*")
+    st.markdown("*Based on 10 operational questions*")
     
     col1, col2 = st.columns(2)
     
