@@ -57,7 +57,7 @@ This system implements an adaptive testing mechanism that:
 1. **Clone the repository:**
 ```bash
    git clone <repository-url>
-   cd adaptive-examination-system
+   cd adaptive-exam
 ```
 
 2. **Install dependencies:**
