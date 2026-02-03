@@ -1,6 +1,6 @@
 """
 Updated ExamService with QPool Integration
-Supports paraphrasing questions and generating distractors on-the-fly
+Supports paraphrasing, scenario generation, and distractor generation on-the-fly
 """
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
@@ -27,8 +27,20 @@ class ExamService:
     
     # QPOOL CONFIGURATION
     USE_QPOOL = True              # Enable/disable QPool paraphrasing
-    QPOOL_PROBABILITY = 0.5       # Probability of paraphrasing (0.5 = 50% of tech questions)
-    QPOOL_TECH_ONLY = True        # Only paraphrase tech questions (not math)
+    QPOOL_PROBABILITY = 0.5       # Probability of using QPool (0.5 = 50% of tech questions)
+    QPOOL_TECH_ONLY = True        # Only apply QPool to tech questions (not math)
+    
+    # TRANSFORMATION CONFIGURATION
+    TRANSFORMATION_WEIGHTS = {
+        "paraphrase": 0.5,        # 50% paraphrase
+        "scenario": 0.5           # 50% scenario
+    }
+    
+    SCENARIO_DOMAINS = [
+        "education",
+        "healthcare",
+        "finance"
+    ]
     
     def __init__(self, db: Session):
         self.db = db
@@ -67,38 +79,62 @@ class ExamService:
         ).first()
     
     # ========================================================================
-    # QPOOL INTEGRATION - NEW METHODS
+    # QPOOL INTEGRATION 
     # ========================================================================
     
     def _should_paraphrase(self, question: Question) -> bool:
         """
-        Decide whether to paraphrase this question using QPool
+        Decide whether to use QPool transformation for this question
         
-        RULE: Only paraphrase TECH questions with 50% probability
-        Math questions are NEVER paraphrased
+        RULE: Only transform TECH questions with 50% probability
+        Math questions are NEVER transformed
         
         Returns:
-            bool: True if should paraphrase, False otherwise
+            bool: True if should use QPool, False otherwise
         """
         if not self.USE_QPOOL:
             return False
         
-        # CRITICAL: Only paraphrase tech questions
+        
         if self.QPOOL_TECH_ONLY and question.domain != 'tech':
             return False
         
-        # 50% probability for tech questions
         return random.random() < self.QPOOL_PROBABILITY
     
-    def _paraphrase_question(self, question: Question) -> Question:
+    def _select_transformation_type(self) -> str:
         """
-        Paraphrase a question using QPool API
+        Randomly select transformation type based on configured weights
+        
+        Returns:
+            str: "paraphrase" or "scenario"
+        """
+        transformations = list(self.TRANSFORMATION_WEIGHTS.keys())
+        weights = list(self.TRANSFORMATION_WEIGHTS.values())
+        
+        selected = random.choices(transformations, weights=weights, k=1)[0]
+        return selected
+    
+    def _select_scenario_domains(self, num_domains: int = 1) -> List[str]:
+        """
+        Randomly select scenario domains from available domains
+        
+        Args:
+            num_domains: Number of domains to select
+        
+        Returns:
+            List[str]: Selected scenario domains
+        """
+        return random.sample(self.SCENARIO_DOMAINS, min(num_domains, len(self.SCENARIO_DOMAINS)))
+    
+    def _transform_question(self, question: Question) -> Question:
+        """
+        Transform a question using QPool API (paraphrase OR scenario)
         
         Args:
             question: Original question from database
         
         Returns:
-            Question: Modified question object with paraphrased content
+            Question: Modified question object with transformed content
                      (NOT saved to database, just modified in memory)
         """
         
@@ -109,67 +145,59 @@ class ExamService:
             # Map difficulty from IRT b_value
             difficulty = self._map_difficulty(question.b_value)
             
+            # Select transformation type
+            transformation_type = self._select_transformation_type()
+            
+            # Prepare transformation-specific parameters
+            if transformation_type == "scenario":
+                # Select random scenario domains
+                scenario_domains = self._select_scenario_domains(num_domains=1)
+                transformations = ["scenario"]
+                print(f"[QPOOL] Generating SCENARIO for Q{question.unique_id} (domain: {scenario_domains[0]})...")
+            else:
+                # Paraphrase
+                scenario_domains = None
+                transformations = ["paraphrase"]
+                print(f"[QPOOL] PARAPHRASING Q{question.unique_id}...")
+            
             # Call QPool API
-            print(f"[QPOOL] Paraphrasing Q{question.unique_id} (TECH question)...")
             result = self.qpool.paraphrase_question_sync(
                 question_id=f"Q_{question.unique_id}",
                 base_stem=question.question_text,
                 base_answer=question.correct_answer,
                 difficulty=difficulty,
                 concept_tags=concept_tags,
+                transformations=transformations,
+                scenario_domains=scenario_domains,
+                variants=1,  # Generate 1 variant
                 generate_distractors=True
             )
             
             # Parse QPool response
-            # Response format: {"question_id": "Q_CALC_001", "variants": [...]}
             variants = result.get('variants', [])
             
             if not variants:
                 print(f"[QPOOL] ✗ No variants returned, using original")
                 return question
             
-            # Select a random variant from the returned variants
-            selected_variant = random.choice(variants)
+            # Select first variant (or random if multiple)
+            selected_variant = variants[0] if len(variants) == 1 else random.choice(variants)
             
-            # Extract paraphrased content from selected variant
-            paraphrased_stem = selected_variant.get('variant_stem') or selected_variant.get('stem', question.question_text)
-            paraphrased_answer = selected_variant.get('answer', question.correct_answer)
+            # Extract transformed content
+            transformed_stem = selected_variant.get('variant_stem') or selected_variant.get('stem', question.question_text)
+            transformed_answer = selected_variant.get('answer', question.correct_answer)
             distractors = selected_variant.get('distractors', [])
+            lineage = selected_variant.get('lineage', {})
+            
+            # Log transformation details
+            if lineage:
+                print(f"[QPOOL] Lineage: {lineage}")
             
             # Build new options: correct answer + distractors
             if distractors:
-                # CRITICAL: The database stores the correct_answer as an index/position
-                # We need to keep the correct answer at the SAME index it was originally
-                # and fill other positions with shuffled distractors
-                
                 # Get the original correct answer index
-                # correct_answer in DB is stored as the index (e.g., 0, 1, 2)
-                # or as text/letter that maps to an index
                 original_correct = question.correct_answer
-                
-                # Determine the original index
-                if isinstance(original_correct, int):
-                    # Direct index
-                    original_index = original_correct
-                elif isinstance(original_correct, str) and len(original_correct) == 1:
-                    # Letter like "A", "B", "C"
-                    original_index = ord(original_correct.upper()) - ord('A')
-                elif isinstance(original_correct, str):
-                    # Text - find it in original options
-                    try:
-                        original_index = question.options.index(original_correct)
-                    except ValueError:
-                        # Can't find it, default to 0
-                        original_index = 0
-                        print(f"[QPOOL] ⚠️  Could not find original answer in options, defaulting to index 0")
-                elif isinstance(original_correct, list):
-                    # List format - use first element
-                    if original_correct and isinstance(original_correct[0], str) and len(original_correct[0]) == 1:
-                        original_index = ord(original_correct[0].upper()) - ord('A')
-                    else:
-                        original_index = 0
-                else:
-                    original_index = 0
+                original_index = self._get_correct_answer_index(original_correct, question.options)
                 
                 print(f"[QPOOL] Original correct answer at index: {original_index}")
                 
@@ -179,17 +207,17 @@ class ExamService:
                 
                 # Build options with correct answer at SAME position
                 total_options_needed = len(distractors) + 1  # distractors + correct answer
-                paraphrased_options = []
+                transformed_options = []
                 distractor_idx = 0
                 
                 for i in range(total_options_needed):
                     if i == original_index:
                         # Put correct answer at its original position
-                        paraphrased_options.append(paraphrased_answer)
+                        transformed_options.append(transformed_answer)
                     else:
                         # Put shuffled distractor
                         if distractor_idx < len(shuffled_distractors):
-                            paraphrased_options.append(shuffled_distractors[distractor_idx])
+                            transformed_options.append(shuffled_distractors[distractor_idx])
                             distractor_idx += 1
                 
                 # Keep correct_answer unchanged - it still points to the same index
@@ -199,7 +227,7 @@ class ExamService:
                 print(f"[QPOOL] Shuffled {len(shuffled_distractors)} distractors into other positions")
             else:
                 # No distractors provided, use original options
-                paraphrased_options = question.options
+                transformed_options = question.options
                 final_correct_answer = question.correct_answer
             
             # Create a modified copy of the question (in-memory only)
@@ -207,36 +235,63 @@ class ExamService:
                 unique_id=question.unique_id,
                 domain=question.domain,
                 concept_tag=question.concept_tag,
-                question_text=paraphrased_stem,  # Paraphrased text
-                options=paraphrased_options,      # Shuffled options
-                correct_answer=final_correct_answer,  # Text of correct answer (not index!)
+                question_text=transformed_stem,      # Transformed text
+                options=transformed_options,          # New options with distractors
+                correct_answer=final_correct_answer,  # Index unchanged
                 image_url=question.image_url,
                 question_type=question.question_type,
-                a_values=question.a_values,      # Keep IRT parameters
-                b_value=question.b_value,        # Keep IRT parameters
+                a_values=question.a_values,          # Keep IRT parameters
+                b_value=question.b_value,            # Keep IRT parameters
                 calibration_status=question.calibration_status
             )
             
             # Debug logging
-            print(f"[QPOOL] ✓ Successfully paraphrased Q{question.unique_id}")
-            print(f"[QPOOL]   Original: {question.question_text[:50]}...")
-            print(f"[QPOOL]   Paraphrased: {paraphrased_stem[:50]}...")
-            print(f"[QPOOL]   Options: {paraphrased_options}")
-            print(f"[QPOOL]   Correct answer kept at same index (unchanged)")
+            print(f"[QPOOL] ✓ Successfully transformed Q{question.unique_id} ({transformation_type.upper()})")
+            print(f"[QPOOL]   Original: {question.question_text[:80]}...")
+            print(f"[QPOOL]   Transformed: {transformed_stem[:80]}...")
+            print(f"[QPOOL]   Options: {transformed_options}")
             
             return modified_question
             
-            print(f"[QPOOL] ✓ Successfully paraphrased Q{question.unique_id}")
-            print(f"[QPOOL]   Original: {question.question_text[:50]}...")
-            print(f"[QPOOL]   Paraphrased: {paraphrased_stem[:50]}...")
-            
-            return modified_question
-        
         except Exception as e:
             # If QPool fails, fall back to original question
-            print(f"[QPOOL] ✗ Failed to paraphrase Q{question.unique_id}: {str(e)}")
+            print(f"[QPOOL] ✗ Failed to transform Q{question.unique_id}: {str(e)}")
             print(f"[QPOOL] Falling back to original question")
             return question
+    
+    def _get_correct_answer_index(self, correct_answer, options: List[str]) -> int:
+        """
+        Determine the index of the correct answer
+        
+        Args:
+            correct_answer: The correct answer (can be index, letter, or text)
+            options: List of answer options
+        
+        Returns:
+            int: Index of the correct answer
+        """
+        if isinstance(correct_answer, int):
+            # Direct index
+            return correct_answer
+        elif isinstance(correct_answer, str) and len(correct_answer) == 1:
+            # Letter like "A", "B", "C"
+            return ord(correct_answer.upper()) - ord('A')
+        elif isinstance(correct_answer, str):
+            # Text - find it in original options
+            try:
+                return options.index(correct_answer)
+            except ValueError:
+                # Can't find it, default to 0
+                print(f"[QPOOL]   Could not find original answer in options, defaulting to index 0")
+                return 0
+        elif isinstance(correct_answer, list):
+            # List format - use first element
+            if correct_answer and isinstance(correct_answer[0], str) and len(correct_answer[0]) == 1:
+                return ord(correct_answer[0].upper()) - ord('A')
+            else:
+                return 0
+        else:
+            return 0
     
     def _map_difficulty(self, b_value: float) -> str:
         """
@@ -256,19 +311,19 @@ class ExamService:
             return "hard"
     
     # ========================================================================
-    # ITEM SELECTION (MODIFIED FOR QPOOL)
+    # ITEM SELECTION 
     # ========================================================================
     
     def select_next_question(self, session_id: int) -> Optional[Question]:
         """
         Select next question - either operational (adaptive) or pretest (random).
-        Optionally paraphrase using QPool.
+        Optionally transform using QPool (paraphrase or scenario).
         
         LOGIC:
         1. Count how many pretest items already given
         2. Decide if this position should be pretest
         3. Select either pretest or operational item
-        4. Optionally paraphrase using QPool
+        4. Optionally transform using QPool (paraphrase OR scenario)
         """
         
         session = self.get_session(session_id)
@@ -297,10 +352,11 @@ class ExamService:
             print(f"[OPERATIONAL] Position {session.current_question_num + 1}/50")
             base_question = self._select_operational_item(session_id)
         
-        # Decide whether to paraphrase
+        # Decide whether to transform
         if self._should_paraphrase(base_question):
-            return self._paraphrase_question(base_question)
+            return self._transform_question(base_question)
         else:
+            print(f"[QPOOL] Skipping transformation for Q{base_question.unique_id}")
             return base_question
     
     def _should_insert_pretest(self, current_q_num: int, pretest_given: int) -> bool:
@@ -435,7 +491,7 @@ class ExamService:
         return best_item
     
     # ========================================================================
-    # THETA UPDATE (UNCHANGED - IGNORE PRETEST)
+    # THETA UPDATE 
     # ========================================================================
     
     def update_theta(self, session_id: int):
@@ -483,7 +539,7 @@ class ExamService:
               f"θ_math={theta[0]:.2f}, θ_tech={theta[1]:.2f}")
     
     # ========================================================================
-    # ANSWER PROCESSING (UNCHANGED)
+    # ANSWER PROCESSING 
     # ========================================================================
     
     def submit_answer(self, session_id: int, question_id: int, user_answer) -> Dict:
@@ -547,7 +603,7 @@ class ExamService:
         }
     
     # ========================================================================
-    # RESULTS (UNCHANGED)
+    # RESULTS 
     # ========================================================================
     
     def get_results(self, session_id: int) -> Dict:
@@ -608,7 +664,7 @@ class ExamService:
         }
     
     # ========================================================================
-    # HELPER METHODS (UNCHANGED)
+    # HELPER METHODS 
     # ========================================================================
     
     def _get_administered_items(self, session_id: int) -> List[int]:
@@ -634,7 +690,7 @@ class ExamService:
             return "Needs Improvement"
     
     # ========================================================================
-    # COMPLETE EXAM WORKFLOW (UNCHANGED)
+    # COMPLETE EXAM WORKFLOW 
     # ========================================================================
     
     def start_exam_with_first_question(self, user_id: Optional[str] = None, n_questions: int = 50):
@@ -643,7 +699,7 @@ class ExamService:
         # Create session
         session = self.create_session(user_id, n_questions)
         
-        # Select first question (may be paraphrased by QPool)
+        # Select first question (may be transformed by QPool)
         first_question = self.select_next_question(session.session_id)
         
         if not first_question:
@@ -693,7 +749,7 @@ class ExamService:
                 'exam_completed': True
             }
         
-        # Get next question (may be paraphrased by QPool)
+        # Get next question (may be transformed by QPool)
         next_question = self.select_next_question(session_id)
         
         if next_question:

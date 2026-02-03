@@ -40,9 +40,9 @@ def start_exam(db: Session = Depends(get_db)):
         session = result['session']
         question = result['question']
         
-        # Build response using dot notation for ORM objects
+        
         return StartExamResponse(
-            session_id=session.session_id,  # Use dot notation
+            session_id=session.session_id,  
             question=QuestionResponse(
                 unique_id=question.unique_id,
                 question_text=question.question_text,

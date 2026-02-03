@@ -20,8 +20,7 @@ class Question(Base):
     b_value = Column(Float, nullable=False)  # 0 for pretest
     
     # CALIBRATION STATUS (NEW!)
-    calibration_status = Column(String(20), default='operational', index=True)
-    # 'operational', 'pretest', 'pilot'  
+    calibration_status = Column(String(20), default='operational', index=True)  
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
@@ -31,8 +30,8 @@ class ExamSession(Base):
     __tablename__ = "exam_sessions"
     
     session_id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String(100))  # Optional user identifier
-    status = Column(String(20), default="in_progress")  # in_progress, completed, abandoned
+    user_id = Column(String(100)) 
+    status = Column(String(20), default="in_progress")  
     n_questions = Column(Integer, default=40)
     current_question_num = Column(Integer, default=0)
     theta_math = Column(Float, default=0.0)
@@ -58,8 +57,8 @@ class Response(Base):
     session_id = Column(Integer, ForeignKey("exam_sessions.session_id"), nullable=False)
     question_id = Column(Integer, ForeignKey("questions.unique_id"), nullable=False)
     question_num = Column(Integer, nullable=False)  # Order in exam
-    user_answer = Column(JSON)  # Can be string or list
-    is_correct = Column(Boolean)  # 1 for correct, 0 for incorrect
+    user_answer = Column(JSON)  
+    is_correct = Column(Boolean)  
     theta_math_after = Column(Float)
     theta_tech_after = Column(Float)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

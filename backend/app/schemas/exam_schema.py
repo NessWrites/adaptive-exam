@@ -1,12 +1,12 @@
 """
-Optimized API Schemas - Refined based on user feedback
+Optimized API Schemas 
 """
 from pydantic import BaseModel
 from typing import List, Optional, Union
 
 
 # ============================================================================
-# Response Schemas - Optimized
+# Response Schemas
 # ============================================================================
 
 class QuestionResponse(BaseModel):
@@ -25,7 +25,7 @@ class StartExamResponse(BaseModel):
 
 
 class AnswerFeedback(BaseModel):
-    """Feedback after answer - no theta (confusing during exam)"""
+    """Feedback after answer submission"""
     is_correct: bool
     correct_answer: Union[str, List[str]]
     question_num: int

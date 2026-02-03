@@ -1,6 +1,7 @@
 """
 QPool API Client Service
 Handles communication with the question paraphrasing and distractor generation API
+
 """
 import httpx
 from typing import Dict, List, Optional, Any
@@ -13,7 +14,6 @@ class QPoolService:
     """Service for interacting with QPool API"""
     
     def __init__(self):
-        # TODO: Add to your config file
         self.base_url = "http://127.0.0.1:8000"  # Adjust to your qpool API URL
         self.timeout = 30.0  # Timeout for API calls
     
@@ -54,6 +54,11 @@ class QPoolService:
         if transformations is None:
             transformations = ["paraphrase"]
         
+        if "scenario" not in transformations and "scenerio" not in transformations:
+            scenario_domains = []
+        elif scenario_domains is None:
+            scenario_domains = ["general"]
+        
         payload = {
             "question_id": question_id,
             "base_stem": base_stem,
@@ -67,7 +72,7 @@ class QPoolService:
             "generation_config": {
                 "transformations": transformations,
                 "variants": variants,
-                "scenario_domains": scenario_domains,
+                "scenerio_domains": scenario_domains, 
                 "generate_distractors": generate_distractors
             }
         }
@@ -131,6 +136,14 @@ class QPoolService:
         if transformations is None:
             transformations = ["paraphrase"]
         
+        
+        if "scenario" not in transformations and "scenerio" not in transformations:
+            scenario_domains = []
+            print(f"[QPOOL] Paraphrase mode - setting scenario_domains to empty list")
+        elif scenario_domains is None:
+            scenario_domains = ["general"]
+            print(f"[QPOOL] Scenario mode with no domains - using default 'general'")
+        
         payload = {
             "question_id": question_id,
             "base_stem": base_stem,
@@ -144,14 +157,16 @@ class QPoolService:
             "generation_config": {
                 "transformations": transformations,
                 "variants": variants,
-                "scenario_domains": scenario_domains,
+                "scenerio_domains": scenario_domains, 
                 "generate_distractors": generate_distractors
             }
         }
         
         try:
             print(f"[QPOOL] Calling API: {self.base_url}/qpool/generate")
-            print(f"[QPOOL] Payload: {payload}")
+            print(f"[QPOOL] Transformation: {transformations}")
+            print(f"[QPOOL] Scenario domains: {scenario_domains}")
+            print(f"[QPOOL] Full payload: {payload}")
             
             with httpx.Client(timeout=self.timeout) as client:
                 response = client.post(
