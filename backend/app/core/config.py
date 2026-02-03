@@ -1,29 +1,37 @@
-from pydantic_settings import BaseSettings
 from functools import lru_cache
 from pathlib import Path
-import os
-import dotenv
-from dotenv import load_dotenv
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-root = Path(__file__).resolve().parent.parent.parent.parent
-load_dotenv(dotenv_path=root / ".env")
+
+BASE_DIR = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
-    """Application settings"""
+    """
+    Application settings.
+    Loaded from environment variables and .env file.
+    """
     
-    DATABASE_URL: str=os.getenv('DATABASE_URL')
+    # Core
+    DATABASE_URL: str = Field(..., description="PostgreSQL connection URL")
     DEBUG: bool = False
     
     # Exam configuration
-    N_ADAPTIVE_QUESTIONS: int = 40
+    N_ADAPTIVE_QUESTIONS: int = Field(default=40, ge=1)
     
-    
+    model_config = SettingsConfigDict(
+        env_file=BASE_DIR / ".env",
+        env_file_encoding="utf-8",
+        case_sensitive=True,
+        extra="ignore"
+    )
 
 
-
-
-@lru_cache()
+@lru_cache
 def get_settings() -> Settings:
-    """Get cached settings instance"""
+    """
+    Cached settings instance.
+    Safe to use across the application.
+    """
     return Settings()

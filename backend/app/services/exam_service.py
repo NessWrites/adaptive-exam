@@ -2,12 +2,12 @@
 Updated ExamService with Pretest Item Support
 50 questions total: 40 operational + 10 pretest
 """
-from sqlalchemy.orm import Session
-from sqlalchemy.sql import func
-from typing import Optional, List, Tuple, Dict, Any
-import numpy as np
-import random
 from datetime import datetime
+from typing import Optional, List, Dict, Any
+import random
+
+import numpy as np
+from sqlalchemy.orm import Session
 
 from backend.app.models.database_models import Question, ExamSession, Response
 from backend.app.services.irt_engine import IRTEngine
@@ -19,10 +19,12 @@ settings = get_settings()
 class ExamService:
     """Business logic for adaptive examination with pretest items"""
     
-    # EXAM CONFIGURATION
+    # Exam configuration constants
     TOTAL_QUESTIONS = 50          # Total questions in exam
     OPERATIONAL_QUESTIONS = 40    # Scored questions (adaptive)
     PRETEST_QUESTIONS = 10        # Unscored questions (random)
+    PRETEST_START_POSITION = 3    # Don't give pretest in first 3 questions
+    RANDOMIZATION_THRESHOLD = 0.95  # 5% threshold for tie randomization
     
     def __init__(self, db: Session):
         self.db = db
@@ -33,10 +35,10 @@ class ExamService:
     # ========================================================================
     
     def create_session(self, user_id: Optional[str] = None, n_questions: int = 50) -> ExamSession:
-        """Create a new exam session"""
+        """Create a new exam session with initial parameters"""
         session = ExamSession(
             user_id=user_id,
-            n_questions=n_questions,  # Always 50 now
+            n_questions=n_questions,
             status="in_progress",
             current_question_num=0,
             theta_math=0.0,
@@ -54,36 +56,25 @@ class ExamService:
         return session
     
     def get_session(self, session_id: int) -> Optional[ExamSession]:
-        """Get exam session by ID"""
+        """Retrieve exam session by ID"""
         return self.db.query(ExamSession).filter(
             ExamSession.session_id == session_id
         ).first()
+    
     # ========================================================================
-    # ITEM SELECTION (MODIFIED FOR PRETEST)
+    # ITEM SELECTION
     # ========================================================================
     
     def select_next_question(self, session_id: int) -> Optional[Question]:
         """
         Select next question - either operational (adaptive) or pretest (random).
-        
-        LOGIC:
-        1. Count how many pretest items already given
-        2. Decide if this position should be pretest
-        3. If yes → select random pretest item
-        4. If no → select adaptive operational item
         """
-        
         session = self.get_session(session_id)
         if not session:
             raise ValueError(f"Session {session_id} not found")
         
         # Count pretest items already administered
-        pretest_count = self.db.query(Response).join(
-            Question, Response.question_id == Question.unique_id
-        ).filter(
-            Response.session_id == session_id,
-            Question.calibration_status == 'pretest'
-        ).count()
+        pretest_count = self._count_pretest_items(session_id)
         
         # Decide if this should be a pretest item
         should_be_pretest = self._should_insert_pretest(
@@ -101,19 +92,13 @@ class ExamService:
     def _should_insert_pretest(self, current_q_num: int, pretest_given: int) -> bool:
         """
         Decide if current position should be a pretest item.
-        
-        STRATEGY: Random insertion throughout exam
-        - Need to give 10 pretest out of 50 total
-        - Ensure we get all 10 by end
-        - Don't put in first 3 questions (build theta first)
         """
-        
-        # Already gave all 10 pretest items?
+        # Already gave all pretest items?
         if pretest_given >= self.PRETEST_QUESTIONS:
             return False
         
-        # Don't give pretest in first 3 questions (need to build initial theta)
-        if current_q_num < 3:
+        # Don't give pretest in first questions (need to build initial theta)
+        if current_q_num < self.PRETEST_START_POSITION:
             return False
         
         # Calculate probability
@@ -133,15 +118,12 @@ class ExamService:
     
     def _select_pretest_item(self, session_id: int) -> Question:
         """
-        Select a PRETEST item (not scored, random selection).
+        Select a pretest item (not scored, random selection).
         
-        CRITERIA:
+        Criteria:
         1. calibration_status = 'pretest'
         2. Not already used in this session
-        3. Random selection (NOT adaptive)
         """
-        
-        # Get already used items
         used_ids = self._get_administered_items(session_id)
         
         # Query pretest items
@@ -158,7 +140,7 @@ class ExamService:
             print("[WARNING] No pretest items available, falling back to operational")
             return self._select_operational_item(session_id)
         
-        # RANDOM selection (not adaptive!)
+        # Random selection (not adaptive)
         selected = random.choice(candidates)
         print(f"  → Selected pretest Q{selected.unique_id} ({selected.concept_tag})")
         
@@ -166,20 +148,18 @@ class ExamService:
     
     def _select_operational_item(self, session_id: int) -> Question:
         """
-        Select an OPERATIONAL item (scored, adaptive selection).
+        Select an operational item (scored, adaptive selection).
         
-        CRITERIA:
+        Criteria:
         1. calibration_status = 'operational'
         2. Not already used in this session
         3. Maximum Fisher Information (adaptive)
         4. Content balancing (50/50 math/tech)
-        5. Randomize ties (within 5% of max info)
         """
-        
         session = self.get_session(session_id)
         used_ids = self._get_administered_items(session_id)
         
-        # Query OPERATIONAL items only
+        # Query operational items only
         query = self.db.query(Question).filter(
             Question.calibration_status == 'operational'
         )
@@ -187,18 +167,24 @@ class ExamService:
         if used_ids:
             query = query.filter(~Question.unique_id.in_(used_ids))
         
-        # Content balancing
+        # Apply content balancing
+        query = self._apply_content_balancing(query, session)
+        
+        candidates = query.all()
+        
+        if not candidates:
+            raise ValueError("No operational items available for selection")
+        
+        # Select item with highest Fisher Information
+        selected_item = self._select_by_fisher_information(candidates, session)
+        
+        return selected_item
+    
+    def _apply_content_balancing(self, query, session: ExamSession):
+        """Apply content balancing filter to ensure 50/50 math/tech split"""
         target_math = self.OPERATIONAL_QUESTIONS // 2  # 20
         target_tech = self.OPERATIONAL_QUESTIONS // 2  # 20
         
-        operational_count = self.db.query(Response).join(
-            Question, Response.question_id == Question.unique_id
-        ).filter(
-            Response.session_id == session_id,
-            Question.calibration_status == 'operational'
-        ).count()
-        
-        remaining_operational = self.OPERATIONAL_QUESTIONS - operational_count
         math_needed = target_math - session.math_count
         tech_needed = target_tech - session.tech_count
         
@@ -207,14 +193,18 @@ class ExamService:
         elif math_needed > 0 and tech_needed == 0:
             query = query.filter(Question.domain == 'math')
         
-        candidates = query.all()
+        return query
+    
+    def _select_by_fisher_information(self, candidates: List[Question], session: ExamSession) -> Question:
+        """
+        Select item using Fisher Information with tie randomization.
         
-        if not candidates:
-            raise ValueError("No operational items available for selection")
-        
-        # Calculate Fisher Information for all candidates
+        Returns the item with highest information, but randomizes among
+        items within 5% of the maximum to avoid deterministic patterns.
+        """
         theta = np.array([session.theta_math, session.theta_tech])
         
+        # Calculate Fisher Information for all candidates
         items_with_info = []
         for item in candidates:
             info = self.irt.fisher_information_matrix(theta, item.a_values, item.b_value)
@@ -226,43 +216,42 @@ class ExamService:
         # Get max information
         max_info = items_with_info[0][1]
         
-        # RANDOMIZE TIES: Select randomly from items within 5% of max info
-        threshold = max_info * 0.95
+        # Randomize ties: Select randomly from items within 5% of max info
+        threshold = max_info * self.RANDOMIZATION_THRESHOLD
         top_items = [(item, info) for item, info in items_with_info if info >= threshold]
         
         # Randomly select from top items
         selected_item, selected_info = random.choice(top_items)
         
         print(f"  → Selected operational Q{selected_item.unique_id} ({selected_item.concept_tag}), "
-            f"Info={selected_info:.3f} (max={max_info:.3f}, ties={len(top_items)})")
+              f"Info={selected_info:.3f} (max={max_info:.3f}, ties={len(top_items)})")
         
         return selected_item
     
     # ========================================================================
-    # THETA UPDATE (MODIFIED - IGNORE PRETEST)
+    # THETA UPDATE
     # ========================================================================
     
     def update_theta(self, session_id: int):
         """
         Update ability estimates using EAP.
         
-        CRITICAL: Only use OPERATIONAL items for scoring!
+        CRITICAL: Only use operational items for scoring.
         Pretest items are completely ignored in theta calculation.
         """
-        
         session = self.get_session(session_id)
         
-        # Get responses for OPERATIONAL items ONLY
+        # Get responses for operational items only
         responses = self.db.query(Response, Question).join(
             Question, Response.question_id == Question.unique_id
         ).filter(
             Response.session_id == session_id,
-            Response.is_correct.isnot(None),  # Answered (not -1)
-            Question.calibration_status == 'operational'  # IGNORE PRETEST!
+            Response.is_correct.isnot(None),  # Answered questions
+            Question.calibration_status == 'operational'  # Ignore pretest
         ).all()
         
         if not responses:
-            print(f"[THETA] No operational responses yet")
+            print("[THETA] No operational responses yet")
             return
         
         # Extract response pattern and item parameters
@@ -272,7 +261,7 @@ class ExamService:
             for r, q in responses
         ]
         
-        # Calculate theta using ONLY operational items
+        # Calculate theta using only operational items
         theta, theta_se = self.irt.update_theta_eap(response_pattern, items)
         
         # Update session
@@ -295,7 +284,6 @@ class ExamService:
         Submit answer and get feedback.
         Works for both operational and pretest items.
         """
-        
         session = self.get_session(session_id)
         question = self.db.query(Question).get(question_id)
         
@@ -323,11 +311,11 @@ class ExamService:
             )
             self.db.add(response)
         
-        # Update theta (ONLY if operational item)
+        # Update theta only if operational item
         if question.calibration_status == 'operational':
             self.update_theta(session_id)
             
-            # Update domain count (ONLY for operational)
+            # Update domain count (only for operational)
             if question.domain == 'math':
                 session.math_count += 1
             else:
@@ -351,68 +339,29 @@ class ExamService:
         }
     
     # ========================================================================
-    # RESULTS (MODIFIED - COUNT ONLY OPERATIONAL)
+    # RESULTS
     # ========================================================================
     
     def get_results(self, session_id: int) -> Dict:
         """
         Calculate final results.
         
-        Accuracy: Based on ALL 50 questions (40 operational + 10 pretest)
-        Theta: Based on ONLY 40 operational questions (calibrated items)
+        Accuracy: Based on all 50 questions (40 operational + 10 pretest)
+        Theta: Based on only 40 operational questions (calibrated items)
         
         This gives students full transparency on their performance while
         ensuring ability estimates are based on validated items only.
         """
-        
         session = self.get_session(session_id)
         
-        # ========================================================================
-        # OPERATIONAL ITEMS (for theta calculation)
-        # ========================================================================
+        # Operational items statistics
+        operational_correct, operational_total = self._get_operational_stats(session_id)
         
-        # Count correct operational items
-        operational_correct = self.db.query(Response).join(
-            Question, Response.question_id == Question.unique_id
-        ).filter(
-            Response.session_id == session_id,
-            Response.is_correct == True,
-            Question.calibration_status == 'operational'
-        ).count()
-        
-        # Total operational items answered
-        operational_total = self.db.query(Response).join(
-            Question, Response.question_id == Question.unique_id
-        ).filter(
-            Response.session_id == session_id,
-            Question.calibration_status == 'operational'
-        ).count()
-        
-        # Operational accuracy (for reference, not returned)
-        operational_accuracy = (operational_correct / operational_total * 100) if operational_total > 0 else 0
-        
-        # ========================================================================
-        # ALL QUESTIONS (for overall accuracy)
-        # ========================================================================
-        
-        # Count correct answers across ALL questions (operational + pretest)
-        total_correct = self.db.query(Response).filter(
-            Response.session_id == session_id,
-            Response.is_correct == True
-        ).count()
-        
-        # Total questions answered (should be 50)
-        total_questions = self.db.query(Response).filter(
-            Response.session_id == session_id,
-            Response.is_correct.isnot(None)  # Only answered questions
-        ).count()
+        # All questions statistics
+        total_correct, total_questions = self._get_total_stats(session_id)
         
         # Overall accuracy (all 50 questions)
         overall_accuracy = (total_correct / total_questions * 100) if total_questions > 0 else 0
-        
-        # ========================================================================
-        # RETURN RESULTS
-        # ========================================================================
         
         return {
             'session_id': session_id,
@@ -420,10 +369,9 @@ class ExamService:
             'correct_answers': total_correct,    # Correct out of 50
             'accuracy': overall_accuracy,        # Percentage out of 50
             
-            # Breakdown (optional - shows the split)
+            # Breakdown
             'operational_questions': operational_total,    # 40
             'operational_correct': operational_correct,    # Correct operational
-            
             
             # Ability estimates (based on 40 operational only)
             'math_ability': {
@@ -440,9 +388,51 @@ class ExamService:
             'completed_at': session.completed_at.isoformat() if session.completed_at else None
         }
     
+    def _get_operational_stats(self, session_id: int) -> tuple[int, int]:
+        """Get correct count and total count for operational items"""
+        operational_correct = self.db.query(Response).join(
+            Question, Response.question_id == Question.unique_id
+        ).filter(
+            Response.session_id == session_id,
+            Response.is_correct == True,
+            Question.calibration_status == 'operational'
+        ).count()
+        
+        operational_total = self.db.query(Response).join(
+            Question, Response.question_id == Question.unique_id
+        ).filter(
+            Response.session_id == session_id,
+            Question.calibration_status == 'operational'
+        ).count()
+        
+        return operational_correct, operational_total
+    
+    def _get_total_stats(self, session_id: int) -> tuple[int, int]:
+        """Get correct count and total count for all questions"""
+        total_correct = self.db.query(Response).filter(
+            Response.session_id == session_id,
+            Response.is_correct == True
+        ).count()
+        
+        total_questions = self.db.query(Response).filter(
+            Response.session_id == session_id,
+            Response.is_correct.isnot(None)  # Only answered questions
+        ).count()
+        
+        return total_correct, total_questions
+    
     # ========================================================================
     # HELPER METHODS
     # ========================================================================
+    
+    def _count_pretest_items(self, session_id: int) -> int:
+        """Count pretest items already administered in this session"""
+        return self.db.query(Response).join(
+            Question, Response.question_id == Question.unique_id
+        ).filter(
+            Response.session_id == session_id,
+            Question.calibration_status == 'pretest'
+        ).count()
     
     def _get_administered_items(self, session_id: int) -> List[int]:
         """Get list of question IDs already used in this session"""
@@ -470,9 +460,12 @@ class ExamService:
     # COMPLETE EXAM WORKFLOW
     # ========================================================================
     
-    def start_exam_with_first_question(self, user_id: Optional[str] = None, n_questions: int = 50):
-        """Start exam and return session + first question"""
-        
+    def start_exam_with_first_question(
+        self, 
+        user_id: Optional[str] = None, 
+        n_questions: int = 50
+    ) -> Dict[str, Any]:
+        """Start exam and return session with first question"""
         # Create session
         session = self.create_session(user_id, n_questions)
         
@@ -497,9 +490,12 @@ class ExamService:
             'question': first_question
         }
     
-    def submit_answer_and_get_next(self, session_id: int, user_answer):
+    def submit_answer_and_get_next(
+        self, 
+        session_id: int, 
+        user_answer
+    ) -> Dict[str, Any]:
         """Submit answer and get next question or completion status"""
-        
         session = self.get_session(session_id)
         
         # Get current unanswered question

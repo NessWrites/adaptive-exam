@@ -1,8 +1,8 @@
 """
 Optimized API Schemas - Refined based on user feedback
 """
-from pydantic import BaseModel
 from typing import List, Optional, Union
+from pydantic import BaseModel, Field
 
 
 # ============================================================================
@@ -14,7 +14,7 @@ class QuestionResponse(BaseModel):
     unique_id: int
     question_text: str
     options: List[str]
-    image_url: Optional[str]
+    image_url: Optional[str] = None
     question_type: str  # MCQ or MSQ
 
 
@@ -25,11 +25,13 @@ class StartExamResponse(BaseModel):
 
 
 class AnswerFeedback(BaseModel):
-    """Feedback after answer - no theta (confusing during exam)"""
+    """
+    Feedback after answer submission.
+    Note: Theta estimates are excluded during exam to avoid confusion.
+    """
     is_correct: bool
     correct_answer: Union[str, List[str]]
     question_num: int
-    # Removed: theta_math, theta_tech, total_questions
 
 
 class SubmitAnswerRequest(BaseModel):
@@ -41,33 +43,38 @@ class SubmitAnswerRequest(BaseModel):
 class SubmitAnswerResponse(BaseModel):
     """Submit answer response"""
     feedback: AnswerFeedback
-    next_question: Optional[QuestionResponse]
+    next_question: Optional[QuestionResponse] = None
     exam_completed: bool
 
 
 class AbilityEstimate(BaseModel):
-    """Ability estimate for results"""
-    value: float
-    standard_error: float
-    interpretation: str
-
+    """Ability estimate with standard error and interpretation"""
+    value: float = Field(..., description="Estimated ability value")
+    standard_error: float = Field(..., description="Standard error of estimate")
+    interpretation: str = Field(..., description="Human-readable interpretation")
 
 
 class ResultsResponse(BaseModel):
     """
-    Final results with comprehensive breakdown
+    Final results with comprehensive breakdown.
     
+    Contains:
+    - Overall performance (50 total questions)
+    - Operational questions breakdown (40 questions)
+    - Ability estimates (calculated from 40 operational questions only)
     """
     session_id: int
-    total_questions: int           # 50 total
-    correct_answers: int           # Correct out of 50
-    accuracy: float                # Percentage out of 50
     
-    # Breakdown
-    operational_questions: int     # 40 operational
-    operational_correct: int       # Correct operational
-        
-    # Ability estimates (from 40 operational only)
+    # Overall performance
+    total_questions: int = Field(..., description="Total questions (50)")
+    correct_answers: int = Field(..., description="Correct answers out of 50")
+    accuracy: float = Field(..., description="Accuracy percentage out of 50")
+    
+    # Operational breakdown
+    operational_questions: int = Field(..., description="Operational questions (40)")
+    operational_correct: int = Field(..., description="Correct operational answers")
+    
+    # Ability estimates (from 40 operational questions only)
     math_ability: AbilityEstimate
     tech_ability: AbilityEstimate
     

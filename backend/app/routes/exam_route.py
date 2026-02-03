@@ -19,13 +19,11 @@ router = APIRouter(prefix="/exam", tags=["Optimized Adaptive Exam"])
 def start_exam(db: Session = Depends(get_db)):
     """
     Start exam - GET request, no parameters needed.
-    Questions fixed at 40, session auto-created.
     """
     
     exam_service = ExamService(db)
     
     try:
-        # Fixed at 40 questions, no user_id
         result = exam_service.start_exam_with_first_question(
             user_id=None,
             n_questions=50  # 40 operational + 10 pretest = 50 total
@@ -36,13 +34,12 @@ def start_exam(db: Session = Depends(get_db)):
         #     'question': <Question object>
         # }
         
-        # Extract session (it's an ORM object, not a dict)
+      
         session = result['session']
         question = result['question']
         
-        # Build response using dot notation for ORM objects
         return StartExamResponse(
-            session_id=session.session_id,  # Use dot notation
+            session_id=session.session_id,  
             question=QuestionResponse(
                 unique_id=question.unique_id,
                 question_text=question.question_text,
@@ -68,7 +65,7 @@ def submit_answer(
 ):
     """
     Submit answer and get next question.
-    During the exam, theta estimates are not returned to avoid confusion.
+    During the exam, theta estimates are not returned 
     Only final results will include ability estimates.  
     """
     exam_service = ExamService(db)
@@ -85,14 +82,14 @@ def submit_answer(
         #     'exam_completed': bool
         # }
         
-        # Build feedback (feedback is already a dict)
+        # Build feedback 
         feedback = AnswerFeedback(
             is_correct=result['feedback']['is_correct'],
             correct_answer=result['feedback']['correct_answer'],
             question_num=result['feedback']['question_num']
         )
         
-        # Build next question if exists (it's an ORM object)
+        # Build next question if exists 
         next_question = None
         if result.get('next_question'):
             q = result['next_question']
@@ -136,7 +133,6 @@ def get_results(
     
     try:
         results = exam_service.get_results(session_id)
-        # results is already a dict with the correct structure
         return ResultsResponse(**results)
     
     except ValueError as e:
