@@ -26,7 +26,8 @@ class ExamService:
     PRETEST_QUESTIONS = 10        # Unscored questions (random)
     
     # QPOOL CONFIGURATION
-    USE_QPOOL = True              # Enable/disable QPool paraphrasing
+    # USE_QPOOL = True              # Enable/disable QPool paraphrasing
+    USE_QPOOL = False            # Enable/disable QPool paraphrasing
     QPOOL_PROBABILITY = 0.5       # Probability of using QPool (0.5 = 50% of tech questions)
     QPOOL_TECH_ONLY = True        # Only apply QPool to tech questions (not math)
     

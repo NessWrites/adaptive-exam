@@ -42,6 +42,7 @@
 │   │   └── utils
 │   │       └── helpers.py
 │   └── requirements.txt
+├── backend.log
 ├── data
 │   ├── 2pl_mirt_qbank.csv
 │   └── mirt_base_questions.json
@@ -53,6 +54,7 @@
 │   └── streamlit_app.py
 ├── generator
 │   └── question_generator.py
+├── locustfile.py
 ├── project_structure.md
 ├── requirements.txt
 ├── results
@@ -62,8 +64,11 @@
 │   ├── 2pl_mirt_5.R
 │   └── 2pl_mirt_7.R
 ├── tests
-│   └── .gitkeep
+│   ├── .gitkeep
+│   ├── conftest.py
+│   ├── test_exam_flow.py
+│   └── test_irt_logic.py
 └── tree.sh
 
-21 directories, 43 files
+21 directories, 48 files
 ```
