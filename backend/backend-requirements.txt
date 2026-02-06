@@ -1,0 +1,58 @@
+# FastAPI and server
+fastapi==0.121.3
+uvicorn==0.38.0
+starlette==0.50.0
+pydantic==2.12.4
+pydantic-settings==2.12.0
+pydantic_core==2.41.5
+
+# Database
+asyncpg==0.31.0
+psycopg==3.3.2
+psycopg2==2.9.11
+SQLAlchemy==2.0.44
+greenlet==3.2.4
+
+# Environment
+python-dotenv==1.2.1
+dotenv==0.9.9
+
+# Core utilities
+annotated-types==0.7.0
+anyio==4.11.0
+click==8.3.1
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.11
+sniffio==1.3.1
+typing_extensions==4.15.0
+
+# API clients (if backend needs to call external APIs)
+requests==2.32.5
+certifi==2025.11.12
+charset-normalizer==3.4.4
+urllib3==2.5.0
+
+# AI/ML (if backend handles AI processing)
+google-genai==1.56.0
+google-generativeai==0.8.6
+google-ai-generativelanguage==0.6.15
+google-api-core==2.28.1
+google-auth==2.45.0
+groq==0.37.1
+grpcio==1.76.0
+grpcio-status==1.71.2
+proto-plus==1.27.0
+protobuf==5.29.5
+pyasn1==0.6.1
+pyasn1_modules==0.4.2
+
+# Data processing (if needed in backend)
+pandas==2.3.3
+numpy==2.3.5
+pyarrow==21.0.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+tzdata==2025.2
+scipy

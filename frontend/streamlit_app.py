@@ -3,12 +3,10 @@ Enhanced Adaptive Exam - Streamlit Application
 Updated for 50 questions (40 operational + 10 pretest) with QPool integration
 """
 import streamlit as st
-import requests
+import requests, os
 from typing import Optional, Dict, Any, List
 
-# API Configuration
-API_BASE_URL = "http://127.0.0.1:8001"
-
+API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.8000")
 # Page configuration
 st.set_page_config(
     page_title="Adaptive Exam System",
