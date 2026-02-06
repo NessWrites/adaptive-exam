@@ -11,7 +11,7 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
     # 1. Mock the Database Session
     mock_db = MagicMock()
     
-    # --- FIX IS HERE: Added math_count=0, tech_count=0 ---
+    # --- FIX 1: Add status="in_progress" and missing theta_se fields ---
     mock_session = ExamSession(
         session_id=123, 
         current_question_num=0, 
@@ -19,19 +19,28 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
         math_count=0, 
         tech_count=0,
         theta_math=0.0,
-        theta_tech=0.0
+        theta_tech=0.0,
+        theta_se_math=1.0,  
+        theta_se_tech=1.0,  
+        status="in_progress" # <--- FIXED: Prevents ValueError
     )
     # -----------------------------------------------------
 
+    # --- UPDATE: More realistic question with 4 options ---
     mock_question = Question(
         unique_id=1, 
-        question_text="Real DB Question", 
-        correct_answer="A", 
-        options=["A", "B"],
+        question_text="Which of the following is a transactional database property?", 
+        correct_answer="A",  # Corresponds to index 0 ('Atomicity')
+        options=[
+            "Atomicity",      # A
+            "Scalability",    # B
+            "Latency",        # C
+            "Throughput"      # D
+        ],
         a_values=[1.0, 0.0],
         b_value=0.0,
         calibration_status='operational',
-        domain='math'
+        domain='tech'
     )
     
     # Setup Service with mocked DB
@@ -46,6 +55,8 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
     
     assert result['session'].session_id == 123
     assert result['question'].unique_id == 1
+    # Verify we have 4 options now
+    assert len(result['question'].options) == 4 
     
     # --- ACTION 2: SUBMIT ANSWER ---
     # Mock finding the session 
@@ -57,13 +68,14 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
     # Complex mocking for the chain: db.query().filter().order_by().first()
     mock_db.query.return_value.filter.return_value.order_by.return_value.first.return_value = mock_response_obj
     
-    # Mock question lookup (When service calls db.query(Question).get(1))
-    # We need a side_effect because the service calls query() multiple times for different things
+    # Mock question lookup 
     def query_side_effect(*args):
         query_mock = MagicMock()
         
         # Case 1: db.query(Question)
         if len(args) == 1 and args[0] == Question:
+            # FIX 2: Mock filter().first() used in submit_answer_and_get_next
+            query_mock.filter.return_value.first.return_value = mock_question
             query_mock.get.return_value = mock_question
             
         # Case 2: db.query(Response)
@@ -76,9 +88,6 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
             
         # Case 3: db.query(Response, Question) - Used in update_theta
         elif len(args) == 2 and args[0] == Response and args[1] == Question:
-            # This handles the complex join in update_theta.
-            # We return an empty list [] for .all() to simulate "no prior history" 
-            # so the math engine doesn't crash trying to calculate theta on mock objects.
             query_mock.join.return_value.filter.return_value.all.return_value = []
             
         return query_mock
@@ -86,6 +95,7 @@ def test_full_exam_cycle_mocked(mock_qpool, mocker):
     mock_db.query.side_effect = query_side_effect
     
     # Perform submission
+    # User submits "A", which matches correct_answer "A" in the mock_question
     submit_result = service.submit_answer_and_get_next(session_id=123, user_answer="A")
     
     assert submit_result['feedback']['is_correct'] is True
