@@ -132,7 +132,8 @@ def get_results(
     """
     Get final results for a completed exam session.
     """
-    exam_service = ExamService(db)
+    exam_service = Ex
+    amService(db)
     
     try:
         results = exam_service.get_results(session_id)
