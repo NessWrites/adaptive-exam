@@ -395,20 +395,26 @@ class ExamService:
         Create a response record when question is presented to user.
         This will be updated when user submits their answer.
         """
-        response = Response(
-            session_id=session_id,
-            question_id=question.unique_id,
-            question_num=question_num,
-            user_answer=None,  # Will be filled when submitted
-            is_correct=None,   # Will be calculated when submitted
-            theta_math_after=None,
-            theta_tech_after=None
-        )
-        self.db.add(response)
-        self.db.commit()
-        self.db.refresh(response)
-        logger.info(f"Created response placeholder for session {session_id}, question {question.unique_id}")
-        return response
+        try: 
+            response = Response(
+                session_id=session_id,
+                question_id=question.unique_id,
+                question_num=question_num,
+                user_answer=None,  # Will be filled when submitted
+                is_correct=None,   # Will be calculated when submitted
+                theta_math_after=None,
+                theta_tech_after=None
+            )
+            self.db.add(response)
+            self.db.commit()
+            self.db.refresh(response)
+            logger.info(f"Created response placeholder for session {session_id}, question {question.unique_id}")
+            return response 
+        
+        except Exception as e: 
+            self.db.rollback()
+            logger.error(f"X failed to create response placeholder")
+            raise
 
     # =========================================================================
     # EXAM WORKFLOW
@@ -470,6 +476,7 @@ class ExamService:
                 Response.user_answer == None  # Find unanswered placeholder
             )
             .order_by(Response.response_id.desc())
+            .with_for_update()               #lock row for update 
             .first()
         )
         
@@ -489,6 +496,7 @@ class ExamService:
         
         open_response.user_answer = user_answer
         open_response.is_correct = is_correct
+        logger.debug(f"Answer recoreded: session ={session_id}, is_correct={open_response.is_correct}")   #added to log the successful addition
         
         # Update theta ONLY if this is an operational question
         if question.calibration_status == 'operational':
@@ -499,7 +507,7 @@ class ExamService:
             open_response.theta_tech_after = session.theta_tech
         
         self.db.commit()
-        
+        logger.info(f"Response Comitted: session={session_id}, response_id={open_response.response_id}, theta_math={session.theta_math}, theta_tech={session.theta_tech}")
         # Build feedback
         feedback = {
             'is_correct': is_correct,

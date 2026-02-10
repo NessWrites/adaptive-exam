@@ -78,8 +78,8 @@ settings = get_settings()
 # Connection pool settings optimized for local testing
 engine = create_engine(
     settings.DATABASE_URL,
-    pool_size=20,                    # Good for local testing (up to 20 concurrent)
-    max_overflow=10,                 # Allow 10 extra connections if needed
+    pool_size=50,                    # Good for local testing (up to 50 concurrent)
+    max_overflow=100,                 # Allow 100 extra connections if needed
     pool_timeout=30,                 # Wait up to 30s for connection
     pool_pre_ping=True,              # Verify connections are alive
     pool_recycle=3600,               # Recycle connections every hour
