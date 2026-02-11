@@ -1,4 +1,4 @@
-[
+
   {
     "domain": "math",
     "modules": [
@@ -92,7 +92,7 @@
               "Big-O Notation in Differentiation Error",
               "Step Height (Delta x) and Accuracy"
           ],
-          "target_complexity" : [1.0, 2.0]
+          "target_complexity" : [1.0, 3.0]
         }
       ]
     },
@@ -137,5 +137,3 @@
     }
     ]
   }
-
-]
