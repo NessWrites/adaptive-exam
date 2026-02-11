@@ -1,0 +1,252 @@
+{
+  "version": "2.0",
+  "exam_name": "Foundations in Artificial Intelligence Program",
+  "domains": [
+    {
+      "domain": "Introduction to the Course",
+      "sub_domains": [
+        {
+          "name": "Introduction to AI",
+          "topics": [
+            "Turing Test & AI History",
+            "Narrow vs General vs Super Intelligence",
+            "Symbolic AI vs Machine Learning",
+            "Supervised vs Unsupervised Learning",
+            "Deep Learning vs Data Science"
+          ],
+          "target_complexity": [0.5, 1.5]
+        }
+      ]
+    },
+    {
+      "domain": "Basics of Computer Systems",
+      "sub_domains": [
+        {
+          "name": "Digital information and Logic",
+          "topics": [
+            "Number Systems (Binary, Hexadecimal)",
+            "Floating-point Representation",
+            "Bitmapped Image & Sound Representation",
+            "Logic Gates (AND, OR, XOR, NAND)",
+            "Boolean Algebra & DeMorgan’s Law"
+          ],
+          "target_complexity": [1.0, 2.0]
+        },
+        {
+          "name": "Basics of Computer Organisation and Architecture",
+          "topics": [
+            "Von-Neumann Architecture",
+            "ALU, Control Unit & Registers",
+            "Instruction Set Architecture (RISC vs CISC)",
+            "Memory Hierarchy & Cache",
+            "Flynn's Taxonomy (SISD, SIMD, MIMD)"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Introduction to Linux Operating System",
+          "topics": [
+            "Kernel Architecture (Monolithic vs Micro)",
+            "File System Organization & Permissions",
+            "Shell Scripting & Pipelines",
+            "Process Life Cycle & Threads",
+            "Virtualization vs Containers"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Fundamentals of Computer Networks",
+          "topics": [
+            "OSI vs TCP/IP Models",
+            "IP Addressing & Protocols (HTTP, DNS)",
+            "Cryptography (Symmetric vs Public Key)",
+            "Cloud Computing Models (IaaS, PaaS)",
+            "Vertical vs Horizontal Scaling"
+          ],
+          "target_complexity": [1.0, 2.5]
+        }
+      ]
+    },
+    {
+      "domain": "Python Programming",
+      "sub_domains": [
+        {
+          "name": "Python Programming Core",
+          "topics": [
+            "PEP8 Standards",
+            "Lists, Tuples, Dictionaries, Sets",
+            "Control Flow (if, for, while)",
+            "Iterators and Generators",
+            "Lambdas & Functional Programming (Map/Filter)",
+            "List Comprehension"
+          ],
+          "target_complexity": [1.0, 2.0]
+        },
+        {
+          "name": "Object-Oriented Programming",
+          "topics": [
+            "Class, Object, Methods",
+            "Inheritance & Method Resolution Order (MRO)",
+            "Polymorphism & Dunder Methods",
+            "Operator Overloading",
+            "Exception Handling",
+            "SOLID Principles"
+          ],
+          "target_complexity": [2.0, 3.0]
+        },
+        {
+          "name": "Numpy",
+          "topics": [
+            "Array Creation & Data Types",
+            "Indexing, Slicing, Reshaping",
+            "Broadcasting & Vectorization",
+            "Matrix Operations (Dot Product, Aggregation)",
+            "Code Profiling (%timeit)"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Matplotlib",
+          "topics": [
+            "Object Hierarchy (Figure, Axes)",
+            "Line, Scatter, Histogram Plots",
+            "Subplots Management"
+          ],
+          "target_complexity": [1.0, 2.0]
+        },
+        {
+          "name": "Pandas",
+          "topics": [
+            "Series vs DataFrame",
+            "loc vs iloc Indexing",
+            "GroupBy & Aggregation",
+            "Merge, Join, Concat",
+            "Handling Missing Data"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Web scraping",
+          "topics": [
+            "HTTP Request Methods",
+            "HTML Parsing with Beautiful Soup",
+            "DOM Navigation",
+            "Data Extraction Strategy"
+          ],
+          "target_complexity": [1.5, 2.5]
+        }
+      ]
+    },
+    {
+      "domain": "Data Structures and Algorithms",
+      "sub_domains": [
+        {
+          "name": "Algorithm Analysis",
+          "topics": [
+            "Time and Space Complexity",
+            "Big-O, Big-Omega, Big-Theta Notations",
+            "Best, Average, Worst Case Scenarios",
+            "Brute Force vs Divide and Conquer"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Data Structure",
+          "topics": [
+            "Stacks (LIFO) & Queues (FIFO)",
+            "Singly vs Doubly Linked Lists",
+            "Trees (Binary Trees, Traversals)",
+            "Graphs (Adjacency Matrix, Weighted)",
+            "Hash Tables & Collision Resolution"
+          ],
+          "target_complexity": [2.0, 3.0]
+        },
+        {
+          "name": "Algorithm",
+          "topics": [
+            "Recursion Implementation",
+            "Sorting (Bubble, Merge, Insertion)",
+            "Searching (Linear vs Binary)",
+            "BFS vs DFS Traversal",
+            "Greedy Search vs A* Search"
+          ],
+          "target_complexity": [2.0, 3.0]
+        },
+        {
+          "name": "Code Optimisation",
+          "topics": [
+            "Parallelization Concepts",
+            "Memory vs Runtime Tradeoffs",
+            "Numerical Code Optimization"
+          ],
+          "target_complexity": [2.0, 3.0]
+        }
+      ]
+    },
+    {
+      "domain": "Database",
+      "sub_domains": [
+        {
+          "name": "SQL",
+          "topics": [
+            "Relational Model & Schemas",
+            "DDL vs DML Commands",
+            "Primary vs Foreign Keys",
+            "Joins (Inner, Outer)",
+            "Group By & Having Clauses",
+            "Subqueries"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "NoSQL",
+          "topics": [
+            "CAP Theorem",
+            "ACID vs BASE Properties",
+            "Document Databases (MongoDB)",
+            "Sharding",
+            "SQL vs NoSQL Comparison"
+          ],
+          "target_complexity": [1.5, 2.5]
+        }
+      ]
+    },
+    {
+      "domain": "Application Development",
+      "sub_domains": [
+        {
+          "name": "Software Development Life Cycle",
+          "topics": [
+            "Waterfall vs Agile Methodology",
+            "Scrum & Kanban Frameworks",
+            "Test Driven Development (TDD)",
+            "Unit vs Integration Testing",
+            "Git Workflows & Branching"
+          ],
+          "target_complexity": [1.0, 2.0]
+        },
+        {
+          "name": "Web Frameworks",
+          "topics": [
+            "MVC Pattern",
+            "HTML/CSS/JS Basics",
+            "DOM Manipulation",
+            "REST API Methods (GET, POST)",
+            "Flask CRUD Operations"
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Deployment",
+          "topics": [
+            "Virtual Environments (venv/conda)",
+            "Docker Containers & Images",
+            "Docker Engine Features",
+            "Basic Cloud Deployment (AWS)"
+          ],
+          "target_complexity": [1.5, 3.0]
+        }
+      ]
+    }
+  ]
+}
