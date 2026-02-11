@@ -1,109 +1,141 @@
 [
   {
-    "domain": "Mathematics for Data Science",
-  "sub_domains": [
+    "domain": "math",
+    "modules": [
     {
-      "name": "Vector Algebra",
-      "concept_tag": "vector_algebra",
-      "topics": [
-        "Linear Combination of Vectors",
-        "Scaling and Vector Addition",
-        "Vector Norms (L0, L1, L2, Linf)",
-        "Euclidean vs Taxicab Distance",
-        "Dot Product Properties",
-        "Orthogonality and Projections"
-      ],
-      "target_complexity": [1.0, 2.0]
+      "module": "Linear Algebra",
+      "sub-module": [
+        {
+          "name" : "Vector Algebra",
+          "topics" : [
+            "Linear Combination of Vectors",
+            "Scaling and Vector Addition",
+            "Vector Norms (L0, L1, L2, Linf)",
+            "Euclidean vs Taxicab Distance",
+            "Dot Product Properties",
+            "Orthogonality and Projections"
+          ],
+          "target_complexity": [1.0,2.0] 
+        },
+        {
+          "name" : "Vector Spaces",
+          "topics" : [
+            "Vector Space Rn",
+            "Vector Subspaces",
+            "Linear Span",
+            "Linear Dependence and Independence",
+            "Four Fundamental Subspaces"
+
+          ],
+          "target_complexity": [1.5, 2.5]
+        },
+        {
+          "name": "Spectral Theory",
+          "topics": [
+            "Eigenvalues and Eigenvectors",
+            "The Basic Eigen-Equation (Ax = λx)",
+            "Characteristic Equation",
+            "Eigen-decomposition (A = XΛX⁻¹)",
+            "Eigen-decomposition for Symmetric Matrices"
+          ],
+          "target_complexity": [2.0, 3.0]
+        },
+        {
+          "name": "Matrix Factorization",
+          "topics": [
+            "Singular Value Decomposition (SVD)",
+            "Singular Values and Singular Vectors",
+            "SVD Basis for Subspaces",
+            "Relation between SVD and Eigenvalues"
+          ],
+          "target_complexity": [2.0, 3.0]
+        },
+        {
+            "name": "Matrix Operations & Regression",
+            "topics": [
+              "Matrix Determinant and Singularity",
+              "Matrix Inverse and Left Inverse",
+              "Matrix Rank and Independence",
+              "Transpose Matrix Operations",
+              "Normal Equations for Linear Regression",
+              "Feature Dependency and Column Space",
+              "Identity Matrix Verification"
+            ],
+            "target_complexity": [1.0, 2.0]
+          },
+          {
+            "name": "Applied Dimensionality Reduction",
+            "topics": [
+              "Principal Component Analysis (PCA)",
+              "Covariance Matrix Construction",
+              "Eigen-faces for Facial Recognition",
+              "Data Centering and Projection",
+              "SVD in Image Processing"
+            ],
+            "target_complexity": [1.5, 3.0]
+          }
+      ]
     },
     {
-      "name": "Vector Spaces",
-      "concept_tag": "vector_spaces",
-      "topics": [
-        "Vector Space Rn",
-        "Vector Subspaces",
-        "Linear Span",
-        "Linear Dependence and Independence",
-        "Four Fundamental Subspaces"
-      ],
-      "target_complexity": [1.5, 2.5]
+      "module" : "Calculus",
+      "sub-module" :[
+        {
+          "name" : "Numerical Differentiation",
+          "topics" : [
+            "Finite Difference Method",
+            "Approximation of First-Order Derivatives",
+              "Approximation of Second-Order Derivatives",
+              "Forward Difference Formula",
+              "Backward Difference Formula",
+              "Central Difference Formula",
+              "Taylor's Expansion for Error Analysis",
+              "Big-O Notation in Differentiation Error",
+              "Step Height (Delta x) and Accuracy"
+          ],
+          "target_complexity" : [1.0, 2.0]
+        }
+      ]
     },
     {
-      "name": "Spectral Theory",
-      "concept_tag": "spectral_theory",
-      "topics": [
-        "Eigenvalues and Eigenvectors",
-        "The Basic Eigen-Equation (Ax = λx)",
-        "Characteristic Equation",
-        "Eigen-decomposition (A = XΛX⁻¹)",
-        "Eigen-decomposition for Symmetric Matrices"
-      ],
-      "target_complexity": [2.0, 3.0]
-    },
-    {
-      "name": "Matrix Factorization",
-      "concept_tag": "matrix_factorization",
-      "topics": [
-        "Singular Value Decomposition (SVD)",
-        "Singular Values and Singular Vectors",
-        "SVD Basis for Subspaces",
-        "Relation between SVD and Eigenvalues"
-      ],
-      "target_complexity": [2.0, 3.0]
-    },
-    {
-      "name": "Applied Dimensionality Reduction",
-      "concept_tag": "dimensionality_reduction",
-      "topics": [
-        "Principal Component Analysis (PCA)",
-        "Covariance Matrix Construction",
-        "Eigen-faces for Facial Recognition",
-        "Data Centering and Projection",
-        "SVD in Image Processing"
-      ],
-      "target_complexity": [1.5, 3.0]
+      "module": "Probability",
+      "sub-module" : [
+        {
+          "name" : "Divergence Metrics",
+          "topics" : [
+            "Relative Entropy (Kullback-Leibler Divergence)",
+            "KL Divergence Properties (Asymmetry, Non-negativity)",
+            "Relation between KL Divergence and Cross-Entropy",
+            "Jensen-Shannon Divergence (JSD)",
+            "Symmetry and Boundedness of JSD",
+            "JSD as a Metric for Distribution Similarity"
+          ],
+          "target_complexity": [1.8, 3.0]
+        },
+        {
+          "name": "Cross-Entropy Measures",
+          "topics": [
+            "Cross-Entropy for Discrete Distributions",
+            "Coding Scheme Inefficiency (Nats vs Bits)",
+            "Binary Cross-Entropy (BCE) Loss",
+            "Multi-class Cross-Entropy Loss",
+            "Expected Value of Log Likelihood"
+          ],
+          "target_complexity": [1.0, 2.5]
+        },
+        {
+          "name": "Information Interaction",
+          "topics": [
+            "Mutual Information (MI) for Discrete Variables",
+            "Joint vs Marginal PMF Relationships",
+            "Relation between Mutual Information and Conditional Entropy",
+            "Information Gain via Mutual Information",
+            "MI as KL Divergence of Marginal Product"
+          ],
+          "target_complexity": [1.5, 3.0]
+        }
+      ]
     }
-  ]
-},
-{
-  "domain": "Information Theory",
-  "sub_domains": [
-    {
-      "name": "Cross-Entropy Measures",
-      "concept_tag": "cross_entropy",
-      "topics": [
-        "Cross-Entropy for Discrete Distributions",
-        "Coding Scheme Inefficiency (Nats vs Bits)",
-        "Binary Cross-Entropy (BCE) Loss",
-        "Multi-class Cross-Entropy Loss",
-        "Expected Value of Log Likelihood"
-      ],
-      "target_complexity": [1.0, 2.5]
-    },
-    {
-      "name": "Divergence Metrics",
-      "concept_tag": "divergence_metrics",
-      "topics": [
-        "Relative Entropy (Kullback-Leibler Divergence)",
-        "KL Divergence Properties (Asymmetry, Non-negativity)",
-        "Relation between KL Divergence and Cross-Entropy",
-        "Jensen-Shannon Divergence (JSD)",
-        "Symmetry and Boundedness of JSD",
-        "JSD as a Metric for Distribution Similarity"
-      ],
-      "target_complexity": [1.8, 3.0]
-    },
-    {
-      "name": "Information Interaction",
-      "concept_tag": "information_interaction",
-      "topics": [
-        "Mutual Information (MI) for Discrete Variables",
-        "Joint vs Marginal PMF Relationships",
-        "Relation between Mutual Information and Conditional Entropy",
-        "Information Gain via Mutual Information",
-        "MI as KL Divergence of Marginal Product"
-      ],
-      "target_complexity": [1.5, 3.0]
-    }
-  ]
+    ]
   }
+
 ]
