@@ -19,7 +19,8 @@ def upgrade() -> None:
     op.create_index(
         'ix_response_todo_item',
         'responses',
-        ['session_id', 'user_answer'],
+        # ['session_id', 'user_answer'],
+        ['session_id'],    #removed user answer as it is json and cannot be indexed into b-tree
         postgresql_where=sa.text("user_answer IS NULL")
     )
     

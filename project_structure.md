@@ -9,11 +9,11 @@
 │   └── model.py
 ├── backend
 │   ├── alembic
-│   │   ├── 001_add_indexes.py
 │   │   ├── README
 │   │   ├── env.py
 │   │   ├── script.py.mako
 │   │   └── versions
+│   │       └── 001_add_indexes.py
 │   ├── alembic.ini
 │   ├── app
 │   │   ├── __init__.py
@@ -48,7 +48,8 @@
 │   │   │   └── question_service.py
 │   │   └── utils
 │   │       └── helpers.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── verify_db.py
 ├── backend.log
 ├── data
 │   ├── 2pl_mirt_qbank.csv
@@ -61,6 +62,8 @@
 │   ├── examinee_results.csv
 │   └── streamlit_app.py
 ├── generator
+│   ├── cs_taxonomy
+│   │   └── taxonomy.txt
 │   └── question_generator.py
 ├── locustfile.py
 ├── project_structure.md
@@ -78,5 +81,5 @@
 │   └── test_irt_logic.py
 └── tree.sh
 
-23 directories, 54 files
+24 directories, 56 files
 ```
