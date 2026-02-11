@@ -1,10 +1,8 @@
-{
-  "version": "2.0",
-  "exam_name": "Foundations in Artificial Intelligence Program",
-  "domains": [
+{ "domain": "Computer Science",
+  "modules": [
     {
-      "domain": "Introduction to the Course",
-      "sub_domains": [
+      "module": "Introduction to the Course",
+      "sub_module": [
         {
           "name": "Introduction to AI",
           "topics": [
@@ -19,8 +17,8 @@
       ]
     },
     {
-      "domain": "Basics of Computer Systems",
-      "sub_domains": [
+      "module": "Basics of Computer Systems",
+      "sub_module": [
         {
           "name": "Digital information and Logic",
           "topics": [
@@ -68,8 +66,8 @@
       ]
     },
     {
-      "domain": "Python Programming",
-      "sub_domains": [
+      "module": "Python Programming",
+      "sub_module": [
         {
           "name": "Python Programming Core",
           "topics": [
@@ -138,8 +136,8 @@
       ]
     },
     {
-      "domain": "Data Structures and Algorithms",
-      "sub_domains": [
+      "module": "Data Structures and Algorithms",
+      "sub_module": [
         {
           "name": "Algorithm Analysis",
           "topics": [
@@ -184,8 +182,8 @@
       ]
     },
     {
-      "domain": "Database",
-      "sub_domains": [
+      "module": "Database",
+      "sub_module": [
         {
           "name": "SQL",
           "topics": [
@@ -212,8 +210,8 @@
       ]
     },
     {
-      "domain": "Application Development",
-      "sub_domains": [
+      "module": "Application Development",
+      "sub_module": [
         {
           "name": "Software Development Life Cycle",
           "topics": [
