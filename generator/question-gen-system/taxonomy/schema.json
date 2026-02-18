@@ -1,0 +1,206 @@
+[
+    {
+        "domain": "math",
+        "units" : [
+            {
+                "unit" : "Linear Algebra",
+                "topics" : [
+                    {
+                        "topic" : "Scalar and Vectors",
+                        "concept" : "scalar_vector",
+                        "bloom_levels": [1,2,3],
+                        "variation_axes" : {
+                            "object_type" : ["Rn", "matrix space"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["scalar multipication", "n > dimension"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the formula used to determine its [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Using the principles of [CONTEXT], explain the physical or geometric significance of a zero [OBJECT_TYPE] between two vectors under the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Given a set of vectors in [CONTEXT], compute the [OBJECT_TYPE] and verify if the system satisfies the [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic" : "Vector Norms, Dot Product and Orthogonal Vectors",
+                        "concept" :"vector_norm_dot_product_and_orthogonal",
+                        "bloom_levels" : [1,2,3],
+                        "variation_axes" : {
+                            "object_type": ["Rn", "Force and displacement vector", "unit vector"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["L2 norm", "orthogonality" , "given rank"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "Define the $L_2$ norm (Euclidean norm) for a vector in {object_type}"
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Using the definition of the dot product, explain why the Work done ( W = F.d) by gravity on the satellite is zero over any interval."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Calculate the scalar projection (dot product) of S onto n(unit vector) to find the effective intensity hitting the panel."
+                            }
+                        ]
+                    },
+                    {
+                        "topic" : "Linear Transformation and Matrix",
+                        "concept" :"linear_transformation_and_matrix",
+                        "bloom_levels" : [1,2,3],
+                        "variation_axes" : {
+                            "object_type": ["Linear Transformation", "Matrix Multipication"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["Invariance", "Rank-deficiency" , "Orthogonal transformation"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the condition under which it satisfies the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "A transformation represented by [OBJECT_TYPE] is applied in [CONTEXT]. Explain how the [CONSTRAINT] affects the dimensionality of the output space."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Apply a [OBJECT_TYPE] to a given system in [CONTEXT] to compute the resulting output and show that the result adheres to the [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic" : "Orthogonality",
+                        "concept" :"orthogonality",
+                        "bloom_levels" : [1,2,3],
+                        "variation_axes" : {
+                            "object_type": ["Orthogonal matrix", "Least Square estimator", "Projection matrix", "gram-schmidt process"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["orthonormality", "Minimization of residuals" , "Preservation of Scalar Product"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "n the context of [CONTEXT], define the [OBJECT_TYPE] and state the essential condition required for it to satisfy [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Given the use of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] ensures the stability or accuracy of the resulting system."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Using the principles of [CONTEXT], compute the [OBJECT_TYPE] for the given parameters and verify that the result adheres to the [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic" : "Eigen and Singular Value Decomposition",
+                        "concept" :"svd",
+                        "bloom_levels" : [1,2,3],
+                        "variation_axes" : {
+                            "object_type": ["Eigen value", "Eigen vector", "SVD"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["directional invariance", "Spectral DEcomposition" , "Singular Value Non-negativity"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the fundamental equation used to satisfy the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Given the application of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] allows for the simplification or compression of the data/system."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Using the parameters provided in [CONTEXT], compute the [OBJECT_TYPE] and verify that the result satisfies the [CONSTRAINT]."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unit" : "Calculus",
+                "topics" : [
+                    {
+                        "topic" : "Partial Derivatives",
+                        "concept" : "partial_derivatives",
+                        "bloom_levels": [1,2,3],
+                        "variation_axes" : {
+                            "object_type" : ["partial derivative", "gradient vector", "tangent plane"],
+                            "context" : ["pure_math", "geometry", "stat_ml"],
+                            "constraint" : ["zero gradient", "steepest ascent"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "In the field of [CONTEXT], define the [OBJECT_TYPE] and state the notation used to represent the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Consider a multivariable function in [CONTEXT]. Explain how the [OBJECT_TYPE] behaves when subjected to the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Given a function $f(x, y)$ in [CONTEXT], compute the [OBJECT_TYPE] at a specific point and verify that the result satisfies the [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic" : "Ordinary Derivatives",
+                        "concept" : "ordinary_derivatives",
+                        "bloom_levels": [1,2,3],
+                        "variation_axes" : {
+                            "object_type" : ["normal derivative", "unit normal vector", "boundary conditions"],
+                            "context" : ["pure_math", "geometry", "engineering"],
+                            "constraint" : ["orthogonality", "boundary vanishing"]
+                        },
+                        "templates" : [
+                            {
+                                "level" : 1,
+                                "type" : "define",
+                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the dot product relationship involving the gradient used to satisfy the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 2,
+                                "type" : "explain",
+                                "stem" : "Consider a field defined on a bounded region in [CONTEXT]. Explain how the [OBJECT_TYPE] relates to the flow of the field across the boundary under the [CONSTRAINT]."
+                            },
+                            {
+                                "level" : 3,
+                                "type" : "compute",
+                                "stem" : "Given a function $f(x, y)$ in [CONTEXT], compute the [OBJECT_TYPE] at a specific point and verify that the result satisfies the [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                ]
+            }
+        ]
+    }
+]
