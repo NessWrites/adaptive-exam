@@ -1,204 +1,204 @@
 [
     {
         "domain": "math",
-        "units" : [
+        "units": [
             {
-                "unit" : "Linear Algebra",
-                "topics" : [
+                "unit": "Linear Algebra",
+                "topics": [
                     {
-                        "topic" : "Scalar and Vectors",
-                        "concept" : "scalar_vector",
-                        "bloom_levels": [1,2,3],
-                        "variation_axes" : {
-                            "object_type" : ["Rn", "matrix space"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["scalar multipication", "n > dimension"]
+                        "topic": "Scalar and Vectors",
+                        "concept": "scalar_vector",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Feature vector", "Force component", "State vector"],
+                            "context": ["Predictive Analytics", "Structural Engineering", "Quantum Computing"],
+                            "constraint": ["linear scaling", "dimensional consistency"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the formula used to determine its [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In the development of a [CONTEXT] model, define the [OBJECT_TYPE] and explain the formula used to ensure [CONSTRAINT] when adjusting global parameters."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Using the principles of [CONTEXT], explain the physical or geometric significance of a zero [OBJECT_TYPE] between two vectors under the [CONSTRAINT]."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Using the requirements of [CONTEXT], explain the physical or logical significance of a zero-magnitude [OBJECT_TYPE] and how it impacts the system's ability to maintain [CONSTRAINT]."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Given a set of vectors in [CONTEXT], compute the [OBJECT_TYPE] and verify if the system satisfies the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Given a set of raw data inputs in [CONTEXT], compute the resulting [OBJECT_TYPE] and verify if the scaling factor satisfies the [CONSTRAINT] required for system stability."
                             }
                         ]
                     },
                     {
-                        "topic" : "Vector Norms, Dot Product and Orthogonal Vectors",
-                        "concept" :"vector_norm_dot_product_and_orthogonal",
-                        "bloom_levels" : [1,2,3],
-                        "variation_axes" : {
-                            "object_type": ["Rn", "Force and displacement vector", "unit vector"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["L2 norm", "orthogonality" , "given rank"]
+                        "topic": "Vector Norms, Dot Product and Orthogonal Vectors",
+                        "concept": "vector_norm_dot_product_and_orthogonal",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Euclidean distance (L2)", "Cosine similarity", "Power intensity vector"],
+                            "context": ["Search Engine Ranking", "Renewable Energy (Solar)", "Autonomous Navigation"],
+                            "constraint": ["orthogonality (zero interference)", "unit magnitude", "minimal error variance"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "Define the $L_2$ norm (Euclidean norm) for a vector in {object_type}"
+                                "level": 1,
+                                "type": "define",
+                                "stem": "For a [CONTEXT] algorithm, define the [OBJECT_TYPE] and describe how it is used to satisfy the [CONSTRAINT] between two competing signals."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Using the definition of the dot product, explain why the Work done ( W = F.d) by gravity on the satellite is zero over any interval."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "In a [CONTEXT] setup, explain why the [OBJECT_TYPE] must be maximized or minimized to ensure that the system meets the [CONSTRAINT] for efficient operation."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Calculate the scalar projection (dot product) of S onto n(unit vector) to find the effective intensity hitting the panel."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "An array in [CONTEXT] provides vectors $u$ and $v$. Calculate the [OBJECT_TYPE] to determine the effective alignment and verify if the [CONSTRAINT] is met within a 5% tolerance."
                             }
                         ]
                     },
                     {
-                        "topic" : "Linear Transformation and Matrix",
-                        "concept" :"linear_transformation_and_matrix",
-                        "bloom_levels" : [1,2,3],
-                        "variation_axes" : {
-                            "object_type": ["Linear Transformation", "Matrix Multipication"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["Invariance", "Rank-deficiency" , "Orthogonal transformation"]
+                        "topic": "Linear Transformation and Matrix",
+                        "concept": "linear_transformation_and_matrix",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Rotation Matrix", "Projection Operator", "Adjacency Matrix"],
+                            "context": ["Computer Graphics (CGI)", "Robotic Kinematics", "Social Network Analysis"],
+                            "constraint": ["Invariance (Shape preservation)", "Rank-deficiency (Information loss)", "Orthogonal transformation"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the condition under which it satisfies the [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In [CONTEXT] workflows, define the [OBJECT_TYPE] and state the mathematical condition required to preserve the [CONSTRAINT] during data processing."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "A transformation represented by [OBJECT_TYPE] is applied in [CONTEXT]. Explain how the [CONSTRAINT] affects the dimensionality of the output space."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "A transformation using [OBJECT_TYPE] is applied to a model in [CONTEXT]. Explain how the [CONSTRAINT] prevents or causes the collapse of specific dimensions in the output."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Apply a [OBJECT_TYPE] to a given system in [CONTEXT] to compute the resulting output and show that the result adheres to the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Apply the specified [OBJECT_TYPE] to the input coordinates of a [CONTEXT] system and compute the output to prove that the [CONSTRAINT] has been successfully maintained."
                             }
                         ]
                     },
                     {
-                        "topic" : "Orthogonality",
-                        "concept" :"orthogonality",
-                        "bloom_levels" : [1,2,3],
-                        "variation_axes" : {
-                            "object_type": ["Orthogonal matrix", "Least Square estimator", "Projection matrix", "gram-schmidt process"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["orthonormality", "Minimization of residuals" , "Preservation of Scalar Product"]
+                        "topic": "Orthogonality",
+                        "concept": "orthogonality",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Gram-Schmidt Process", "Least Squares Estimator", "Orthogonal Basis"],
+                            "context": ["Signal De-noising", "Market Trend Forecasting", "Acoustic Engineering"],
+                            "constraint": ["Minimization of residuals", "Signal-to-noise optimization", "Normalization"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "n the context of [CONTEXT], define the [OBJECT_TYPE] and state the essential condition required for it to satisfy [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "When optimizing a [CONTEXT] system, define the [OBJECT_TYPE] and state the condition necessary to achieve the [CONSTRAINT]."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Given the use of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] ensures the stability or accuracy of the resulting system."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Given the use of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] ensures that the resulting model does not overfit the data or lose signal clarity."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Using the principles of [CONTEXT], compute the [OBJECT_TYPE] for the given parameters and verify that the result adheres to the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Using real-world parameters from [CONTEXT], compute the [OBJECT_TYPE] and verify that the output successfully satisfies the [CONSTRAINT] for the predicted values."
                             }
                         ]
                     },
                     {
-                        "topic" : "Eigen and Singular Value Decomposition",
-                        "concept" :"svd",
-                        "bloom_levels" : [1,2,3],
-                        "variation_axes" : {
-                            "object_type": ["Eigen value", "Eigen vector", "SVD"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["directional invariance", "Spectral DEcomposition" , "Singular Value Non-negativity"]
+                        "topic": "Eigen and Singular Value Decomposition",
+                        "concept": "svd",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Principal Components", "Singular Values", "Eigenvectors"],
+                            "context": ["Facial Recognition Systems", "Bridge Vibration Analysis", "Recommendation Engines"],
+                            "constraint": ["Data compression ratio", "Directional invariance", "Spectral stability"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the fundamental equation used to satisfy the [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In the context of [CONTEXT], define the [OBJECT_TYPE] and explain its role in satisfying the [CONSTRAINT] during high-dimensional data reduction."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Given the application of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] allows for the simplification or compression of the data/system."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain how the [OBJECT_TYPE] allows an engineer in [CONTEXT] to identify the most critical points of failure while maintaining the [CONSTRAINT] of the overall structure."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Using the parameters provided in [CONTEXT], compute the [OBJECT_TYPE] and verify that the result satisfies the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Given a covariance matrix from a [CONTEXT] study, compute the [OBJECT_TYPE] and determine if the resulting [CONSTRAINT] allows for a 90% reduction in data storage."
                             }
                         ]
                     }
                 ]
             },
             {
-                "unit" : "Calculus",
-                "topics" : [
+                "unit": "Calculus",
+                "topics": [
                     {
-                        "topic" : "Partial Derivatives",
-                        "concept" : "partial_derivatives",
-                        "bloom_levels": [1,2,3],
-                        "variation_axes" : {
-                            "object_type" : ["partial derivative", "gradient vector", "tangent plane"],
-                            "context" : ["pure_math", "geometry", "stat_ml"],
-                            "constraint" : ["zero gradient", "steepest ascent"]
+                        "topic": "Partial Derivatives",
+                        "concept": "partial_derivatives",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Gradient vector", "Rate of change (Sensitivity)", "Jacobian Matrix"],
+                            "context": ["Deep Learning (Backpropagation)", "Chemical Kinetics", "Financial Option Pricing"],
+                            "constraint": ["local extrema (Optimization)", "Steepest descent", "Constraint satisfaction"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "In the field of [CONTEXT], define the [OBJECT_TYPE] and state the notation used to represent the [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In [CONTEXT] training, define the [OBJECT_TYPE] and state how it is used to satisfy the [CONSTRAINT] of the loss function."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Consider a multivariable function in [CONTEXT]. Explain how the [OBJECT_TYPE] behaves when subjected to the [CONSTRAINT]."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Consider a multi-variable process in [CONTEXT]. Explain how the [OBJECT_TYPE] determines the system's sensitivity to small changes while under the [CONSTRAINT]."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Given a function $f(x, y)$ in [CONTEXT], compute the [OBJECT_TYPE] at a specific point and verify that the result satisfies the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "A model in [CONTEXT] uses the function $f(x, y, z)$. Compute the [OBJECT_TYPE] at the current operating point and verify if the system has reached the [CONSTRAINT] required for equilibrium."
                             }
                         ]
                     },
                     {
-                        "topic" : "Ordinary Derivatives",
-                        "concept" : "ordinary_derivatives",
-                        "bloom_levels": [1,2,3],
-                        "variation_axes" : {
-                            "object_type" : ["normal derivative", "unit normal vector", "boundary conditions"],
-                            "context" : ["pure_math", "geometry", "engineering"],
-                            "constraint" : ["orthogonality", "boundary vanishing"]
+                        "topic": "Ordinary Derivatives",
+                        "concept": "ordinary_derivatives",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Normal derivative (flux rate)", "Unit normal vector", "Boundary conditions"],
+                            "context": ["Thermal Management", "Fluid Dynamics", "Structural Geology"],
+                            "constraint": ["No-flux (insulation)", "Tangential flow", "Isothermal boundary"]
                         },
-                        "templates" : [
+                        "templates": [
                             {
-                                "level" : 1,
-                                "type" : "define",
-                                "stem" : "In the context of [CONTEXT], define the [OBJECT_TYPE] and state the dot product relationship involving the gradient used to satisfy the [CONSTRAINT]."
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In a [CONTEXT] scenario, define the [OBJECT_TYPE] and explain how the dot product is used to ensure the [CONSTRAINT] is physically maintained at the surface."
                             },
                             {
-                                "level" : 2,
-                                "type" : "explain",
-                                "stem" : "Consider a field defined on a bounded region in [CONTEXT]. Explain how the [OBJECT_TYPE] relates to the flow of the field across the boundary under the [CONSTRAINT]."
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "You are designing a system in [CONTEXT]. Explain the physical significance of the [OBJECT_TYPE] regarding how energy/material moves across the boundary when satisfying a [CONSTRAINT]."
                             },
                             {
-                                "level" : 3,
-                                "type" : "compute",
-                                "stem" : "Given a function $f(x, y)$ in [CONTEXT], compute the [OBJECT_TYPE] at a specific point and verify that the result satisfies the [CONSTRAINT]."
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "A sensor in a [CONTEXT] system measures a field modeled by $f(x, y)$. Compute the [OBJECT_TYPE] at $(x_0, y_0)$ and determine if the current flow satisfies the [CONSTRAINT] for stability."
                             }
                         ]
-                    },
+                    }
                 ]
             }
         ]
