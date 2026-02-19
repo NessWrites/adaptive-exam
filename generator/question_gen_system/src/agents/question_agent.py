@@ -1,6 +1,7 @@
 import json
 import google.generativeai as genai
 from typing import Dict
+from generator.question_gen_system.src.agents.prompt_registry import DOMAIN_PERSONAS
 
 class HydrationAgent:
     def __init__(self, api_key: str, model_name: str = "gemini-2.5-flash"):
@@ -14,20 +15,20 @@ class HydrationAgent:
             generation_config={"response_mime_type": "application/json"}
         )
 
-    async def hydrate(self, concept: str, level: int, skeleton: str) -> Dict:
+    async def hydrate(self,domain: str, concept: str, level: int, skeleton: str) -> Dict:
         """
         Calls Gemini to turn a skeleton into a robust, solvable question.
         """
-        # We combine the system instructions and user prompt for Gemini
+        persona = DOMAIN_PERSONAS.get(domain.lower(), DOMAIN_PERSONAS['math'])
+
         prompt = f"""
-        You are a Professional Mathematics Item Writer. 
-        Task: Transform the mathematical 'Skeleton' into a high-fidelity, solvable exam problem.
+        {persona}
+        Task: Hydrate this {domain} skeletion into a complete exam question.
 
         Rules:
-        1. Generate specific math values (functions f(x,y), vectors, matrices, points) realistic for the [CONTEXT].
-        2. Ensure the math is 100% accurate and solvable.
-        3. Provide a step-by-step solution and a final answer.
-        4. Return result strictly in JSON format.
+        1. Use realistic values for the context.
+        2. Ensure the math/logic is robust
+        3. Return result strictly in JSON format.
 
         Input Details:
         - Concept ID: {concept}

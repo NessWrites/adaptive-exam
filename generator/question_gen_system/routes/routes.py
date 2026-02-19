@@ -26,9 +26,10 @@ async def generator(
     level: int = Query(..., example = 3)):
     concept, skeleton = gen.generate_skeleton(domain, unit, topic, level)
 
-    result = await agent.hydrate(concept, level, skeleton)
+    result = await agent.hydrate(domain, concept, level, skeleton)
 
     return {
+        "domain" : domain,
         "skeleton": skeleton,
         "question": result
     }
