@@ -202,5 +202,281 @@ Schema = [
                 ]
             }
         ]
+    },
+    {
+        "domain": "cs",
+        "units": [
+            {
+                "unit": "Basics of Computer Systems",
+                "topics": [
+                    {
+                        "topic": "Digital Information and Logic",
+                        "concept": "digital_logic_and_representation",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Floating-point number", "XOR Gate", "Two's Complement", "Bitmapped Image"],
+                            "context": ["circuit design", "data compression", "cryptography", "error checking"],
+                            "constraint": ["precision loss", "overflow", "truth table validity", "DeMorgan's Law"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In the context of [CONTEXT], define a [OBJECT_TYPE] and state the rules regarding [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Using the principles of [CONTEXT], explain why [CONSTRAINT] occurs when manipulating a [OBJECT_TYPE]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Given a specific input in [CONTEXT], determine the output of the [OBJECT_TYPE] and verify if the result suffers from [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "Architecture and OS",
+                        "concept": "arch_and_os_fundamentals",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Cache Memory", "Process Control Block", "Instruction Set (RISC)", "Thread"],
+                            "context": ["multitasking environment", "high-performance computing", "embedded systems"],
+                            "constraint": ["Von-Neumann bottleneck", "Deadlock", "Context Switching overhead"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define the role of [OBJECT_TYPE] in a [CONTEXT] and describe the phenomenon of [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain how the design of [OBJECT_TYPE] improves efficiency in [CONTEXT] despite the limitations imposed by [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Analyze a scenario involving [OBJECT_TYPE] in [CONTEXT] and calculate/estimate the performance impact caused by [CONSTRAINT]."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unit": "Python Programming",
+                "topics": [
+                    {
+                        "topic": "Object-Oriented Programming",
+                        "concept": "oop_concepts",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Inheritance", "Polymorphism", "Decorator", "Class Method"],
+                            "context": ["game development", "API design", "library extension"],
+                            "constraint": ["Method Resolution Order (MRO)", "Encapsulation", "Liskov Substitution Principle"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In Python [CONTEXT], define [OBJECT_TYPE] and explain the syntax rules regarding [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain how using [OBJECT_TYPE] in [CONTEXT] promotes code reusability while adhering to [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Write or trace a Python code snippet demonstrating [OBJECT_TYPE] in [CONTEXT] that specifically handles [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "Numpy and Data Analysis",
+                        "concept": "numpy_vectorization",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Numpy Array", "Broadcasting", "Slicing", "Dot Product"],
+                            "context": ["image processing", "statistical analysis", "financial modeling"],
+                            "constraint": ["Shape mismatch", "Memory efficiency", "Vectorization"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define [OBJECT_TYPE] in the context of [CONTEXT] and state the condition required to avoid [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain why [OBJECT_TYPE] is preferred over standard lists in [CONTEXT] regarding [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Given two datasets in [CONTEXT], perform a [OBJECT_TYPE] operation and determine the resulting dimensions, ensuring [CONSTRAINT] is satisfied."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unit": "Data Structures and Algorithms",
+                "topics": [
+                    {
+                        "topic": "Algorithm Analysis",
+                        "concept": "time_space_complexity",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Binary Search", "Merge Sort", "Recursion", "Hash Map Lookup"],
+                            "context": ["large-scale database", "real-time systems", "memory-constrained device"],
+                            "constraint": ["Worst-case O(n^2)", "Space Complexity O(n)", "Stack Overflow"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define the Big-O notation for [OBJECT_TYPE] and identify the scenario that triggers [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "In the context of [CONTEXT], explain why [OBJECT_TYPE] might be unsuitable due to [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Calculate the asymptotic complexity of [OBJECT_TYPE] applied to [CONTEXT] and verify if it exceeds [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "Data Structures",
+                        "concept": "linear_and_non_linear_ds",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Stack (LIFO)", "Binary Search Tree", "Adjacency Matrix", "Queue (FIFO)"],
+                            "context": ["browser history", "task scheduling", "social network graph"],
+                            "constraint": ["Collision resolution", "Unbalanced tree height", "Memory contiguity"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define the structure of [OBJECT_TYPE] used in [CONTEXT] and describe the method for handling [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain how the properties of [OBJECT_TYPE] make it ideal for [CONTEXT], specifically addressing [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Simulate the insertion/deletion of elements in [OBJECT_TYPE] for [CONTEXT] and show the state of the structure under [CONSTRAINT]."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unit": "Database Systems",
+                "topics": [
+                    {
+                        "topic": "SQL and Relational Design",
+                        "concept": "rdbms_fundamentals",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Foreign Key", "Inner Join", "Group By Clause", "Subquery"],
+                            "context": ["e-commerce inventory", "student records", "banking transactions"],
+                            "constraint": ["Referential Integrity", "ACID properties", "Normalization (3NF)"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "In the context of [CONTEXT], define [OBJECT_TYPE] and state how it enforces [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain the result of applying [OBJECT_TYPE] on a [CONTEXT] database and how it helps maintain [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Construct a SQL query using [OBJECT_TYPE] for a [CONTEXT] schema and verify that the design satisfies [CONSTRAINT]."
+                            }
+                        ]
+                    },
+                    {
+                        "topic": "NoSQL",
+                        "concept": "nosql_properties",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["Document Store (MongoDB)", "Sharding", "Key-Value Pair"],
+                            "context": ["content management system", "big data analytics", "real-time feed"],
+                            "constraint": ["CAP Theorem", "Eventual Consistency", "Schema flexibility"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define [OBJECT_TYPE] in [CONTEXT] and state its relationship to the [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain why [OBJECT_TYPE] is chosen for [CONTEXT] over relational models, specifically regarding the trade-off presented by [CONSTRAINT]."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Design a data model using [OBJECT_TYPE] for [CONTEXT] and demonstrate how it handles a failure scenario based on [CONSTRAINT]."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "unit": "Application Development",
+                "topics": [
+                    {
+                        "topic": "Web Frameworks",
+                        "concept": "web_architecture",
+                        "bloom_levels": [1, 2, 3],
+                        "variation_axes": {
+                            "object_type": ["REST API", "MVC Pattern", "HTTP Request (POST/GET)", "DOM Manipulation"],
+                            "context": ["social media feed", "user authentication", "dynamic dashboard"],
+                            "constraint": ["Statelessness", "Separation of Concerns", "Same-origin policy"]
+                        },
+                        "templates": [
+                            {
+                                "level": 1,
+                                "type": "define",
+                                "stem": "Define [OBJECT_TYPE] in [CONTEXT] and explain the importance of [CONSTRAINT]."
+                            },
+                            {
+                                "level": 2,
+                                "type": "explain",
+                                "stem": "Explain the flow of data when using [OBJECT_TYPE] in [CONTEXT] and how [CONSTRAINT] influences the architecture."
+                            },
+                            {
+                                "level": 3,
+                                "type": "compute",
+                                "stem": "Design or trace a request cycle using [OBJECT_TYPE] for [CONTEXT] ensuring it adheres to [CONSTRAINT]."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
+
+    
+    
 ]
