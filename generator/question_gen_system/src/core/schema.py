@@ -7,6 +7,31 @@ DomainType = Literal["math", "tech"]
 QuestionType = Literal["mcqs", "subjectives", "codes", "fill_in_the_blanks"]
 CalibrationStatus = Literal["pretest", "operational"]
 
+
+class DatabaseLog(BaseModel):
+    id : Optional[int] = None 
+    status: str 
+    error: Optional[str] = None 
+    
+class QuestionContent(BaseModel):
+    scenario_expansion: str 
+    final_question: str 
+    solution_steps: List[str]
+    final_answer: str 
+    
+class GeneratedContentWrapper(BaseModel): 
+    domain: str 
+    unit: str 
+    topic: str 
+    skeleton: str 
+    question: QuestionContent 
+    
+class GeneratorResponse(BaseModel): 
+    generated_content: GeneratedContentWrapper
+    database_log: Optional[DatabaseLog] = None 
+    
+
+# below is old schema for reference: 
 class QuestionSchema(BaseModel):
     # --- DB COLUMNS ---
     unique_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
