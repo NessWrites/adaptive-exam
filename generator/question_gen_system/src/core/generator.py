@@ -50,4 +50,4 @@ class SkeletonGenerator:
         for placeholder, value in selections.items():
             skeleton = skeleton.replace(f"[{placeholder}]", value)
             
-        return topic_node["concept"], skeleton
+        return topic_node["concept"], skeleton, selections['CONTEXT']

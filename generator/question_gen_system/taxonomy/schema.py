@@ -6,12 +6,17 @@ Schema = [
                 "unit": "Linear Algebra",
                 "topics": [
                     {
-                        "topic": "Scalar and Vectors",
+                        "topic": "Scalars and Vectors",
                         "concept": "scalar_vector",
                         "bloom_levels": [1, 2, 3],
                         "variation_axes": {
                             "object_type": ["Feature vector", "Force component", "State vector"],
-                            "context": ["Predictive Analytics", "Structural Engineering", "Quantum Computing"],
+                            "context": [
+                                        "Representing the magnitude and direction of wind velocity at various points in a weather model.",
+                                        "Encoding RGB color values for individual pixels in a digital image.",
+                                        "Organizing inventory levels for multiple products across various warehouse locations.",
+                                        "Calculating stress distribution within a structural beam during finite element analysis."
+                                        ],
                             "constraint": ["linear scaling", "dimensional consistency"]
                         },
                         "templates": [
@@ -38,7 +43,11 @@ Schema = [
                         "bloom_levels": [1, 2, 3],
                         "variation_axes": {
                             "object_type": ["Euclidean distance (L2)", "Cosine similarity", "Power intensity vector"],
-                            "context": ["Search Engine Ranking", "Renewable Energy (Solar)", "Autonomous Navigation"],
+                            "context": [
+                                        "Calculation of mechanical work performed by a constant force vector along a linear displacement vector.",
+                                        "Calculating the total path length traversed along grid lines in urban navigation and robotics.",
+                                        "Propagating system states over discrete time steps using a state transition matrix in control systems."
+                                        ],
                             "constraint": ["orthogonality (zero interference)", "unit magnitude", "minimal error variance"]
                         },
                         "templates": [
@@ -151,14 +160,14 @@ Schema = [
                         "bloom_levels": [1, 2, 3],
                         "variation_axes": {
                             "object_type": ["Gradient vector", "Rate of change (Sensitivity)", "Jacobian Matrix"],
-                            "context": ["Deep Learning (Backpropagation)", "Chemical Kinetics", "Financial Option Pricing"],
+                            "context": ["Deep Learning", "Chemical Kinetics", "Financial Option Pricing"],
                             "constraint": ["local extrema (Optimization)", "Steepest descent", "Constraint satisfaction"]
                         },
                         "templates": [
                             {
                                 "level": 1,
                                 "type": "define",
-                                "stem": "In [CONTEXT] training, define the [OBJECT_TYPE] and state how it is used to satisfy the [CONSTRAINT] of the loss function."
+                                "stem": "In [CONTEXT] training, define the [OBJECT_TYPE]."
                             },
                             {
                                 "level": 2,
@@ -178,7 +187,10 @@ Schema = [
                         "bloom_levels": [1, 2, 3],
                         "variation_axes": {
                             "object_type": ["Normal derivative (flux rate)", "Unit normal vector", "Boundary conditions"],
-                            "context": ["Thermal Management", "Fluid Dynamics", "Structural Geology"],
+                            "context": ["Local rate of heat transfer through a material given a temperature gradient.",
+                                        "Instantaneous rate of change of reactant concentration during a chemical reaction.",
+                                        "Marginal cost of producing an additional unit of a manufactured good.",
+                                        "Instantaneous rate of change of displacement of a moving object."],
                             "constraint": ["No-flux (insulation)", "Tangential flow", "Isothermal boundary"]
                         },
                         "templates": [
