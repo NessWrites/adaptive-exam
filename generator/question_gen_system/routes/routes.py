@@ -40,7 +40,6 @@ async def generator(
 
     # concept, skeleton, context = gen.generate_skeleton(domain, unit, topic, level)
 
-    background_tasks.add_task(dump_to_csv, log_data)
     try: 
         concept, skeleton, context = gen.generate_skeleton(domain, unit, topic, level)
     except ValueError as e: 
@@ -58,6 +57,7 @@ async def generator(
         "Response" : result,
     }
 
+    background_tasks.add_task(dump_to_csv, log_data)
     if "error" in result: 
         raise HTTPException(status_code = 500, detail = result['details'])
     

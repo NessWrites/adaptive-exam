@@ -20,22 +20,22 @@ Schema = [
                             "constraint": ["linear scaling", "dimensional consistency"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In the development of a [CONTEXT] model, define the [OBJECT_TYPE] and explain the formula used to ensure [CONSTRAINT] when adjusting global parameters."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Using the requirements of [CONTEXT], explain the physical or logical significance of a zero-magnitude [OBJECT_TYPE] and how it impacts the system's ability to maintain [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Given a set of raw data inputs in [CONTEXT], compute the resulting [OBJECT_TYPE] and verify if the scaling factor satisfies the [CONSTRAINT] required for system stability."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] and describe its fundamental mathematical properties."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In the context of [CONTEXT], explain the significance and role of a [OBJECT_TYPE] within the system."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Given raw inputs in [CONTEXT], compute the resulting [OBJECT_TYPE] and verify that it satisfies the required [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Vector Norms, Dot Product and Orthogonal Vectors",
@@ -51,22 +51,22 @@ Schema = [
                             "constraint": ["orthogonality (zero interference)", "unit magnitude", "minimal error variance"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "For a [CONTEXT] algorithm, define the [OBJECT_TYPE] and describe how it is used to satisfy the [CONSTRAINT] between two competing signals."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "In a [CONTEXT] setup, explain why the [OBJECT_TYPE] must be maximized or minimized to ensure that the system meets the [CONSTRAINT] for efficient operation."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "An array in [CONTEXT] provides vectors $u$ and $v$. Calculate the [OBJECT_TYPE] to determine the effective alignment and verify if the [CONSTRAINT] is met within a 5% tolerance."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] and describe its fundamental mathematical properties."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In the context of [CONTEXT], explain the significance and role of a [OBJECT_TYPE] within the system."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Given raw inputs in [CONTEXT], compute the resulting [OBJECT_TYPE] and verify that it satisfies the required [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Linear Transformation and Matrix",
@@ -78,22 +78,22 @@ Schema = [
                             "constraint": ["Invariance (Shape preservation)", "Rank-deficiency (Information loss)", "Orthogonal transformation"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In [CONTEXT] workflows, define the [OBJECT_TYPE] and state the mathematical condition required to preserve the [CONSTRAINT] during data processing."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "A transformation using [OBJECT_TYPE] is applied to a model in [CONTEXT]. Explain how the [CONSTRAINT] prevents or causes the collapse of specific dimensions in the output."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Apply the specified [OBJECT_TYPE] to the input coordinates of a [CONTEXT] system and compute the output to prove that the [CONSTRAINT] has been successfully maintained."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] and state its key algebraic properties."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how the [OBJECT_TYPE] transforms inputs within the system."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Apply the specified [OBJECT_TYPE] in [CONTEXT] and compute the output to verify preservation of the [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Orthogonality",
@@ -105,22 +105,22 @@ Schema = [
                             "constraint": ["Minimization of residuals", "Signal-to-noise optimization", "Normalization"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "When optimizing a [CONTEXT] system, define the [OBJECT_TYPE] and state the condition necessary to achieve the [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Given the use of [OBJECT_TYPE] in [CONTEXT], explain how the [CONSTRAINT] ensures that the resulting model does not overfit the data or lose signal clarity."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Using real-world parameters from [CONTEXT], compute the [OBJECT_TYPE] and verify that the output successfully satisfies the [CONSTRAINT] for the predicted values."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] and describe the mathematical principle it is based on."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how the [OBJECT_TYPE] improves system accuracy or stability."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Using parameters from [CONTEXT], compute the [OBJECT_TYPE] and verify that it satisfies the [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Eigen and Singular Value Decomposition",
@@ -132,22 +132,22 @@ Schema = [
                             "constraint": ["Data compression ratio", "Directional invariance", "Spectral stability"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In the context of [CONTEXT], define the [OBJECT_TYPE] and explain its role in satisfying the [CONSTRAINT] during high-dimensional data reduction."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain how the [OBJECT_TYPE] allows an engineer in [CONTEXT] to identify the most critical points of failure while maintaining the [CONSTRAINT] of the overall structure."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Given a covariance matrix from a [CONTEXT] study, compute the [OBJECT_TYPE] and determine if the resulting [CONSTRAINT] allows for a 90% reduction in data storage."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] and describe its role in matrix decomposition."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how the [OBJECT_TYPE] helps analyze structural or data patterns."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Given data from [CONTEXT], compute the [OBJECT_TYPE] and determine whether the resulting model maintains the [CONSTRAINT]."
+    }
+]
                     }
                 ]
             },
@@ -164,22 +164,22 @@ Schema = [
                             "constraint": ["local extrema (Optimization)", "Steepest descent", "Constraint satisfaction"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In [CONTEXT] training, define the [OBJECT_TYPE]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Consider a multi-variable process in [CONTEXT]. Explain how the [OBJECT_TYPE] determines the system's sensitivity to small changes while under the [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "A model in [CONTEXT] uses the function $f(x, y, z)$. Compute the [OBJECT_TYPE] at the current operating point and verify if the system has reached the [CONSTRAINT] required for equilibrium."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] for a multivariable function."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how the [OBJECT_TYPE] determines system sensitivity."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "For a function in [CONTEXT], compute the [OBJECT_TYPE] and verify whether the system satisfies the [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Ordinary Derivatives",
@@ -194,22 +194,22 @@ Schema = [
                             "constraint": ["No-flux (insulation)", "Tangential flow", "Isothermal boundary"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In a [CONTEXT] scenario, define the [OBJECT_TYPE] and explain how the dot product is used to ensure the [CONSTRAINT] is physically maintained at the surface."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "You are designing a system in [CONTEXT]. Explain the physical significance of the [OBJECT_TYPE] regarding how energy/material moves across the boundary when satisfying a [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "A sensor in a [CONTEXT] system measures a field modeled by $f(x, y)$. Compute the [OBJECT_TYPE] at $(x_0, y_0)$ and determine if the current flow satisfies the [CONSTRAINT] for stability."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the [OBJECT_TYPE] for a multivariable function."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how the [OBJECT_TYPE] determines system sensitivity."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "For a function in [CONTEXT], compute the [OBJECT_TYPE] and verify whether the system satisfies the [CONSTRAINT]."
+    }
+]
                     }
                 ]
             }
@@ -231,22 +231,22 @@ Schema = [
                             "constraint": ["precision loss", "overflow", "truth table validity", "DeMorgan's Law"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In the context of [CONTEXT], define a [OBJECT_TYPE] and state the rules regarding [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Using the principles of [CONTEXT], explain why [CONSTRAINT] occurs when manipulating a [OBJECT_TYPE]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Given a specific input in [CONTEXT], determine the output of the [OBJECT_TYPE] and verify if the result suffers from [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] and describe its structural representation."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how [OBJECT_TYPE] functions within the system."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Given input in [CONTEXT], determine the output of [OBJECT_TYPE] and verify whether it satisfies [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Architecture and OS",
@@ -258,22 +258,22 @@ Schema = [
                             "constraint": ["Von-Neumann bottleneck", "Deadlock", "Context Switching overhead"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define the role of [OBJECT_TYPE] in a [CONTEXT] and describe the phenomenon of [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain how the design of [OBJECT_TYPE] improves efficiency in [CONTEXT] despite the limitations imposed by [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Analyze a scenario involving [OBJECT_TYPE] in [CONTEXT] and calculate/estimate the performance impact caused by [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] and describe its role in computer systems."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In a [CONTEXT], explain how [OBJECT_TYPE] improves system efficiency."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Analyze [OBJECT_TYPE] in a [CONTEXT] and estimate its impact under [CONSTRAINT]."
+    }
+]
                     }
                 ]
             },
@@ -290,22 +290,22 @@ Schema = [
                             "constraint": ["Method Resolution Order (MRO)", "Encapsulation", "Liskov Substitution Principle"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In Python [CONTEXT], define [OBJECT_TYPE] and explain the syntax rules regarding [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain how using [OBJECT_TYPE] in [CONTEXT] promotes code reusability while adhering to [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Write or trace a Python code snippet demonstrating [OBJECT_TYPE] in [CONTEXT] that specifically handles [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] in Python and describe its core characteristics."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain how [OBJECT_TYPE] improves modularity and structure."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Write or trace code in [CONTEXT] demonstrating [OBJECT_TYPE] while ensuring adherence to [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Numpy and Data Analysis",
@@ -317,22 +317,22 @@ Schema = [
                             "constraint": ["Shape mismatch", "Memory efficiency", "Vectorization"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define [OBJECT_TYPE] in the context of [CONTEXT] and state the condition required to avoid [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain why [OBJECT_TYPE] is preferred over standard lists in [CONTEXT] regarding [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Given two datasets in [CONTEXT], perform a [OBJECT_TYPE] operation and determine the resulting dimensions, ensuring [CONSTRAINT] is satisfied."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] in numerical computing."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain why [OBJECT_TYPE] improves performance."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Perform a [OBJECT_TYPE] operation in [CONTEXT] and verify that it avoids [CONSTRAINT]."
+    }
+]
                     }
                 ]
             },
@@ -349,22 +349,22 @@ Schema = [
                             "constraint": ["Worst-case O(n^2)", "Space Complexity O(n)", "Stack Overflow"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define the Big-O notation for [OBJECT_TYPE] and identify the scenario that triggers [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "In the context of [CONTEXT], explain why [OBJECT_TYPE] might be unsuitable due to [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Calculate the asymptotic complexity of [OBJECT_TYPE] applied to [CONTEXT] and verify if it exceeds [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the time or space complexity of [OBJECT_TYPE]."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain why [OBJECT_TYPE] may impact system performance."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Compute the asymptotic complexity of [OBJECT_TYPE] in [CONTEXT] and determine whether it exceeds [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "Data Structures",
@@ -376,22 +376,22 @@ Schema = [
                             "constraint": ["Collision resolution", "Unbalanced tree height", "Memory contiguity"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define the structure of [OBJECT_TYPE] used in [CONTEXT] and describe the method for handling [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain how the properties of [OBJECT_TYPE] make it ideal for [CONTEXT], specifically addressing [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Simulate the insertion/deletion of elements in [OBJECT_TYPE] for [CONTEXT] and show the state of the structure under [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define the time or space complexity of [OBJECT_TYPE]."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain why [OBJECT_TYPE] may impact system performance."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Compute the asymptotic complexity of [OBJECT_TYPE] in [CONTEXT] and determine whether it exceeds [CONSTRAINT]."
+    }
+]
                     }
                 ]
             },
@@ -408,22 +408,22 @@ Schema = [
                             "constraint": ["Referential Integrity", "ACID properties", "Normalization (3NF)"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "In the context of [CONTEXT], define [OBJECT_TYPE] and state how it enforces [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain the result of applying [OBJECT_TYPE] on a [CONTEXT] database and how it helps maintain [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Construct a SQL query using [OBJECT_TYPE] for a [CONTEXT] schema and verify that the design satisfies [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] in relational databases."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In a [CONTEXT] database, explain how [OBJECT_TYPE] operates."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Construct a query using [OBJECT_TYPE] in [CONTEXT] and verify compliance with [CONSTRAINT]."
+    }
+]
                     },
                     {
                         "topic": "NoSQL",
@@ -434,23 +434,23 @@ Schema = [
                             "context": ["content management system", "big data analytics", "real-time feed"],
                             "constraint": ["CAP Theorem", "Eventual Consistency", "Schema flexibility"]
                         },
-                        "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define [OBJECT_TYPE] in [CONTEXT] and state its relationship to the [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain why [OBJECT_TYPE] is chosen for [CONTEXT] over relational models, specifically regarding the trade-off presented by [CONSTRAINT]."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Design a data model using [OBJECT_TYPE] for [CONTEXT] and demonstrate how it handles a failure scenario based on [CONSTRAINT]."
-                            }
-                        ]
+"templates": [
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] in distributed databases."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain why [OBJECT_TYPE] is selected."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Design a [OBJECT_TYPE] model for [CONTEXT] and demonstrate how it handles [CONSTRAINT]."
+    }
+]
                     }
                 ]
             },
@@ -467,22 +467,22 @@ Schema = [
                             "constraint": ["Statelessness", "Separation of Concerns", "Same-origin policy"]
                         },
                         "templates": [
-                            {
-                                "level": 1,
-                                "type": "define",
-                                "stem": "Define [OBJECT_TYPE] in [CONTEXT] and explain the importance of [CONSTRAINT]."
-                            },
-                            {
-                                "level": 2,
-                                "type": "explain",
-                                "stem": "Explain the flow of data when using [OBJECT_TYPE] in [CONTEXT] and how [CONSTRAINT] influences the architecture."
-                            },
-                            {
-                                "level": 3,
-                                "type": "compute",
-                                "stem": "Design or trace a request cycle using [OBJECT_TYPE] for [CONTEXT] ensuring it adheres to [CONSTRAINT]."
-                            }
-                        ]
+    {
+        "level": 1,
+        "type": "define",
+        "stem": "Define [OBJECT_TYPE] in distributed databases."
+    },
+    {
+        "level": 2,
+        "type": "explain",
+        "stem": "In [CONTEXT], explain why [OBJECT_TYPE] is selected."
+    },
+    {
+        "level": 3,
+        "type": "compute",
+        "stem": "Design a [OBJECT_TYPE] model for [CONTEXT] and demonstrate how it handles [CONSTRAINT]."
+    }
+]
                     }
                 ]
             }
