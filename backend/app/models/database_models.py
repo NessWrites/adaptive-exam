@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON,ARRAY,Boolean
+from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, JSON,ARRAY,Boolean, CheckConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from backend.app.database.postgresql.connection import Base
@@ -8,11 +8,11 @@ class Question(Base):
     
     unique_id = Column(Integer, primary_key=True, index=True,autoincrement=True)
     domain = Column(String(100), nullable=False)
-    concept_tag = Column(String(200))
+    concept_tag = Column(String(200), nullable=False)
     question_text = Column(Text, nullable=False)
-    options = Column(JSON)
-    correct_answer = Column(JSON)
-    image_url = Column(Text)
+    options = Column(JSON, nullable=True)
+    correct_answer = Column(JSON, nullable=True)
+    image_url = Column(Text, nullable=True)
     question_type = Column(String(10))
     
     # IRT Parameters
@@ -66,3 +66,16 @@ class Response(Base):
     # Relationships
     session = relationship("ExamSession", back_populates="responses")
     question = relationship("Question")
+
+
+class SubjectiveQuestion(Question):
+    __tablename__ = "subjective_questions"
+
+    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key=True)
+    mark_schema = Column(JSON, nullable=True)
+    bloom_level = Column(Float, nullable=False)
+    total_marks = Column(Integer, nullable=False)
+
+    __table_args__ = (
+        CheckConstraint('total_marks <= 5', name='check_total_marks_max'),
+    )

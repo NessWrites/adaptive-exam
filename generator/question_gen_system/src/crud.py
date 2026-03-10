@@ -1,45 +1,32 @@
 from sqlalchemy.orm import Session 
-from generator.question_gen_system.src.models import SubjectiveQuestion
-
-import json 
+from backend.app.models.database_models import SubjectiveQuestion
 
 def save_subjective_question(
     db: Session, 
     domain: str, 
     unit: str, 
     topic: str, 
-    level: int, 
-    concept_id: str, 
-    skeleton: str, 
-    ai_data: dict,
+    level: int,
+    question: str,
+    total_marks: int
 ) -> SubjectiveQuestion: 
     """parse llm output and save to subjective_questions table"""
     
-    #construct student facing question text 
-    scenario = ai_data.get("scenario_expansion","")
-    final_q = ai_data.get("final_question", "") 
-    full_text = f"{scenario}\n\n{final_q}"
-    
-    
-    steps = ai_data.get("solution_steps", [])
-    final_ans = ai_data.get("final_answer", "")
+    concept_tag = f"{unit} / {topic}"
     
     #create the db record 
     new_question = SubjectiveQuestion(
-        domain = domain,
-        unit = unit, 
-        topic = topic, 
-        bloom_level = level, 
-        question_text = full_text, 
-        concept_id = concept_id, 
-        skeleton_used = skeleton, 
-        correct_answer = final_ans, 
-        solution_steps = steps, 
-        
-        a_value = 1.0, 
-        b_value = 0.0,
-        calibration_status = "pretest"
-        
+        domain=domain,
+        bloom_level=level, 
+        concept_tag=concept_tag, 
+        question_text=question,
+        mark_schema=None,
+        correct_answer={},
+        a_values=[0,0],
+        b_value=0,
+        calibration_status="pretest",
+        question_type="subjective",
+        total_marks = total_marks
     )
     
     db.add(new_question)
