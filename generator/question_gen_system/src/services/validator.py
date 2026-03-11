@@ -23,6 +23,7 @@ def system_prompt(batch: List[Dict]):
             }
         )
     prompt = f"""
+        {system_message}
         You are given a dataset where each row is completely independent of the others.
         {validator_task}
         Evaluate the following questions for accuracy and clarity.

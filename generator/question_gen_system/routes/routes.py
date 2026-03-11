@@ -11,9 +11,6 @@ from generator.question_gen_system.src.services.processer import split_question
 from generator.question_gen_system.src.services.validator import validate_batch
 from generator.question_gen_system.src.pipeline.batch_buffer import add_to_buffer, current_buffer_size
 
-
-#db imports 
-# from generator.question_gen_system.src.database import get_db, engine 
 from generator.question_gen_system.src import crud
 from backend.app.models import database_models as models
 
@@ -41,8 +38,6 @@ async def generator(
     level: int = Query(..., example = 2),
     num_questions: int = Query(..., example = 4),
     db: Session = Depends(get_db)):
-
-    # concept, skeleton, context = gen.generate_skeleton(domain, unit, topic, level)
 
     try: 
         concept, skeleton, context = gen.generate_skeleton(domain, unit, topic, level)
@@ -84,7 +79,7 @@ async def generator(
                         topic=item['topic'],
                         level=item['bloom_level'],
                         question=item['question'],
-                        total_marks = item['total_marks']
+                        total_marks=item['total_marks']
                     )
                     saved_info.append({
                         "id" : db_record.id,
