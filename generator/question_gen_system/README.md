@@ -31,6 +31,7 @@ These objectives collectively ensure the development of a scalable system capabl
 ![System Architecture Diagram](item_gen_system_architecture.png)
 
 ### Project Structure
+```
 generator
 └── question_gen_system 
     ├── README.md
@@ -59,7 +60,7 @@ generator
     │   └── schema.py                   # structured syllabus schema(topics, context)
     ├── tests                           # empty
     └── utils                           # empty
-
+```
 
 ### API Documentation
 
