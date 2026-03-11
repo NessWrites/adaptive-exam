@@ -27,7 +27,7 @@ Support downstream assessment workflows by supplying validated questions to the 
 These objectives collectively ensure the development of a scalable system capable of producing pedagogically consistent and contextually accurate assessment questions.
 
 
-# System Architecture
+### System Architecture
 ![System Architecture Diagram](item_gen_system_architecture.png)
 
 ### Project Structure
@@ -65,9 +65,9 @@ generator
 ### API Documentation
 
 Endpoint:
-`GET /questions/generator`
-Description: Generates questions based on the specfied domain, unit, topic and Bloom's taxonomy level. You cannot randomly input any values into the parameters. First, you have to look into `taxonomy/schema.py` from there you can choose the domain, unit, topic and bloom's taxonomy(1 or 2 or 3).
-num_questions: you can choose integer number to generate 'n' number of questions.
+`GET /questions/generator` <br>
+**Description**: Generates questions based on the specfied domain, unit, topic and Bloom's taxonomy level. You cannot randomly input any values into the parameters. First, you have to look into `taxonomy/schema.py` from there you can choose the domain, unit, topic and bloom's taxonomy(1 or 2 or 3). <br>
+`num_questions`: you can choose integer number to generate 'n' number of questions.
 
 ![api endpoint images](api_endpoint.png)
 
