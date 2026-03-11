@@ -21,7 +21,7 @@ def save_subjective_question(
         concept_tag=concept_tag, 
         question_text=question,
         mark_schema=None,
-        correct_answer={},
+        correct_answer=None,
         a_values=[0,0],
         b_value=0,
         calibration_status="pretest",
