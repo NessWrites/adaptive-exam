@@ -34,7 +34,7 @@ These objectives collectively ensure the development of a scalable system capabl
 ```
 generator
 └── question_gen_system 
-    ├── README.md
+    ├── README.md                       # you are here
     ├── routes
     │   └── routes.py                   # API endpoints
     ├── src
