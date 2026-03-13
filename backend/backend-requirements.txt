@@ -56,3 +56,8 @@ python-dateutil==2.9.0.post0
 pytz==2025.2
 tzdata==2025.2
 scipy
+
+
+
+langchain-google-genai 
+langchain

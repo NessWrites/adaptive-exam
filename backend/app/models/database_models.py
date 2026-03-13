@@ -79,3 +79,12 @@ class SubjectiveQuestion(Question):
     __table_args__ = (
         CheckConstraint('total_marks <= 5', name='check_total_marks_max'),
     )
+    
+    
+class MCQQuestion(Question):
+    __tablename__ = 'mcq_questions_converted'
+    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key = True)
+    # options = Column(JSON, nullable= False)
+    # correct_answer = Column(JSON, nullable= False)
+    explanation = Column(Text, nullable = True) 
+    

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.app.routes import exam_route
 from backend.app.core.config import get_settings
 from generator.question_gen_system.routes import routes
-
+from generator.mcq_generator.api.routes import router as mcq_generator_router 
 settings = get_settings()
 
 app = FastAPI(
@@ -25,7 +25,7 @@ app.add_middleware(
 # Include routers
 app.include_router(exam_route.router)
 app.include_router(routes.router, prefix="/questions", tags= ['Question Generator'])
-
+app.include_router(mcq_generator_router)
 
 @app.get("/")
 async def root():
