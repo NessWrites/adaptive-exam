@@ -19,8 +19,9 @@ class MCQEngine:
                        "with exactly one correct answer. Distractors should target common student misconceptions.")
                 ,
                 ("human", "Domain: {domain} \n"
-                 "Concept Tat: {concept_tag} \n\n"
+                 "Concept Tag: {concept_tag} \n\n"
                  "Original Subjective Question: \n {question_text} \n\n"
+                 
                  "Convert this into MCQ format")
             ])
         

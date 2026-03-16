@@ -19,6 +19,7 @@ class MCQRepository:
             concept_tag = original_sub_q.concept_tag,
             question_text = mcq_data["question_text"],
             options = mcq_data["options"],
+            correct_answer = mcq_data['correct_answer'],
             explanation = mcq_data["explanation"],
             question_type = "mcq",
             a_values  = [0.0, 0.0],

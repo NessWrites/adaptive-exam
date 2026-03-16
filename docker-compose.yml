@@ -36,7 +36,8 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/adaptive_exam_db
     ports:
       - "8000:8000"
-    command: python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    # command: python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: bash -c "python -m alembic -c backend/alembic.ini upgrade head && python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
       - .:/app
     depends_on:

@@ -83,8 +83,9 @@ class SubjectiveQuestion(Question):
     
 class MCQQuestion(Question):
     __tablename__ = 'mcq_questions_converted'
-    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key = True)
-    # options = Column(JSON, nullable= False)
-    # correct_answer = Column(JSON, nullable= False)
+    mcq_id = Column(Integer, primary_key= True)
+    id = Column(Integer, ForeignKey("questions.unique_id"))
+    bloom_level = Column(Integer, nullable= False)
+    derived_from_subjective_id = Column(Integer, ForeignKey("subjective_questions.id"), nullable=False)
     explanation = Column(Text, nullable = True) 
     

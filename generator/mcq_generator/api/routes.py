@@ -8,7 +8,7 @@ from generator.mcq_generator.services.mcq_service import MCQService
 
 router = APIRouter(prefix = "/generator/mcq", tags = ["MCQ Generator"])
 
-@router.post("/convvert/{question_id}") 
+@router.post("/convert/{question_id}") 
 
 async def convert_question(question_id: int, db: Session = Depends(get_db)): 
     """takes an existing subjective qid , converts it into an mcq via gemini and saves it to mcq table"""
