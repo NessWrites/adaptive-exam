@@ -26,7 +26,7 @@ class MCQEngine:
         
         #need to add the marking scheme and answer such as to help the llm to create the answer and distractors successfully 
         
-        async def generate_mcq(self, domain: str, concept_tag: str, question_text: str) -> MCQoutput:
+    async def generate_mcq(self, domain: str, concept_tag: str, question_text: str) -> MCQoutput:
             """Invoke the LangChain pipeline to transform the question """
             chain = self.prompt | self.llm 
             result = await chain.ainvoke({
