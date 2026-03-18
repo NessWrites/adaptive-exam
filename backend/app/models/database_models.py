@@ -24,6 +24,11 @@ class Question(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
+    #polymorphic config : 
+    __mapper_args__= {
+        "polymorphic_on": question_type,
+        "polymorphic_identity": "question",
+    }
 
 class ExamSession(Base):
     """Exam session tracking"""
@@ -47,7 +52,6 @@ class ExamSession(Base):
     
     # Relationships
     responses = relationship("Response", back_populates="session", cascade="all, delete-orphan")
-
 
 class Response(Base):
     """Individual question responses"""
@@ -80,12 +84,30 @@ class SubjectiveQuestion(Question):
         CheckConstraint('total_marks <= 5', name='check_total_marks_max'),
     )
     
+    __mapper_args__ = {"polymorphic_identity": "subjective"}
+
+
+    
+    #easily fetch all mcq genrated from this question 
+    derived_mcqs = relationship(
+        "MCQQuestion",
+        back_populates= "source_subjective_question",
+        foreign_keys= "[MCQQuestion.derived_from_subjective_id]")
+    
     
 class MCQQuestion(Question):
     __tablename__ = 'mcq_questions_converted'
-    mcq_id = Column(Integer, primary_key= True)
-    id = Column(Integer, ForeignKey("questions.unique_id"))
+    
+    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key= True)
+    
     bloom_level = Column(Integer, nullable= False)
     derived_from_subjective_id = Column(Integer, ForeignKey("subjective_questions.id"), nullable=False)
+    
     explanation = Column(Text, nullable = True) 
     
+    
+    __mapper_args__ = {"polymorphic_identity": "mcq"}  #
+    source_subjective_question = relationship(
+        "SubjectiveQuestion",
+        back_populates = "derived_mcqs",
+        foreign_keys=[derived_from_subjective_id])

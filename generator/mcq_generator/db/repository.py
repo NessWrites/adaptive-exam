@@ -11,7 +11,7 @@ class MCQRepository:
         """fetch the original subjective question by id"""
         return self.db.query(SubjectiveQuestion).filter(SubjectiveQuestion.id == question_id).first()
     
-    def save_mcq(self, original_sub_q: SubjectiveQuestion, mcq_data: dict) -> MCQQuestion: 
+    def save_mcq(self, original_sub_q: SubjectiveQuestion, mcq_data: dict, target_bloom_level: int) -> MCQQuestion: 
         """Save the newly generated MCQ utilizing you existing MCQQUESTION table mapping """
         
         new_mcq = MCQQuestion(
@@ -24,7 +24,11 @@ class MCQRepository:
             question_type = "mcq",
             a_values  = [0.0, 0.0],
             b_value = 0.0,
-            calibration_status = "pretest"
+            calibration_status = "pretest",
+            
+            bloom_level = target_bloom_level, 
+            derived_from_subjective_id = original_sub_q.id,
+            
                     
         )
         

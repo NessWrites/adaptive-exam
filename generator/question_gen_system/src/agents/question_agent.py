@@ -7,7 +7,7 @@ class HydrationAgent:
     def __init__(self, api_key: str, model_name: str = "gemini-2.5-flash"):
         """
         Initializes Google GenAI (Gemini).
-        Using gemini-1.5-flash as it is fast and supports JSON mode.
+        Using gemini-2.5-flash as it is fast and supports JSON mode.
         """
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(
