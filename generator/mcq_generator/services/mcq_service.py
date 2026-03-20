@@ -5,6 +5,13 @@ from sqlalchemy.orm import Session
 from generator.mcq_generator.db.repository import MCQRepository 
 from generator.mcq_generator.core.ai_engine import MCQEngine 
 
+
+import logging 
+
+# logger = logging.getLogger(__name__)
+
+logger = logging.getLogger("uvicorn.error")
+logger.setLevel(logging.INFO)
 # class MCQService: 
 #     def __init__(self, db: Session): 
 #         self.repo = MCQRepository(db)
@@ -53,22 +60,44 @@ class MCQService:
         
         #handle bloom level logic 
         #user provides levels , otherwise pick "num_variants" unique random levels from [1,2,3,4]
+        VALID_BLOOM_LEVELS = {1,2,3,4}
         
-        if not target_levels: 
-            available_levels = [1,2,3,4]
+        if target_levels: 
+            seen = set() 
+            cleaned = []
+            invalid = []
             
-            count = min(num_variants,4) 
-            target_levels = random.sample(available_levels, count) 
+            for lvl in target_levels: 
+                if lvl not in VALID_BLOOM_LEVELS: 
+                    invalid.append(lvl) 
+                elif lvl not in seen: 
+                    seen.add(lvl)
+                    cleaned.append(lvl)
+                    
+            if invalid: 
+                raise ValueError(f" Invalid Bloom levels: {invalid}. Must be integers in [1,2,3,4].")
+        
+            resolved_levels = cleaned 
+            
+        else: 
+            count = min(num_variants, len(VALID_BLOOM_LEVELS))
+            resolved_levels = random.sample(sorted(VALID_BLOOM_LEVELS), count)
+        
+    # resolved_levels is now guaranteed:
+    #   - no duplicates
+    #   - all values in {1, 2, 3, 4}
+    #   - length between 1 and 4
             
         mark_scheme_str = str(subjective_q.mark_schema) if subjective_q.mark_schema else "No marking scheme provided"
-            
+        # print("DEBUG: ABOUT TO CALL AI ENGINE",f"sending marking scheme to AI engine for qid {question_id}:{mark_scheme_str}") 
+        logger.info(f"sending marking scheme to AI engine for qid {question_id}:{mark_scheme_str}")
             #single api call for the batch generation 
             
         batch_results = await self.ai_engine.generate_mcq_batch(
             domain= subjective_q.domain,
             concept_tag= subjective_q.concept_tag,
             question_text= subjective_q.question_text,
-            levels= target_levels,
+            levels= resolved_levels,
             mark_scheme= mark_scheme_str
         )
         

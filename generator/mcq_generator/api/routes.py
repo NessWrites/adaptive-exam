@@ -37,7 +37,11 @@ async def convert_question(question_id: int,
     # except Exception as e: 
     #     raise HTTPException(status_code= 500, detail = f"conversion failed: {str(e)}")
     
-    
+    if target_bloom_levels and len(target_bloom_levels) > 4 : 
+        raise HTTPException(
+            status_code= 422,
+            detail="cannot request more than 4 bloom "
+        )
     try: 
         # If 'levels' is passed, it overrides 'num_variants'
         # If 'levels' is None, 'num_variants' random levels are picked
