@@ -1,0 +1,2133 @@
+{
+  "questions": [
+    {
+      "stem": " A robotic arm's end effector is at position v = [3, 4]^T in a 2D plane. \nTo rotate the arm's end effector by pi/2 radians counterclockwise using a rotation matrix R, \nwhat is the new position v' of the end effector after this rotation?",
+      "answer": "[−4, 3​]^T",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Linear Algebra / Robotics",
+      "distractors": [
+        {
+          "text": "[-3, -4]^T",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing rotation with reflection, thinking the operation reflects the point across both axes",
+          "_sim": 0.6
+        },
+        {
+          "text": "[3, -4]^T",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "inadequate understanding of rotation matrix application, incorrectly applying the rotation to only one axis",
+          "_sim": 0.631578947368421
+        }
+      ]
+    },
+    {
+      "stem": "The derivative of x ^ 2 * ln(x) ",
+      "answer": "2xln(x)+x​",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Calculus / Derivatives",
+      "distractors": [
+        {
+          "text": "x * ln(x)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "inadequate application of the product rule, where one might only differentiate one part of the product and not the entire expression correctly",
+          "_sim": 0.631578947368421
+        }
+      ]
+    },
+    {
+      "stem": "During the training of a neural network, you use gradient descent to minimize a loss function. What does this process involve?",
+      "answer": "Finding the points where the derivative of the loss function is zero.",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Machine Learning / Neural Networks",
+      "distractors": [
+        {
+          "text": "Randomly adjusting the model's parameters until the loss function is minimized",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding of the systematic, gradient-based approach used in gradient descent",
+          "_sim": 0.54421768707483
+        },
+        {
+          "text": "Iteratively adding the derivative of the loss function to the model's parameters",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusion between the roles of addition and subtraction in gradient descent updates",
+          "_sim": 0.6174496644295302
+        },
+        {
+          "text": "Finding the points where the loss function is at its maximum value",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that gradient descent aims to maximize the loss function instead of minimizing it",
+          "_sim": 0.6962962962962963
+        }
+      ]
+    },
+    {
+      "stem": "A rain gauge measures the rainfall rate r(t)= 2*t mm/hour, where t is time in hours. What is the total rainfall (in mm) from t=0 to t=3 hours?",
+      "answer": "9 mm",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Calculus / Integration",
+      "distractors": [
+        {
+          "text": "12 mm",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misapplication of the formula for total rainfall, where the student incorrectly integrates the function or misunderstands the limits of integration.",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "10 mm",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Rounding error or approximation mistake in the calculation of the definite integral, leading to a numerically close but incorrect answer.",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "6 mm",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that the rainfall rate is constant, rather than increasing linearly with time, leading to incorrect calculation of total rainfall.",
+          "_sim": 0.75
+        },
+        {
+          "text": "8 mm",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrect calculation of the definite integral, such as mistaking the average value of the function over the interval for the total accumulation.",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "stem": "In a certain locality, 6% of men have diabetes and 3% of women have diabetes. The total population is divided in the ratio 32 in favour of women. If a person is selected at random from among all those with diabetes, what is the probability that the person is a man?",
+      "answer": "4/7",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Probability / Conditional Probability",
+      "distractors": [
+        {
+          "text": "4/14",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "8/7",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "5/8",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "8/14",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.2857142857142857
+        }
+      ]
+    },
+    {
+      "stem": "What’s the Standard deviation for the following sample data 2,4,6,8,10 and 12",
+      "answer": "3.42",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Statistics / Standard Deviation",
+      "distractors": [
+        {
+          "text": "6.84",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "3.52",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "3.32",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "1.71",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "stem": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+      "answer": "There is a 2% chance that the new homepage (Version B) is better than the current homepage (Version A).",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Statistics / Hypothesis Testing",
+      "distractors": [
+        {
+          "text": "The probability that the results are due to chance is 98%, so the new design is likely to be an improvement",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly inverting the p-value to conclude the opposite of what it actually indicates about the null hypothesis",
+          "_sim": 0.34285714285714286
+        },
+        {
+          "text": "There is a 98% chance that the new homepage (Version B) is significantly different from the current homepage (Version A)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the p-value with the confidence level or misinterpreting it as a direct measure of significance",
+          "_sim": 0.8251121076233184
+        }
+      ]
+    },
+    {
+      "stem": "Which of the following are keywords in python ?",
+      "answer": "yield",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Python / Programming",
+      "distractors": [
+        {
+          "text": "lambda",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misidentifying the yield keyword with anonymous functions created by the lambda keyword",
+          "_sim": 0.36363636363636365
+        },
+        {
+          "text": "print",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistaking the yield keyword for a function that outputs values directly, similar to how print is used for output",
+          "_sim": 0.2
+        },
+        {
+          "text": "break",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly assuming yield is used for flow control, similar to how break is used to exit loops",
+          "_sim": 0.2
+        },
+        {
+          "text": "return",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the yield keyword with the return statement, which serves a different purpose in Python functions",
+          "_sim": 0.18181818181818182
+        }
+      ]
+    },
+    {
+      "stem": "Suppose d = {\"Ben\": 40, \"Ten\": 45}. To obtain the number of entries in the dictionary, which command do we use?",
+      "answer": "len(d)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / Data Structures",
+      "distractors": [
+        {
+          "text": "len(d.keys())",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "partial understanding that len() is used to get the number of items, but mistakenly applying it to dictionary keys",
+          "_sim": 0.631578947368421
+        },
+        {
+          "text": "d.keys()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the number of entries in a dictionary is obtained by getting its keys",
+          "_sim": 0.2857142857142857
+        },
+        {
+          "text": "d.items()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the number of entries in a dictionary is obtained by getting its items",
+          "_sim": 0.26666666666666666
+        },
+        {
+          "text": "d.values()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the number of entries in a dictionary is obtained by getting its values",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "stem": "Debug the code ",
+      "answer": "No Error, the works",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Python / Debugging",
+      "distractors": [
+        {
+          "text": "The code has a logical error due to incorrect indentation of the loop",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that indentation issues in Python always lead to logical errors",
+          "_sim": 0.29545454545454547
+        },
+        {
+          "text": "The code will throw a runtime error because of an undefined variable",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that all variable references in Python will result in runtime errors if not defined",
+          "_sim": 0.27586206896551724
+        },
+        {
+          "text": "The code has a syntax error due to a missing colon after the function definition",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that Python syntax errors are always due to missing punctuation",
+          "_sim": 0.26262626262626265
+        },
+        {
+          "text": "The code will not compile due to a missing import statement for a required library",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that Python requires explicit import statements for all standard library functions",
+          "_sim": 0.15841584158415842
+        }
+      ]
+    },
+    {
+      "stem": "You are designing a system with different types of sensors. Using Object-Oriented Programming (OOP) principles, how would you best represent these sensors?",
+      "answer": "Designing a class hierarchy of sensors",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Programming / OOP",
+      "distractors": [
+        {
+          "text": "Using a single class to represent all sensor types",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "This option reflects a misconception that a single class can handle all types of sensors without the need for inheritance or polymorphism, ignoring the benefits of modularity and extensibility in OOP.",
+          "_sim": 0.5
+        },
+        {
+          "text": "Defining an interface for sensors without a class hierarchy",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "This option partially understands the use of interfaces in defining contracts for sensors but misses the importance of a class hierarchy in establishing relationships and facilitating polymorphic behavior among different sensor types.",
+          "_sim": 0.5154639175257731
+        },
+        {
+          "text": "Creating separate functions for each sensor type",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "This option represents a procedural programming approach, misunderstanding the object-oriented principle of encapsulating data and behavior into classes and objects.",
+          "_sim": 0.4186046511627907
+        },
+        {
+          "text": "Implementing sensors as standalone modules without classes",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "This choice reflects a misconception that OOP principles are not necessary for organizing sensor code, overlooking the advantages of classes in promoting code reuse, abstraction, and organization.",
+          "_sim": 0.2708333333333333
+        }
+      ]
+    },
+    {
+      "stem": "What is the space complexity for deleting a linked list?",
+      "answer": "O(1)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Data Structures / Complexity",
+      "distractors": [
+        {
+          "text": "O(log n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusion with search or insertion operations in a linked list, which may have logarithmic time complexity, but not applicable to deletion",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n log n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misapplication of time complexity of sorting algorithms to space complexity of deletion operation",
+          "_sim": 0.42857142857142855
+        },
+        {
+          "text": "O(2^n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "gross overestimation due to misunderstanding of exponential growth in relation to linked list operations",
+          "_sim": 0.6
+        },
+        {
+          "text": "O(n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that deleting a linked list requires iterating over all nodes, leading to linear space complexity",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "stem": "Which of the following algorithm always manages to reach the final goal state with the least cost path?",
+      "answer": "A* Search",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Algorithms / Search",
+      "distractors": [
+        {
+          "text": "Depth-First Search",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly assuming depth-first search is guaranteed to find the least cost path due to its ability to explore as far as possible along each branch",
+          "_sim": 0.5185185185185185
+        },
+        {
+          "text": "Breadth-First Search",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding that breadth-first search always finds the least cost path due to its exhaustive nature",
+          "_sim": 0.5517241379310345
+        },
+        {
+          "text": "Greedy Search",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that greedy search, which makes locally optimal choices, always leads to the globally optimal solution with the least cost",
+          "_sim": 0.6363636363636364
+        },
+        {
+          "text": "Dijkstra's Algorithm",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing A* search with Dijkstra's algorithm, which also finds the shortest path but does not use heuristics",
+          "_sim": 0.20689655172413793
+        }
+      ]
+    },
+    {
+      "stem": "You need to efficiently find a specific record in a large sorted database. Which algorithm would you use?",
+      "answer": "Binary Search",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Algorithms / Binary Search",
+      "distractors": [
+        {
+          "text": "Depth-First Search",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misapplying a graph traversal algorithm to a sorted database, due to a lack of understanding of the differences between graph and linear data structures",
+          "_sim": 0.5806451612903226
+        },
+        {
+          "text": "Bubble Sort",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the purpose of sorting algorithms with the task of finding a specific record, and mistakenly choosing a sorting algorithm",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "Hashing",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "overgeneralizing the use of hashing for fast lookup, without considering the requirement for the database to be sorted, which hashing does not guarantee",
+          "_sim": 0.2
+        },
+        {
+          "text": "Linear Search",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that searching through the database one record at a time is the most straightforward approach, despite its inefficiency for large datasets",
+          "_sim": 0.8461538461538461
+        }
+      ]
+    },
+    {
+      "stem": "What is the next number in this sequence of numbers 21,13,34,47,71,18, ?",
+      "answer": "89",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Logic / Pattern Recognition",
+      "distractors": [
+        {
+          "text": "90",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "88",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "178",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.4
+        },
+        {
+          "text": "44",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "stem": "We present a novel neural architecture, Sparse Attentive Feature Aggregation (SAFA), designed to enhance feature representation in high-dimensional image data. SAFA utilizes a sparse attention mechanism, focusing on salient image regions while minimizing computational overhead. This is achieved through a learnable gating function that dynamically selects relevant feature channels. By applying a localized attention kernel, SAFA aggregates contextual information within these salient regions, leading to improved object detection and segmentation performance. Experiments on benchmark datasets demonstrate that SAFA outperforms existing attention mechanisms, particularly in scenarios with complex object occlusions and varying illumination conditions.How does SAFA minimize computational overhead?",
+      "answer": "By simply applying the problem in complex object occlusion and varying illumination condition",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Machine Learning / Research Comprehension",
+      "distractors": [
+        {
+          "text": "By ignoring contextual information and focusing solely on individual pixels",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partial truth that attention mechanisms focus on specific regions, but misapplying this concept to ignore contextual information",
+          "_sim": 0.44047619047619047
+        },
+        {
+          "text": "By averaging feature channels instead of selecting relevant ones",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that simple averaging is an effective method for feature aggregation, rather than selective attention mechanisms",
+          "_sim": 0.3821656050955414
+        },
+        {
+          "text": "By applying a fixed attention kernel to all image regions",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding of the role of learnable gating functions in dynamically selecting relevant feature channels",
+          "_sim": 0.36
+        },
+        {
+          "text": "By using a large number of parameters to process all image regions equally",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that increasing parameters always leads to better performance, ignoring the concept of sparse attention mechanisms",
+          "_sim": 0.32335329341317365
+        }
+      ]
+    },
+    {
+      "stem": "Determine the tribe of each islander.",
+      "answer": "Truth-tellers: A,C  Liars: B",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Logic / Reasoning",
+      "distractors": []
+    },
+    {
+      "stem": "Puzzle",
+      "answer": "4",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Logic / Puzzles",
+      "distractors": [
+        {
+          "text": "5",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "3",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "8",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "stem": "The list all_numbers contains numbers from 1 to 100. Which of the following code creates a new list even_numbers that contains all even numbers filtered from the list all_numbers.",
+      "answer": "even_numbers = [i for i in all_numbers if i%2==0]",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Python / List Comprehension",
+      "distractors": []
+    },
+    {
+      "stem": "What is the output of the following code snippet.\ny = 0\ntry:\nresult = x/y\nprint (result)\nexcept ZeroDivisionError:\nprint(\"Division by zero is not allowed.\")\nexcept NameError:\nprint(\"The variables is/are not defined.\")\nexcept:\nprint(\"Error occurred during division\")",
+      "answer": "The variables is/are not defined.",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Python / Exception Handling",
+      "distractors": [
+        {
+          "text": "The result is infinity",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The student incorrectly applies mathematical concepts to programming, believing that division by zero in code would result in infinity, not recognizing the exception handling mechanism in Python.",
+          "_sim": 0.5454545454545454
+        },
+        {
+          "text": "Division by zero is not allowed.",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The student mistakenly thinks that the code will attempt to divide by zero before checking if the variable 'x' is defined, which is a common misconception about the order of operations in exception handling.",
+          "_sim": 0.4
+        },
+        {
+          "text": "The result is undefined",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The student misunderstands the concept of variable definition and initialization, thinking that an uninitialized variable would lead to an undefined result rather than a NameError.",
+          "_sim": 0.6785714285714286
+        },
+        {
+          "text": "Error occurred during division",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The student believes that any error during the division operation will trigger the general exception handler, not realizing that specific exceptions like NameError take precedence.",
+          "_sim": 0.31746031746031744
+        }
+      ]
+    },
+    {
+      "stem": "Consider a sentence from an ML paper “Our approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.” What does “circumvents” imply in this context?",
+      "answer": "Avoids or bypasses",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Vocabulary / Technical Writing",
+      "distractors": [
+        {
+          "text": "Directly addresses",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing 'circumvents' with confronting or tackling the issue head-on",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "Completely solves",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Overestimation of 'circumvents' to mean a complete resolution of the issue",
+          "_sim": 0.2857142857142857
+        },
+        {
+          "text": "Improves upon",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that 'circumvents' implies an enhancement or upgrade rather than avoidance",
+          "_sim": 0.25806451612903225
+        },
+        {
+          "text": "Mitigates the effects of",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partial understanding, thinking 'circumvents' means reducing the severity but not avoiding",
+          "_sim": 0.19047619047619047
+        }
+      ]
+    },
+    {
+      "stem": "The orthogonal basis vectors  ðÌ   and  ðÌ   are transformed by  T  to a new set of orthogonal basis vectors  3ðÌ â2ðÌ   and  4ðÌ +6ðÌ, respectively. Find the transformation matrix  T.",
+      "answer": "B",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Linear Algebra / Transformations",
+      "distractors": []
+    },
+    {
+      "stem": "A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?",
+      "answer": "(b) Some sensor signals are linearly dependent.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Linear Algebra / Matrix Rank",
+      "distractors": [
+        {
+          "text": "The sensor network is not fully connected",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly relating the rank of the matrix to the connectivity of the sensor network rather than signal dependency",
+          "_sim": 0.4090909090909091
+        },
+        {
+          "text": "The matrix A has a determinant of zero",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Falsely equating a low-rank matrix with a matrix having a zero determinant, which applies to square matrices only",
+          "_sim": 0.3058823529411765
+        },
+        {
+          "text": "The number of sensors is less than the number of signal transformations",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the relationship between the rank of a matrix and the dimensions of the matrix",
+          "_sim": 0.288135593220339
+        },
+        {
+          "text": "The matrix A is not invertible",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the concept of matrix rank with invertibility, which is a separate property",
+          "_sim": 0.2857142857142857
+        }
+      ]
+    },
+    {
+      "stem": "An acoustic engineer is designing a noise-canceling system.  They decompose a sound wave into orthogonal components.  What does the orthogonality of these components signify in terms of the sound waves?",
+      "answer": "c) The components represent independent, non-overlapping sound sources.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Linear Algebra / Orthogonality",
+      "distractors": [
+        {
+          "text": "b) The components are perpendicular in a physical sense, like vectors in 3D space",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misinterpreting the mathematical concept of orthogonality as a physical, spatial relationship rather than an abstract, algebraic one",
+          "_sim": 0.4868421052631579
+        },
+        {
+          "text": "e) The components represent the maximum and minimum amplitudes of the sound wave",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the concept of orthogonality with the idea of extremal values, such as maximum and minimum amplitudes, which is unrelated to the decomposition into orthogonal components",
+          "_sim": 0.543046357615894
+        },
+        {
+          "text": "a) The components have the same frequency but different amplitudes",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing orthogonality with the concept of having the same frequency, which is a different property of sound waves",
+          "_sim": 0.40875912408759124
+        },
+        {
+          "text": "d) The components can be combined using simple arithmetic operations to reconstruct the original sound wave",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the nature of orthogonal components, which require linear combinations, not simple arithmetic operations, to accurately reconstruct the original signal",
+          "_sim": 0.39325842696629215
+        }
+      ]
+    },
+    {
+      "stem": "A digital image is represented as a matrix. Using Singular Value Decomposition (SVD), you find that the first few singular values capture most of the image's information. What is the practical application of this?",
+      "answer": "Compressing the image by discarding less significant values.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Linear Algebra / SVD",
+      "distractors": [
+        {
+          "text": "Identifying edges in the image using the first few singular values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly applying SVD to edge detection, which is a different application of image processing techniques",
+          "_sim": 0.5396825396825397
+        },
+        {
+          "text": "Improving the image's color palette by modifying the singular vectors",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the purpose of SVD in image representation with color manipulation, which involves a different aspect of image processing",
+          "_sim": 0.5581395348837209
+        },
+        {
+          "text": "Restoring a corrupted image by replacing the first few singular values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misapplying the concept of SVD in image restoration, where the focus is on repairing damaged images rather than compressing or representing them",
+          "_sim": 0.5846153846153846
+        },
+        {
+          "text": "Enhancing the image by amplifying less significant values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the role of singular values in representing image information, thinking that amplifying less significant values would enhance the image",
+          "_sim": 0.7863247863247863
+        }
+      ]
+    },
+    {
+      "stem": "A sensor's readings are known to have a linear relationship with the actual values, but with some noise. You have a set of measured data points (x,y,) and want to find the best-fit line y=mx+c to calibrate the sensor. What is the goal of using least squares in this context?",
+      "answer": "To minimize the sum of the squared differences between the measured and predicted values.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Linear Algebra / Least Squares",
+      "distractors": [
+        {
+          "text": "To determine the slope of the line that passes through the most data points",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that the goal is to find a line that intersects the most points rather than minimizing the squared differences",
+          "_sim": 0.5
+        },
+        {
+          "text": "To maximize the sum of the measured and predicted values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the goal of least squares as maximization instead of minimization",
+          "_sim": 0.7448275862068966
+        },
+        {
+          "text": "To find the average difference between the measured and predicted values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the concept of least squares with a simple average of differences",
+          "_sim": 0.8074534161490683
+        }
+      ]
+    },
+    {
+      "stem": "Given function f(x, y) = sin(x) * y ^ 2 . Compute f_{xy}",
+      "answer": "2ycosx",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Calculus / Partial Derivatives",
+      "distractors": [
+        {
+          "text": "cosx * y",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "forgetting to differentiate the y^2 term properly and misunderstanding the application of partial derivatives to the given function",
+          "_sim": 0.5714285714285714
+        }
+      ]
+    },
+    {
+      "stem": "A company's profit P (in dollars) from selling x units of a product is given by P(x) = -0.01x^2 + 300x - 200000. How many units should the company sell to maximize profit?",
+      "answer": "15000 units",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Calculus / Optimization",
+      "distractors": [
+        {
+          "text": "20000 units",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistakenly assuming the maximum profit is achieved when the derivative of the profit function is at its maximum value, rather than when it equals zero",
+          "_sim": 0.8181818181818182
+        },
+        {
+          "text": "30000 units",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "failing to account for the negative leading coefficient in the quadratic function, leading to an incorrect assumption about the direction of the parabola's opening",
+          "_sim": 0.8181818181818182
+        },
+        {
+          "text": "2500 units",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly identifying the maximum profit point as where the function's slope changes from positive to negative without properly finding the critical points",
+          "_sim": 0.8571428571428571
+        },
+        {
+          "text": "10000 units",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the maximum profit occurs at the vertex of the parabola without considering the actual function given",
+          "_sim": 0.9090909090909091
+        }
+      ]
+    },
+    {
+      "stem": "For a function w=g(x,y,z)= exyz + xy², Determine the gradient vector?",
+      "answer": "∇g=(yze^xyz+y^2,xze^xyz+2xy,xye^xyz)​",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Calculus / Gradient Vector",
+      "distractors": [
+        {
+          "text": "(ye^xyz, xe^xyz, xye^xyz)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Forgetting to apply the product rule and chain rule correctly when differentiating the function with respect to each variable.",
+          "_sim": 0.7419354838709677
+        },
+        {
+          "text": "(yze^xyz + y, xze^xyz + x, xye^xyz + z)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly adding the variables themselves to the partial derivatives, rather than applying the correct differentiation rules.",
+          "_sim": 0.7631578947368421
+        },
+        {
+          "text": "(yze^xyz, xze^xyz, xye^xyz)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Omitting the additional terms from the partial derivatives with respect to x, y, and z, which is a common mistake when computing gradient vectors.",
+          "_sim": 0.78125
+        }
+      ]
+    },
+    {
+      "stem": "The rate of water flow into a tank is given by R(t) = 100*t liters per minute, where t is in minutes. How much water enters the tank between t = 1 and t = 5 minutes?",
+      "answer": "1200 liters",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Calculus / Integration",
+      "distractors": [
+        {
+          "text": "1000 liters",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the rate of water flow is constant, rather than increasing linearly with time",
+          "_sim": 0.9090909090909091
+        },
+        {
+          "text": "1250 liters",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly applying the average rate of water flow over the time interval, rather than integrating the rate function",
+          "_sim": 0.9090909090909091
+        },
+        {
+          "text": "1100 liters",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "miscalculation of the definite integral, such as incorrectly applying the power rule of integration",
+          "_sim": 0.9090909090909091
+        },
+        {
+          "text": "1300 liters",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "failure to evaluate the definite integral over the correct time interval, resulting in an incorrect calculation of the total water entered",
+          "_sim": 0.9090909090909091
+        }
+      ]
+    },
+    {
+      "stem": "Suppose you have a 60% chance of passing this exam and you are given 4 chances, each having similar but different questions. Assuming that each exam is independent of other, what is the probability that you will pass the majority of the time?",
+      "answer": "4C3*0.6^3*0.4 + 4C4 * 0.6^4",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Probability / Binomial Distribution",
+      "distractors": [
+        {
+          "text": "0.6^4",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the probability of passing all four exams is the same as passing the majority of the time, ignoring the cases of passing three out of four exams",
+          "_sim": 0.3125
+        },
+        {
+          "text": "1 - (0.4^4)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the probability of passing at least one exam is equivalent to passing the majority of the time, ignoring the actual number of exams passed",
+          "_sim": 0.2631578947368421
+        }
+      ]
+    },
+    {
+      "stem": "A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?",
+      "answer": "It multiplies the prior probability by the likelihood of the content given spam.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Probability / Bayes Theorem",
+      "distractors": [
+        {
+          "text": "It uses the likelihood of the content given not spam to update its belief",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly applying the concept of likelihood to the complement event instead of the event of interest",
+          "_sim": 0.6143790849673203
+        },
+        {
+          "text": "It takes the average of the prior probability and the likelihood of the content given spam",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding of how to combine prior knowledge with new evidence, mistakenly using averaging instead of multiplication",
+          "_sim": 0.8235294117647058
+        }
+      ]
+    },
+    {
+      "stem": "You are tasked to create a statistical distribution based estimate for a server. If the average rate is 5 requests per minute, what is the probability of receiving exactly 7 requests in a minute?",
+      "answer": "e^(−5)∗5^7 / 7!",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Probability / Poisson Distribution",
+      "distractors": [
+        {
+          "text": "e^(-7) * 7^5 / 5!",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the average rate with the number of requests and misapplying the Poisson distribution formula",
+          "_sim": 0.5
+        },
+        {
+          "text": "1 - (e^(-5) * 5^6 / 6!)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding the concept of probability in the Poisson distribution and attempting to calculate the complement of the probability",
+          "_sim": 0.5789473684210527
+        }
+      ]
+    },
+    {
+      "stem": "A continuous random variable T has a uniform distribution between 0 and 10. What is the expected value of T?",
+      "answer": "5",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Probability / Uniform Distribution",
+      "distractors": [
+        {
+          "text": "6",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "10",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "stem": "For a standard normal distribution, what is the value of the third central moment?",
+      "answer": "3",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Statistics / Moments",
+      "distractors": [
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "6",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "1",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "stem": "A large population has a mean weight of 150 lbs and a standard deviation of 20 lbs. If you take a random sample of 100 individuals, what is the approximate standard deviation of the sample mean?",
+      "answer": "20 lbs",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Statistics / Central Limit Theorem",
+      "distractors": [
+        {
+          "text": "4 lbs",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistakenly applying a rule of thumb or incorrect formula for calculating the standard deviation of the sample mean, such as dividing by the sample size instead of its square root",
+          "_sim": 0.7272727272727273
+        },
+        {
+          "text": "10 lbs",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly applying the formula for the standard deviation of the sample mean, using the wrong operation or value",
+          "_sim": 0.8333333333333334
+        },
+        {
+          "text": "40 lbs",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the standard deviation of the sample with the standard deviation of the population, or misunderstanding how the Central Limit Theorem applies",
+          "_sim": 0.8333333333333334
+        },
+        {
+          "text": "2 lbs",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the standard deviation of the sample mean is equal to the population standard deviation divided by the sample size, rather than the square root of the sample size",
+          "_sim": 0.9090909090909091
+        }
+      ]
+    },
+    {
+      "stem": "If X and Y are uncorrelated variable then this implies",
+      "answer": "Absence of any linear relationship between X & Y",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Statistics / Correlation",
+      "distractors": [
+        {
+          "text": "Independence of X and Y",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Equating uncorrelatedness with statistical independence, which is a stronger condition",
+          "_sim": 0.3380281690140845
+        },
+        {
+          "text": "No causal relationship between X and Y",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing correlation with causation, assuming uncorrelated variables cannot have a causal relationship",
+          "_sim": 0.7209302325581395
+        },
+        {
+          "text": "Presence of a strong nonlinear relationship between X and Y",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding that uncorrelated variables cannot have a nonlinear relationship",
+          "_sim": 0.8037383177570093
+        }
+      ]
+    },
+    {
+      "stem": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+      "answer": "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Statistics / Hypothesis Testing",
+      "distractors": [
+        {
+          "text": "There is a 98% chance that the new homepage (Version B) is more effective than the current homepage (Version A)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the p-value with the confidence level or misinterpreting it as a direct probability of Version B being better",
+          "_sim": 0.5454545454545454
+        }
+      ]
+    },
+    {
+      "stem": "What is the result of [1, 2, 3] + \"4\"",
+      "answer": "[1, 2, 3, '4']",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Python / Data Types",
+      "distractors": [
+        {
+          "text": "error or undefined",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "expecting that the operation of adding a string to a list would result in an error due to type mismatch",
+          "_sim": 0.125
+        }
+      ]
+    },
+    {
+      "stem": "Given a = [1,2,3,4,5,6]. Here, which of the following will remove element 4 from the list?",
+      "answer": "a.remove(4)",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Python / Lists",
+      "distractors": [
+        {
+          "text": "a.clear()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Overgeneralizing the removal process, thinking that clearing the entire list is the way to remove a specific element.",
+          "_sim": 0.5
+        },
+        {
+          "text": "a.pop(3)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the index of the element to be removed with its value, leading to using the pop method with an index instead of the remove method with the value.",
+          "_sim": 0.5263157894736842
+        },
+        {
+          "text": "del a[3]",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the difference between deleting an element by its index and removing it by its value, leading to using the del statement with an index.",
+          "_sim": 0.10526315789473684
+        },
+        {
+          "text": "a = [1,2,3,5,6]",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Thinking that reassigning the list without the element is equivalent to removing the element from the original list, not understanding the difference between list reassignment and in-place modification.",
+          "_sim": 0.07692307692307693
+        }
+      ]
+    },
+    {
+      "stem": "What is the output of the following code snippet?",
+      "answer": "Division by zero is not allowed.",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Python / Exception Handling",
+      "distractors": [
+        {
+          "text": "The code will throw an overflow error",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Student incorrectly associates division by zero with an overflow, which typically occurs from excessively large numbers",
+          "_sim": 0.2608695652173913
+        },
+        {
+          "text": "The code will return zero",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Student mistakenly thinks that any number divided by zero equals zero, ignoring the fundamental rule against division by zero",
+          "_sim": 0.21052631578947367
+        },
+        {
+          "text": "The code will return NaN",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Student confuses division by zero with an undefined result in mathematics, thinking it returns Not a Number",
+          "_sim": 0.17857142857142858
+        },
+        {
+          "text": "The code will return infinity",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Student believes that division by zero results in infinity, rather than an error",
+          "_sim": 0.16393442622950818
+        }
+      ]
+    },
+    {
+      "stem": "Which function overloads the > operator?",
+      "answer": "__gt__()",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / Operator Overloading",
+      "distractors": [
+        {
+          "text": "__cmp__",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "relying on an outdated comparison method from older Python versions",
+          "_sim": 0.5333333333333333
+        },
+        {
+          "text": "__compare__",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing a single function handles all comparison operations",
+          "_sim": 0.42105263157894735
+        },
+        {
+          "text": "__greater__",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "assuming the function name directly corresponds to the operator symbol",
+          "_sim": 0.631578947368421
+        },
+        {
+          "text": "__lt__",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the greater than operator with the less than operator",
+          "_sim": 0.7142857142857143
+        }
+      ]
+    },
+    {
+      "stem": "What is the output of the following codenew_list = [2*x for x in range(1,5)]print(new_list)",
+      "answer": "[2, 4, 6, 8]",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Python / List Comprehension",
+      "distractors": [
+        {
+          "text": "[4, 8, 12, 16]",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistakenly doubling the multiplier in the list comprehension",
+          "_sim": 0.5384615384615384
+        },
+        {
+          "text": "[1, 3, 5, 7]",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the list comprehension iterates over the range without applying the multiplication operation",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "[0, 2, 4, 6, 8]",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding the start value of the range function, including zero as the first element",
+          "_sim": 0.8888888888888888
+        }
+      ]
+    },
+    {
+      "stem": "You want to extract all email addresses from a webpage's HTML content. What Python module is most suitable for this task?",
+      "answer": "RegEx",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / Regular Expressions",
+      "distractors": [
+        {
+          "text": "HTMLParser",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that a basic HTML parser can handle complex pattern extraction tasks without additional tools",
+          "_sim": 0.26666666666666666
+        },
+        {
+          "text": "urllib",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the module for fetching URLs with the task of parsing the content of those URLs",
+          "_sim": 0.18181818181818182
+        },
+        {
+          "text": "re.sub from the subprocess module",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly combining concepts, thinking that regular expressions are part of the subprocess module",
+          "_sim": 0.15789473684210525
+        },
+        {
+          "text": "BeautifulSoup",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistakenly thinking that an HTML parsing library is sufficient for extracting specific patterns like email addresses",
+          "_sim": 0.1111111111111111
+        }
+      ]
+    },
+    {
+      "stem": "If Z is a NumPy array, what does the following code do?Z[(4 < Z) & (Z < 8)] *= -1",
+      "answer": "Multiply all elements greater than 4 and less than or equal to 9 by -1",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / NumPy",
+      "distractors": []
+    },
+    {
+      "stem": "You have a large dataset in a CSV file and need to calculate the average sales per product category. Which Pandas function would you use?",
+      "answer": "data.groupby().mean()",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Python / Pandas",
+      "distractors": [
+        {
+          "text": "data.pivot_table()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding that pivot tables are necessary for calculating averages when groupby is sufficient",
+          "_sim": 0.46153846153846156
+        },
+        {
+          "text": "data.mean()",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "assuming that the mean function can directly calculate the average sales per product category without grouping",
+          "_sim": 0.6875
+        },
+        {
+          "text": "data.apply(np.mean)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly applying a function to the entire dataset without considering the need for grouping by product category",
+          "_sim": 0.7
+        }
+      ]
+    },
+    {
+      "stem": "What command implies that we are making two figures side-by-side ?",
+      "answer": "plt.subplot(1,2,1)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / Matplotlib",
+      "distractors": []
+    },
+    {
+      "stem": "Which of the following commands would you use to save the version of all the modules installed in your current environment?",
+      "answer": "pip freeze >> requirements.txt",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / Package Management",
+      "distractors": [
+        {
+          "text": "python -m pip list >> requirements.txt",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusion between listing packages and saving their versions, with an incorrect command syntax",
+          "_sim": 0.7058823529411765
+        },
+        {
+          "text": "pip install requirements.txt",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that installing from a requirements file also saves the current environment's package versions",
+          "_sim": 0.7241379310344828
+        },
+        {
+          "text": "pip list > requirements.txt",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "partial knowledge of the correct command, with incorrect redirection operator and missing 'freeze' subcommand",
+          "_sim": 0.8070175438596491
+        }
+      ]
+    },
+    {
+      "stem": "You are working with a data structure as shown below where data points are stored in nodes and each node points to the next node. What is the space complexity for deleting a point C from this data structure?",
+      "answer": "O(1)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Data Structures / Linked Lists",
+      "distractors": [
+        {
+          "text": "O(log n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusion with search operations in linked lists, thinking deletion also requires a logarithmic search time",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n^2)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Overestimation of the complexity due to misunderstanding the efficiency of pointer updates in linked lists",
+          "_sim": 0.6
+        },
+        {
+          "text": "O(2^n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Exponential growth misconception, mistakenly applying principles from recursive algorithms to a simple linked list operation",
+          "_sim": 0.6
+        },
+        {
+          "text": "O(n)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that deleting a node in a linked list requires traversing the entire list",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "stem": "In a recommendation system, users and items can be represented as nodes in a graph, and their interactions (e.g., ratings, purchases) as edges. Which graph algorithm approach could be used to find similar items for a given user?",
+      "answer": "Graph clustering/community detection: Groups nodes into clusters based on their connectivity",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Algorithms / Graph Algorithms",
+      "distractors": [
+        {
+          "text": "Topological sorting: Orders nodes based on their dependencies",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the concept of ordering nodes with the task of grouping similar items, which requires clustering",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "Breadth-first search (BFS): Explores all nodes at a given depth level",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly assuming that exploring all nodes in a level order will reveal clusters of similar items without considering connectivity patterns",
+          "_sim": 0.3105590062111801
+        },
+        {
+          "text": "Minimum spanning tree: Finds the subgraph with the minimum total edge weight",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the goal of finding similar items as requiring the identification of the most efficient subgraph, rather than clusters of densely connected nodes",
+          "_sim": 0.19047619047619047
+        },
+        {
+          "text": "Dijkstra's algorithm: Finds the shortest path between two nodes",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misapplying a well-known graph algorithm to a problem that requires cluster identification, rather than pathfinding",
+          "_sim": 0.18064516129032257
+        }
+      ]
+    },
+    {
+      "stem": "A web browser maintains a history of pages visited by the user. When the user clicks the \"Back\" button, the browser loads the most recently visited page. Which data structure would be best suited to implement this functionality?",
+      "answer": "Stack",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Data Structures / Stack",
+      "distractors": [
+        {
+          "text": "Linked List",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The misconception that a linked list, with its ability to insert and delete nodes efficiently, is the most suitable data structure for the browser's history, underestimating the importance of the Last-In-First-Out (LIFO) principle in this context.",
+          "_sim": 0.25
+        },
+        {
+          "text": "Tree",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The misconception that a tree data structure is needed to represent the complex hierarchy of web pages visited, misunderstanding the simplicity of the browser's back button functionality.",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Graph",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "The misconception that a graph is necessary to model the relationships between different web pages, overcomplicating the straightforward nature of the browser's history.",
+          "_sim": 0.2
+        }
+      ]
+    },
+    {
+      "stem": "A beginner programmer is tasked with implementing a sorting algorithm to arrange a small list of numbers in ascending order. She implemented a simple sorting algorithm that repeatedly compares the adjacent elements in a list and swaps them if they are out of order, continuing until the list is fully sorted. What is this algorithm called?",
+      "answer": "Quick Sort",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Algorithms / Sorting",
+      "distractors": [
+        {
+          "text": "Merge Sort",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusion between different sorting algorithms, thinking that any simple sorting method must be merge sort",
+          "_sim": 0.5
+        },
+        {
+          "text": "Insertion Sort",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mixing up algorithms that involve comparing and rearranging elements, thinking insertion sort is the only method for small lists",
+          "_sim": 0.5
+        },
+        {
+          "text": "Selection Sort",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly assuming that selection sort, which also involves comparisons, is the algorithm being described due to its simplicity",
+          "_sim": 0.5
+        },
+        {
+          "text": "Bubble Sort",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misidentification of the algorithm due to its simple iterative comparison and swap process",
+          "_sim": 0.5714285714285714
+        }
+      ]
+    },
+    {
+      "stem": "In git, which of the following commands (in sequence)  are used when we want to reflect a change of file from the local working directory to the staging area and finally to the repository?",
+      "answer": "git commit -> git push",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Git / Version Control",
+      "distractors": [
+        {
+          "text": "git add -> git commit",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding the role of git push in reflecting changes to the repository",
+          "_sim": 0.46511627906976744
+        },
+        {
+          "text": "git pull -> git commit",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the purpose of git pull with git push in updating the repository",
+          "_sim": 0.45454545454545453
+        },
+        {
+          "text": "git add -> git push",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "omitting the necessary git commit step before pushing changes to the repository",
+          "_sim": 0.7804878048780488
+        },
+        {
+          "text": "git commit -> git fetch",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly assuming git fetch updates the repository instead of git push",
+          "_sim": 0.8444444444444444
+        }
+      ]
+    },
+    {
+      "stem": "In which phase of SDLC, the cost of changes is least?",
+      "answer": "Early Stage of Requirement Analysis.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Software Engineering / SDLC",
+      "distractors": [
+        {
+          "text": "After the Implementation Phase",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrect assumption that once the system is implemented, making changes is less costly because the major expenses have already been incurred, ignoring the potential for significant rework and testing costs.",
+          "_sim": 0.3939393939393939
+        },
+        {
+          "text": "At the End of the Design Phase",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Belief that finalizing the design is the point at which changes become more manageable and less expensive, due to a misunderstanding of how design decisions impact subsequent phases.",
+          "_sim": 0.36363636363636365
+        },
+        {
+          "text": "During the Maintenance Phase",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that changes are least costly when the system is already in use and modifications are made as needed, rather than during the initial stages of development.",
+          "_sim": 0.3125
+        },
+        {
+          "text": "Just Before the Testing Phase",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding that changes are less expensive right before testing because it is assumed that testing will reveal necessary changes, and making them just before this phase seems efficient, but overlooks the potential for cascading effects and retesting.",
+          "_sim": 0.3076923076923077
+        }
+      ]
+    },
+    {
+      "stem": "When designing a relational database, what is the primary purpose of defining a \"primary key\"?",
+      "answer": "To uniquely identify each record within a table.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Database / Relational Design",
+      "distractors": [
+        {
+          "text": "To establish relationships between different tables in a database",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the purpose of a primary key with that of a foreign key, which is used to establish relationships between tables.",
+          "_sim": 0.37168141592920356
+        },
+        {
+          "text": "To optimize data storage and reduce memory usage",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the primary purpose of a primary key, thinking it's related to database performance or storage efficiency rather than data uniqueness.",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "To ensure data consistency across the database",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partially confusing the role of a primary key with data integrity constraints, which ensure consistency but are not the primary purpose of a primary key.",
+          "_sim": 0.3191489361702128
+        },
+        {
+          "text": "To provide an index for faster data retrieval",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconceiving the primary key as merely an indexing tool for speeding up queries, rather than a fundamental identifier for each record.",
+          "_sim": 0.3010752688172043
+        }
+      ]
+    },
+    {
+      "stem": "The given Query can also be replaced with_______SELECT name, course_id  FROM instructor, teaches  WHERE instructor_ID= teaches_ID;",
+      "answer": "Select name, course_id from instructor;",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Database / SQL",
+      "distractors": [
+        {
+          "text": "SELECT name, course_id FROM instructor, teaches WHERE instructor_ID = teaches_ID AND course_id = course_id",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "including an unnecessary condition in the WHERE clause, mistakenly thinking it's necessary for the join",
+          "_sim": 0.5241379310344828
+        },
+        {
+          "text": "SELECT name, course_id FROM instructor WHERE instructor_ID IN (SELECT teaches_ID FROM teaches)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "using a subquery instead of a join, demonstrating a lack of understanding of join operations",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "SELECT name, course_id FROM instructor CROSS JOIN teaches WHERE instructor_ID = teaches_ID",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly applying a cross join instead of an inner join, showing confusion between types of joins",
+          "_sim": 0.5891472868217055
+        },
+        {
+          "text": "SELECT name, course_id FROM instructor INNER JOIN teaches ON instructor_ID = teaches_ID",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding of the implicit join syntax, thinking an explicit join is required",
+          "_sim": 0.6031746031746031
+        }
+      ]
+    },
+    {
+      "stem": "GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow?",
+      "answer": "Single Instruction Multiple Data (SIMD)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Computer Architecture / GPU",
+      "distractors": [
+        {
+          "text": "Data Parallelism with Multiple Control Units",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "this option reflects a partial truth, as GPUs do process data in parallel, but the addition of 'multiple control units' misrepresents the SIMD paradigm, where a single control unit issues instructions to multiple execution units",
+          "_sim": 0.43373493975903615
+        },
+        {
+          "text": "Pipelining",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "some students may think that pipelining, a technique for improving instruction-level parallelism, is the primary parallel paradigm used by GPUs, which is a misunderstanding of how GPUs process data",
+          "_sim": 0.12244897959183673
+        }
+      ]
+    },
+    {
+      "stem": "What is the next number in this sequence of numbers 77,49,36,18, __ ?",
+      "answer": "3",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Logic / Pattern Recognition",
+      "distractors": [
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "6",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "1",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "stem": "Consider a sentence from an ML paper âOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.â What does âcircumventsâ imply in this context?",
+      "answer": "Reduces or Attenuate",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Machine Learning ",
+      "distractors": [
+        {
+          "text": "Replaces with an equivalent",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partial truth that 'circumvents' might imply replacing something, but missing the crucial aspect of reducing or attenuating the pitfalls.",
+          "_sim": 0.46808510638297873
+        },
+        {
+          "text": "Increases the impact of",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding of the word 'circumvents' as amplifying the effects of the pitfalls, rather than lessening them.",
+          "_sim": 0.4186046511627907
+        },
+        {
+          "text": "Ignores the existence of",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that 'circumvents' means disregarding the pitfalls, rather than taking an alternative approach to overcome them.",
+          "_sim": 0.4090909090909091
+        },
+        {
+          "text": "Completely avoids",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that 'circumvents' implies a complete elimination of the pitfalls, rather than a reduction or mitigation.",
+          "_sim": 0.2702702702702703
+        }
+      ]
+    },
+    {
+      "stem": "Three individuals, X, Y, and Z, are standing in a line, facing forward. Each is wearing a hat that is either red or blue. They cannot see their own hat.Someone announces, 'At least one of you is wearing a red hat.'X says, 'I do not know the color of my hat.'Y says, 'I do not know the color of my hat.'Z then says, 'I know the color of my hat.'What color is Z's hat,",
+      "answer": "Red",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Logic / Deductive Reasoning",
+      "distractors": [
+        {
+          "text": "Blue",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the implication of Z's statement, assuming that knowing one's hat color requires seeing another's red hat, which is not necessary given the initial announcement.",
+          "_sim": 0.2857142857142857
+        },
+        {
+          "text": "It could be either red or blue",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Failure to apply deductive reasoning fully, not considering how X and Y's lack of knowledge after the announcement affects the possible colors of Z's hat.",
+          "_sim": 0.18181818181818182
+        }
+      ]
+    },
+    {
+      "stem": "Guess the correct answer.",
+      "answer": "F",
+      "type": "mathematical",
+      "difficulty": "hard",
+      "concept_tag": "Logic / Puzzles",
+      "distractors": []
+    },
+    {
+      "stem": "A 3D graphics programmer is calculating the diffuse reflection of light from a surface.  This involves projecting the light vector onto the surface normal.  If the projection of the light vector onto the normal vector is the zero vector, what does this imply?",
+      "answer": "The light source is grazing the surface (parallel to the surface).",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Linear Algebra / Graphics",
+      "distractors": [
+        {
+          "text": "The surface normal is the zero vector",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusion between the projection result being zero and the normal vector itself being zero",
+          "_sim": 0.42718446601941745
+        },
+        {
+          "text": "The light vector has zero magnitude",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that a zero projection implies the light vector has no magnitude, rather than being parallel to the surface",
+          "_sim": 0.33663366336633666
+        },
+        {
+          "text": "The surface is not reflecting any light",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding that a zero projection of the light vector onto the normal implies no reflection, rather than the light being parallel to the surface",
+          "_sim": 0.3047619047619048
+        },
+        {
+          "text": "The light source is directly above the surface (perpendicular to the surface)",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that a zero projection implies a perpendicular relationship, rather than a parallel one",
+          "_sim": 0.7552447552447552
+        }
+      ]
+    },
+    {
+      "stem": "Eigenvectors of a matrix represent",
+      "answer": "Directions along which the linear transformation acts by scaling.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Linear Algebra / Eigenvectors",
+      "distractors": [
+        {
+          "text": "The trace of the matrix",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Mixing up eigenvectors with the trace of a matrix, which is the sum of the diagonal elements and is related to the eigenvalues, not directly to the eigenvectors.",
+          "_sim": 0.2727272727272727
+        },
+        {
+          "text": "The inverse of the matrix",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the relationship between eigenvectors and matrix inversion, possibly thinking that eigenvectors are directly related to the process of inverting a matrix.",
+          "_sim": 0.26666666666666666
+        },
+        {
+          "text": "The determinant of the matrix",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing eigenvectors with another important concept in linear algebra, such as the determinant, which is a scalar value representing certain properties of the matrix.",
+          "_sim": 0.2553191489361702
+        },
+        {
+          "text": "The rank of the matrix",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing eigenvectors with the concept of matrix rank, which is a measure of the maximum number of linearly independent rows or columns in a matrix.",
+          "_sim": 0.25287356321839083
+        }
+      ]
+    },
+    {
+      "stem": "A lottery ticket costs $2. There's a 1% chance of winning $100, a 5% chance of winning $10, and a 94% chance of winning nothing. Let X be the random variable representing your profit. What is the expected profit from buying one ticket?",
+      "answer": "-$0.50",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Probability / Expected Value",
+      "distractors": [
+        {
+          "text": "$1.00",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "failing to account for the probability of winning nothing and its impact on the expected value",
+          "_sim": 0.5454545454545454
+        },
+        {
+          "text": "-$1.00",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misunderstanding the calculation of expected value by not properly weighing the probabilities of each outcome",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "-$0.10",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "miscalculating the expected value by incorrectly applying the probabilities to the winnings and the cost of the ticket",
+          "_sim": 0.8333333333333334
+        }
+      ]
+    },
+    {
+      "stem": "A manufacturing process produces items with varying dimensions. The Central Limit Theorem is used to analyze the distribution of sample means. Why is this useful?",
+      "answer": "To estimate the population mean and confidence intervals.",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Statistics / Central Limit Theorem",
+      "distractors": [
+        {
+          "text": "To find the standard deviation of the population",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partial truth that leads to overemphasis on standard deviation calculation rather than understanding its role in estimating the population mean and confidence intervals",
+          "_sim": 0.45714285714285713
+        },
+        {
+          "text": "To prove that the manufacturing process is under control",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding of the Central Limit Theorem's purpose as a means to control processes rather than understand statistical properties",
+          "_sim": 0.4424778761061947
+        },
+        {
+          "text": "To determine the exact dimensions of every item",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that the Central Limit Theorem is used for precise measurement rather than statistical inference",
+          "_sim": 0.4423076923076923
+        },
+        {
+          "text": "To analyze the distribution of individual item dimensions",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusion between the distribution of individual data points and the distribution of sample means",
+          "_sim": 0.43859649122807015
+        }
+      ]
+    },
+    {
+      "stem": "In an airport baggage claim system, luggage is processed in the order it arrives. Each piece of luggage is loaded onto a conveyor belt, and the first piece loaded is the first to be delivered to passengers.  Which data structure would be best suited to model this luggage delivery system?",
+      "answer": "Queue",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Data Structures / Queue",
+      "distractors": [
+        {
+          "text": "Tree",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly applying a hierarchical data structure to a sequential process",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "Heap",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misapplying a data structure optimized for priority-based sorting to a first-come-first-served system",
+          "_sim": 0.2222222222222222
+        }
+      ]
+    },
+    {
+      "stem": "A data scientist needs to visualise clusters or groups of data points of six dimensional data. He uses a certain dimensionality reduction technique to reduce the dimensions to two. Which of the following would be the best visualisation method in order to identify the visual clusters in the reduced dataset and identify potential outliers?",
+      "answer": "Heatmap",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Data Visualization / Dimensionality Reduction",
+      "distractors": [
+        {
+          "text": "Histogram",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Partial truth that histograms can show distribution and density, but misconception that they are the best choice for identifying clusters and outliers in a two-dimensional representation of a six-dimensional dataset.",
+          "_sim": 0.375
+        },
+        {
+          "text": "Line Graph",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding that a line graph, often used to show trends over time or across categories, is suitable for visualizing clusters and outliers in a multidimensional dataset reduced to two dimensions.",
+          "_sim": 0.35294117647058826
+        },
+        {
+          "text": "Scatter Plot",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that a scatter plot is the best method for visualizing clusters and outliers in a reduced dataset, without considering the limitations of this method in revealing complex relationships and density-based clusters.",
+          "_sim": 0.3157894736842105
+        },
+        {
+          "text": "Bar Chart",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrect assumption that a bar chart, which is typically used for categorical data, can effectively display and help identify clusters and outliers in a continuous, reduced dataset.",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "stem": "What is the output of the following?",
+      "answer": "(we, are, humans)",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "Python / String Operations",
+      "distractors": [
+        {
+          "text": "['we', 'are', 'humans']",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusion between list and tuple data structures in Python",
+          "_sim": 0.75
+        },
+        {
+          "text": "('we', 'are', 'humans')",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrect assumption that tuple output always includes parentheses",
+          "_sim": 0.85
+        }
+      ]
+    },
+    {
+      "stem": "A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?",
+      "answer": "Hypothesis testing (e.g., t-test).",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Statistics / Hypothesis Testing",
+      "distractors": [
+        {
+          "text": "Descriptive statistics",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Believing that descriptive statistics alone are sufficient to compare and determine the effectiveness of the new website design",
+          "_sim": 0.32142857142857145
+        },
+        {
+          "text": "Confidence intervals",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the purpose of confidence intervals with hypothesis testing, thinking they serve the same purpose",
+          "_sim": 0.2962962962962963
+        },
+        {
+          "text": "Correlation analysis",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding that correlation analysis can determine causality or differences between groups",
+          "_sim": 0.18518518518518517
+        },
+        {
+          "text": "Regression analysis",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that regression analysis is primarily used for comparing groups rather than modeling relationships",
+          "_sim": 0.1509433962264151
+        }
+      ]
+    },
+    {
+      "stem": "What is the primary objective of the least squares method?",
+      "answer": "Minimize the sum of squared differences between observed and predicted values",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "Statistics / Least Squares",
+      "distractors": [
+        {
+          "text": "Find the mean of the observed values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misunderstanding the purpose of the least squares method as merely calculating a central tendency rather than fitting a model",
+          "_sim": 0.5309734513274337
+        },
+        {
+          "text": "Determine the correlation coefficient between observed and predicted values",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the objective of the least squares method with measuring the strength of the relationship between variables",
+          "_sim": 0.7236842105263158
+        }
+      ]
+    }
+  ]
+}

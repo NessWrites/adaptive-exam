@@ -1,0 +1,1636 @@
+{
+  "questions": [
+    {
+      "core_id": "CS020",
+      "stem": "What does CPU stand for?",
+      "answer": "Central Processing Unit",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "computer_fundamentals",
+      "distractors": [
+        {
+          "text": "Central Peripheral Unit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly associating the CPU with peripheral devices, rather than its role as the primary processing component",
+          "_sim": 0.6956521739130435
+        },
+        {
+          "text": "Central Performance Unit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the term 'processing' as 'performance', implying the CPU is solely responsible for a computer's speed",
+          "_sim": 0.7659574468085106
+        },
+        {
+          "text": "Central Power Unit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the term 'processing' with 'power', leading to a misconception about the CPU's primary function",
+          "_sim": 0.7804878048780488
+        },
+        {
+          "text": "Central Programming Unit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconceiving the CPU's function as directly related to programming, rather than executing programmed instructions",
+          "_sim": 0.8085106382978723
+        }
+      ]
+    },
+    {
+      "core_id": "DSA020",
+      "stem": "What is the worst-case time complexity of binary search?",
+      "answer": "O(log n)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "searching_algorithms",
+      "distractors": [
+        {
+          "text": "O(1)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "incorrectly assuming that binary search can always find the target in constant time, regardless of the size of the input",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n^2)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "mistaking binary search for an algorithm with quadratic time complexity, such as bubble sort",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "O(n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusing binary search with linear search, which has a time complexity of O(n)",
+          "_sim": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "CODE020",
+      "stem": "What is the output of the following Python code?\n\nx = 10\ndef f():\n    x = 5\n    return x\nprint(f(), x)",
+      "answer": "5 10",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_scope",
+      "distractors": [
+        {
+          "text": "10 5",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "The student mistakenly believes that the global variable x is changed by the function f() and then printed.",
+          "_sim": 0.5
+        },
+        {
+          "text": "10 10",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "The student mistakenly thinks that the local variable x in function f() does not affect the output of f(), and the global x remains unchanged throughout the execution.",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "Error",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "The student incorrectly assumes that the code will throw an error due to variable x being used in both local and global scopes without proper handling.",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "MATH020",
+      "stem": "What is the derivative of x² with respect to x?",
+      "answer": "2x",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "calculus",
+      "distractors": [
+        {
+          "text": "x²",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "misconception that the derivative of a function is the function itself",
+          "_sim": 0.5
+        },
+        {
+          "text": "x",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incomplete application of the power rule for differentiation, forgetting to multiply by the exponent",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "1",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistaken belief that the derivative of any function is constant, or misunderstanding of the concept of a derivative",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "STAT020",
+      "stem": "What is the mean of the data set: 2, 4, 6, 8?",
+      "answer": "5",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "mean",
+      "distractors": [
+        {
+          "text": "6",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "10",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "PHY020",
+      "stem": "What is the SI unit of force?",
+      "answer": "Newton",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "physics_units",
+      "distractors": [
+        {
+          "text": "Watt",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misidentifying the unit of power as the unit of force",
+          "_sim": 0.4
+        },
+        {
+          "text": "Joule",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the unit of energy with the unit of force",
+          "_sim": 0.18181818181818182
+        },
+        {
+          "text": "Kilogram",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly identifying the unit of mass as the unit of force",
+          "_sim": 0.14285714285714285
+        }
+      ]
+    },
+    {
+      "core_id": "ML020",
+      "stem": "Which algorithm is commonly used for binary classification?",
+      "answer": "Logistic Regression",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "classification",
+      "distractors": [
+        {
+          "text": "K-Means Clustering",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the difference between classification and clustering, where clustering is an unsupervised learning task",
+          "_sim": 0.3783783783783784
+        },
+        {
+          "text": "Decision Tree",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing binary classification with a specific type of classification model that can handle multiple classes",
+          "_sim": 0.3125
+        },
+        {
+          "text": "Naive Bayes",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "assuming any probabilistic classifier is suitable for binary classification without considering the specific strengths of logistic regression",
+          "_sim": 0.26666666666666666
+        },
+        {
+          "text": "Support Vector Machine with multiple kernels",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "overcomplicating binary classification by assuming it requires a more complex model with multiple kernels",
+          "_sim": 0.19047619047619047
+        }
+      ]
+    },
+    {
+      "core_id": "DL020",
+      "stem": "Which activation function is most commonly used in hidden layers of deep neural networks?",
+      "answer": "ReLU",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "activation_functions",
+      "distractors": [
+        {
+          "text": "Linear",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the need for non-linearity in hidden layers, leading to the incorrect assumption that linear activation functions are sufficient",
+          "_sim": 0.2
+        }
+      ]
+    },
+    {
+      "core_id": "MLOPS020",
+      "stem": "What is the primary purpose of Docker?",
+      "answer": "To containerize applications for consistent deployment",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "docker",
+      "distractors": [
+        {
+          "text": "To enhance application security by encrypting data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Incorrectly assuming Docker's primary purpose is related to security features like encryption rather than containerization",
+          "_sim": 0.5192307692307693
+        },
+        {
+          "text": "To manage and orchestrate cloud infrastructure",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding Docker as a tool primarily for managing cloud resources rather than application containerization",
+          "_sim": 0.42
+        },
+        {
+          "text": "To compile and package code into executable binaries",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusing Docker with a build tool or compiler, thinking its primary function is related to code compilation",
+          "_sim": 0.33962264150943394
+        },
+        {
+          "text": "To replace virtual machines with a new hypervisor",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusing Docker's purpose with that of a virtualization platform, thinking it's meant to replace traditional VMs",
+          "_sim": 0.17475728155339806
+        }
+      ]
+    },
+    {
+      "core_id": "GIT020",
+      "stem": "Which Git command is used to create a new branch?",
+      "answer": "git branch",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git",
+      "distractors": [
+        {
+          "text": "git commit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly associating committing changes with the creation of a new branch",
+          "_sim": 0.5
+        },
+        {
+          "text": "git merge",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the purpose of merging branches as creating a new one",
+          "_sim": 0.5263157894736842
+        },
+        {
+          "text": "git checkout",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the command to switch branches with the command to create a new branch",
+          "_sim": 0.5454545454545454
+        },
+        {
+          "text": "git push",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistaking the command to upload changes with the command to create a new branch",
+          "_sim": 0.5555555555555556
+        }
+      ]
+    },
+    {
+      "core_id": "GENAI020",
+      "stem": "What is the main role of a prompt in large language models?",
+      "answer": "To guide the model's response by providing instructions or context",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "prompt_engineering",
+      "distractors": [
+        {
+          "text": "To automate the model's training by reducing human input",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that prompts are used to minimize human involvement in the training process",
+          "_sim": 0.5245901639344263
+        },
+        {
+          "text": "To evaluate the model's performance by testing its limits",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the purpose of prompts with model evaluation or testing",
+          "_sim": 0.5691056910569106
+        },
+        {
+          "text": "To increase the model's vocabulary by providing new words",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that prompts are used to expand the model's vocabulary rather than guide its response",
+          "_sim": 0.6016260162601627
+        },
+        {
+          "text": "To personalize the model's tone by adding emotional context",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that prompts are primarily used to influence the model's tone or emotional expression",
+          "_sim": 0.672
+        }
+      ]
+    },
+    {
+      "core_id": "LLM020",
+      "stem": "What does 'token' mean in the context of LLMs?",
+      "answer": "A unit of text used as input or output by the model",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "llm_basics",
+      "distractors": [
+        {
+          "text": "A specific algorithm used in the model's architecture",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusing the term 'token' with a specific component or technique within the model",
+          "_sim": 0.4230769230769231
+        },
+        {
+          "text": "A type of training data used to fine-tune the model",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Mistaking 'token' for a specific type of data or input used in the training process",
+          "_sim": 0.5882352941176471
+        },
+        {
+          "text": "A unique identifier for a user or session",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Incorrectly assuming 'token' refers to user authentication or session management",
+          "_sim": 0.3695652173913043
+        },
+        {
+          "text": "A measure of the model's performance or accuracy",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding 'token' as a metric for evaluating the model rather than a unit of text",
+          "_sim": 0.32323232323232326
+        }
+      ]
+    },
+    {
+      "core_id": "DATA020",
+      "stem": "Why is data normalization important in machine learning?",
+      "answer": "It ensures features contribute equally to model training",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "data_preprocessing",
+      "distractors": [
+        {
+          "text": "It increases the computational power required for model training",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that data normalization affects computational resources rather than feature contribution",
+          "_sim": 0.6
+        },
+        {
+          "text": "It helps to remove outliers from the dataset",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing data normalization with outlier detection or removal techniques",
+          "_sim": 0.32
+        },
+        {
+          "text": "It is necessary for reducing overfitting in machine learning models",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misattributing the purpose of data normalization to overfitting prevention, which is more directly addressed by regularization techniques",
+          "_sim": 0.2926829268292683
+        },
+        {
+          "text": "It allows for the use of different machine learning algorithms",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly believing that data normalization determines the choice of algorithm rather than preparing data for various algorithms",
+          "_sim": 0.288135593220339
+        }
+      ]
+    },
+    {
+      "core_id": "PANDAS020",
+      "stem": "Which pandas function is used to remove missing values?",
+      "answer": "dropna()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_cleaning",
+      "distractors": [
+        {
+          "text": "fillna()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the function to replace missing values with the function to remove missing values",
+          "_sim": 0.5
+        },
+        {
+          "text": "replace()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "thinking that replacing values is equivalent to removing them, due to a lack of understanding of the difference between value replacement and removal",
+          "_sim": 0.5882352941176471
+        },
+        {
+          "text": "clean()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "assuming a generic function exists for cleaning data, including removing missing values",
+          "_sim": 0.4
+        },
+        {
+          "text": "filter()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistaking data filtering for the removal of missing values, due to a misunderstanding of data manipulation concepts",
+          "_sim": 0.375
+        }
+      ]
+    },
+    {
+      "core_id": "SQL020",
+      "stem": "Which SQL clause is used to filter rows?",
+      "answer": "WHERE",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_basics",
+      "distractors": [
+        {
+          "text": "SELECT",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial understanding of SQL syntax, incorrectly assuming SELECT is used for filtering instead of just selecting columns",
+          "_sim": 0.36363636363636365
+        },
+        {
+          "text": "ORDER BY",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing row filtering with row sorting, believing ORDER BY can filter rows",
+          "_sim": 0.3076923076923077
+        },
+        {
+          "text": "HAVING",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the difference between WHERE and HAVING clauses, thinking HAVING is used for basic row filtering",
+          "_sim": 0.18181818181818182
+        },
+        {
+          "text": "GROUP BY",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mixing up aggregation and filtering, thinking GROUP BY is used to filter rows based on conditions",
+          "_sim": 0.15384615384615385
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE020",
+      "stem": "What is the time complexity of inserting an element at the beginning of a Python list?",
+      "answer": "O(n)",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "time_complexity",
+      "distractors": [
+        {
+          "text": "O(n log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "overestimation of the time complexity, possibly due to mixing it with the complexity of sorting algorithms",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "O(log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusion with time complexities of other data structures, such as balanced binary search trees, where insertion can be logarithmic",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "O(1)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misconception that insertion at the beginning of a list is a constant time operation, ignoring the need to shift existing elements",
+          "_sim": 0.75
+        },
+        {
+          "text": "O(n^2)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "exaggerated misconception, possibly thinking that each insertion requires a full rearrangement of the list, similar to a naive sorting algorithm",
+          "_sim": 0.8
+        }
+      ]
+    },
+    {
+      "core_id": "STAT021",
+      "stem": "What is the variance of a dataset where all values are identical?",
+      "answer": "0",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "variance",
+      "distractors": [
+        {
+          "text": "10",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "1",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "PHY021",
+      "stem": "What happens to kinetic energy if velocity is doubled?",
+      "answer": "It becomes four times",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "kinetic_energy",
+      "distractors": [
+        {
+          "text": "It remains the same",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that kinetic energy is independent of velocity",
+          "_sim": 0.5
+        },
+        {
+          "text": "It becomes eight times",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "overextension of the concept that kinetic energy increases with velocity, mistakenly applying an exponential rather than quadratic relationship",
+          "_sim": 0.7906976744186046
+        },
+        {
+          "text": "It becomes three times",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial understanding of the relationship between kinetic energy and velocity, but incorrectly applying a linear rather than quadratic increase",
+          "_sim": 0.8372093023255814
+        }
+      ]
+    },
+    {
+      "core_id": "CODE021",
+      "stem": "What is the output of the following Python code?\n\nprint(len({1, 2, 2, 3}))",
+      "answer": "3",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_sets",
+      "distractors": [
+        {
+          "text": "4",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that a set in Python maintains duplicate values",
+          "_sim": 0.0
+        },
+        {
+          "text": "1",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that set only keeps the first unique element encountered",
+          "_sim": 0.0
+        },
+        {
+          "text": "5",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrect assumption that the set includes an implicit or default element",
+          "_sim": 0.0
+        },
+        {
+          "text": "0",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that an empty set is created when duplicate values are provided",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "MATH030",
+      "stem": "What is the value of log₂(8)?",
+      "answer": "3",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "logarithms",
+      "distractors": [
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "6",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "1",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "MATH031",
+      "stem": "What is 15% of 200?",
+      "answer": "30",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "percentage",
+      "distractors": [
+        {
+          "text": "31",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "60",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "29",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "15",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "STAT030",
+      "stem": "What is the median of the data: 3, 7, 9, 10, 15?",
+      "answer": "9",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "median",
+      "distractors": [
+        {
+          "text": "10",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "8",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "18",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "STAT031",
+      "stem": "If two events are independent, what is P(A ∩ B)?",
+      "answer": "P(A) × P(B)",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "probability",
+      "distractors": [
+        {
+          "text": "P(A) × P(B) when A and B are mutually exclusive",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "failing to recognize that the formula P(A) × P(B) applies specifically to independent events, not mutually exclusive events",
+          "_sim": 0.3793103448275862
+        },
+        {
+          "text": "1 - P(A) × P(B)",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly applying the complement rule to find the probability of the intersection of two independent events",
+          "_sim": 0.8461538461538461
+        }
+      ]
+    },
+    {
+      "core_id": "DSA030",
+      "stem": "What is the best-case time complexity of linear search?",
+      "answer": "O(1)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "searching_algorithms",
+      "distractors": [
+        {
+          "text": "O(log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "incorrectly applying the time complexity of binary search to linear search, due to a misunderstanding of the differences between these two algorithms",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusing linear search with more complex searching algorithms that have a higher time complexity, such as merge sort or quick sort",
+          "_sim": 0.42857142857142855
+        },
+        {
+          "text": "O(n^2)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "mistaking linear search for an algorithm with quadratic time complexity, often associated with nested loop structures",
+          "_sim": 0.6
+        },
+        {
+          "text": "O(n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misconception that the best-case scenario for linear search is when the target element is at the end of the list, requiring a linear number of comparisons",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "core_id": "DSA031",
+      "stem": "Which data structure is used to implement BFS?",
+      "answer": "Queue",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "graph_traversal",
+      "distractors": [
+        {
+          "text": "Tree",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misunderstanding the data structure used for BFS as the structure being traversed, rather than the implementation",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "Heap",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "mistaking the priority queue data structure, which is sometimes implemented as a heap, with the standard queue used in BFS",
+          "_sim": 0.2222222222222222
+        }
+      ]
+    },
+    {
+      "core_id": "CODE030",
+      "stem": "What is the output of the following Python code?\n\nprint(type((1)))",
+      "answer": "<class 'int'>",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_types",
+      "distractors": [
+        {
+          "text": "<class 'tuple'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that the type of a single-element tuple is a tuple itself, even when it contains only one element",
+          "_sim": 0.7857142857142857
+        },
+        {
+          "text": "<class 'float'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrect assumption that any number in Python, regardless of its literal representation, defaults to a floating-point type",
+          "_sim": 0.7857142857142857
+        },
+        {
+          "text": "<class 'set'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that the use of parentheses implies a set data type, not recognizing the distinction between set and tuple syntax",
+          "_sim": 0.8461538461538461
+        }
+      ]
+    },
+    {
+      "core_id": "CODE031",
+      "stem": "What is the output of the following Python code?\n\nprint(type((1,)))",
+      "answer": "<class 'tuple'>",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_tuples",
+      "distractors": [
+        {
+          "text": "<class 'list'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing tuples with lists due to their similar uses in storing multiple values",
+          "_sim": 0.7586206896551724
+        },
+        {
+          "text": "<class 'dict'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming tuples are dictionaries due to the use of parentheses in both data structures",
+          "_sim": 0.7586206896551724
+        },
+        {
+          "text": "<class 'set'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistaking tuples for sets because both can contain multiple elements, despite differences in ordering and mutability",
+          "_sim": 0.7857142857142857
+        },
+        {
+          "text": "<class 'int'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "failing to recognize the tuple syntax and thinking the output refers to the type of the single element within the tuple",
+          "_sim": 0.7857142857142857
+        }
+      ]
+    },
+    {
+      "core_id": "CODE032",
+      "stem": "What is the output of the following Python code?\n\nx = [1, 2]\ny = x.copy()\ny.append(3)\nprint(x)",
+      "answer": "[1, 2]",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_mutability",
+      "distractors": [
+        {
+          "text": "[3]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "The student mistakenly believes that assigning a new list to the variable y affects the original list x, replacing its contents entirely.",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "Error: list modified",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "The student incorrectly assumes that attempting to modify a list after it has been copied will result in an error due to the original list being immutable after the copy operation.",
+          "_sim": 0.07692307692307693
+        }
+      ]
+    },
+    {
+      "core_id": "PHY030",
+      "stem": "What is the value of acceleration due to gravity on Earth (approximate)?",
+      "answer": "9.8 m/s²",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "gravity",
+      "distractors": [
+        {
+          "text": "10 m/s²",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Rounding error, where students approximate the value to the nearest whole number, leading to an overestimation.",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "11 m/s²",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusion with other physical constants or units, such as mixing up the value of gravity with another acceleration value.",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "8.5 m/s²",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Inaccurate assumption that the value of gravity is lower due to the Earth not being a perfect sphere or other environmental factors.",
+          "_sim": 0.75
+        },
+        {
+          "text": "9.1 m/s²",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Miscalculation or incorrect recall of the acceleration due to gravity, resulting in an underestimation.",
+          "_sim": 0.875
+        }
+      ]
+    },
+    {
+      "core_id": "PHY031",
+      "stem": "Which law states that for every action there is an equal and opposite reaction?",
+      "answer": "Newton's Third Law",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "newton_laws",
+      "distractors": [
+        {
+          "text": "Newton's Second Law",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusion between the law of acceleration and the law of action and reaction",
+          "_sim": 0.7567567567567568
+        },
+        {
+          "text": "The Law of Universal Gravitation",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misapplication of Newton's law of gravity to the concept of action and reaction",
+          "_sim": 0.24
+        },
+        {
+          "text": "The Law of Conservation of Momentum",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistaking the related concept of momentum conservation for the principle of action and reaction",
+          "_sim": 0.22641509433962265
+        },
+        {
+          "text": "Newton's First Law",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misattribution of the law of inertia to the concept of action and reaction",
+          "_sim": 0.8333333333333334
+        }
+      ]
+    },
+    {
+      "core_id": "ML030",
+      "stem": "Which metric is best suited for imbalanced classification problems?",
+      "answer": "F1-score",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "evaluation_metrics",
+      "distractors": [
+        {
+          "text": "Accuracy",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "failing to consider the impact of class imbalance on metric choice",
+          "_sim": 0.25
+        },
+        {
+          "text": "Mean Squared Error",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing evaluation metrics for regression problems with those for classification problems",
+          "_sim": 0.23076923076923078
+        },
+        {
+          "text": "Mean Absolute Error",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly applying regression metrics to classification problems, including imbalanced ones",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Area Under the Receiver Operating Characteristic Curve (AUC-ROC)",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the difference between metrics for model comparison and metrics for model evaluation on imbalanced datasets",
+          "_sim": 0.05555555555555555
+        }
+      ]
+    },
+    {
+      "core_id": "ML031",
+      "stem": "What problem does regularization mainly address?",
+      "answer": "Overfitting",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "regularization",
+      "distractors": [
+        {
+          "text": "Variance in the model",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Partial understanding of the bias-variance tradeoff, mistakenly attributing regularization's role to solely addressing model variance.",
+          "_sim": 0.3125
+        },
+        {
+          "text": "Model interpretability",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misattributing the goal of regularization to making models more interpretable, rather than preventing overfitting.",
+          "_sim": 0.24242424242424243
+        },
+        {
+          "text": "Bias in the data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusing the purpose of regularization with data preprocessing techniques that aim to reduce bias in the dataset.",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Underfitting",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that regularization is used to address the issue of models being too simple, rather than too complex.",
+          "_sim": 0.782608695652174
+        }
+      ]
+    },
+    {
+      "core_id": "DL030",
+      "stem": "Why are residual connections used in deep networks?",
+      "answer": "To reduce vanishing gradient problems",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "resnet",
+      "distractors": [
+        {
+          "text": "To speed up the training process by allowing the network to skip certain layers",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception about how residual connections function, thinking they are primarily for speeding up training rather than addressing vanishing gradients",
+          "_sim": 0.3275862068965517
+        },
+        {
+          "text": "To increase the number of parameters in the network",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the purpose of residual connections, thinking they are used to add complexity rather than alleviate vanishing gradients",
+          "_sim": 0.29545454545454547
+        },
+        {
+          "text": "To allow the network to learn multiple representations of the input data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial truth, as residual connections do help in learning multiple representations but the primary reason is to reduce vanishing gradients",
+          "_sim": 0.25688073394495414
+        },
+        {
+          "text": "To improve the network's ability to generalize to new, unseen data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misapplied definition, confusing the role of residual connections with regularization techniques",
+          "_sim": 0.17475728155339806
+        }
+      ]
+    },
+    {
+      "core_id": "DL031",
+      "stem": "Which layer is typically used for multi-class classification?",
+      "answer": "Softmax",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "output_layers",
+      "distractors": [
+        {
+          "text": "Tanh",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming that tanh, another activation function, is suitable for multi-class classification due to its output range",
+          "_sim": 0.36363636363636365
+        },
+        {
+          "text": "Sigmoid",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the purpose of sigmoid activation, which is often used for binary classification, with the needs of multi-class classification",
+          "_sim": 0.2857142857142857
+        },
+        {
+          "text": "Linear",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "believing that a linear activation function could be used for multi-class classification, ignoring the need for an activation function that can handle multiple classes effectively",
+          "_sim": 0.15384615384615385
+        }
+      ]
+    },
+    {
+      "core_id": "GENAI030",
+      "stem": "What does temperature control in text generation?",
+      "answer": "Randomness of the output",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "generation_parameters",
+      "distractors": [
+        {
+          "text": "The style or tone of the generated text",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This option reflects a partial truth, as temperature can influence the style, but it primarily controls the randomness of the output, leading to a misconception about its primary function.",
+          "_sim": 0.4126984126984127
+        },
+        {
+          "text": "The quality of the training data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This option reflects a misconception that temperature control is related to the input or training data quality rather than the randomness of the output.",
+          "_sim": 0.39285714285714285
+        },
+        {
+          "text": "The length of the generated text",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This option represents a misunderstanding that temperature control influences the quantity of the output rather than its randomness or diversity.",
+          "_sim": 0.39285714285714285
+        },
+        {
+          "text": "The grammatical correctness of the output",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This option misapplies the definition of temperature control, thinking it ensures the linguistic accuracy rather than recognizing its role in output randomness.",
+          "_sim": 0.6461538461538462
+        }
+      ]
+    },
+    {
+      "core_id": "GENAI031",
+      "stem": "Which technique improves LLM responses by providing examples?",
+      "answer": "Few-shot prompting",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "prompting",
+      "distractors": [
+        {
+          "text": "Fine-tuning",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Partial truth that fine-tuning, which adjusts model parameters on specific data, is the primary method for improving LLM responses, overlooking the role of examples in few-shot prompting.",
+          "_sim": 0.4827586206896552
+        },
+        {
+          "text": "Zero-shot learning",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding that zero-shot learning, which involves making predictions without examples, is equivalent to providing examples to improve LLM responses.",
+          "_sim": 0.6111111111111112
+        },
+        {
+          "text": "Chain-of-thought prompting",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that chain-of-thought prompting, which involves generating intermediate steps, is the primary method for improving LLM responses with examples.",
+          "_sim": 0.6363636363636364
+        },
+        {
+          "text": "Transfer learning",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that transfer learning, which involves applying pre-trained models to new tasks, is the technique that directly improves LLM responses by providing examples.",
+          "_sim": 0.34285714285714286
+        }
+      ]
+    },
+    {
+      "core_id": "MLOPS030",
+      "stem": "Which Docker file instruction specifies the base image?",
+      "answer": "FROM",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "dockerfile",
+      "distractors": [
+        {
+          "text": "RUN",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that the RUN instruction, which is used to execute commands, also sets the base image",
+          "_sim": 0.2857142857142857
+        },
+        {
+          "text": "COPY",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the COPY instruction, which copies files, with setting the base image",
+          "_sim": 0.25
+        },
+        {
+          "text": "EXPOSE",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistakenly believing that exposing a port with EXPOSE is related to specifying the base image",
+          "_sim": 0.2
+        },
+        {
+          "text": "WORKDIR",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming that setting the working directory with WORKDIR also specifies the base image",
+          "_sim": 0.18181818181818182
+        }
+      ]
+    },
+    {
+      "core_id": "MLOPS031",
+      "stem": "Why is CI/CD important in MLOps?",
+      "answer": "To automate testing and deployment of models",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "mlops_pipeline",
+      "distractors": [
+        {
+          "text": "To prioritize model training over deployment",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that CI/CD focuses solely on the training phase, neglecting deployment",
+          "_sim": 0.5454545454545454
+        },
+        {
+          "text": "To manually review and approve every model update",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding of automation in CI/CD, thinking it's about manual intervention",
+          "_sim": 0.45161290322580644
+        },
+        {
+          "text": "To reduce the role of human oversight in the model development process",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial truth, misunderstanding the balance between automation and human oversight in CI/CD",
+          "_sim": 0.3684210526315789
+        },
+        {
+          "text": "To only focus on the model's performance metrics, ignoring other aspects",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misapplied definition, thinking CI/CD is only about model performance, not the entire pipeline",
+          "_sim": 0.27586206896551724
+        }
+      ]
+    },
+    {
+      "core_id": "GIT030",
+      "stem": "Which Git command is used to upload local commits to a remote repository?",
+      "answer": "git push",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git_commands",
+      "distractors": [
+        {
+          "text": "git merge",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming that merging branches involves uploading local commits to a remote repository",
+          "_sim": 0.47058823529411764
+        },
+        {
+          "text": "git commit",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "believing that committing changes locally is equivalent to uploading them to a remote repository",
+          "_sim": 0.4444444444444444
+        },
+        {
+          "text": "git fetch",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the command to upload local commits with the command to download remote commits",
+          "_sim": 0.5882352941176471
+        },
+        {
+          "text": "git pull",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the command to synchronize local and remote repositories as the command to upload local commits",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "core_id": "GIT031",
+      "stem": "What is the purpose of .gitignore?",
+      "answer": "To specify files Git should not track",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git_basics",
+      "distractors": [
+        {
+          "text": "To specify the main branch of a repository",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusion between .gitignore and Git branching concepts",
+          "_sim": 0.4810126582278481
+        },
+        {
+          "text": "To configure Git commit message templates",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Mixing .gitignore with other Git configuration files and their purposes",
+          "_sim": 0.41025641025641024
+        },
+        {
+          "text": "To store Git repository passwords",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding of .gitignore purpose, relating it to security features",
+          "_sim": 0.34285714285714286
+        }
+      ]
+    },
+    {
+      "core_id": "SQL030",
+      "stem": "Which SQL function is used to count rows?",
+      "answer": "COUNT()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_aggregation",
+      "distractors": [
+        {
+          "text": "SUM()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing aggregation functions, mistakenly selecting SUM() which is used for adding values instead of counting rows",
+          "_sim": 0.5
+        },
+        {
+          "text": "ROWS()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "assuming a non-standard function ROWS() exists for counting, due to a misunderstanding of SQL syntax and available functions",
+          "_sim": 0.46153846153846156
+        },
+        {
+          "text": "MAX()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the purpose of MAX(), which returns the highest value, not the number of rows",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "AVG()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming AVG() counts rows because it's an aggregation function, while it actually calculates the mean",
+          "_sim": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "core_id": "SQL031",
+      "stem": "Which SQL clause groups rows with the same values?",
+      "answer": "GROUP BY",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_grouping",
+      "distractors": [
+        {
+          "text": "ORDER BY",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the purpose of grouping with the purpose of ordering, which is a common misconception among students learning SQL",
+          "_sim": 0.5
+        },
+        {
+          "text": "WHERE",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "failing to distinguish between filtering individual rows (WHERE) and grouping rows based on shared values, indicating a misconception about SQL query structure",
+          "_sim": 0.15384615384615385
+        },
+        {
+          "text": "HAVING",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the difference between filtering groups (HAVING) and creating groups (GROUP BY), leading to incorrect application of SQL clauses",
+          "_sim": 0.14285714285714285
+        }
+      ]
+    },
+    {
+      "core_id": "PANDAS030",
+      "stem": "Which pandas function is used to merge two DataFrames?",
+      "answer": "merge()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_merge",
+      "distractors": [
+        {
+          "text": "melt()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "students may confuse merging with reshaping or pivoting data, leading them to consider melt() as an option",
+          "_sim": 0.6153846153846154
+        },
+        {
+          "text": "groupby()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "students may misunderstand the purpose of groupby() and think it merges DataFrames based on common values",
+          "_sim": 0.375
+        },
+        {
+          "text": "join()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "students may think join() is the primary function for merging, due to its use in other contexts like SQL",
+          "_sim": 0.3076923076923077
+        },
+        {
+          "text": "concat()",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "students may confuse merging with concatenating DataFrames, as both involve combining data",
+          "_sim": 0.26666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "PANDAS031",
+      "stem": "What does df.head() do?",
+      "answer": "Displays the first few rows of the DataFrame",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_basics",
+      "distractors": [
+        {
+          "text": "Sorts the DataFrame by the first column",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misapplying the concept of 'head' as a sorting operation instead of a display operation",
+          "_sim": 0.40963855421686746
+        },
+        {
+          "text": "Randomly samples rows from the DataFrame",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusion between the 'head' function and random sampling functions in pandas",
+          "_sim": 0.6428571428571429
+        },
+        {
+          "text": "Returns the data types of the first few columns of the DataFrame",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Partial truth, as 'head' does show columns, but misunderstanding its purpose as displaying data types",
+          "_sim": 0.7037037037037037
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE030",
+      "stem": "What is the space complexity of a recursive function with depth n?",
+      "answer": "O(n)",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "space_complexity",
+      "distractors": [
+        {
+          "text": "O(log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusion between time and space complexity, or misapplication of logarithmic scaling",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "O(1)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misconception that recursive function calls do not consume additional memory",
+          "_sim": 0.75
+        },
+        {
+          "text": "O(2^n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "overestimation of memory usage due to misunderstanding of recursive call stack",
+          "_sim": 0.8
+        },
+        {
+          "text": "O(n^2)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misconception that each recursive call adds a quadratic amount of memory usage",
+          "_sim": 0.8
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE031",
+      "stem": "What happens if a Python function has no return statement?",
+      "answer": "It returns None",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_functions",
+      "distractors": [
+        {
+          "text": "It raises a SyntaxError",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This distractor represents the misconception that the absence of a return statement is a syntax error, rather than a semantic choice in Python.",
+          "_sim": 0.47368421052631576
+        },
+        {
+          "text": "It returns the last expression evaluated in the function",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This distractor reflects a common misconception that Python functions return the last expression evaluated, similar to some other programming languages.",
+          "_sim": 0.39436619718309857
+        },
+        {
+          "text": "It does not return anything and the program terminates",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This distractor represents a misconception that the absence of a return statement means the function does not return at all, rather than returning None by default.",
+          "_sim": 0.37681159420289856
+        },
+        {
+          "text": "It returns the function itself",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "This option reflects a misunderstanding of how Python handles functions as first-class citizens, mistakenly thinking that the function returns itself when there's no explicit return statement.",
+          "_sim": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE032",
+      "stem": "What is the result of bool(0)?",
+      "answer": "False",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_truthiness",
+      "distractors": [
+        {
+          "text": "True",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that any non-empty value in Python is considered True, including zero.",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "None",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Confusion between the boolean value of zero and the absence of a value, leading to the incorrect assumption that bool(0) returns None.",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Error",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Belief that attempting to convert zero to a boolean would result in an error due to a misunderstanding of Python's truthiness rules.",
+          "_sim": 0.2
+        }
+      ]
+    }
+  ]
+}

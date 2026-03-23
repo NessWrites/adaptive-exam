@@ -1,0 +1,150 @@
+[
+{
+  "core_id": "MATH010",
+  "stem": "What is the value of 2^10?",
+  "answer": "1024",
+  "type": "mathematical",
+  "difficulty": "medium",
+  "concept_tag": "exponents",
+  "distractors": []
+},
+{
+  "core_id": "MATH011",
+  "stem": "What is the value of 22 ÷ 7 rounded to two decimal places?",
+  "answer": "3.14",
+  "type": "mathematical",
+  "difficulty": "medium",
+  "concept_tag": "division",
+  "distractors": []
+},
+{
+  "core_id": "MATH012",
+  "stem": "What is the simplified form of 18/24?",
+  "answer": "3/4",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "fractions",
+  "distractors": []
+},
+{
+  "core_id": "STAT010",
+  "stem": "Approximately what percentage of data lies within three standard deviations of the mean in a normal distribution?",
+  "answer": "99.7%",
+  "type": "mathematical",
+  "difficulty": "medium",
+  "concept_tag": "normal_distribution",
+  "distractors": []
+},
+{
+  "core_id": "STAT011",
+  "stem": "If a model correctly classifies 45 out of 60 samples, what is its accuracy?",
+  "answer": "75%",
+  "type": "mathematical",
+  "difficulty": "medium",
+  "concept_tag": "classification_metrics",
+  "distractors": []
+},
+{
+  "core_id": "STAT012",
+  "stem": "What is the probability of getting heads when tossing a fair coin?",
+  "answer": "50%",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "probability",
+  "distractors": []
+},
+{
+  "core_id": "DL010",
+  "stem": "Why does batch normalization help stabilize neural network training?",
+  "answer": "It reduces internal covariate shift by normalizing layer inputs, allowing faster and more stable training.",
+  "type": "conceptual",
+  "difficulty": "hard",
+  "concept_tag": "batch_normalization",
+  "distractors": []
+},
+{
+  "core_id": "ML010",
+  "stem": "Why is cross-validation preferred over a single train-test split?",
+  "answer": "It provides a more reliable estimate of model performance by reducing variance due to data partitioning.",
+  "type": "conceptual",
+  "difficulty": "medium",
+  "concept_tag": "model_evaluation",
+  "distractors": []
+},
+{
+  "core_id": "DSA010",
+  "stem": "What is the worst-case time complexity of quicksort?",
+  "answer": "O(n^2)",
+  "type": "theoretical",
+  "difficulty": "medium",
+  "concept_tag": "sorting_algorithms",
+  "distractors": []
+},
+{
+  "core_id": "DSA011",
+  "stem": "Which data structure is most suitable for implementing recursion internally?",
+  "answer": "Stack",
+  "type": "theoretical",
+  "difficulty": "easy",
+  "concept_tag": "data_structures",
+  "distractors": []
+},
+{
+  "core_id": "PY010",
+  "stem": "What is the output of the following Python code?\n\nx = [1, 2, 3]\ny = x\ny.append(4)\nprint(x)",
+  "answer": "[1, 2, 3, 4]",
+  "type": "conceptual",
+  "difficulty": "medium",
+  "concept_tag": "python_mutability",
+  "distractors": []
+},
+{
+  "core_id": "PY011",
+  "stem": "What is the output of the following Python code?\n\ndef f(x, arr=[]):\n    arr.append(x)\n    return arr\n\nprint(f(1))\nprint(f(2))",
+  "answer": "[1]\n[1, 2]",
+  "type": "conceptual",
+  "difficulty": "hard",
+  "concept_tag": "python_functions",
+  "distractors": []
+},
+{
+  "core_id": "PY012",
+  "stem": "What is the output of the following Python code?\n\nprint(bool([]), bool([0]))",
+  "answer": "False True",
+  "type": "conceptual",
+  "difficulty": "medium",
+  "concept_tag": "python_truthiness",
+  "distractors": []
+},
+{
+  "core_id": "EDGE010",
+  "stem": "How many unique values are in the set {1, 1, 2, 3, 3, 3}?",
+  "answer": "3",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "sets",
+  "distractors": []
+},
+{
+  "core_id": "EDGE011",
+  "stem": "What is the time complexity of accessing an element in a Python list by index?",
+  "answer": "O(1)",
+  "type": "theoretical",
+  "difficulty": "easy",
+  "concept_tag": "time_complexity",
+  "distractors": []
+}
+]
+
+
+
+
+
+
+
+
+
+
+
+
+

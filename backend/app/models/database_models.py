@@ -104,6 +104,8 @@ class MCQQuestion(Question):
     derived_from_subjective_id = Column(Integer, ForeignKey("subjective_questions.id"), nullable=False)
     
     explanation = Column(Text, nullable = True) 
+    validation_score = Column(JSON, nullable=True)
+    
     
     
     __mapper_args__ = {"polymorphic_identity": "mcq"}  #

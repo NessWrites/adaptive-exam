@@ -1,0 +1,14 @@
+{
+  "architecture_basics": [
+    {
+      "text": "A perceptron can solve XOR problems without hidden layers",
+      "type": "misconception",
+      "rationale": "Students think perceptrons can solve non-linear problems"
+    },
+    {
+      "text": "MLPs are always better than single-layer perceptrons",
+      "type": "misconception", 
+      "rationale": "Students don't understand trade-offs"
+    }
+  ]
+}

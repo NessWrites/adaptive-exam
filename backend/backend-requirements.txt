@@ -61,3 +61,4 @@ scipy
 
 langchain-google-genai 
 langchain
+jinja2

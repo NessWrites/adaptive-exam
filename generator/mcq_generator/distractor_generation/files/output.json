@@ -1,0 +1,562 @@
+[
+  {
+    "stem": " A robotic arm's end effector is at position v = [3, 4]^T in a 2D plane. \nTo rotate the arm's end effector by pi/2 radians counterclockwise using a rotation matrix R, \nwhat is the new position v' of the end effector after this rotation?",
+    "answer": "[−4, 3​]^T",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Linear Algebra / Robotics",
+    "distractors": []
+  },
+  {
+    "stem": "The derivative of x ^ 2 * ln(x) ",
+    "answer": "2xln(x)+x​",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Calculus / Derivatives",
+    "distractors": []
+  },
+  {
+    "stem": "During the training of a neural network, you use gradient descent to minimize a loss function. What does this process involve?",
+    "answer": "Finding the points where the derivative of the loss function is zero.",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Machine Learning / Neural Networks",
+    "distractors": []
+  },
+  {
+    "stem": "A rain gauge measures the rainfall rate r(t)= 2*t mm/hour, where t is time in hours. What is the total rainfall (in mm) from t=0 to t=3 hours?",
+    "answer": "9 mm",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Calculus / Integration",
+    "distractors": []
+  },
+  {
+    "stem": "In a certain locality, 6% of men have diabetes and 3% of women have diabetes. The total population is divided in the ratio 32 in favour of women. If a person is selected at random from among all those with diabetes, what is the probability that the person is a man?",
+    "answer": "4/7",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Probability / Conditional Probability",
+    "distractors": []
+  },
+  {
+    "stem": "What’s the Standard deviation for the following sample data 2,4,6,8,10 and 12",
+    "answer": "3.42",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Statistics / Standard Deviation",
+    "distractors": []
+  },
+  {
+    "stem": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+    "answer": "There is a 2% chance that the new homepage (Version B) is better than the current homepage (Version A).",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Statistics / Hypothesis Testing",
+    "distractors": []
+  },
+  {
+    "stem": "Which of the following are keywords in python ?",
+    "answer": "yield",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Python / Programming",
+    "distractors": []
+  },
+  {
+    "stem": "Suppose d = {\"Ben\": 40, \"Ten\": 45}. To obtain the number of entries in the dictionary, which command do we use?",
+    "answer": "len(d)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / Data Structures",
+    "distractors": []
+  },
+  {
+    "stem": "Debug the code ",
+    "answer": "No Error, the works",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Python / Debugging",
+    "distractors": []
+  },
+  {
+    "stem": "You are designing a system with different types of sensors. Using Object-Oriented Programming (OOP) principles, how would you best represent these sensors?",
+    "answer": "Designing a class hierarchy of sensors",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Programming / OOP",
+    "distractors": []
+  },
+  {
+    "stem": "What is the space complexity for deleting a linked list?",
+    "answer": "O(1)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Data Structures / Complexity",
+    "distractors": []
+  },
+  {
+    "stem": "Which of the following algorithm always manages to reach the final goal state with the least cost path?",
+    "answer": "A* Search",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Algorithms / Search",
+    "distractors": []
+  },
+  {
+    "stem": "You need to efficiently find a specific record in a large sorted database. Which algorithm would you use?",
+    "answer": "Binary Search",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Algorithms / Binary Search",
+    "distractors": []
+  },
+  {
+    "stem": "What is the next number in this sequence of numbers 21,13,34,47,71,18, ?",
+    "answer": "89",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Logic / Pattern Recognition",
+    "distractors": []
+  },
+  {
+    "stem": "We present a novel neural architecture, Sparse Attentive Feature Aggregation (SAFA), designed to enhance feature representation in high-dimensional image data. SAFA utilizes a sparse attention mechanism, focusing on salient image regions while minimizing computational overhead. This is achieved through a learnable gating function that dynamically selects relevant feature channels. By applying a localized attention kernel, SAFA aggregates contextual information within these salient regions, leading to improved object detection and segmentation performance. Experiments on benchmark datasets demonstrate that SAFA outperforms existing attention mechanisms, particularly in scenarios with complex object occlusions and varying illumination conditions.How does SAFA minimize computational overhead?",
+    "answer": "By simply applying the problem in complex object occlusion and varying illumination condition",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Machine Learning / Research Comprehension",
+    "distractors": []
+  },
+  {
+    "stem": "Determine the tribe of each islander.",
+    "answer": "Truth-tellers: A,C  Liars: B",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Logic / Reasoning",
+    "distractors": []
+  },
+  {
+    "stem": "Puzzle",
+    "answer": "4",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Logic / Puzzles",
+    "distractors": []
+  },
+  {
+    "stem": "The list all_numbers contains numbers from 1 to 100. Which of the following code creates a new list even_numbers that contains all even numbers filtered from the list all_numbers.",
+    "answer": "even_numbers = [i for i in all_numbers if i%2==0]",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Python / List Comprehension",
+    "distractors": []
+  },
+  {
+    "stem": "What is the output of the following code snippet.\ny = 0\ntry:\nresult = x/y\nprint (result)\nexcept ZeroDivisionError:\nprint(\"Division by zero is not allowed.\")\nexcept NameError:\nprint(\"The variables is/are not defined.\")\nexcept:\nprint(\"Error occurred during division\")",
+    "answer": "The variables is/are not defined.",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Python / Exception Handling",
+    "distractors": []
+  },
+  {
+    "stem": "Consider a sentence from an ML paper “Our approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.” What does “circumvents” imply in this context?",
+    "answer": "Avoids or bypasses",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Vocabulary / Technical Writing",
+    "distractors": []
+  },
+  {
+    "stem": "The orthogonal basis vectors  ðÌ   and  ðÌ   are transformed by  T  to a new set of orthogonal basis vectors  3ðÌ â2ðÌ   and  4ðÌ +6ðÌ, respectively. Find the transformation matrix  T.",
+    "answer": "B",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Linear Algebra / Transformations",
+    "distractors": []
+  },
+  {
+    "stem": "A sensor network uses a matrix A to represent signal transformations. If the rank of A is less than the number of sensors, what does this imply?",
+    "answer": "(b) Some sensor signals are linearly dependent.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Linear Algebra / Matrix Rank",
+    "distractors": []
+  },
+  {
+    "stem": "An acoustic engineer is designing a noise-canceling system.  They decompose a sound wave into orthogonal components.  What does the orthogonality of these components signify in terms of the sound waves?",
+    "answer": "c) The components represent independent, non-overlapping sound sources.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Linear Algebra / Orthogonality",
+    "distractors": []
+  },
+  {
+    "stem": "A digital image is represented as a matrix. Using Singular Value Decomposition (SVD), you find that the first few singular values capture most of the image's information. What is the practical application of this?",
+    "answer": "Compressing the image by discarding less significant values.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Linear Algebra / SVD",
+    "distractors": []
+  },
+  {
+    "stem": "A sensor's readings are known to have a linear relationship with the actual values, but with some noise. You have a set of measured data points (x,y,) and want to find the best-fit line y=mx+c to calibrate the sensor. What is the goal of using least squares in this context?",
+    "answer": "To minimize the sum of the squared differences between the measured and predicted values.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Linear Algebra / Least Squares",
+    "distractors": []
+  },
+  {
+    "stem": "Given function f(x, y) = sin(x) * y ^ 2 . Compute f_{xy}",
+    "answer": "2ycosx",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Calculus / Partial Derivatives",
+    "distractors": []
+  },
+  {
+    "stem": "A company's profit P (in dollars) from selling x units of a product is given by P(x) = -0.01x^2 + 300x - 200000. How many units should the company sell to maximize profit?",
+    "answer": "15000 units",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Calculus / Optimization",
+    "distractors": []
+  },
+  {
+    "stem": "For a function w=g(x,y,z)= exyz + xy², Determine the gradient vector?",
+    "answer": "∇g=(yze^xyz+y^2,xze^xyz+2xy,xye^xyz)​",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Calculus / Gradient Vector",
+    "distractors": []
+  },
+  {
+    "stem": "The rate of water flow into a tank is given by R(t) = 100*t liters per minute, where t is in minutes. How much water enters the tank between t = 1 and t = 5 minutes?",
+    "answer": "1200 liters",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Calculus / Integration",
+    "distractors": []
+  },
+  {
+    "stem": "Suppose you have a 60% chance of passing this exam and you are given 4 chances, each having similar but different questions. Assuming that each exam is independent of other, what is the probability that you will pass the majority of the time?",
+    "answer": "4C3*0.6^3*0.4 + 4C4 * 0.6^4",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Probability / Binomial Distribution",
+    "distractors": []
+  },
+  {
+    "stem": "A spam filter uses Bayes' Theorem to classify emails. Given the probability of an email being spam and the filter's accuracy, how does it update its belief about an email being spam after analyzing its content?",
+    "answer": "It multiplies the prior probability by the likelihood of the content given spam.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Probability / Bayes Theorem",
+    "distractors": []
+  },
+  {
+    "stem": "You are tasked to create a statistical distribution based estimate for a server. If the average rate is 5 requests per minute, what is the probability of receiving exactly 7 requests in a minute?",
+    "answer": "e^(−5)∗5^7 / 7!",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Probability / Poisson Distribution",
+    "distractors": []
+  },
+  {
+    "stem": "A continuous random variable T has a uniform distribution between 0 and 10. What is the expected value of T?",
+    "answer": "5",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Probability / Uniform Distribution",
+    "distractors": []
+  },
+  {
+    "stem": "For a standard normal distribution, what is the value of the third central moment?",
+    "answer": "3",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Statistics / Moments",
+    "distractors": []
+  },
+  {
+    "stem": "A large population has a mean weight of 150 lbs and a standard deviation of 20 lbs. If you take a random sample of 100 individuals, what is the approximate standard deviation of the sample mean?",
+    "answer": "20 lbs",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Statistics / Central Limit Theorem",
+    "distractors": []
+  },
+  {
+    "stem": "If X and Y are uncorrelated variable then this implies",
+    "answer": "Absence of any linear relationship between X & Y",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Statistics / Correlation",
+    "distractors": []
+  },
+  {
+    "stem": "A software company is running an A/B test to compare two versions of their homepage Version A (current design) and Version B (new design). After conducting the test with a sample of users, they calculate a p-value of 0.02. What does this p-value indicate about the results of the A/B test?",
+    "answer": "There is a 2% chance that the observed user behavior would occur if the current homepage (Version A) is equally effective as the new homepage (Version B)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Statistics / Hypothesis Testing",
+    "distractors": []
+  },
+  {
+    "stem": "What is the result of [1, 2, 3] + \"4\"",
+    "answer": "[1, 2, 3, '4']",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Python / Data Types",
+    "distractors": []
+  },
+  {
+    "stem": "Given a = [1,2,3,4,5,6]. Here, which of the following will remove element 4 from the list?",
+    "answer": "a.remove(4)",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Python / Lists",
+    "distractors": []
+  },
+  {
+    "stem": "What is the output of the following code snippet?",
+    "answer": "Division by zero is not allowed.",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Python / Exception Handling",
+    "distractors": []
+  },
+  {
+    "stem": "Which function overloads the > operator?",
+    "answer": "__gt__()",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / Operator Overloading",
+    "distractors": []
+  },
+  {
+    "stem": "What is the output of the following codenew_list = [2*x for x in range(1,5)]print(new_list)",
+    "answer": "[2, 4, 6, 8]",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Python / List Comprehension",
+    "distractors": []
+  },
+  {
+    "stem": "You want to extract all email addresses from a webpage's HTML content. What Python module is most suitable for this task?",
+    "answer": "RegEx",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / Regular Expressions",
+    "distractors": []
+  },
+  {
+    "stem": "If Z is a NumPy array, what does the following code do?Z[(4 < Z) & (Z < 8)] *= -1",
+    "answer": "Multiply all elements greater than 4 and less than or equal to 9 by -1",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / NumPy",
+    "distractors": []
+  },
+  {
+    "stem": "You have a large dataset in a CSV file and need to calculate the average sales per product category. Which Pandas function would you use?",
+    "answer": "data.groupby().mean()",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Python / Pandas",
+    "distractors": []
+  },
+  {
+    "stem": "What command implies that we are making two figures side-by-side ?",
+    "answer": "plt.subplot(1,2,1)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / Matplotlib",
+    "distractors": []
+  },
+  {
+    "stem": "Which of the following commands would you use to save the version of all the modules installed in your current environment?",
+    "answer": "pip freeze >> requirements.txt",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / Package Management",
+    "distractors": []
+  },
+  {
+    "stem": "You are working with a data structure as shown below where data points are stored in nodes and each node points to the next node. What is the space complexity for deleting a point C from this data structure?",
+    "answer": "O(1)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Data Structures / Linked Lists",
+    "distractors": []
+  },
+  {
+    "stem": "In a recommendation system, users and items can be represented as nodes in a graph, and their interactions (e.g., ratings, purchases) as edges. Which graph algorithm approach could be used to find similar items for a given user?",
+    "answer": "Graph clustering/community detection: Groups nodes into clusters based on their connectivity",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Algorithms / Graph Algorithms",
+    "distractors": []
+  },
+  {
+    "stem": "A web browser maintains a history of pages visited by the user. When the user clicks the \"Back\" button, the browser loads the most recently visited page. Which data structure would be best suited to implement this functionality?",
+    "answer": "Stack",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Data Structures / Stack",
+    "distractors": []
+  },
+  {
+    "stem": "A beginner programmer is tasked with implementing a sorting algorithm to arrange a small list of numbers in ascending order. She implemented a simple sorting algorithm that repeatedly compares the adjacent elements in a list and swaps them if they are out of order, continuing until the list is fully sorted. What is this algorithm called?",
+    "answer": "Quick Sort",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Algorithms / Sorting",
+    "distractors": []
+  },
+  {
+    "stem": "In git, which of the following commands (in sequence)  are used when we want to reflect a change of file from the local working directory to the staging area and finally to the repository?",
+    "answer": "git commit -> git push",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Git / Version Control",
+    "distractors": []
+  },
+  {
+    "stem": "In which phase of SDLC, the cost of changes is least?",
+    "answer": "Early Stage of Requirement Analysis.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Software Engineering / SDLC",
+    "distractors": []
+  },
+  {
+    "stem": "When designing a relational database, what is the primary purpose of defining a \"primary key\"?",
+    "answer": "To uniquely identify each record within a table.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Database / Relational Design",
+    "distractors": []
+  },
+  {
+    "stem": "The given Query can also be replaced with_______SELECT name, course_id  FROM instructor, teaches  WHERE instructor_ID= teaches_ID;",
+    "answer": "Select name, course_id from instructor;",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Database / SQL",
+    "distractors": []
+  },
+  {
+    "stem": "GPUs have 100s of smaller cores that enable it to process a large amount of data in parallel. Which of the following parallel paradigms does it follow?",
+    "answer": "Single Instruction Multiple Data (SIMD)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Computer Architecture / GPU",
+    "distractors": []
+  },
+  {
+    "stem": "What is the next number in this sequence of numbers 77,49,36,18, __ ?",
+    "answer": "3",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Logic / Pattern Recognition",
+    "distractors": []
+  },
+  {
+    "stem": "Consider a sentence from an ML paper âOur approach circumvents the pitfalls of conventional gradient descent by adaptively modulating the learning rate.â What does âcircumventsâ imply in this context?",
+    "answer": "Reduces or Attenuate",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Machine Learning ",
+    "distractors": []
+  },
+  {
+    "stem": "Three individuals, X, Y, and Z, are standing in a line, facing forward. Each is wearing a hat that is either red or blue. They cannot see their own hat.Someone announces, 'At least one of you is wearing a red hat.'X says, 'I do not know the color of my hat.'Y says, 'I do not know the color of my hat.'Z then says, 'I know the color of my hat.'What color is Z's hat,",
+    "answer": "Red",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Logic / Deductive Reasoning",
+    "distractors": []
+  },
+  {
+    "stem": "Guess the correct answer.",
+    "answer": "F",
+    "type": "mathematical",
+    "difficulty": "hard",
+    "concept_tag": "Logic / Puzzles",
+    "distractors": []
+  },
+  {
+    "stem": "A 3D graphics programmer is calculating the diffuse reflection of light from a surface.  This involves projecting the light vector onto the surface normal.  If the projection of the light vector onto the normal vector is the zero vector, what does this imply?",
+    "answer": "The light source is grazing the surface (parallel to the surface).",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Linear Algebra / Graphics",
+    "distractors": []
+  },
+  {
+    "stem": "Eigenvectors of a matrix represent",
+    "answer": "Directions along which the linear transformation acts by scaling.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Linear Algebra / Eigenvectors",
+    "distractors": []
+  },
+  {
+    "stem": "A lottery ticket costs $2. There's a 1% chance of winning $100, a 5% chance of winning $10, and a 94% chance of winning nothing. Let X be the random variable representing your profit. What is the expected profit from buying one ticket?",
+    "answer": "-$0.50",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Probability / Expected Value",
+    "distractors": []
+  },
+  {
+    "stem": "A manufacturing process produces items with varying dimensions. The Central Limit Theorem is used to analyze the distribution of sample means. Why is this useful?",
+    "answer": "To estimate the population mean and confidence intervals.",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Statistics / Central Limit Theorem",
+    "distractors": []
+  },
+  {
+    "stem": "In an airport baggage claim system, luggage is processed in the order it arrives. Each piece of luggage is loaded onto a conveyor belt, and the first piece loaded is the first to be delivered to passengers.  Which data structure would be best suited to model this luggage delivery system?",
+    "answer": "Queue",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Data Structures / Queue",
+    "distractors": []
+  },
+  {
+    "stem": "A data scientist needs to visualise clusters or groups of data points of six dimensional data. He uses a certain dimensionality reduction technique to reduce the dimensions to two. Which of the following would be the best visualisation method in order to identify the visual clusters in the reduced dataset and identify potential outliers?",
+    "answer": "Heatmap",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Data Visualization / Dimensionality Reduction",
+    "distractors": []
+  },
+  {
+    "stem": "What is the output of the following?",
+    "answer": "(we, are, humans)",
+    "type": "mathematical",
+    "difficulty": "medium",
+    "concept_tag": "Python / String Operations",
+    "distractors": []
+  },
+  {
+    "stem": "A company wants to determine if a new website design increases conversion rates. What statistical tool is most appropriate for this analysis?",
+    "answer": "Hypothesis testing (e.g., t-test).",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Statistics / Hypothesis Testing",
+    "distractors": []
+  },
+  {
+    "stem": "What is the primary objective of the least squares method?",
+    "answer": "Minimize the sum of squared differences between observed and predicted values",
+    "type": "mathematical",
+    "difficulty": "easy",
+    "concept_tag": "Statistics / Least Squares",
+    "distractors": []
+  }
+]

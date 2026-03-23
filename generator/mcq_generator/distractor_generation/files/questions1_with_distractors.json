@@ -1,0 +1,532 @@
+{
+  "questions": [
+    {
+      "core_id": "MATH010",
+      "stem": "What is the value of 2^10?",
+      "answer": "1024",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "exponents",
+      "distractors": [
+        {
+          "text": "2048",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "512",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "1025",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "1023",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        }
+      ]
+    },
+    {
+      "core_id": "MATH011",
+      "stem": "What is the value of 22 ÷ 7 rounded to two decimal places?",
+      "answer": "3.14",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "division",
+      "distractors": [
+        {
+          "text": "3.24",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "3.04",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "6.28",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.25
+        },
+        {
+          "text": "1.57",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "core_id": "MATH012",
+      "stem": "What is the simplified form of 18/24?",
+      "answer": "3/4",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "fractions",
+      "distractors": [
+        {
+          "text": "3/8",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "6/4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "6/8",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "0.75",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "STAT010",
+      "stem": "Approximately what percentage of data lies within three standard deviations of the mean in a normal distribution?",
+      "answer": "99.7%",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "normal_distribution",
+      "distractors": [
+        {
+          "text": "95%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the percentage of data within two standard deviations (approximately 95%) with the percentage within three standard deviations",
+          "_sim": 0.5
+        },
+        {
+          "text": "97.5%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "incorrectly splitting the remaining percentage of data outside of two standard deviations, leading to an underestimation of the data within three standard deviations",
+          "_sim": 0.6
+        },
+        {
+          "text": "99%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "underestimating the percentage of data within three standard deviations due to a miscalculation or misunderstanding of the normal distribution curve",
+          "_sim": 0.75
+        },
+        {
+          "text": "100%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that all data points must lie within three standard deviations of the mean, neglecting the possibility of extreme outliers",
+          "_sim": 0.2222222222222222
+        }
+      ]
+    },
+    {
+      "core_id": "STAT011",
+      "stem": "If a model correctly classifies 45 out of 60 samples, what is its accuracy?",
+      "answer": "75%",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "classification_metrics",
+      "distractors": [
+        {
+          "text": "70%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "underestimation of correct classifications due to a calculation error",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "50%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "assuming that half of the samples are correctly classified by default, without performing the actual calculation",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "80%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "miscalculation due to incorrect rounding or overestimation of correct classifications",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "60%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the total number of samples with the number of correctly classified samples",
+          "_sim": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "core_id": "STAT012",
+      "stem": "What is the probability of getting heads when tossing a fair coin?",
+      "answer": "50%",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "probability",
+      "distractors": [
+        {
+          "text": "25%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "assuming that because there are two outcomes, each outcome has a probability of one quarter, rather than one half",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "75%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that because a fair coin is used, it must have a higher probability of landing on heads due to its 'fairness', rather than an equal probability",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "33.33%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the probability of getting heads with the probability of getting heads in a sequence of three tosses, where two out of three is not the correct scenario",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "66.67%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "overestimating the likelihood of getting heads due to an incorrect assumption that the coin has a higher chance of landing on heads",
+          "_sim": 0.2222222222222222
+        }
+      ]
+    },
+    {
+      "core_id": "DL010",
+      "stem": "Why does batch normalization help stabilize neural network training?",
+      "answer": "It reduces internal covariate shift by normalizing layer inputs, allowing faster and more stable training.",
+      "type": "conceptual",
+      "difficulty": "hard",
+      "concept_tag": "batch_normalization",
+      "distractors": [
+        {
+          "text": "It regularizes the model by penalizing large weights",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusion between batch normalization and regularization techniques such as L1 or L2 regularization",
+          "_sim": 0.4430379746835443
+        },
+        {
+          "text": "It speeds up training by allowing the use of larger learning rates",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that batch normalization primarily affects the learning rate rather than the stability of the training process",
+          "_sim": 0.4069767441860465
+        },
+        {
+          "text": "It increases the capacity of the neural network by adding more parameters to be learned",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that batch normalization adds complexity rather than simplifying the training process",
+          "_sim": 0.35233160621761656
+        },
+        {
+          "text": "It helps the model learn more complex representations by preserving the scale of the inputs",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial truth that batch normalization affects the scale of inputs, but misunderstanding its primary purpose of reducing internal covariate shift",
+          "_sim": 0.34517766497461927
+        }
+      ]
+    },
+    {
+      "core_id": "ML010",
+      "stem": "Why is cross-validation preferred over a single train-test split?",
+      "answer": "It provides a more reliable estimate of model performance by reducing variance due to data partitioning.",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "model_evaluation",
+      "distractors": [
+        {
+          "text": "It allows for the use of more complex models that require larger training datasets",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that cross-validation is primarily used to accommodate complex models rather than to assess model performance reliably",
+          "_sim": 0.3870967741935484
+        },
+        {
+          "text": "It is used to increase the training time and computational cost of model development",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that cross-validation's primary purpose is to add complexity or cost to the model development process",
+          "_sim": 0.3723404255319149
+        },
+        {
+          "text": "It increases the risk of overfitting by exposing the model to more data",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusion between the concepts of overfitting and the purpose of cross-validation, which actually helps mitigate overfitting",
+          "_sim": 0.3314285714285714
+        },
+        {
+          "text": "It is a requirement for certain machine learning algorithms to function properly",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that cross-validation is a technical requirement for algorithmic functionality rather than a methodological choice for evaluation",
+          "_sim": 0.30434782608695654
+        }
+      ]
+    },
+    {
+      "core_id": "DSA010",
+      "stem": "What is the worst-case time complexity of quicksort?",
+      "answer": "O(n^2)",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "sorting_algorithms",
+      "distractors": [
+        {
+          "text": "O(n log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusing the average-case time complexity of quicksort with its worst-case time complexity",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "incorrectly applying the time complexity of binary search to quicksort",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "O(n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misunderstanding the time complexity of quicksort by comparing it to linear search algorithms",
+          "_sim": 0.8
+        }
+      ]
+    },
+    {
+      "core_id": "DSA011",
+      "stem": "Which data structure is most suitable for implementing recursion internally?",
+      "answer": "Stack",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "data_structures",
+      "distractors": [
+        {
+          "text": "Tree",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "some students may mistakenly believe that the hierarchical structure of trees makes them inherently suitable for recursive operations, despite the fact that recursion can be implemented with various data structures",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Heap",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "a common misconception is that the heap's ability to efficiently manage priority-based operations makes it well-suited for recursion, when in fact the key characteristic of recursion is the LIFO ordering, which is directly supported by stacks",
+          "_sim": 0.2222222222222222
+        },
+        {
+          "text": "Graph",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "students might think that the complex, non-linear nature of graphs makes them a natural fit for recursive algorithms, overlooking the fact that recursion is more directly related to the stack data structure",
+          "_sim": 0.2
+        }
+      ]
+    },
+    {
+      "core_id": "PY010",
+      "stem": "What is the output of the following Python code?\n\nx = [1, 2, 3]\ny = x\ny.append(4)\nprint(x)",
+      "answer": "[1, 2, 3, 4]",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_mutability",
+      "distractors": [
+        {
+          "text": "[4]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "thinking that appending to y will replace the original list x",
+          "_sim": 0.4
+        },
+        {
+          "text": "an error, since y is not defined as a list",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "not recognizing that y is a reference to the same list object as x",
+          "_sim": 0.14814814814814814
+        }
+      ]
+    },
+    {
+      "core_id": "PY011",
+      "stem": "What is the output of the following Python code?\n\ndef f(x, arr=[]):\n    arr.append(x)\n    return arr\n\nprint(f(1))\nprint(f(2))",
+      "answer": "[1]\n[1, 2]",
+      "type": "conceptual",
+      "difficulty": "hard",
+      "concept_tag": "python_functions",
+      "distractors": [
+        {
+          "text": "[2] [2]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding of how default arguments are handled in Python, thinking they are reset on each call",
+          "_sim": 0.35294117647058826
+        },
+        {
+          "text": "Error: arr is not defined",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that default argument values must be defined within the function body, not in the function definition",
+          "_sim": 0.05714285714285714
+        }
+      ]
+    },
+    {
+      "core_id": "PY012",
+      "stem": "What is the output of the following Python code?\n\nprint(bool([]), bool([0]))",
+      "answer": "False True",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_truthiness",
+      "distractors": [
+        {
+          "text": "True False",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that empty lists are truthy and non-empty lists containing zeros are falsy",
+          "_sim": 0.5
+        },
+        {
+          "text": "True True",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that all non-empty lists are truthy, regardless of their contents",
+          "_sim": 0.631578947368421
+        },
+        {
+          "text": "False False",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrect assumption that empty lists and lists containing zeros are both falsy",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "Error",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that the code will raise an error due to the use of bool() on lists",
+          "_sim": 0.26666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE010",
+      "stem": "How many unique values are in the set {1, 1, 2, 3, 3, 3}?",
+      "answer": "3",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sets",
+      "distractors": [
+        {
+          "text": "6",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "counting each occurrence of an element in the set instead of identifying unique values",
+          "_sim": 0.0
+        },
+        {
+          "text": "4",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the concept of a set and including duplicate values as separate unique elements",
+          "_sim": 0.0
+        },
+        {
+          "text": "2",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "failing to account for all unique elements in the set, only considering the first or last occurrences",
+          "_sim": 0.0
+        },
+        {
+          "text": "5",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly assuming that the number of unique values is always one less than the total number of elements in the set",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE011",
+      "stem": "What is the time complexity of accessing an element in a Python list by index?",
+      "answer": "O(1)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "time_complexity",
+      "distractors": [
+        {
+          "text": "O(log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusion with the time complexity of search operations in other data structures, such as binary search trees",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n log n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misapplication of the time complexity of sorting algorithms to simple access operations",
+          "_sim": 0.42857142857142855
+        },
+        {
+          "text": "O(2^n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "exponential growth misconception, thinking that the time complexity increases exponentially with the size of the list",
+          "_sim": 0.6
+        },
+        {
+          "text": "O(n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misconception that accessing an element in a list requires iterating through all elements",
+          "_sim": 0.75
+        }
+      ]
+    }
+  ]
+}
