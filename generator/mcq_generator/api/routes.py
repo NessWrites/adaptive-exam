@@ -29,28 +29,8 @@ async def convert_question(question_id: int,
                             target_bloom_levels: List[int] = Query(None), #optional list
                             db: Session = Depends(get_db),
                             distractor_bridge: DistractorBridge = Depends(get_distractor_bridge),): 
-    """takes an existing subjective qid , converts it into an mcq via gemini and saves it to mcq table"""
+    """Takes an existing question (subjective or code) by ID, converts it into MCQ(s) via Gemini and saves to mcq table."""
     service = MCQService(db=db, distractor_bridge= distractor_bridge) 
-    
-    # try: 
-    #     new_mcq = await service.convert_subjective_to_mcq(question_id)
-    #     return {
-    #         "status": "success" ,
-    #         "message": "Subjective question successfully converted to mcq",
-    #         "data" : {
-    #             "mcq_id": new_mcq.unique_id,
-    #             "question_text": new_mcq.question_text, 
-    #             "options": new_mcq.options,
-    #             "correct_answer": new_mcq.correct_answer,
-    #             "explanation": new_mcq.explanation
-    #         }
-    #     }
-    
-    # except ValueError as e: 
-    #     raise HTTPException(status_code= 404, detail = str(e))
-    
-    # except Exception as e: 
-    #     raise HTTPException(status_code= 500, detail = f"conversion failed: {str(e)}")
     
     if target_bloom_levels and len(target_bloom_levels) > 4 : 
         raise HTTPException(
@@ -58,9 +38,8 @@ async def convert_question(question_id: int,
             detail="cannot request more than 4 bloom "
         )
     try: 
-        # If 'levels' is passed, it overrides 'num_variants'
-        # If 'levels' is None, 'num_variants' random levels are picked
-        new_mcqs = await service.convert_subjective_to_mcq(
+        # Auto-detects question type (subjective or code)
+        new_mcqs = await service.convert_to_mcq(
             question_id=question_id, 
             num_variants=num_variants, 
             target_levels= target_bloom_levels

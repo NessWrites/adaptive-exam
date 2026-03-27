@@ -140,38 +140,51 @@ class MCQService:
         self.evaluator = MCQEvaluator()
         self.distractor_bridge = distractor_bridge
 
-    async def convert_subjective_to_mcq(
+    # ------------------------------------------------------------------ #
+    # UNIFIED ENTRY POINT                                                  #
+    # ------------------------------------------------------------------ #
+
+    async def convert_to_mcq(
         self,
         question_id: int,
         num_variants: int = 1,
         target_levels: Optional[List[int]] = None,
     ) -> list:
-        # --- 1. Fetch source question ---
-        subjective_q = self.repo.get_subjective_questions(question_id)
-        if not subjective_q:
-            raise ValueError(f"SubjectiveQuestion with id {question_id} not found.")
+        """
+        Auto-detect source question type (subjective / code) and convert to MCQ.
+        """
+        # --- 1. Fetch source question (any type) ---
+        source_q = self.repo.get_any_source_question(question_id)
+        if not source_q:
+            raise ValueError(
+                f"Question with id {question_id} not found "
+                f"(must be 'subjective' or 'code' type)."
+            )
 
         # --- 2. Determine Bloom levels ---
         if not target_levels:
             count = min(num_variants, 4)
             target_levels = random.sample([1, 2, 3, 4], count)
 
-        mark_scheme_str = (
-            str(subjective_q.mark_schema)
-            if subjective_q.mark_schema
-            else "Not provided"
-        )
+        # --- 3. Branch on question type for LLM call ---
+        if source_q.question_type == "subjective":
+            batch_result = await self._generate_from_subjective(source_q, target_levels)
+            # For the evaluator: use mark_schema as the reference context
+            evaluator_context = (
+                str(source_q.mark_schema)
+                if source_q.mark_schema
+                else "Not provided"
+            )
+        elif source_q.question_type == "code":
+            batch_result = await self._generate_from_code(source_q, target_levels)
+            # For the evaluator: use test cases as the reference context
+            evaluator_context = str(source_q.markscheme) if source_q.markscheme else "Not provided"
+        else:
+            raise ValueError(
+                f"Unsupported question_type '{source_q.question_type}' for MCQ conversion."
+            )
 
-        # --- 3. Single LLM call → batch of (stem, correct_answer, explanation) ---
-        batch_result = await self.ai_engine.generate_mcq_batch(
-            domain=subjective_q.domain,
-            concept_tag=subjective_q.concept_tag,
-            question_text=subjective_q.question_text,
-            levels=target_levels,
-            mark_scheme=mark_scheme_str,
-        )
-
-        # --- 4. For each LLM core, run DistractorBridge → assemble full MCQ ---
+        # --- 4. For each LLM core, run Distractors → Evaluate → Save ---
         results = []
         for mcq_core in batch_result.questions:
             try:
@@ -179,8 +192,8 @@ class MCQService:
                     await self.distractor_bridge.build_options_dict(
                         stem=mcq_core.question_text,
                         correct_answer=mcq_core.correct_answer,
-                        concept_tag=subjective_q.concept_tag,
-                        domain=subjective_q.domain,
+                        concept_tag=source_q.concept_tag,
+                        domain=source_q.domain,
                     )
                 )
             except Exception as exc:
@@ -190,14 +203,13 @@ class MCQService:
                     exc,
                     exc_info=True,
                 )
-                # Hard fallback: skip this MCQ variant rather than save corrupted data
                 continue
 
             # --- 5. Evaluate the generated MCQ ---
             distractors_list = [v for k, v in options_dict.items() if k != correct_answer_dict["key"]]
             eval_score = await self.evaluator.evaluate_mcq(
-                question_text=subjective_q.question_text,
-                mark_scheme=subjective_q.mark_schema,
+                question_text=source_q.question_text,
+                mark_scheme=evaluator_context,
                 bloom_level=mcq_core.bloom_level,
                 mcq_stem=mcq_core.question_text,
                 correct_answer=correct_answer_dict["text"],
@@ -208,14 +220,14 @@ class MCQService:
             # --- 6. Assemble the final dict for the repository ---
             mcq_data = {
                 "question_text": mcq_core.question_text,
-                "options": options_dict,               # {"A":…, "B":…, "C":…, "D":…}
-                "correct_answer": correct_answer_dict, # {"key": "B", "text": "…"}
+                "options": options_dict,
+                "correct_answer": correct_answer_dict,
                 "explanation": mcq_core.explanation,
                 "validation_score": eval_score,
             }
 
             new_mcq = self.repo.save_mcq(
-                original_sub_q=subjective_q,
+                source_question=source_q,
                 mcq_data=mcq_data,
                 target_bloom_level=mcq_core.bloom_level,
             )
@@ -228,3 +240,54 @@ class MCQService:
             )
 
         return results
+
+    # ------------------------------------------------------------------ #
+    # BACKWARD-COMPATIBLE ALIAS                                            #
+    # ------------------------------------------------------------------ #
+
+    async def convert_subjective_to_mcq(
+        self,
+        question_id: int,
+        num_variants: int = 1,
+        target_levels: Optional[List[int]] = None,
+    ) -> list:
+        """Legacy method — delegates to the unified convert_to_mcq."""
+        return await self.convert_to_mcq(question_id, num_variants, target_levels)
+
+    # ------------------------------------------------------------------ #
+    # PRIVATE: TYPE-SPECIFIC LLM CALLS                                     #
+    # ------------------------------------------------------------------ #
+
+    async def _generate_from_subjective(self, source_q, target_levels):
+        """Call the subjective-specific LLM prompt."""
+        mark_scheme_str = (
+            str(source_q.mark_schema) if source_q.mark_schema else "Not provided"
+        )
+        return await self.ai_engine.generate_mcq_batch(
+            domain=source_q.domain,
+            concept_tag=source_q.concept_tag,
+            question_text=source_q.question_text,
+            levels=target_levels,
+            mark_scheme=mark_scheme_str,
+        )
+
+    async def _generate_from_code(self, source_q, target_levels):
+        """Call the code-specific LLM prompt, serializing code question fields."""
+        import json
+
+        # Serialize test cases for the prompt (hide hidden flag from LLM, show I/O)
+        test_cases_raw = source_q.markscheme or []
+        test_cases_str = json.dumps(test_cases_raw, indent=2)
+
+        configurations_str = json.dumps(source_q.configurations or {}, indent=2)
+
+        return await self.ai_engine.generate_mcq_batch_from_code(
+            domain=source_q.domain,
+            concept_tag=source_q.concept_tag,
+            question_text=source_q.question_text,
+            function_name=source_q.function_name,
+            placeholder=source_q.placeholder or "",
+            test_cases=test_cases_str,
+            configurations=configurations_str,
+            levels=target_levels,
+        )

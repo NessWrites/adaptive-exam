@@ -18,7 +18,7 @@ class MCQEvaluator:
             (
                 "system",
                 """You are an advanced AI assessment judge and pedagogy expert.
-Your task is to evaluate a generated Multiple Choice Question (MCQ) based on its original subjective question, marking scheme, and the targeted Bloom's level.
+Your task is to evaluate a generated Multiple Choice Question (MCQ) based on its original source question, reference material (marking scheme or test cases), and the targeted Bloom's level.
 
 You must score the MCQ based on the following three axes:
 1. Hallucination (Score from 1 to 5: 1=Hallucinated/Contradicts marking scheme, 5=Perfectly aligns)
@@ -30,10 +30,10 @@ Provide a brief 'feedback' string justifying the scores.
             ),
             (
                 "human",
-                """Original Subjective Question:
+                """Original Source Question:
 {question_text}
 
-Original Marking Scheme:
+Original Reference Material (marking scheme or test cases):
 {mark_scheme}
 
 Targeted Bloom Level: {bloom_level}
