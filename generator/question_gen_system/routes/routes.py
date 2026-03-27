@@ -17,7 +17,11 @@ from backend.app.models import database_models as models
 from backend.app.database.postgresql.connection import get_db, engine
 
 #initialize db table if no table creates one does not work for migration 
-models.Base.metadata.create_all(bind = engine)  #use alembic in prod
+# models.Base.metadata.create_all(bind = engine)  #use alembic in prod
+
+#the above line created problem for generating alembic migrations, this skipped table creation
+#alembic is notorious for not catching checkconstraints but not create tables!!
+
 
 load_dotenv()
 
