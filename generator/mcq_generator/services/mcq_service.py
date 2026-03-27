@@ -188,34 +188,57 @@ class MCQService:
         results = []
         for mcq_core in batch_result.questions:
             try:
-                options_dict, correct_answer_dict = (
-                    await self.distractor_bridge.build_options_dict(
-                        stem=mcq_core.question_text,
-                        correct_answer=mcq_core.correct_answer,
-                        concept_tag=source_q.concept_tag,
-                        domain=source_q.domain,
+                if source_q.question_type == "subjective":
+                    options_dict, correct_answer_dict = (
+                        await self.distractor_bridge.build_options_dict(
+                            stem=mcq_core.question_text,
+                            correct_answer=mcq_core.correct_answer,
+                            concept_tag=source_q.concept_tag,
+                            domain=source_q.domain,
+                        )
                     )
-                )
+                    mcq_category = "text"
+                    stem_code = None
+                    # --- 5. Evaluate the generated MCQ ---
+                    distractors_list = [v for k, v in options_dict.items() if k != correct_answer_dict["key"]]
+                    eval_score = await self.evaluator.evaluate_mcq(
+                        question_text=source_q.question_text,
+                        mark_scheme=evaluator_context,
+                        bloom_level=mcq_core.bloom_level,
+                        mcq_stem=mcq_core.question_text,
+                        correct_answer=correct_answer_dict["text"],
+                        distractors=distractors_list,
+                        explanation=mcq_core.explanation
+                    )
+                else:
+                    # code question already has 4 options
+                    options_dict = mcq_core.options
+                    correct_answer_dict = {
+                        "key": mcq_core.correct_answer_key,
+                        "text": options_dict.get(mcq_core.correct_answer_key, "")
+                    }
+                    mcq_category = mcq_core.mcq_category
+                    stem_code = mcq_core.stem_code
+                    
+                    # For evaluation of code MCQs
+                    distractors_list = [v for k, v in options_dict.items() if k != mcq_core.correct_answer_key]
+                    eval_score = await self.evaluator.evaluate_mcq(
+                        question_text=source_q.question_text,
+                        mark_scheme=evaluator_context,
+                        bloom_level=mcq_core.bloom_level,
+                        mcq_stem=mcq_core.question_text,
+                        correct_answer=correct_answer_dict["text"],
+                        distractors=distractors_list,
+                        explanation=mcq_core.explanation
+                    )
             except Exception as exc:
                 logger.error(
-                    "DistractorBridge failed for bloom level %d: %s",
+                    "Error processing MCQ for bloom level %d: %s",
                     mcq_core.bloom_level,
                     exc,
                     exc_info=True,
                 )
                 continue
-
-            # --- 5. Evaluate the generated MCQ ---
-            distractors_list = [v for k, v in options_dict.items() if k != correct_answer_dict["key"]]
-            eval_score = await self.evaluator.evaluate_mcq(
-                question_text=source_q.question_text,
-                mark_scheme=evaluator_context,
-                bloom_level=mcq_core.bloom_level,
-                mcq_stem=mcq_core.question_text,
-                correct_answer=correct_answer_dict["text"],
-                distractors=distractors_list,
-                explanation=mcq_core.explanation
-            )
 
             # --- 6. Assemble the final dict for the repository ---
             mcq_data = {
@@ -224,6 +247,8 @@ class MCQService:
                 "correct_answer": correct_answer_dict,
                 "explanation": mcq_core.explanation,
                 "validation_score": eval_score,
+                "mcq_category": mcq_category,
+                "stem_code": stem_code,
             }
 
             new_mcq = self.repo.save_mcq(
@@ -281,7 +306,7 @@ class MCQService:
 
         configurations_str = json.dumps(source_q.configurations or {}, indent=2)
 
-        return await self.ai_engine.generate_mcq_batch_from_code(
+        return await self.ai_engine.generate_code_mcq_batch(
             domain=source_q.domain,
             concept_tag=source_q.concept_tag,
             question_text=source_q.question_text,

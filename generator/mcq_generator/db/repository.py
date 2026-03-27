@@ -77,6 +77,8 @@ class MCQRepository:
             correct_answer = mcq_data['correct_answer'],
             explanation = mcq_data["explanation"],
             validation_score = mcq_data.get("validation_score"),
+            mcq_category = mcq_data.get("mcq_category", "text"),
+            stem_code = mcq_data.get("stem_code"),
             question_type = "mcq",
             a_values  = [0.0, 0.0],
             b_value = 0.0,

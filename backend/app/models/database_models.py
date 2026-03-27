@@ -152,6 +152,10 @@ class MCQQuestion(Question):
     explanation = Column(Text, nullable = True) 
     validation_score = Column(JSON, nullable=True)
     
+    mcq_category = Column(String(30), default="text", nullable=False)
+    stem_code = Column(Text, nullable=True)
+
+    
 
     __table_args__ = ( 
         CheckConstraint(
