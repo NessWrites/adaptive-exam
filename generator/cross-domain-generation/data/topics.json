@@ -1,0 +1,162 @@
+[
+  {
+    "topic": "eigenvalues_and_eigenvectors",
+    "learning_objective": "Compute eigenvalues and eigenvectors of a square matrix and interpret their geometric meaning as scaling factors and invariant directions under a linear transformation."
+  },
+  {
+    "topic": "matrix_decomposition_svd",
+    "learning_objective": "Decompose a matrix using Singular Value Decomposition (SVD) and apply it to dimensionality reduction and low-rank approximation problems."
+  },
+  {
+    "topic": "linear_transformations",
+    "learning_objective": "Represent a linear transformation as a matrix and describe how it maps vectors between spaces, including identifying stretching, rotation, and reflection."
+  },
+  {
+    "topic": "vector_spaces_and_subspaces",
+    "learning_objective": "Determine whether a given set of vectors forms a vector space or subspace by verifying closure under addition and scalar multiplication."
+  },
+  {
+    "topic": "rank_and_null_space",
+    "learning_objective": "Calculate the rank and null space of a matrix and use them to determine the solution structure of a system of linear equations."
+  },
+  {
+    "topic": "least_squares_regression",
+    "learning_objective": "Derive the least squares solution to an overdetermined system and apply it to fit a linear model to data by minimizing residual error."
+  },
+  {
+    "topic": "orthogonality_and_projections",
+    "learning_objective": "Apply the Gram-Schmidt process to produce an orthonormal basis and use orthogonal projections to decompose vectors within a subspace."
+  },
+  {
+    "topic": "markov_chains",
+    "learning_objective": "Construct a transition matrix for a Markov chain and compute the steady-state distribution by finding its dominant eigenvector."
+  },
+  {
+    "topic": "determinants_and_invertibility",
+    "learning_objective": "Evaluate the determinant of a matrix to determine invertibility and use it to understand how a transformation scales area or volume."
+  },
+  {
+    "topic": "covariance_matrix",
+    "learning_objective": "Construct a covariance matrix from a dataset and interpret its diagonal and off-diagonal entries in terms of variance and feature correlation."
+  },
+  {
+    "topic": "gradient_and_partial_derivatives",
+    "learning_objective": "Compute partial derivatives of a multivariable function and assemble them into a gradient vector that points in the direction of steepest ascent."
+  },
+  {
+    "topic": "optimization_maxima_and_minima",
+    "learning_objective": "Apply the first and second derivative tests to locate and classify local maxima, minima, and saddle points of a differentiable function."
+  },
+  {
+    "topic": "differential_equations_odes",
+    "learning_objective": "Solve a first-order ordinary differential equation using separation of variables and interpret the solution as a model of a dynamic system."
+  },
+  {
+    "topic": "integration_and_area_under_curve",
+    "learning_objective": "Evaluate definite integrals using the Fundamental Theorem of Calculus and interpret the result as the net signed area under a curve."
+  },
+  {
+    "topic": "taylor_series_approximation",
+    "learning_objective": "Construct a Taylor series expansion of a smooth function around a point and use it to approximate the function's value near that point."
+  },
+  {
+    "topic": "multivariable_optimization",
+    "learning_objective": "Use Lagrange multipliers to find the extrema of a multivariable function subject to an equality constraint."
+  },
+  {
+    "topic": "gradient_descent",
+    "learning_objective": "Implement the gradient descent update rule and explain how step size and gradient magnitude jointly determine convergence toward a local minimum."
+  },
+  {
+    "topic": "rate_of_change_and_related_rates",
+    "learning_objective": "Set up and solve a related rates problem by differentiating an implicit relationship with respect to time to find an unknown rate of change."
+  },
+  {
+    "topic": "fourier_transform",
+    "learning_objective": "Apply the Fourier transform to decompose a time-domain signal into its frequency components and interpret the resulting spectrum."
+  },
+  {
+    "topic": "limits_and_continuity",
+    "learning_objective": "Evaluate the limit of a function at a point using formal limit laws and determine whether the function is continuous at that point."
+  },
+  {
+    "topic": "hypothesis_testing",
+    "learning_objective": "Formulate null and alternative hypotheses for a given research question, select an appropriate test statistic, and make a reject/fail-to-reject decision based on the p-value."
+  },
+  {
+    "topic": "confidence_intervals",
+    "learning_objective": "Construct a confidence interval for a population mean or proportion and correctly interpret it as a range that captures the true parameter with a stated level of confidence."
+  },
+  {
+    "topic": "regression_analysis",
+    "learning_objective": "Fit a simple or multiple linear regression model to data, interpret the coefficients, and assess model fit using R-squared and residual diagnostics."
+  },
+  {
+    "topic": "central_limit_theorem",
+    "learning_objective": "State the Central Limit Theorem and use it to justify why the sampling distribution of the mean approaches normality as sample size increases, regardless of population shape."
+  },
+  {
+    "topic": "type_i_and_type_ii_errors",
+    "learning_objective": "Distinguish between Type I and Type II errors in hypothesis testing, explain the trade-off between them, and relate each to the concepts of significance level and statistical power."
+  },
+  {
+    "topic": "sampling_methods_and_bias",
+    "learning_objective": "Compare probability, stratified, and convenience sampling methods and identify how each can introduce or reduce selection bias in a study."
+  },
+  {
+    "topic": "anova_variance_analysis",
+    "learning_objective": "Conduct a one-way ANOVA to test whether the means of three or more groups differ significantly, and interpret the F-statistic and associated p-value."
+  },
+  {
+    "topic": "correlation_vs_causation",
+    "learning_objective": "Explain why a strong correlation between two variables does not imply a causal relationship, and identify confounding variables or alternative explanations."
+  },
+  {
+    "topic": "bayesian_updating",
+    "learning_objective": "Apply Bayes' theorem to update a prior probability distribution with new evidence and interpret the resulting posterior distribution."
+  },
+  {
+    "topic": "time_series_analysis",
+    "learning_objective": "Decompose a time series into trend, seasonality, and residual components and apply a forecasting method such as exponential smoothing."
+  },
+  {
+    "topic": "conditional_probability",
+    "learning_objective": "Calculate conditional probabilities using the definition P(A|B) = P(A∩B)/P(B) and apply the law of total probability to partition complex probability problems."
+  },
+  {
+    "topic": "bayes_theorem",
+    "learning_objective": "Apply Bayes' theorem to reverse conditional probabilities and update the likelihood of a hypothesis given new observed evidence."
+  },
+  {
+    "topic": "random_variables_and_distributions",
+    "learning_objective": "Define discrete and continuous random variables, identify their probability distributions, and compute probabilities using PMFs and PDFs."
+  },
+  {
+    "topic": "law_of_large_numbers",
+    "learning_objective": "State the Law of Large Numbers and use it to explain why the sample mean converges to the population mean as the number of trials increases."
+  },
+  {
+    "topic": "expected_value",
+    "learning_objective": "Compute the expected value of a discrete or continuous random variable and interpret it as the long-run average outcome of a random process."
+  },
+  {
+    "topic": "variance_and_standard_deviation",
+    "learning_objective": "Calculate the variance and standard deviation of a random variable from its distribution and interpret them as measures of spread around the mean."
+  },
+  {
+    "topic": "independence_and_correlation",
+    "learning_objective": "Distinguish between statistical independence and zero correlation, and determine whether two events or variables satisfy each condition."
+  },
+  {
+    "topic": "poisson_process",
+    "learning_objective": "Model the number of events occurring in a fixed interval using a Poisson distribution and verify when the Poisson process assumptions are satisfied."
+  },
+  {
+    "topic": "monte_carlo_simulation",
+    "learning_objective": "Design a Monte Carlo simulation to estimate a probability or expected value by generating random samples and computing sample statistics."
+  },
+  {
+    "topic": "information_theory_and_entropy",
+    "learning_objective": "Calculate the Shannon entropy of a discrete probability distribution and interpret it as a measure of uncertainty or information content."
+  }
+]

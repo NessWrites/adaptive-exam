@@ -1,0 +1,99 @@
+{
+  "run_info": {
+    "topic_1": "optimization_maxima_and_minima",
+    "topic_2": "multivariable_optimization",
+    "learning_objective_1": "Apply the first and second derivative tests to locate and classify local maxima, minima, and saddle points of a differentiable function.",
+    "learning_objective_2": "Use Lagrange multipliers to find the extrema of a multivariable function subject to an equality constraint.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Portfolio Optimization in Financial Markets",
+    "domain": "Financial Economics",
+    "scenario": "An investment firm is managing a portfolio of assets, including stocks, bonds, and commodities. The firm wants to optimize the portfolio's returns while minimizing the risk. The portfolio's return can be represented by a differentiable function, and the first and second derivative tests can be used to locate and classify local maxima, minima, and saddle points. Additionally, the firm is subject to an equality constraint representing the regulatory requirements, and Lagrange multipliers can be used to find the extrema of a multivariable function subject to this constraint.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The scenario effectively integrates both learning objectives, using the first and second derivative tests to optimize portfolio returns and Lagrange multipliers to optimize risk subject to regulatory requirements. The domain of financial economics makes the mathematical structure feel natural and coherent."
+  },
+  "best_question": {
+    "question": "Suppose the investment firm's portfolio return function is f(x, y) = 3x^2 + 2y^2 - 4xy, where x is the percentage of assets allocated to bonds and y is the percentage allocated to commodities. The firm wants to minimize the risk, represented by the function R(x, y) = x^2 + y^2 - 2xy, subject to the regulatory constraint x + y = 100%. Using the first and second derivative tests, find the critical points of the risk function and then use Lagrange multipliers to find the minimum risk subject to the constraint. What is the optimal asset allocation percentage and the corresponding minimum risk?",
+    "expected_concepts": [
+      "first and second derivative tests",
+      "Lagrange multipliers"
+    ],
+    "overall_score": 0.8250000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply both the first and second derivative tests and Lagrange multipliers, making it a good reflection of both learning objectives. The cognitive load is balanced between the two topics, but the decomposability could be improved with more distinct sub-tasks. The question stays within the domain of investment portfolio optimization and the student's attempt adheres to the learning objectives."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking us to find the optimal asset allocation percentage and the corresponding minimum risk for an investment firm's portfolio.",
+      "We are given a risk function R(x, y) = x^2 + y^2 - 2xy, where x is the percentage of assets allocated to bonds and y is the percentage allocated to commodities.",
+      "We also have a regulatory constraint x + y = 100%, which can be rewritten as x + y - 100 = 0.",
+      "To solve this, we need to use the first and second derivative tests to classify the critical points of the risk function, and then use Lagrange multipliers to find the minimum risk subject to the constraint."
+    ],
+    "attempt": "First, we need to find the critical points of the risk function R(x, y) = x^2 + y^2 - 2xy. To do this, we take the partial derivatives of R with respect to x and y and set them equal to 0: \u2202R/\u2202x = 2x - 2y = 0 and \u2202R/\u2202y = 2y - 2x = 0. Solving this system of equations, we get x = y. Next, we need to use the second derivative test to classify these critical points. The Hessian matrix of R is [[2, -2], [-2, 2]], which has a positive determinant, so the critical points are local minima. However, since the question is asking for the minimum risk subject to the constraint x + y - 100 = 0, we need to use Lagrange multipliers. The Lagrangian function is L(x, y, \u03bb) = R(x, y) - \u03bb(x + y - 100) = x^2 + y^2 - 2xy - \u03bb(x + y - 100). Taking the partial derivatives of L with respect to x, y, and \u03bb, we get \u2202L/\u2202x = 2x - 2y - \u03bb, \u2202L/\u2202y = 2y - 2x - \u03bb, and \u2202L/\u2202\u03bb = x + y - 100. Setting these equal to 0 and solving the system of equations, we get x = y = 50 and \u03bb = 0. This solution makes sense in the context of the problem.",
+    "conclusion": "The optimal asset allocation percentage is 50% bonds and 50% commodities, and the corresponding minimum risk is R(50, 50) = 50^2 + 50^2 - 2*50*50 = 0.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The solution I found makes sense in the context of the problem."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 510,
+        "output_tokens": 1006,
+        "total_tokens": 1516
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1414,
+        "output_tokens": 400,
+        "total_tokens": 1814
+      },
+      "question_type_classifier": {
+        "input_tokens": 487,
+        "output_tokens": 103,
+        "total_tokens": 590
+      },
+      "question_generator": {
+        "input_tokens": 513,
+        "output_tokens": 775,
+        "total_tokens": 1288
+      },
+      "student_agent": {
+        "input_tokens": 1023,
+        "output_tokens": 1839,
+        "total_tokens": 2862
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1677,
+        "output_tokens": 163,
+        "total_tokens": 1840
+      }
+    },
+    "total": {
+      "input_tokens": 5624,
+      "output_tokens": 4286,
+      "total_tokens": 9910
+    }
+  }
+}

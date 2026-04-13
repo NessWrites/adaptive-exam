@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "rank_and_null_space",
+    "topic_2": "rate_of_change_and_related_rates",
+    "learning_objective_1": "Calculate the rank and null space of a matrix and use them to determine the solution structure of a system of linear equations.",
+    "learning_objective_2": "Set up and solve a related rates problem by differentiating an implicit relationship with respect to time to find an unknown rate of change.",
+    "stratum": "adjacent",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 3,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Space Station Resource Management",
+    "domain": "Aerospace Engineering",
+    "scenario": "A space station is experiencing a malfunction in its life support system, affecting the oxygen supply. To mitigate the issue, engineers must calculate the rank and null space of a matrix representing the system's resource allocation to determine the solution structure of the equations governing the supply and demand of oxygen. Meanwhile, they must also set up and solve a related rates problem to find the rate at which oxygen is being consumed, given the implicit relationship between the station's population, activity levels, and oxygen usage, all of which are changing over time.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for solving the space station's life support issue, with a good balance between calculating rank and null space for resource allocation and determining the rate of oxygen consumption. The scenario naturally implies measurable structures and feels coherent within the aerospace engineering domain."
+  },
+  "best_question": {
+    "question": "The space station's life support system has an initial oxygen supply of 1000 units. The population size is 50, and the activity levels are at 20%. The time rate of change of oxygen consumption is -2 units per hour. The resource allocation matrix A is given by | 2  1 |, | 4  2 |. Find the rank and null space of matrix A, and then use related rates to determine the rate at which the population size must change to maintain a stable oxygen supply, assuming the activity levels increase by 5% every hour.",
+    "expected_concepts": [
+      "rank and null space of a matrix",
+      "related rates"
+    ],
+    "overall_score": 0.785,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.8,
+      "boundary_adherence": 0.7
+    },
+    "reason": "The question requires both learning objectives to be applied, with a clear decomposition into rank and null space calculation, and related rates analysis. However, the cognitive load balance is slightly skewed towards related rates, and the domain coherence is good but not perfect due to the somewhat artificial scenario."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking us to find the rank and null space of matrix A, and then use related rates to determine the rate at which the population size must change to maintain a stable oxygen supply.",
+      "First, we need to calculate the rank of matrix A, which involves finding the determinant of the matrix.",
+      "Then, we need to find the null space of matrix A, which involves solving the equation Ax = 0.",
+      "After that, we can use related rates to determine the rate at which the population size must change, taking into account the increase in activity levels and the initial oxygen supply."
+    ],
+    "attempt": "To find the rank of matrix A, we calculate the determinant: det(A) = (2*2) - (1*4) = 4 - 4 = 0. Since the determinant is 0, the matrix A is singular and its rank is less than 2. The rank of A is 1. The null space of A can be found by solving the equation Ax = 0. Let x = [x1, x2]^T, then we have [2 1; 4 2][x1; x2] = [0; 0]. This gives us the equations 2x1 + x2 = 0 and 4x1 + 2x2 = 0. Solving these equations, we get x2 = -2x1. So, the null space of A is spanned by the vector [1, -2]^T. Now, let's use related rates to find the rate at which the population size must change. Let P be the population size, A be the activity level, and O be the oxygen supply. We are given that dO/dt = -2, dA/dt = 0.05A, and we want to find dP/dt. We know that the oxygen consumption rate is proportional to the product of the population size and the activity level. So, we can write dO/dt = -kPA, where k is a constant. Differentiating this equation with respect to time t, we get d^2O/dt^2 = -k(dP/dt)A - kP(dA/dt). Since the oxygen supply is decreasing at a constant rate, d^2O/dt^2 = 0. Substituting the given values and solving for dP/dt, we get dP/dt = -kP(0.05A)/(-2 - kPA).",
+    "conclusion": "The rank of matrix A is 1, the null space of A is spanned by the vector [1, -2]^T, and the rate at which the population size must change to maintain a stable oxygen supply is dP/dt = -kP(0.05A)/(-2 - kPA).",
+    "student_confidence": 0.6,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to calculate the rank and null space of matrix A, and to use related rates to find the rate at which the population size must change."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 510,
+        "output_tokens": 1000,
+        "total_tokens": 1510,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1408,
+        "output_tokens": 395,
+        "total_tokens": 1803,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 480,
+        "output_tokens": 80,
+        "total_tokens": 560,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 5694,
+        "output_tokens": 2865,
+        "total_tokens": 8559,
+        "requests": 4
+      },
+      "student_agent": {
+        "input_tokens": 3693,
+        "output_tokens": 6277,
+        "total_tokens": 9970,
+        "requests": 4
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 3032,
+        "output_tokens": 433,
+        "total_tokens": 3465,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 14817,
+      "output_tokens": 11050,
+      "total_tokens": 25867,
+      "requests": 12
+    }
+  }
+}

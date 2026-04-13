@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "orthogonality_and_projections",
+    "topic_2": "integration_and_area_under_curve",
+    "learning_objective_1": "Apply the Gram-Schmidt process to produce an orthonormal basis and use orthogonal projections to decompose vectors within a subspace.",
+    "learning_objective_2": "Evaluate definite integrals using the Fundamental Theorem of Calculus and interpret the result as the net signed area under a curve.",
+    "stratum": "adjacent",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Audio Signal Processing",
+    "domain": "Signal Processing",
+    "scenario": "An audio engineer is working on a music track with multiple sound sources. To remove background noise and isolate the desired signal, the engineer must apply the Gram-Schmidt process to produce an orthonormal basis for the signal subspace and use orthogonal projections to decompose the signal into its constituent parts. Then, the engineer must integrate the signal over time to determine the net signed area under the curve, representing the signal's energy, and apply the Fundamental Theorem of Calculus to evaluate the definite integral.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The audio signal processing scenario tightly integrates both learning objectives, with a balanced cognitive load. The signal processing domain naturally incorporates mathematical structures, revealing non-obvious insights."
+  },
+  "best_question": {
+    "question": "For an audio signal sampled at 32000 Hz, with background noise in the frequency range of 30 Hz to 90 Hz, the engineer applies the Gram-Schmidt process to generate an orthonormal basis for the signal subspace. The orthogonal projection of the signal onto this basis gives the desired signal components. If the signal's amplitude is described by the function f(t) = 4sin(2\u03c0*30t) - 2sin(2\u03c0*90t) over a time interval of 3 seconds, how would you use the Fundamental Theorem of Calculus to evaluate the definite integral of this function, representing the signal's energy, and how does the orthogonality of the basis affect the interpretation of the integration result in the context of audio engineering?",
+    "expected_concepts": [
+      "orthogonality_and_projections",
+      "integration_and_area_under_curve"
+    ],
+    "overall_score": 0.8550000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.8,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question effectively requires the student to apply both the Gram-Schmidt process and the Fundamental Theorem of Calculus in a balanced manner, and the student's attempt demonstrates a good understanding of both concepts and their application to the problem."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking to evaluate the definite integral of the function f(t) = 4sin(2\u03c0*30t) - 2sin(2\u03c0*90t) over a time interval of 3 seconds using the Fundamental Theorem of Calculus.",
+      "To do this, I need to find the antiderivative of the function and then apply the Fundamental Theorem of Calculus.",
+      "The antiderivative of sin(2\u03c0*30t) is -1/(2\u03c0*30)cos(2\u03c0*30t) and the antiderivative of sin(2\u03c0*90t) is -1/(2\u03c0*90)cos(2\u03c0*90t).",
+      "I will then apply the Fundamental Theorem of Calculus by evaluating the antiderivative at the limits of integration, which are 0 and 3 seconds."
+    ],
+    "attempt": "The definite integral of f(t) is \u222b[0,3] (4sin(2\u03c0*30t) - 2sin(2\u03c0*90t)) dt. Using the antiderivatives, this becomes [-4/(2\u03c0*30)cos(2\u03c0*30t) + 2/(2\u03c0*90)cos(2\u03c0*90t)] from 0 to 3. Evaluating this, I get [-4/(2\u03c0*30)cos(90\u03c0) + 2/(2\u03c0*90)cos(270\u03c0)] - [-4/(2\u03c0*30)cos(0) + 2/(2\u03c0*90)cos(0)]. This simplifies to [-4/(2\u03c0*30)cos(90\u03c0) + 2/(2\u03c0*90)cos(270\u03c0)] - [-4/(2\u03c0*30) + 2/(2\u03c0*90)]. Since cos(90\u03c0) = 0 and cos(270\u03c0) = 0, this further simplifies to [0 + 0] - [-4/(2\u03c0*30) + 2/(2\u03c0*90)], which equals 4/(2\u03c0*30) - 2/(2\u03c0*90).",
+    "conclusion": "The definite integral of the function f(t) = 4sin(2\u03c0*30t) - 2sin(2\u03c0*90t) over a time interval of 3 seconds is 4/(2\u03c0*30) - 2/(2\u03c0*90), which represents the net signed area under the curve of the signal over this time interval.",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided enough information to evaluate the definite integral using the Fundamental Theorem of Calculus."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 495,
+        "output_tokens": 978,
+        "total_tokens": 1473,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1390,
+        "output_tokens": 366,
+        "total_tokens": 1756,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 480,
+        "output_tokens": 64,
+        "total_tokens": 544,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 506,
+        "output_tokens": 729,
+        "total_tokens": 1235,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 1042,
+        "output_tokens": 1892,
+        "total_tokens": 2934,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 3079,
+        "output_tokens": 389,
+        "total_tokens": 3468,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 6992,
+      "output_tokens": 4418,
+      "total_tokens": 11410,
+      "requests": 6
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "eigenvalues_and_eigenvectors",
+    "topic_2": "covariance_matrix",
+    "learning_objective_1": "Compute eigenvalues and eigenvectors of a square matrix and interpret their geometric meaning as scaling factors and invariant directions under a linear transformation.",
+    "learning_objective_2": "Construct a covariance matrix from a dataset and interpret its diagonal and off-diagonal entries in terms of variance and feature correlation.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 3,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Galactic Cluster Analysis",
+    "domain": "Astrophysics",
+    "scenario": "A team of astrobiologists is studying the formation of galactic clusters. To understand the dynamics of these clusters, they must first compute the eigenvalues and eigenvectors of the velocity matrix of the galaxies to determine the invariant directions of galaxy motion. Then, they construct a covariance matrix of the galaxy positions and velocities to analyze the correlation between these features and understand how the clusters are structured.",
+    "overall_score": 0.8300000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.8
+    },
+    "reason": "Both learning objectives are crucial for understanding galactic cluster dynamics, and the scenario balances the cognitive load between them. The numerical entry points are clear, and the domain of astrophysics makes the mathematical structure feel natural."
+  },
+  "best_question": {
+    "question": "Using the galaxy velocity data with an eigenvalue of 3.2 and eigenvector [0.7, 0.3], construct the initial covariance matrix of the galaxy positions and velocities. The galaxy position data has a variance of 4.2 and the galaxy velocity data has a variance of 2.1. After applying the linear transformation represented by the velocity matrix, calculate the new diagonal entry of the covariance matrix corresponding to the galaxy velocities and interpret its change in terms of the scaling effect of the eigenvalue.",
+    "expected_concepts": [
+      "eigenvalues and eigenvectors",
+      "covariance matrix construction and interpretation"
+    ],
+    "overall_score": 0.805,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply both learning objectives, as it asks to construct a covariance matrix and interpret the scaling effect of an eigenvalue on the variance of galaxy velocities. The student naturally decomposes the question into multiple pieces, including constructing the initial covariance matrix, applying the linear transformation, and interpreting the scaling effect. The question stays within the domain of galaxy position and velocity data, and the student's attempt adheres to the learning objectives without requiring additional knowledge."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question asks me to construct the initial covariance matrix of galaxy positions and velocities and then find the new diagonal entry of the covariance matrix corresponding to the galaxy velocities after a linear transformation.",
+      "I know the variances of the galaxy positions and velocities, which are needed for the diagonal of the covariance matrix.",
+      "The eigenvalue and eigenvector given are for the velocity matrix, which I would use to find the scaling effect on the velocity variance.",
+      "I need to recall how linear transformations affect covariance matrices, specifically how the eigenvalue scales the variance."
+    ],
+    "attempt": "The initial covariance matrix would have the variances of the galaxy positions (4.2) and velocities (2.1) on the diagonal. The off-diagonal entries would represent the covariance between positions and velocities, which isn't directly given. After applying the linear transformation represented by the velocity matrix, the variance of the velocities would be scaled by the square of the eigenvalue (3.2^2). Thus, the new variance of the velocities would be 2.1 * (3.2^2). However, without the original covariance between positions and velocities, I can only comment on the scaling effect of the eigenvalue on the velocity variance.",
+    "conclusion": "The new diagonal entry for the velocity variance in the covariance matrix would be 2.1 * (3.2^2) = 2.1 * 10.24 = 21.504, showing how the eigenvalue scales the variance of the velocities.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "Had enough information to calculate the scaling effect of the eigenvalue on the velocity variance."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 510,
+        "output_tokens": 805,
+        "total_tokens": 1315,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1213,
+        "output_tokens": 393,
+        "total_tokens": 1606,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 446,
+        "output_tokens": 71,
+        "total_tokens": 517,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 4994,
+        "output_tokens": 2835,
+        "total_tokens": 7829,
+        "requests": 4
+      },
+      "student_agent": {
+        "input_tokens": 3690,
+        "output_tokens": 4824,
+        "total_tokens": 8514,
+        "requests": 4
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1404,
+        "output_tokens": 179,
+        "total_tokens": 1583,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 12257,
+      "output_tokens": 9107,
+      "total_tokens": 21364,
+      "requests": 12
+    }
+  }
+}

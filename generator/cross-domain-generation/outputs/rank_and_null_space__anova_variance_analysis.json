@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "rank_and_null_space",
+    "topic_2": "anova_variance_analysis",
+    "learning_objective_1": "Calculate the rank and null space of a matrix and use them to determine the solution structure of a system of linear equations.",
+    "learning_objective_2": "Conduct a one-way ANOVA to test whether the means of three or more groups differ significantly, and interpret the F-statistic and associated p-value.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Genetic Data Analysis for Disease Research",
+    "domain": "Biomedical Research",
+    "scenario": "Researchers are studying the genetic factors contributing to a specific disease by analyzing the genetic data of patients and healthy controls. They need to identify the genetic markers associated with the disease and understand how they interact. To do this, they first calculate the rank and null space of a matrix representing the genetic data to determine the solution structure of the system of linear equations that models the relationships between the genetic markers. Then, they use one-way ANOVA to compare the means of the genetic marker expression levels across different patient groups and healthy controls, testing whether the means differ significantly.",
+    "overall_score": 0.8300000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.8
+    },
+    "reason": "Both learning objectives are integral to the scenario, with rank and null space calculation informing the system of linear equations and one-way ANOVA comparing means across groups, creating a balanced cognitive load. The scenario naturally implies measurable structures, and the domain of biomedical research makes the mathematical concepts feel relevant."
+  },
+  "best_question": {
+    "question": "The researchers are interested in understanding how the number of patients and healthy controls affects the results of the one-way ANOVA. If they increase the number of patients to 150 and the number of healthy controls to 75, and the F-statistic increases to 4.2, while the rank of the matrix remains the same, what can be inferred about the relationships between the genetic markers, and how do the results of the ANOVA reflect changes in the solution structure of the system of linear equations modeling these relationships?",
+    "expected_concepts": [
+      "rank_and_null_space",
+      "anova_variance_analysis"
+    ],
+    "overall_score": 0.745,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.6,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to relate the increase in sample size to the results of the one-way ANOVA and the relationships between the genetic markers, which involves both learning objectives. However, the question may slightly favor the ANOVA topic, and the student's decomposition of the question could be more detailed."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question is asking about how the increase in the number of patients and healthy controls affects the results of the one-way ANOVA and the relationships between the genetic markers.",
+      "The key pieces of this question include the increase in the number of patients and healthy controls, the increase in the F-statistic, and the constant rank of the matrix.",
+      "These pieces relate to each other through the concept of statistical analysis and sample size.",
+      "My plan is to first understand the implications of the increase in sample size on the results of the ANOVA, and then relate this to the relationships between the genetic markers."
+    ],
+    "attempt": "Given that the F-statistic increases to 4.2 with the increase in sample size, this suggests that the differences between the means of the genetic marker expression levels become more significant. However, the constant rank of the matrix implies that the underlying relationships between the genetic markers remain the same.",
+    "conclusion": "The increase in sample size leads to more significant differences between the means of the genetic marker expression levels, but the underlying relationships between the genetic markers remain unchanged.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides sufficient information to understand the implications of the increase in sample size on the results of the ANOVA."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 494,
+        "output_tokens": 1000,
+        "total_tokens": 1494,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1411,
+        "output_tokens": 425,
+        "total_tokens": 1836,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 490,
+        "output_tokens": 64,
+        "total_tokens": 554,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 516,
+        "output_tokens": 643,
+        "total_tokens": 1159,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 911,
+        "output_tokens": 1015,
+        "total_tokens": 1926,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1321,
+        "output_tokens": 148,
+        "total_tokens": 1469,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5143,
+      "output_tokens": 3295,
+      "total_tokens": 8438,
+      "requests": 6
+    }
+  }
+}

@@ -1,0 +1,168 @@
+Total Sample: 156 pairs
+Seed: 42
+============================================================
+
+STRATUM 1 — Same Category (36 pairs)
+------------------------------------------------------------
+law_of_large_numbers, monte_carlo_simulation //tick
+vector_spaces_and_subspaces, determinants_and_invertibility //tick
+eigenvalues_and_eigenvectors, markov_chains //tick
+integration_and_area_under_curve, multivariable_optimization //tick
+differential_equations_odes, integration_and_area_under_curve
+optimization_maxima_and_minima, multivariable_optimization //tick
+least_squares_regression, orthogonality_and_projections //tick
+vector_spaces_and_subspaces, orthogonality_and_projections //tick
+conditional_probability, variance_and_standard_deviation //tick
+linear_transformations, determinants_and_invertibility //tick
+bayes_theorem, information_theory_and_entropy //tick
+regression_analysis, type_i_and_type_ii_errors //tick
+eigenvalues_and_eigenvectors, covariance_matrix //tick
+eigenvalues_and_eigenvectors, determinants_and_invertibility //tick
+linear_transformations, covariance_matrix //tick
+optimization_maxima_and_minima, integration_and_area_under_curve //tick
+optimization_maxima_and_minima, rate_of_change_and_related_rates //tick
+anova_variance_analysis, correlation_vs_causation
+random_variables_and_distributions, variance_and_standard_deviation
+poisson_process, monte_carlo_simulation
+conditional_probability, information_theory_and_entropy //tick
+gradient_and_partial_derivatives, gradient_descent
+variance_and_standard_deviation, poisson_process
+regression_analysis, central_limit_theorem
+optimization_maxima_and_minima, taylor_series_approximation
+central_limit_theorem, type_i_and_type_ii_errors
+bayes_theorem, monte_carlo_simulation
+integration_and_area_under_curve, gradient_descent
+eigenvalues_and_eigenvectors, linear_transformations
+orthogonality_and_projections, determinants_and_invertibility
+expected_value, monte_carlo_simulation
+rate_of_change_and_related_rates, fourier_transform
+random_variables_and_distributions, law_of_large_numbers
+orthogonality_and_projections, markov_chains
+law_of_large_numbers, information_theory_and_entropy
+gradient_descent, limits_and_continuity
+
+STRATUM 2A — Adjacent Category (60 pairs)
+------------------------------------------------------------
+least_squares_regression, differential_equations_odes //tick
+rank_and_null_space, rate_of_change_and_related_rates //tick
+limits_and_continuity, type_i_and_type_ii_errors //tick
+rank_and_null_space, limits_and_continuity //tick
+fourier_transform, central_limit_theorem //tick
+rate_of_change_and_related_rates, anova_variance_analysis
+integration_and_area_under_curve, sampling_methods_and_bias //tick
+linear_transformations, differential_equations_odes //tick
+central_limit_theorem, variance_and_standard_deviation //tick
+correlation_vs_causation, expected_value //tick
+orthogonality_and_projections, integration_and_area_under_curve //tick
+limits_and_continuity, central_limit_theorem
+rank_and_null_space, gradient_and_partial_derivatives
+bayesian_updating, random_variables_and_distributions
+multivariable_optimization, hypothesis_testing
+fourier_transform, sampling_methods_and_bias
+time_series_analysis, variance_and_standard_deviation
+covariance_matrix, fourier_transform
+vector_spaces_and_subspaces, multivariable_optimization
+linear_transformations, integration_and_area_under_curve
+optimization_maxima_and_minima, anova_variance_analysis
+taylor_series_approximation, bayesian_updating
+optimization_maxima_and_minima, time_series_analysis
+least_squares_regression, optimization_maxima_and_minima
+taylor_series_approximation, regression_analysis
+central_limit_theorem, random_variables_and_distributions
+fourier_transform, anova_variance_analysis
+determinants_and_invertibility, integration_and_area_under_curve
+fourier_transform, time_series_analysis
+fourier_transform, confidence_intervals
+gradient_and_partial_derivatives, correlation_vs_causation
+integration_and_area_under_curve, anova_variance_analysis
+vector_spaces_and_subspaces, gradient_descent
+determinants_and_invertibility, rate_of_change_and_related_rates
+correlation_vs_causation, law_of_large_numbers
+differential_equations_odes, sampling_methods_and_bias
+central_limit_theorem, independence_and_correlation
+integration_and_area_under_curve, bayesian_updating
+bayesian_updating, variance_and_standard_deviation
+optimization_maxima_and_minima, regression_analysis
+gradient_descent, anova_variance_analysis
+linear_transformations, fourier_transform
+optimization_maxima_and_minima, correlation_vs_causation
+matrix_decomposition_svd, gradient_descent
+gradient_descent, confidence_intervals
+hypothesis_testing, variance_and_standard_deviation
+integration_and_area_under_curve, correlation_vs_causation
+vector_spaces_and_subspaces, integration_and_area_under_curve
+gradient_and_partial_derivatives, bayesian_updating
+time_series_analysis, conditional_probability
+sampling_methods_and_bias, variance_and_standard_deviation
+hypothesis_testing, random_variables_and_distributions
+central_limit_theorem, expected_value
+markov_chains, integration_and_area_under_curve
+markov_chains, optimization_maxima_and_minima
+differential_equations_odes, anova_variance_analysis
+bayesian_updating, poisson_process
+correlation_vs_causation, variance_and_standard_deviation
+integration_and_area_under_curve, type_i_and_type_ii_errors
+time_series_analysis, information_theory_and_entropy
+
+STRATUM 2B — Distant Category (60 pairs)
+------------------------------------------------------------
+optimization_maxima_and_minima, information_theory_and_entropy //tick
+limits_and_continuity, monte_carlo_simulation //tick
+gradient_and_partial_derivatives, expected_value //tick
+determinants_and_invertibility, variance_and_standard_deviation //tick
+matrix_decomposition_svd, random_variables_and_distributions //tick
+markov_chains, hypothesis_testing //tick
+gradient_descent, conditional_probability //tick
+multivariable_optimization, random_variables_and_distributions //tick
+rank_and_null_space, anova_variance_analysis //tick
+linear_transformations, type_i_and_type_ii_errors // tick
+least_squares_regression, anova_variance_analysis // tick
+markov_chains, bayesian_updating // tick -- doubtful
+determinants_and_invertibility, confidence_intervals // tick
+optimization_maxima_and_minima, independence_and_correlation //
+vector_spaces_and_subspaces, regression_analysis
+covariance_matrix, poisson_process
+covariance_matrix, variance_and_standard_deviation
+integration_and_area_under_curve, information_theory_and_entropy
+rate_of_change_and_related_rates, conditional_probability
+linear_transformations, monte_carlo_simulation
+fourier_transform, law_of_large_numbers
+eigenvalues_and_eigenvectors, sampling_methods_and_bias
+least_squares_regression, bayesian_updating
+rate_of_change_and_related_rates, expected_value
+vector_spaces_and_subspaces, independence_and_correlation
+markov_chains, expected_value
+least_squares_regression, correlation_vs_causation
+least_squares_regression, conditional_probability
+differential_equations_odes, random_variables_and_distributions
+determinants_and_invertibility, hypothesis_testing
+integration_and_area_under_curve, random_variables_and_distributions
+eigenvalues_and_eigenvectors, confidence_intervals
+vector_spaces_and_subspaces, expected_value
+multivariable_optimization, independence_and_correlation
+covariance_matrix, confidence_intervals
+multivariable_optimization, information_theory_and_entropy
+least_squares_regression, type_i_and_type_ii_errors
+least_squares_regression, random_variables_and_distributions
+eigenvalues_and_eigenvectors, bayes_theorem
+covariance_matrix, bayes_theorem
+determinants_and_invertibility, regression_analysis
+rate_of_change_and_related_rates, independence_and_correlation
+rate_of_change_and_related_rates, bayes_theorem
+eigenvalues_and_eigenvectors, hypothesis_testing
+orthogonality_and_projections, variance_and_standard_deviation
+multivariable_optimization, conditional_probability
+eigenvalues_and_eigenvectors, time_series_analysis
+least_squares_regression, poisson_process
+linear_transformations, random_variables_and_distributions
+linear_transformations, time_series_analysis
+linear_transformations, law_of_large_numbers
+limits_and_continuity, conditional_probability
+rank_and_null_space, hypothesis_testing
+rank_and_null_space, central_limit_theorem
+taylor_series_approximation, monte_carlo_simulation
+vector_spaces_and_subspaces, sampling_methods_and_bias
+rate_of_change_and_related_rates, random_variables_and_distributions
+orthogonality_and_projections, type_i_and_type_ii_errors
+orthogonality_and_projections, sampling_methods_and_bias
+taylor_series_approximation, law_of_large_numbers

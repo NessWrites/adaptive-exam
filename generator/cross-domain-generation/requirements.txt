@@ -1,0 +1,8 @@
+langgraph==0.5.3
+langchain
+langchain-groq
+pydantic
+python-dotenv
+pandas==3.0.2
+matplotlib
+seaborn

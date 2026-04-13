@@ -1,0 +1,109 @@
+{
+  "run_info": {
+    "topic_1": "regression_analysis",
+    "topic_2": "type_i_and_type_ii_errors",
+    "learning_objective_1": "Fit a simple or multiple linear regression model to data, interpret the coefficients, and assess model fit using R-squared and residual diagnostics.",
+    "learning_objective_2": "Distinguish between Type I and Type II errors in hypothesis testing, explain the trade-off between them, and relate each to the concepts of significance level and statistical power.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Medical Research Study",
+    "domain": "Medicine",
+    "scenario": "A team of researchers is conducting a study to investigate the relationship between a new drug and its effects on blood pressure. They collect data on the dosage of the drug and the corresponding blood pressure levels. To understand the relationship, they need to fit a simple linear regression model to the data. However, they also want to account for other factors that might influence blood pressure, such as age and weight, so they need to fit a multiple linear regression model. After fitting the models, they need to interpret the coefficients and assess the model fit using R-squared and residual diagnostics. Additionally, they want to test the hypothesis that the new drug has a significant effect on blood pressure, so they need to distinguish between Type I and Type II errors in hypothesis testing and understand the trade-off between them.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial to the medical research study, and the scenario naturally implies measurable structures. The domain of medicine makes the mathematical structure feel natural."
+  },
+  "best_question": {
+    "question": "Suppose the researcher decides to test the hypothesis that the new drug has a significant effect on blood pressure at a significance level of \u03b1 = 0.05. If the test statistic indicates a p-value of 0.01, what are the implications for the probability of Type I and Type II errors, and how would the results be affected by increasing the sample size to improve statistical power, considering the R-squared value and residual diagnostics of the multiple linear regression model?",
+    "expected_concepts": [
+      "hypothesis testing",
+      "Type I and Type II errors",
+      "statistical power",
+      "sample size"
+    ],
+    "overall_score": 0.835,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question directly involves hypothesis testing (LO2) with a given significance level and p-value, and the discussion about improving statistical power by increasing the sample size implicitly involves understanding the model's fit (LO1). The question has a good balance between the two learning objectives, stays well within the domain of hypothesis testing and regression analysis, and requires the student to decompose the problem into understandable parts, making it a well-structured question."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question involves hypothesis testing about the effect of the new drug on blood pressure at a given significance level (\u03b1 = 0.05).",
+      "Given the p-value (0.01) from the test statistic, I need to determine the implications for the probabilities of Type I and Type II errors.",
+      "The p-value indicates the probability of observing the test statistic (or a more extreme value) assuming the null hypothesis is true. Since the p-value (0.01) is less than \u03b1 (0.05), the null hypothesis is rejected.",
+      "I must consider how increasing the sample size affects the statistical power (1 - \u03b2) and the precision of the estimates, given the R-squared value and residual diagnostics of the model.",
+      "Increasing the sample size generally increases the power of the test (reducing \u03b2), making it easier to detect true effects if they exist, and can improve the precision of the model's estimates."
+    ],
+    "attempt": "Given the p-value of 0.01 is less than the significance level \u03b1 of 0.05, we reject the null hypothesis, indicating a significant effect of the drug on blood pressure. The probability of a Type I error (\u03b1) is set at 0.05, meaning there's a 5% chance of rejecting the null hypothesis if it's true. The probability of a Type II error (\u03b2) is related to the power of the test (1 - \u03b2), which can be increased by enlarging the sample size. A larger sample size provides more precise estimates, potentially improving the R-squared value if the model is correctly specified, and enhances the ability to detect true effects, thus reducing \u03b2.",
+    "conclusion": "Rejecting the null hypothesis based on the p-value indicates a significant effect of the drug on blood pressure. Increasing the sample size can enhance the statistical power, reducing the risk of a Type II error, and can lead to more precise model estimates, potentially improving the model's fit as measured by the R-squared value.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided enough information about the hypothesis test and its results to determine the significance of the drug's effect. The discussion around increasing the sample size and its effects on statistical power and model precision required understanding of statistical principles, which was manageable with the given context."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 519,
+        "output_tokens": 1063,
+        "total_tokens": 1582,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1480,
+        "output_tokens": 370,
+        "total_tokens": 1850,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 550,
+        "output_tokens": 75,
+        "total_tokens": 625,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 1340,
+        "output_tokens": 1444,
+        "total_tokens": 2784,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1864,
+        "output_tokens": 3004,
+        "total_tokens": 4868,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 4121,
+        "output_tokens": 689,
+        "total_tokens": 4810,
+        "requests": 2
+      }
+    },
+    "total": {
+      "input_tokens": 9874,
+      "output_tokens": 6645,
+      "total_tokens": 16519,
+      "requests": 9
+    }
+  }
+}

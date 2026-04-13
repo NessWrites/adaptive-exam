@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "eigenvalues_and_eigenvectors",
+    "topic_2": "determinants_and_invertibility",
+    "learning_objective_1": "Compute eigenvalues and eigenvectors of a square matrix and interpret their geometric meaning as scaling factors and invariant directions under a linear transformation.",
+    "learning_objective_2": "Evaluate the determinant of a matrix to determine invertibility and use it to understand how a transformation scales area or volume.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Protein Structure Prediction",
+    "domain": "Bioinformatics",
+    "scenario": "A team of bioinformaticians is trying to predict the structure of a protein. They use a linear transformation to model the folding of the protein, and they need to compute the eigenvalues and eigenvectors of the transformation matrix to understand the scaling factors and invariant directions of the folding process. They also need to evaluate the determinant of the matrix to determine if the transformation is invertible and to understand how it scales the volume of the protein.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The protein structure prediction scenario tightly integrates both learning objectives, with a clear need to compute eigenvalues and eigenvectors for understanding the folding process and determinants for evaluating invertibility. The bioinformatics domain feels highly coherent with the mathematical structure, and the scenario reveals non-obvious insights into the folding process. The cognitive load is well-balanced between the two topics."
+  },
+  "best_question": {
+    "question": "A protein's folding matrix has a determinant of 3.0 and eigenvalues of 2.0 and 1.5. How do these eigenvalues and the determinant indicate the scaling factors and the change in volume of the protein during folding, and what does the determinant signify about the possibility of reversing the folding process?",
+    "expected_concepts": [
+      "eigenvalues_and_eigenvectors",
+      "determinants_and_invertibility"
+    ],
+    "overall_score": 0.835,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question effectively requires the student to use both eigenvalues and determinant to understand the scaling of the protein's volume and the invertibility of the transformation. The student's attempt demonstrates a clear understanding of the relationship between the two learning objectives, and the question stays within the domain of protein folding."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question gives a determinant of 3.0 and eigenvalues of 2.0 and 1.5 for a protein's folding matrix.",
+      "I should recall that the determinant of a matrix equals the product of its eigenvalues for a 2x2 matrix, which seems to be the case here given the information provided.",
+      "The determinant being 3.0 means the volume of the protein is scaled by a factor of 3.0 during folding.",
+      "The eigenvalues indicate how the transformation affects the protein in the directions of the corresponding eigenvectors."
+    ],
+    "attempt": "To verify the relationship, I check if the product of the eigenvalues (2.0 * 1.5) equals the determinant (3.0), which it does. This means the volume is indeed scaled by a factor of 3.0. Since the determinant is positive and non-zero, the transformation is invertible.",
+    "conclusion": "The transformation scales the protein's volume by a factor of 3.0, and it is invertible because the determinant is non-zero.",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided sufficient information about the determinant and eigenvalues to determine the scaling of the protein's volume and the invertibility of the transformation."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 513,
+        "output_tokens": 881,
+        "total_tokens": 1394,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1292,
+        "output_tokens": 469,
+        "total_tokens": 1761,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 472,
+        "output_tokens": 73,
+        "total_tokens": 545,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 498,
+        "output_tokens": 474,
+        "total_tokens": 972,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 759,
+        "output_tokens": 1042,
+        "total_tokens": 1801,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1594,
+        "output_tokens": 274,
+        "total_tokens": 1868,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5128,
+      "output_tokens": 3213,
+      "total_tokens": 8341,
+      "requests": 6
+    }
+  }
+}

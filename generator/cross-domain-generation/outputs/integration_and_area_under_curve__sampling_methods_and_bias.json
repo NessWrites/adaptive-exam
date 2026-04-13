@@ -1,0 +1,107 @@
+{
+  "run_info": {
+    "topic_1": "integration_and_area_under_curve",
+    "topic_2": "sampling_methods_and_bias",
+    "learning_objective_1": "Evaluate definite integrals using the Fundamental Theorem of Calculus and interpret the result as the net signed area under a curve.",
+    "learning_objective_2": "Compare probability, stratified, and convenience sampling methods and identify how each can introduce or reduce selection bias in a study.",
+    "stratum": "adjacent",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Medical Research Study",
+    "domain": "Public Health",
+    "scenario": "Researchers are conducting a study to investigate the relationship between a new medication and its effect on patients' blood pressure. The researchers must calculate the area under the curve of the blood pressure function over time to determine the net effect of the medication. Furthermore, they need to select a representative sample of patients to participate in the study, minimizing selection bias by comparing different sampling methods.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The scenario effectively integrates both learning objectives, and the medical research context provides a clear and coherent application of calculus and sampling methods. The domain of public health makes the mathematical structure feel authentic and relevant."
+  },
+  "best_question": {
+    "question": "If the researchers find that the blood pressure function for a particular patient demographic is f(t) = 4t^2 - 5t + 2, and they want to calculate the net effect of the medication over a 2-hour period using a sample size of 200 patients selected using stratified sampling, how does the use of stratified sampling help reduce selection bias, and what is the net signed area under the curve over the 2-hour period?",
+    "expected_concepts": [
+      "Fundamental Theorem of Calculus",
+      "stratified sampling",
+      "selection bias"
+    ],
+    "overall_score": 0.8550000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.8,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to use stratified sampling to reduce selection bias and to calculate the net signed area under the curve using the Fundamental Theorem of Calculus. The question balances the cognitive load between the two topics and requires the student to fully engage with both learning objectives to answer the question."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking about the effect of stratified sampling on selection bias and the net signed area under a given blood pressure function over a 2-hour period.",
+      "To calculate the net signed area, we need to use the Fundamental Theorem of Calculus, which involves finding the definite integral of the function f(t) = 4t^2 - 5t + 2 from 0 to 2.",
+      "Stratified sampling reduces selection bias by dividing the population into subgroups and sampling from each subgroup, ensuring that each subgroup is represented in the sample.",
+      "We need to understand how stratified sampling reduces selection bias and then calculate the definite integral of the given function."
+    ],
+    "attempt": "To calculate the net signed area, we need to find the definite integral of f(t) = 4t^2 - 5t + 2 from 0 to 2. Using the power rule of integration, we get \u222b(4t^2 - 5t + 2)dt = (4/3)t^3 - (5/2)t^2 + 2t. Evaluating this from 0 to 2, we get [(4/3)(2)^3 - (5/2)(2)^2 + 2(2)] - [(4/3)(0)^3 - (5/2)(0)^2 + 2(0)] = (4/3)(8) - (5/2)(4) + 4 = 32/3 - 10 + 4 = 32/3 - 6 = (32 - 18)/3 = 14/3. For the stratified sampling part, it reduces selection bias by ensuring that each subgroup is represented in the sample, which helps to increase the accuracy of the results.",
+    "conclusion": "The net signed area under the curve over the 2-hour period is 14/3, and stratified sampling reduces selection bias by ensuring each subgroup is represented in the sample.",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided enough information to calculate the definite integral and understand the concept of stratified sampling."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 489,
+        "output_tokens": 803,
+        "total_tokens": 1292,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1209,
+        "output_tokens": 379,
+        "total_tokens": 1588,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 436,
+        "output_tokens": 52,
+        "total_tokens": 488,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 462,
+        "output_tokens": 686,
+        "total_tokens": 1148,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 886,
+        "output_tokens": 1627,
+        "total_tokens": 2513,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2674,
+        "output_tokens": 426,
+        "total_tokens": 3100,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 6156,
+      "output_tokens": 3973,
+      "total_tokens": 10129,
+      "requests": 6
+    }
+  }
+}

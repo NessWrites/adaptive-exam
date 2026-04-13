@@ -1,0 +1,107 @@
+{
+  "run_info": {
+    "topic_1": "markov_chains",
+    "topic_2": "bayesian_updating",
+    "learning_objective_1": "Construct a transition matrix for a Markov chain and compute the steady-state distribution by finding its dominant eigenvector.",
+    "learning_objective_2": "Apply Bayes' theorem to update a prior probability distribution with new evidence and interpret the resulting posterior distribution.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 2,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Autonomous Vehicle Navigation",
+    "domain": "Artificial Intelligence",
+    "scenario": "An autonomous vehicle must navigate through a dynamic environment, avoiding obstacles and reaching its destination. The vehicle's navigation system uses a Markov chain to model the environment, where each state represents a different location or situation. By computing the steady-state distribution, the vehicle can predict the most likely future states and plan its route accordingly. However, as new sensor data becomes available, the vehicle updates its predictions using Bayes' theorem to incorporate the latest evidence and adjust its navigation strategy to ensure safe and efficient travel.",
+    "overall_score": 0.8800000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.9,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are essential for autonomous vehicle navigation, contributing equally to the scenario. The AI domain naturally implies measurable structures, and the intersection of Markov chains and Bayesian updating reveals the importance of incorporating new sensor data for safe and efficient navigation, showcasing a deep understanding of the topics."
+  },
+  "best_question": {
+    "question": "An autonomous vehicle is navigating through a dynamic environment with a 4-state Markov chain, where each state represents a different location. The transition matrix is given as [[0.6, 0.2, 0.1, 0.1], [0.3, 0.5, 0.1, 0.1], [0.1, 0.2, 0.6, 0.1], [0.1, 0.1, 0.2, 0.6]]. The vehicle's current speed is 60 km/h, and sensor readings indicate a 25% chance of an obstacle on the current route. The prior probability distribution of the vehicle's location is [0.3, 0.2, 0.2, 0.3]. Update the prior distribution using Bayes' theorem and compute the steady-state distribution of the Markov chain. What is the probability of reaching the destination safely, assuming the destination state has a high probability in the steady-state distribution?",
+    "expected_concepts": [
+      "Bayes' theorem",
+      "Markov chain",
+      "steady-state distribution"
+    ],
+    "overall_score": 0.875,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.9,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to update the prior distribution using Bayes' theorem and then find the steady-state distribution of the Markov chain, which naturally triggers a multi-piece breakdown within the boundary of the learning objectives, and the domain coherence is high due to the clear scenario description."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking to update the prior probability distribution of the vehicle's location using Bayes' theorem and then find the steady-state distribution of the Markov chain.",
+      "The prior probability distribution is given as [0.3, 0.2, 0.2, 0.3] and the transition matrix is [[0.6, 0.2, 0.1, 0.1], [0.3, 0.5, 0.1, 0.1], [0.1, 0.2, 0.6, 0.1], [0.1, 0.1, 0.2, 0.6]].",
+      "To update the prior distribution, we need to calculate the posterior probability using Bayes' theorem, which involves the likelihood of the sensor readings and the prior probability.",
+      "After updating the prior distribution, we need to find the steady-state distribution of the Markov chain, which can be done by finding the eigenvector of the transition matrix corresponding to the eigenvalue 1."
+    ],
+    "attempt": "To update the prior distribution, we can use Bayes' theorem: P(state|sensor) = P(sensor|state) * P(state) / P(sensor). The likelihood of the sensor readings is given as 0.25 for an obstacle on the current route. Let's assume the likelihood of no obstacle is 0.75. We can calculate the posterior probability for each state and then normalize the distribution. For the steady-state distribution, we need to find the eigenvector of the transition matrix corresponding to the eigenvalue 1. This can be done using various methods such as power iteration or solving the equation (T - I)v = 0, where T is the transition matrix and I is the identity matrix.",
+    "conclusion": "The probability of reaching the destination safely is the probability of the destination state in the steady-state distribution, which we can find by solving for the eigenvector of the transition matrix.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to update the prior distribution using Bayes' theorem and find the steady-state distribution of the Markov chain."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 483,
+        "output_tokens": 868,
+        "total_tokens": 1351,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1268,
+        "output_tokens": 404,
+        "total_tokens": 1672,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 459,
+        "output_tokens": 64,
+        "total_tokens": 523,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 3526,
+        "output_tokens": 3055,
+        "total_tokens": 6581,
+        "requests": 3
+      },
+      "student_agent": {
+        "input_tokens": 3304,
+        "output_tokens": 3935,
+        "total_tokens": 7239,
+        "requests": 3
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2689,
+        "output_tokens": 394,
+        "total_tokens": 3083,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 11729,
+      "output_tokens": 8720,
+      "total_tokens": 20449,
+      "requests": 10
+    }
+  }
+}

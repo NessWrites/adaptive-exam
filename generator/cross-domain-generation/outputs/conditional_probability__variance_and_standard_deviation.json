@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "conditional_probability",
+    "topic_2": "variance_and_standard_deviation",
+    "learning_objective_1": "Calculate conditional probabilities using the definition P(A|B) = P(A\u2229B)/P(B) and apply the law of total probability to partition complex probability problems.",
+    "learning_objective_2": "Calculate the variance and standard deviation of a random variable from its distribution and interpret them as measures of spread around the mean.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Financial Portfolio Risk Analysis",
+    "domain": "Finance",
+    "scenario": "A financial analyst is tasked with assessing the risk of a portfolio that includes stocks from various sectors. The analyst needs to calculate the conditional probability of a stock's performance given the state of the market and then assess the variance and standard deviation of the portfolio's returns to determine its overall risk.",
+    "overall_score": 0.8500000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.95,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The financial portfolio risk analysis scenario tightly integrates both learning objectives, with conditional probability and variance/standard deviation calculations being crucial for risk assessment. The finance domain is highly coherent with these concepts, and the numerical entry points are extensive. The cognitive load is well-balanced between the two topics."
+  },
+  "best_question": {
+    "question": "Given that the probability of a stock's price being $50 or higher given the market index is 1000 is 0.7, and the probability of the market index being 1000 is 0.5, calculate the probability of both the stock price being $50 or higher and the market index being 1000. Then, using the portfolio returns of $40, $50, and $60 with probabilities of 0.2, 0.5, and 0.3 respectively, determine the variance and standard deviation of these returns. How do these calculations inform the financial analyst about the conditional risk of the portfolio?",
+    "expected_concepts": [
+      "conditional_probability",
+      "variance_and_standard_deviation"
+    ],
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.9,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question naturally requires both conditional probability and variance/standard deviation calculations, with a clear and balanced connection between the two parts, and the student's attempt reflects a strong understanding of both learning objectives within the given domain."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question provides probabilities related to the stock price and the market index and asks for the probability of both the stock price being $50 or higher and the market index being 1000.",
+      "Then, it asks to calculate the variance and standard deviation of the portfolio returns given specific returns and their probabilities.",
+      "To find the probability of both events happening, we multiply their probabilities if they are independent.",
+      "For the variance and standard deviation, we use the formulas involving the mean and the squared differences from the mean."
+    ],
+    "attempt": "The probability of the stock price being $50 or higher given the market index is 1000 is 0.7, and the probability of the market index being 1000 is 0.5. Assuming independence, the probability of both is 0.7 * 0.5 = 0.35. For the variance and standard deviation of the portfolio returns $40, $50, $60 with probabilities 0.2, 0.5, 0.3, first, we find the mean return: (0.2*40 + 0.5*50 + 0.3*60) = 8 + 25 + 18 = 51. Then, the variance is [(40-51)^2*0.2 + (50-51)^2*0.5 + (60-51)^2*0.3] = [11^2*0.2 + 1^2*0.5 + 9^2*0.3] = [242*0.2 + 1*0.5 + 81*0.3] = [48.4 + 0.5 + 24.3] = 73.2. The standard deviation is the square root of the variance, so sqrt(73.2) \u2248 8.56.",
+    "conclusion": "The probability of both the stock price being $50 or higher and the market index being 1000 is 0.35, and the variance and standard deviation of the portfolio returns are approximately 73.2 and 8.56, respectively.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to calculate the probabilities and the variance and standard deviation of the portfolio returns."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 515,
+        "output_tokens": 801,
+        "total_tokens": 1316,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1217,
+        "output_tokens": 421,
+        "total_tokens": 1638,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 426,
+        "output_tokens": 48,
+        "total_tokens": 474,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 452,
+        "output_tokens": 861,
+        "total_tokens": 1313,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 964,
+        "output_tokens": 1628,
+        "total_tokens": 2592,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2749,
+        "output_tokens": 382,
+        "total_tokens": 3131,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 6323,
+      "output_tokens": 4141,
+      "total_tokens": 10464,
+      "requests": 6
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "linear_transformations",
+    "topic_2": "determinants_and_invertibility",
+    "learning_objective_1": "Represent a linear transformation as a matrix and describe how it maps vectors between spaces, including identifying stretching, rotation, and reflection.",
+    "learning_objective_2": "Evaluate the determinant of a matrix to determine invertibility and use it to understand how a transformation scales area or volume.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Galactic Cartography",
+    "domain": "Astrocartography",
+    "scenario": "An astrocartographer is tasked with mapping the distortion of space-time around a newly discovered black hole. To create an accurate map, they must represent the linear transformation caused by the black hole's gravitational field as a matrix, identifying how it stretches, rotates, and reflects nearby stars. Furthermore, they need to evaluate the determinant of this matrix to understand how the transformation affects the area and volume of nearby space, ensuring their map is not only accurate but also informs astronauts of potential hazards.",
+    "overall_score": 0.8600000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for mapping space-time distortion and understanding its effects, with a good balance between linear transformations and determinants. The scenario naturally implies measurable structures and reveals non-obvious insights into space-time transformations."
+  },
+  "best_question": {
+    "question": "A 2x2 matrix with a determinant of -1.2 represents a linear transformation caused by a black hole's gravitational field. This transformation involves a reflection. If the astrocartographer needs to understand how this transformation affects the area of nearby space, how would they relate the determinant's magnitude to the area scaling factor, and what does the negative sign indicate about the transformation's effect on the orientation of nearby stars?",
+    "expected_concepts": [
+      "linear_transformations",
+      "determinants_and_invertibility"
+    ],
+    "overall_score": 0.835,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to understand the linear transformation represented by the matrix and its effect on area scaling, which naturally involves both learning objectives. The student's attempt shows a good balance between the two topics, although the decomposition could be richer. The question stays within the domain of linear transformations and matrix determinants, and the student's attempt adheres to the learning objective boundary."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question is about a 2x2 matrix with a determinant of -1.2, representing a transformation that involves reflection.",
+      "The determinant's magnitude, 1.2, indicates the factor by which areas are scaled.",
+      "The negative sign of the determinant indicates a reflection, as positive determinants preserve orientation, and negative determinants reverse it.",
+      "I need to relate the determinant's magnitude to the area scaling factor and understand the implications of the negative sign."
+    ],
+    "attempt": "The determinant of -1.2 directly tells us that areas are scaled by a factor of 1.2, and the negative sign indicates that the transformation includes a reflection. This is because, in 2D, a negative determinant means that the transformation flips the space, changing the orientation of shapes. The magnitude of the determinant, 1.2, means that areas are enlarged by this factor. Thus, the transformation not only reflects but also expands the area of the space it is applied to.",
+    "conclusion": "The transformation scales areas by a factor of 1.2 and includes a reflection due to the negative determinant, indicating a change in orientation of nearby stars.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "Direct relationship between the determinant of a 2x2 matrix and area scaling, with the sign indicating reflection."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 507,
+        "output_tokens": 893,
+        "total_tokens": 1400,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1298,
+        "output_tokens": 388,
+        "total_tokens": 1686,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 462,
+        "output_tokens": 72,
+        "total_tokens": 534,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 1939,
+        "output_tokens": 983,
+        "total_tokens": 2922,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1577,
+        "output_tokens": 2559,
+        "total_tokens": 4136,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1309,
+        "output_tokens": 161,
+        "total_tokens": 1470,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 7092,
+      "output_tokens": 5056,
+      "total_tokens": 12148,
+      "requests": 8
+    }
+  }
+}

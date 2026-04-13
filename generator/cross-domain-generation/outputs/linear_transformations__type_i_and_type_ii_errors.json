@@ -1,0 +1,107 @@
+{
+  "run_info": {
+    "topic_1": "linear_transformations",
+    "topic_2": "type_i_and_type_ii_errors",
+    "learning_objective_1": "Represent a linear transformation as a matrix and describe how it maps vectors between spaces, including identifying stretching, rotation, and reflection.",
+    "learning_objective_2": "Distinguish between Type I and Type II errors in hypothesis testing, explain the trade-off between them, and relate each to the concepts of significance level and statistical power.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 3,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Climate Modeling and Prediction",
+    "domain": "Environmental Science",
+    "scenario": "Climatologists use linear transformations to analyze climate patterns and then apply hypothesis testing to predict future climate changes, accounting for Type I and Type II errors in their models.",
+    "overall_score": 0.8600000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "The climate modeling and prediction scenario effectively integrates linear transformations and hypothesis testing, with both topics feeling essential to the scenario. The scenario balances cognitive load, implies measurable structures, and reveals non-obvious insights into the intersection of climate patterns and statistical analysis, making it highly coherent within the environmental science domain."
+  },
+  "best_question": {
+    "question": "A linear transformation with a scaling factor of 1.5 is applied to climate data before a hypothesis test. If the test has a significance level of 0.1, calculate the probability of committing a Type I error and discuss how the scaling factor affects the dispersion of the data and the statistical power of the test, considering an error margin of 0.01 and considering the implication of these factors on the trade-off between Type I and Type II errors in predicting climate changes.",
+    "expected_concepts": [
+      "linear_transformations",
+      "type_i_and_type_ii_errors"
+    ],
+    "overall_score": 0.745,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.6,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires understanding of linear transformations and their impact on data, as well as the concepts of Type I and Type II errors in hypothesis testing. The student's attempt shows a good balance between the two topics, but the question could be improved to make both objectives more causally necessary. The domain coherence is high as the question stays within the context of climate data and hypothesis testing."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question asks for the probability of committing a Type I error after applying a linear transformation with a scaling factor of 1.5 to climate data.",
+      "The significance level of the test is given as 0.1, which is the probability of committing a Type I error (\u03b1).",
+      "The error margin is mentioned as 0.01, but it's unclear how this directly relates to the question about Type I error probability.",
+      "The scaling factor of the transformation could affect the dispersion of the data, potentially influencing the statistical power of the test.",
+      "However, the probability of a Type I error (\u03b1) is set by the researcher and is not directly affected by the scaling transformation."
+    ],
+    "attempt": "The probability of committing a Type I error is directly given by the significance level of the test, which is 0.1. The scaling factor of 1.5 in the linear transformation affects the data's dispersion and could increase the effect size, thereby potentially increasing the statistical power of the test. However, the Type I error rate is determined by the significance level chosen for the test, not by the transformation's scaling factor. Thus, the probability of committing a Type I error remains 0.1, as set by the significance level. The scaling factor could influence the balance between Type I and Type II errors by potentially reducing the probability of a Type II error (increasing the power), but it does not change the set \u03b1 level.",
+    "conclusion": "The probability of committing a Type I error is 0.1, as determined by the test's significance level. The linear transformation's scaling factor does not directly affect this probability but could influence the test's power and the balance between Type I and Type II errors.",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides sufficient context for determining the probability of a Type I error."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 499,
+        "output_tokens": 723,
+        "total_tokens": 1222,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1139,
+        "output_tokens": 418,
+        "total_tokens": 1557,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 407,
+        "output_tokens": 59,
+        "total_tokens": 466,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 4743,
+        "output_tokens": 2257,
+        "total_tokens": 7000,
+        "requests": 4
+      },
+      "student_agent": {
+        "input_tokens": 3464,
+        "output_tokens": 5018,
+        "total_tokens": 8482,
+        "requests": 4
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1447,
+        "output_tokens": 162,
+        "total_tokens": 1609,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 11699,
+      "output_tokens": 8637,
+      "total_tokens": 20336,
+      "requests": 12
+    }
+  }
+}

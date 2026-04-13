@@ -1,0 +1,109 @@
+{
+  "run_info": {
+    "topic_1": "gradient_and_partial_derivatives",
+    "topic_2": "expected_value",
+    "learning_objective_1": "Compute partial derivatives of a multivariable function and assemble them into a gradient vector that points in the direction of steepest ascent.",
+    "learning_objective_2": "Compute the expected value of a discrete or continuous random variable and interpret it as the long-run average outcome of a random process.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Optimizing Portfolio Returns",
+    "domain": "Finance",
+    "scenario": "A portfolio manager wants to optimize the returns of a portfolio by adjusting the weights of different assets. The manager uses the gradient of the portfolio's return function to determine the direction of steepest ascent and computes the expected value of the portfolio's return to set a target for the optimization.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for optimizing portfolio returns, and the finance domain naturally incorporates mathematical structures."
+  },
+  "best_question": {
+    "question": "A portfolio manager uses the gradient of the return function to optimize the portfolio by adjusting the weights of three assets with expected returns of 11%, 8%, and 10%, respectively. If the return function is 0.04x + 0.02y + 0.03z, where x, y, and z are the weights of the assets, what is the expected value of the portfolio's return at the point (0.3, 0.2, 0.5), and in which direction should the manager adjust the weights to achieve the steepest ascent in expected value?",
+    "expected_concepts": [
+      "gradient_and_partial_derivatives",
+      "expected_value"
+    ],
+    "overall_score": 0.8550000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.8,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to compute the expected value of the portfolio's return and find the direction of steepest ascent, which reflects both learning objectives. The cognitive load is well-balanced, and the question stays within the domain of portfolio optimization, making it a coherent and well-structured question."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking for the expected value of the portfolio's return at a specific point and the direction in which the manager should adjust the weights to achieve the steepest ascent in expected value.",
+      "The return function is given as 0.04x + 0.02y + 0.03z, where x, y, and z are the weights of three assets with expected returns of 11%, 8%, and 10%, respectively.",
+      "To find the expected value, I need to evaluate the return function at the point (0.3, 0.2, 0.5).",
+      "The expected value is 0.04(0.3) + 0.02(0.2) + 0.03(0.5) = 0.012 + 0.004 + 0.015 = 0.031 or 3.1%.",
+      "To find the direction of steepest ascent, I need to find the gradient of the return function.",
+      "The partial derivatives of the return function with respect to x, y, and z are 0.04, 0.02, and 0.03, respectively.",
+      "The gradient is a vector of these partial derivatives, so the gradient is (0.04, 0.02, 0.03)."
+    ],
+    "attempt": "The expected value of the portfolio's return at the point (0.3, 0.2, 0.5) is 0.031 or 3.1%. The gradient of the return function is (0.04, 0.02, 0.03), which indicates the direction of steepest ascent in expected value.",
+    "conclusion": "The expected value of the portfolio's return at the point (0.3, 0.2, 0.5) is 3.1% and the direction of steepest ascent is given by the gradient (0.04, 0.02, 0.03).",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to calculate the expected value and the gradient of the return function."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 490,
+        "output_tokens": 790,
+        "total_tokens": 1280,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1197,
+        "output_tokens": 329,
+        "total_tokens": 1526,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 424,
+        "output_tokens": 63,
+        "total_tokens": 487,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 450,
+        "output_tokens": 659,
+        "total_tokens": 1109,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 876,
+        "output_tokens": 1418,
+        "total_tokens": 2294,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2002,
+        "output_tokens": 285,
+        "total_tokens": 2287,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5439,
+      "output_tokens": 3544,
+      "total_tokens": 8983,
+      "requests": 6
+    }
+  }
+}

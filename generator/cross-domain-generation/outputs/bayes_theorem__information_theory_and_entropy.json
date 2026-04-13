@@ -1,0 +1,107 @@
+{
+  "run_info": {
+    "topic_1": "bayes_theorem",
+    "topic_2": "information_theory_and_entropy",
+    "learning_objective_1": "Apply Bayes' theorem to reverse conditional probabilities and update the likelihood of a hypothesis given new observed evidence.",
+    "learning_objective_2": "Calculate the Shannon entropy of a discrete probability distribution and interpret it as a measure of uncertainty or information content.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Medical Diagnosis",
+    "domain": "Healthcare",
+    "scenario": "A doctor is trying to diagnose a rare disease in a patient. The doctor has a set of symptoms and must apply Bayes' theorem to update the likelihood of the disease given the symptoms. The doctor also needs to calculate the Shannon entropy of the diagnostic test results to determine the uncertainty of the diagnosis.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The medical diagnosis scenario effectively integrates both learning objectives, with Bayes' theorem updating the likelihood of the disease and Shannon entropy calculating the uncertainty of the diagnostic test results. The scenario feels natural in the healthcare domain."
+  },
+  "best_question": {
+    "question": "A doctor is considering two diagnostic tests for a disease with a prior probability of 0.03. The first test has 4 possible results with probabilities of 0.4, 0.3, 0.2, and 0.1, while the second test has 8 possible results with a uniform distribution. Calculate the Shannon entropy for each test and compare the uncertainties. Then, apply Bayes' theorem to update the disease likelihood given symptoms, assuming the conditional probability of symptoms given the disease is 0.85 and the probability of symptoms is 0.6. Discuss how the different entropies of the two tests influence the interpretation of the updated disease likelihoods.",
+    "expected_concepts": [
+      "Bayes' theorem",
+      "Shannon entropy",
+      "comparing uncertainties"
+    ],
+    "overall_score": 0.875,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.9,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the calculation of Shannon entropy for two different tests and the application of Bayes' theorem to update the disease likelihood. The student's attempt demonstrates a clear understanding of both concepts and how they relate to the scenario. The question stays within the domain of disease diagnosis and requires a good balance of cognitive load between the two learning objectives."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question asks us to calculate the Shannon entropy for two different diagnostic tests and compare their uncertainties, then apply Bayes' theorem to update the disease likelihood given symptoms.",
+      "For the first test, we'll use the formula for Shannon entropy with the given probabilities. For the second test, since it has a uniform distribution, we can use the formula log2(n), where n is the number of possible outcomes.",
+      "After calculating the entropies, we'll apply Bayes' theorem using the given probabilities to update the disease likelihood.",
+      "We need to consider how the different entropies of the two tests influence the interpretation of the updated disease likelihoods."
+    ],
+    "attempt": "For the first test, the Shannon entropy is -((0.4 * log2(0.4)) + (0.3 * log2(0.3)) + (0.2 * log2(0.2)) + (0.1 * log2(0.1))), which is approximately 1.894 bits. For the second test, the entropy is log2(8), which is 3 bits. Applying Bayes' theorem with the given probabilities (prior disease probability of 0.03, conditional probability of symptoms given the disease of 0.85, and probability of symptoms of 0.6), we get P(D|S) = (0.85 * 0.03) / 0.6 = 0.0425 for both tests, as the test results' entropy does not directly affect the calculation of the updated disease likelihood but reflects the tests' uncertainty.",
+    "conclusion": "The Shannon entropy of the first test is approximately 1.894 bits, and the second test is 3 bits. The updated likelihood of the disease given symptoms is 0.0425 for both tests.",
+    "student_confidence": 0.6,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to calculate the Shannon entropies and apply Bayes' theorem, but comparing the influence of different entropies on the disease likelihood interpretation might require additional context or clarification on how the entropy directly affects the disease likelihood calculation."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 501,
+        "output_tokens": 806,
+        "total_tokens": 1307,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1205,
+        "output_tokens": 387,
+        "total_tokens": 1592,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 438,
+        "output_tokens": 63,
+        "total_tokens": 501,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 2086,
+        "output_tokens": 1477,
+        "total_tokens": 3563,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1817,
+        "output_tokens": 2749,
+        "total_tokens": 4566,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2476,
+        "output_tokens": 450,
+        "total_tokens": 2926,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 8523,
+      "output_tokens": 5932,
+      "total_tokens": 14455,
+      "requests": 8
+    }
+  }
+}

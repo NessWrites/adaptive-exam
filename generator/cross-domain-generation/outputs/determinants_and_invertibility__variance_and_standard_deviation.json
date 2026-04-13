@@ -1,0 +1,108 @@
+{
+  "run_info": {
+    "topic_1": "determinants_and_invertibility",
+    "topic_2": "variance_and_standard_deviation",
+    "learning_objective_1": "Evaluate the determinant of a matrix to determine invertibility and use it to understand how a transformation scales area or volume.",
+    "learning_objective_2": "Calculate the variance and standard deviation of a random variable from its distribution and interpret them as measures of spread around the mean.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Medical Imaging Analysis",
+    "domain": "Biomedical Engineering",
+    "scenario": "A medical imaging team needs to analyze MRI scans to understand the effects of a new treatment on tumor growth. They use the determinant of a matrix representing the tumor's shape to determine invertibility and understand how the treatment scales the tumor's size. Then, they calculate the variance and standard deviation of the tumor sizes to determine the treatment's efficacy.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The medical imaging scenario naturally incorporates both learning objectives, with the determinant of the tumor shape matrix and the variance/standard deviation of tumor sizes being essential to understanding the treatment's efficacy. The domain coherence is particularly high, as the mathematical concepts feel organic to the medical context."
+  },
+  "best_question": {
+    "question": "For a set of tumor size data with a mean of 12 units, a variance of 4, and a standard deviation of 2, the medical imaging team applies a transformation matrix with a determinant of 2 to model the effect of a new treatment. Calculate the new mean tumor size after the treatment, assuming the transformation scales the tumor size directly. Then, conceptually explain how the determinant of the transformation matrix affects the scaling of tumor size in relation to the initial variance and standard deviation, and how this impacts the interpretation of treatment efficacy.",
+    "expected_concepts": [
+      "determinant",
+      "variance",
+      "standard deviation",
+      "scaling effect",
+      "treatment efficacy"
+    ],
+    "overall_score": 0.8450000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.8,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question effectively requires the student to apply both learning objectives, with a good balance of cognitive load. The student naturally breaks down the problem into manageable pieces, and the question stays within the domain of tumor size transformation."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The determinant of the transformation matrix is 2, indicating how the treatment scales the tumor size.",
+      "The mean tumor size before the treatment is 12 units, and we need to find the new mean after the treatment, assuming the transformation scales the tumor size directly.",
+      "We also need to conceptually explain how the determinant affects the scaling of tumor size in relation to the initial variance and standard deviation."
+    ],
+    "attempt": "Since the determinant is 2, the linear dimensions (like size) are scaled by the square root of 2. Thus, the new mean tumor size after the treatment would be the original mean (12 units) scaled by the square root of 2, which gives us 12 * sqrt(2). The initial variance is 4, and standard deviation is 2. The scaling factor from the determinant would affect these by scaling the variance by the square of the scaling factor (since variance is a measure of spread that is affected by the square of the scaling factor), thus the new variance would be 4 * 2^2 = 16, and the new standard deviation would be sqrt(16) = 4.",
+    "conclusion": "The new mean tumor size after the treatment is 12 * sqrt(2), and the new standard deviation would be 4, indicating how the determinant of the transformation matrix scales the tumor size and affects the spread as measured by variance and standard deviation.",
+    "student_confidence": 0.9,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough context to calculate the new mean and understand the scaling effect on variance and standard deviation."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 489,
+        "output_tokens": 886,
+        "total_tokens": 1375,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1292,
+        "output_tokens": 399,
+        "total_tokens": 1691,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 443,
+        "output_tokens": 59,
+        "total_tokens": 502,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 469,
+        "output_tokens": 628,
+        "total_tokens": 1097,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 892,
+        "output_tokens": 1316,
+        "total_tokens": 2208,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1752,
+        "output_tokens": 254,
+        "total_tokens": 2006,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5337,
+      "output_tokens": 3542,
+      "total_tokens": 8879,
+      "requests": 6
+    }
+  }
+}

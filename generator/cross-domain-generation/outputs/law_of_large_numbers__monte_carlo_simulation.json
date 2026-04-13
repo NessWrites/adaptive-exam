@@ -1,0 +1,61 @@
+{
+  "run_info": {
+    "topic_1": "law_of_large_numbers",
+    "topic_2": "monte_carlo_simulation",
+    "learning_objective_1": "State the Law of Large Numbers and use it to explain why the sample mean converges to the population mean as the number of trials increases.",
+    "learning_objective_2": "Design a Monte Carlo simulation to estimate a probability or expected value by generating random samples and computing sample statistics.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Financial risk management",
+    "domain": "Economics",
+    "scenario": "A financial institution wants to estimate the expected return on investment for a new portfolio. They use a Monte Carlo simulation to generate random samples of possible returns and compute the sample mean. The Law of Large Numbers ensures that the sample mean converges to the true expected return as the number of simulations increases.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The financial institution's use of Monte Carlo simulation to estimate expected return on investment, justified by the Law of Large Numbers, is a natural and coherent application of both topics, with a strong balance of cognitive load and conceptual depth."
+  },
+  "best_question": {
+    "question": "A financial institution runs a Monte Carlo simulation with 10,000 samples to estimate the expected return on investment for a new portfolio. If the sample mean return is 8% and the number of simulations is increased to 50,000, how does the Law of Large Numbers explain the convergence of the sample mean to the true expected return, and what can be inferred about the reliability of the estimated expected return?",
+    "expected_concepts": [
+      "Law of Large Numbers",
+      "Monte Carlo simulation"
+    ],
+    "overall_score": 0.745,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.6,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply the Law of Large Numbers to a Monte Carlo simulation, which naturally involves both learning objectives. However, the question is slightly biased towards the Law of Large Numbers, and the student's attempt could have been more detailed in terms of designing the Monte Carlo simulation."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking about the Law of Large Numbers and its application to Monte Carlo simulations in finance.",
+      "The Law of Large Numbers states that as the number of trials increases, the average of the results will converge to the expected value.",
+      "In this case, the financial institution is running a Monte Carlo simulation to estimate the expected return on investment for a new portfolio.",
+      "The sample mean return is 8% with 10,000 samples, and the question asks how the Law of Large Numbers explains the convergence of the sample mean to the true expected return when the number of simulations is increased to 50,000.",
+      "I plan to approach this by explaining the Law of Large Numbers, its relevance to Monte Carlo simulations, and how increasing the sample size affects the convergence of the sample mean to the true expected return."
+    ],
+    "attempt": "The Law of Large Numbers states that as the number of trials increases, the average of the results will converge to the expected value. In this case, the financial institution is running a Monte Carlo simulation with 10,000 samples, which gives a sample mean return of 8%. If the number of simulations is increased to 50,000, the Law of Large Numbers suggests that the sample mean will converge closer to the true expected return. This is because the increased sample size reduces the standard error of the sample mean, making it a more reliable estimate of the true expected return. However, without knowing the true expected return, it's difficult to determine the exact reliability of the estimated expected return.",
+    "conclusion": "The Law of Large Numbers explains the convergence of the sample mean to the true expected return as the number of simulations increases. The increased sample size reduces the standard error of the sample mean, making it a more reliable estimate of the true expected return.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough context about the Law of Large Numbers and its application to Monte Carlo simulations, and I have sufficient knowledge to attempt and solve the question."
+    }
+  }
+}

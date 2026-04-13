@@ -1,0 +1,110 @@
+{
+  "run_info": {
+    "topic_1": "vector_spaces_and_subspaces",
+    "topic_2": "orthogonality_and_projections",
+    "learning_objective_1": "Determine whether a given set of vectors forms a vector space or subspace by verifying closure under addition and scalar multiplication.",
+    "learning_objective_2": "Apply the Gram-Schmidt process to produce an orthonormal basis and use orthogonal projections to decompose vectors within a subspace.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Signal Processing for Audio Filtering",
+    "domain": "Audio Engineering",
+    "scenario": "Audio engineers aim to develop a signal processing technique to filter out background noise from audio recordings. To achieve this, they first verify whether a set of audio signals forms a vector space or subspace by checking closure under addition and scalar multiplication. Then, they use the Gram-Schmidt process to construct an orthonormal basis for the subspace of audio signals, allowing them to project the noisy signal onto the subspace and filter out the noise by taking the orthogonal component.",
+    "overall_score": 0.8800000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.9,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are essential for audio filtering, and the scenario balances the cognitive load between them. The domain of audio engineering naturally implies measurable structures, and the intersection of the topics reveals non-obvious insights into signal processing."
+  },
+  "best_question": {
+    "question": "Suppose an audio signal with a sampling rate of 44.1 kHz is to be filtered using a cutoff frequency of 10 kHz. Determine whether the set of filtered signals forms a subspace by verifying closure under addition and scalar multiplication. If it does, apply the Gram-Schmidt process to construct an orthonormal basis for this subspace, considering the noise reduction metric of signal-to-noise ratio (SNR) to be at least 20 dB. How would you interpret the resulting orthonormal basis in the context of filtering out background noise?",
+    "expected_concepts": [
+      "vector space",
+      "subspace",
+      "Gram-Schmidt process",
+      "orthonormal basis",
+      "orthogonal projections"
+    ],
+    "overall_score": 0.805,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.8,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to apply both learning objectives naturally, first determining if the set of filtered signals forms a subspace and then applying the Gram-Schmidt process, showing good learning objective reflection and decomposability. The cognitive load is somewhat balanced, though the question leans slightly more towards the application of the Gram-Schmidt process. The domain coherence is good, staying within the context of signal filtering, and the student attempt adheres well to the learning objective boundaries."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "To determine if the set of filtered signals forms a subspace, we need to verify closure under addition and scalar multiplication.",
+      "This involves checking if the sum of any two filtered signals and the product of any scalar with a filtered signal are also in the set of filtered signals.",
+      "Given that the filtering process involves a cutoff frequency, we should consider how this affects the properties of the signals.",
+      "The Gram-Schmidt process can then be applied to construct an orthonormal basis for this subspace, which will help in representing the signals in a more efficient and noise-reduced form.",
+      "The noise reduction metric of signal-to-noise ratio (SNR) being at least 20 dB will guide the construction of the orthonormal basis to ensure effective noise filtering."
+    ],
+    "attempt": "First, we verify that the set of filtered signals is closed under addition and scalar multiplication. Given a filter with a cutoff frequency of 10 kHz, any signal that has frequencies above 10 kHz will be attenuated. The sum of two such filtered signals will also have frequencies above 10 kHz attenuated, thus the set is closed under addition. Similarly, multiplying a filtered signal by a scalar will not introduce frequencies above 10 kHz, so the set is closed under scalar multiplication. Having established that the set of filtered signals forms a subspace, we can apply the Gram-Schmidt process to find an orthonormal basis. However, without specific signal vectors to work with, we cannot proceed to explicit calculations. The process involves taking a set of vectors, normalizing the first one, and then iteratively subtracting the projection of each subsequent vector onto the previous normalized vectors and normalizing the result. The orthonormal basis aids in filtering by allowing the representation of signals in a basis where noise can be more easily identified and removed, especially when considering the SNR metric.",
+    "conclusion": "The set of filtered signals with a cutoff frequency of 10 kHz forms a subspace because it is closed under addition and scalar multiplication. An orthonormal basis for this subspace can be constructed using the Gram-Schmidt process, which helps in filtering out background noise by providing a representation of the signals that facilitates the identification and reduction of noise, given a noise reduction metric of at least 20 dB SNR.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to understand the problem, and the concepts of subspace, closure under addition and scalar multiplication, and the Gram-Schmidt process are familiar from linear algebra and signal processing studies."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 512,
+        "output_tokens": 888,
+        "total_tokens": 1400,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1298,
+        "output_tokens": 387,
+        "total_tokens": 1685,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 464,
+        "output_tokens": 68,
+        "total_tokens": 532,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 490,
+        "output_tokens": 683,
+        "total_tokens": 1173,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 931,
+        "output_tokens": 1860,
+        "total_tokens": 2791,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1572,
+        "output_tokens": 181,
+        "total_tokens": 1753,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5267,
+      "output_tokens": 4067,
+      "total_tokens": 9334,
+      "requests": 6
+    }
+  }
+}

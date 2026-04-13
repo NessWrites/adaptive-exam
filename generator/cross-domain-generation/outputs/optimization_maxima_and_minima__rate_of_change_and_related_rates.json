@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "optimization_maxima_and_minima",
+    "topic_2": "rate_of_change_and_related_rates",
+    "learning_objective_1": "Apply the first and second derivative tests to locate and classify local maxima, minima, and saddle points of a differentiable function.",
+    "learning_objective_2": "Set up and solve a related rates problem by differentiating an implicit relationship with respect to time to find an unknown rate of change.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Space Mission Optimization",
+    "domain": "Astronautics",
+    "scenario": "A spacecraft is on a mission to Mars, and the crew needs to optimize their fuel consumption to ensure a safe landing. The spacecraft's trajectory is affected by the changing gravitational force of Mars, and the crew must adjust their fuel burn rate accordingly.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "The scenario tightly integrates both learning objectives, with a clear need to optimize fuel burn rates and understand the impact of gravitational force on the spacecraft's trajectory. The numerical entry points are well-defined, and the domain of astronautics makes the mathematical structure feel highly natural and relevant."
+  },
+  "best_question": {
+    "question": "The spacecraft's fuel consumption rate is dF/dt = 0.02v^2 kg/s, and its velocity is increasing at a rate of 10 m/s^2. If the distance to Mars is 2000 km, find the rate of change of the fuel consumption rate and classify the nature of the function using the first derivative test. Additionally, find the acceleration of the spacecraft if the Mars' gravitational force is F_g = 0.01d^(-2) N and the mass of the spacecraft is 4000 kg.",
+    "expected_concepts": [
+      "first derivative test",
+      "related rates problem"
+    ],
+    "overall_score": 0.74,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.6,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply both learning objectives, but the cognitive load balance is slightly skewed towards the first objective. The question stays within the scenario domain and the student attempt adheres to the learning objective boundary, but the decomposability could be improved with more explicit connections between the pieces."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking us to classify the nature of the fuel consumption rate function and find the rate of change of the fuel consumption rate.",
+      "We are given the fuel consumption rate function dF/dt = 0.02v^2 kg/s and the velocity is increasing at a rate of 10 m/s^2.",
+      "We need to use the first derivative test to classify the function.",
+      "We are also asked to find the acceleration of the spacecraft given the Mars' gravitational force F_g = 0.01d^(-2) N and the mass of the spacecraft is 4000 kg."
+    ],
+    "attempt": "First, let's find the derivative of the fuel consumption rate function with respect to time. We have dF/dt = 0.02v^2. The derivative of v^2 with respect to time is 2v(dv/dt). So, the derivative of the fuel consumption rate function is d^2F/dt^2 = 0.04v(dv/dt). Given that dv/dt = 10 m/s^2, we can substitute this value into the equation to find the rate of change of the fuel consumption rate.",
+    "conclusion": "The nature of the fuel consumption rate function can be classified using the first derivative test, and the rate of change of the fuel consumption rate can be found by substituting the given values into the equation. The acceleration of the spacecraft can be found using the equation of motion, F = ma, where F is the net force acting on the spacecraft, m is the mass of the spacecraft, and a is the acceleration.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides sufficient information to classify the function and find the rate of change of the fuel consumption rate, as well as the acceleration of the spacecraft."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 496,
+        "output_tokens": 879,
+        "total_tokens": 1375,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1301,
+        "output_tokens": 405,
+        "total_tokens": 1706,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 441,
+        "output_tokens": 84,
+        "total_tokens": 525,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 2319,
+        "output_tokens": 1434,
+        "total_tokens": 3753,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1840,
+        "output_tokens": 2927,
+        "total_tokens": 4767,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1440,
+        "output_tokens": 145,
+        "total_tokens": 1585,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 7837,
+      "output_tokens": 5874,
+      "total_tokens": 13711,
+      "requests": 8
+    }
+  }
+}

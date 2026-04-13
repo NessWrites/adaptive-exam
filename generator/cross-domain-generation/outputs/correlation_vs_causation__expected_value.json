@@ -1,0 +1,107 @@
+{
+  "run_info": {
+    "topic_1": "correlation_vs_causation",
+    "topic_2": "expected_value",
+    "learning_objective_1": "Explain why a strong correlation between two variables does not imply a causal relationship, and identify confounding variables or alternative explanations.",
+    "learning_objective_2": "Compute the expected value of a discrete or continuous random variable and interpret it as the long-run average outcome of a random process.",
+    "stratum": "adjacent",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Public Health Policy Evaluation",
+    "domain": "Public Health",
+    "scenario": "A public health official is assessing the impact of a new vaccination program on the incidence of a specific disease. The objective is to determine if there's a causal relationship between vaccination rates and disease incidence, and to predict the expected reduction in disease cases based on vaccination coverage.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "The public health scenario seamlessly integrates both learning objectives, with a clear focus on correlation vs causation and expected value in the context of vaccination programs. The numerical entry points are well-defined, and the domain of public health makes the mathematical structure feel highly relevant and natural."
+  },
+  "best_question": {
+    "question": "Suppose a study found a strong correlation between vaccination coverage rates and disease incidence rates in four different regions, with vaccination coverage rates of 70%, 75%, 80%, and 85%, and corresponding disease incidence rates of 250, 220, 200, and 180 cases/100,000, respectively. What is the expected disease incidence rate if the vaccination coverage rate were to increase to 92% in a region with a population size of 750,000? Also, discuss how this correlation does not necessarily imply a causal relationship and identify potential confounding variables that could explain the observed correlation.",
+    "expected_concepts": [
+      "correlation_vs_causation",
+      "expected_value"
+    ],
+    "overall_score": 0.805,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply both correlation vs causation and expected value concepts, but the calculation of expected disease incidence rate dominates the question, making cognitive load balance slightly lower. The student naturally decomposes the question into multiple pieces, including calculating the rate of change, applying it to find the expected incidence rate, and discussing correlation vs causation and confounding variables."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question provides correlation data between vaccination coverage rates and disease incidence rates across four regions.",
+      "It asks for the expected disease incidence rate if the vaccination coverage rate increases to 92% in a new region.",
+      "To solve this, I can calculate the rate of change in disease incidence rate per percentage point increase in vaccination coverage based on the given data points.",
+      "Then, I can apply this rate to find the expected incidence rate at 92% coverage.",
+      "Additionally, I need to discuss how correlation does not imply causation and identify potential confounding variables."
+    ],
+    "attempt": "First, I'll calculate the slope (rate of change) using the given data points. From 70% to 75%, the incidence rate decreases from 250 to 220, which is a 30 case decrease for a 5% increase in coverage. From 75% to 80%, it decreases from 220 to 200, which is a 20 case decrease for a 5% increase. From 80% to 85%, it decreases from 200 to 180, which is a 20 case decrease for a 5% increase. The pattern is not perfectly linear but suggests an average decrease. To simplify, let's calculate the average decrease per percentage point: the total decrease from 70% to 85% is 70 cases over 15 percentage points, which averages to about 4.67 cases/100,000 per percentage point. To find the expected incidence rate at 92% coverage, I'll apply this rate: from 85% to 92% is a 7% increase, so the decrease would be approximately 7 * 4.67 = 32.69 cases/100,000. Starting from 180 cases/100,000 at 85% coverage, the expected incidence rate at 92% would be 180 - 32.69, which is approximately 147.31 cases/100,000.",
+    "conclusion": "The expected disease incidence rate if the vaccination coverage rate increases to 92% could be approximately 147 cases/100,000, based on the calculated average rate of decrease. However, this calculation assumes a linear relationship based on average decreases and does not account for potential non-linear effects or confounding variables.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides sufficient data to calculate the expected disease incidence rate."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 487,
+        "output_tokens": 854,
+        "total_tokens": 1341,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1258,
+        "output_tokens": 407,
+        "total_tokens": 1665,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 425,
+        "output_tokens": 55,
+        "total_tokens": 480,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 1897,
+        "output_tokens": 1504,
+        "total_tokens": 3401,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1866,
+        "output_tokens": 2821,
+        "total_tokens": 4687,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2125,
+        "output_tokens": 309,
+        "total_tokens": 2434,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 8058,
+      "output_tokens": 5950,
+      "total_tokens": 14008,
+      "requests": 8
+    }
+  }
+}

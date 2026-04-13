@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "matrix_decomposition_svd",
+    "topic_2": "random_variables_and_distributions",
+    "learning_objective_1": "Decompose a matrix using Singular Value Decomposition (SVD) and apply it to dimensionality reduction and low-rank approximation problems.",
+    "learning_objective_2": "Define discrete and continuous random variables, identify their probability distributions, and compute probabilities using PMFs and PDFs.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 2,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Recommendation System for Personalized Medicine",
+    "domain": "Healthcare",
+    "scenario": "A healthcare company wants to develop a personalized medicine recommendation system based on patient genetic profiles and medical histories. They use SVD to reduce the dimensionality of the patient data and then apply probability distributions to predict the likelihood of patient responses to different treatments.",
+    "overall_score": 0.8200000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.8,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for the scenario and contribute equally. The domain is very coherent with the mathematical structure, but the numerical fertility is slightly lower than s1."
+  },
+  "best_question": {
+    "question": "The healthcare company applies SVD to reduce the dimensionality of 200 patients' genetic profiles from 1000 markers to 10 features. The second dimension of the resulting SVD matrix represents the probability of a positive treatment response, with values ranging from 0.3 to 0.7. If the company selects 15 patients with values greater than 0.5 in this dimension, what is the expected number of patients who will respond positively to the treatment, given that the probability of response follows a binomial distribution with a probability of success of 0.6?",
+    "expected_concepts": [
+      "matrix_decomposition_svd",
+      "random_variables_and_distributions"
+    ],
+    "overall_score": 0.74,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.6,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires both SVD for dimensionality reduction and understanding of binomial distribution for probability calculation, but the connection between the two could be more integrated. The student's attempt shows a clear breakdown of the problem, but the cognitive load is slightly heavier on the probability calculation side. The domain of healthcare and patient treatment response is coherent and well-defined, and the student's attempt stays within the learning objective boundaries."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question involves selecting patients based on their values in the second dimension of the SVD matrix, which represents the probability of a positive treatment response.",
+      "Given that the values range from 0.3 to 0.7 and we're selecting patients with values greater than 0.5, we're essentially dealing with a subset of patients with higher predicted probabilities of response.",
+      "The probability of response follows a binomial distribution with a given probability of success.",
+      "To find the expected number of patients who will respond positively, I need to consider the number of selected patients and the probability of success."
+    ],
+    "attempt": "Since we're selecting 15 patients with values greater than 0.5 in the second dimension, and assuming that these values directly reflect their probabilities of responding positively (though the exact relationship isn't specified), we can use the binomial distribution formula to find the expected number of successes. The formula for the expected value in a binomial distribution is E(X) = np, where n is the number of trials (15 patients in this case) and p is the probability of success on a given trial (0.6 as per the question). Thus, E(X) = 15 * 0.6 = 9. However, this calculation assumes that the probability of success (0.6) applies directly to these selected patients, which might not be the case given the range of values (0.3 to 0.7) and the selection criterion (values > 0.5).",
+    "conclusion": "The expected number of patients to respond positively, based on the binomial distribution, would be 9, but this conclusion assumes the probability of success applies uniformly to the selected group.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to apply the binomial distribution formula, despite some ambiguity in how the SVD dimension values translate to individual probabilities of response."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 490,
+        "output_tokens": 734,
+        "total_tokens": 1224,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1141,
+        "output_tokens": 353,
+        "total_tokens": 1494,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 416,
+        "output_tokens": 57,
+        "total_tokens": 473,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 3664,
+        "output_tokens": 1992,
+        "total_tokens": 5656,
+        "requests": 3
+      },
+      "student_agent": {
+        "input_tokens": 2705,
+        "output_tokens": 4058,
+        "total_tokens": 6763,
+        "requests": 3
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1454,
+        "output_tokens": 168,
+        "total_tokens": 1622,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 9870,
+      "output_tokens": 7362,
+      "total_tokens": 17232,
+      "requests": 10
+    }
+  }
+}

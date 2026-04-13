@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "least_squares_regression",
+    "topic_2": "differential_equations_odes",
+    "learning_objective_1": "Derive the least squares solution to an overdetermined system and apply it to fit a linear model to data by minimizing residual error.",
+    "learning_objective_2": "Solve a first-order ordinary differential equation using separation of variables and interpret the solution as a model of a dynamic system.",
+    "stratum": "adjacent",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Designing a Climate Control System",
+    "domain": "Engineering",
+    "scenario": "An engineer is tasked with designing a climate control system for a large building. The engineer uses least squares regression to model the relationship between temperature settings and energy consumption, minimizing residual error to optimize energy efficiency. The resulting model is then used to inform the solution of a differential equation that describes how the building's temperature changes over time, taking into account factors such as insulation, windows, and heating/cooling systems.",
+    "overall_score": 0.8800000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.9,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for designing a climate control system, and the scenario balances the cognitive load between them. The numerical entry points are abundant, and the intersection of the topics reveals non-obvious insights into dynamic systems and optimization. The engineering domain makes the mathematical structure feel extremely natural and cohesive."
+  },
+  "best_question": {
+    "question": "Suppose the engineer's least squares regression model for temperature settings and energy consumption yields a slope of 1.5 and an intercept of 2, and the building's temperature is governed by the differential equation dx/dt = -0.2x + 5, where x is temperature in degrees Celsius. If the insulation and window parameters result in an initial energy consumption of 100 kW and a temperature setting of 15 degrees Celsius, how would the engineer interpret the solution to the differential equation in terms of the building's temperature over time, and what temperature setting would be required to maintain an energy consumption of 80 kW after 1 hour, using the least squares regression model?",
+    "expected_concepts": [
+      "least_squares_regression",
+      "differential_equations_odes"
+    ],
+    "overall_score": 0.8250000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to use both least squares regression and differential equations to solve the problem, demonstrating a strong reflection of both learning objectives. The cognitive load is balanced between the two topics, and the question stays within the domain of temperature settings and energy consumption. However, the decomposability could be improved as the student may not naturally break down the question into multiple pieces."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question involves using the least squares regression model to find the temperature setting required to maintain an energy consumption of 80 kW after 1 hour.",
+      "First, I need to understand the given slope and intercept of the least squares regression model, which are 1.5 and 2 respectively.",
+      "Then, I need to solve the differential equation dx/dt = -0.2x + 5 to find the temperature setting over time.",
+      "After that, I can use the solution to the differential equation and the least squares regression model to find the required temperature setting."
+    ],
+    "attempt": "To solve the differential equation dx/dt = -0.2x + 5, I will use the separation of variables method. The solution to the differential equation is x(t) = 25 - 10e^(-0.2t). Given the initial temperature of 15 degrees Celsius, I can find the temperature setting after 1 hour by plugging in t = 1 into the solution. Then, I can use the least squares regression model y = 1.5x + 2 to find the required temperature setting to maintain an energy consumption of 80 kW. Rearranging the model to solve for x, I get x = (y - 2) / 1.5. Plugging in y = 80, I get x = (80 - 2) / 1.5 = 78 / 1.5 = 52.",
+    "conclusion": "The required temperature setting to maintain an energy consumption of 80 kW after 1 hour is 52 degrees Celsius, but this seems unrealistic given the initial temperature and the differential equation.",
+    "student_confidence": 0.6,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to solve the differential equation and use the least squares regression model"
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 508,
+        "output_tokens": 878,
+        "total_tokens": 1386,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1284,
+        "output_tokens": 418,
+        "total_tokens": 1702,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 447,
+        "output_tokens": 66,
+        "total_tokens": 513,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 473,
+        "output_tokens": 718,
+        "total_tokens": 1191,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 1006,
+        "output_tokens": 1353,
+        "total_tokens": 2359,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2068,
+        "output_tokens": 312,
+        "total_tokens": 2380,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5786,
+      "output_tokens": 3745,
+      "total_tokens": 9531,
+      "requests": 6
+    }
+  }
+}

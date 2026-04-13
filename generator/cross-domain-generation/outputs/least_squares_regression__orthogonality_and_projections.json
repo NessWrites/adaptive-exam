@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "least_squares_regression",
+    "topic_2": "orthogonality_and_projections",
+    "learning_objective_1": "Derive the least squares solution to an overdetermined system and apply it to fit a linear model to data by minimizing residual error.",
+    "learning_objective_2": "Apply the Gram-Schmidt process to produce an orthonormal basis and use orthogonal projections to decompose vectors within a subspace.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Medical Image Reconstruction",
+    "domain": "Medical Imaging",
+    "scenario": "In medical imaging, reconstructing detailed images from limited data is crucial for diagnoses. To achieve this, researchers derive the least squares solution to an overdetermined system of equations representing the imaging data, fitting a linear model to the data and minimizing residual error. This step enhances image quality. Then, they apply the Gram-Schmidt process to produce an orthonormal basis for the image data, allowing for the use of orthogonal projections to decompose the image vectors within the subspace of interest. This process helps in removing noise and improving image resolution, aiding in the identification of abnormalities.",
+    "overall_score": 0.9000000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.9,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.9,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are essential for medical image reconstruction, and the scenario balances the cognitive load between them. The numerical entry points are well-defined, and the intersection of the topics reveals non-obvious insights into image quality enhancement and noise removal."
+  },
+  "best_question": {
+    "question": "Suppose a medical imaging system has a fixed data acquisition time of 10 minutes and produces images with a resolution of 256x256 pixels. The system currently has a signal-to-noise ratio of 20. If the image resolution is increased to 1024x1024 pixels, and the residual error is expected to increase by a factor of 2, calculate the new signal-to-noise ratio. Then, describe how the Gram-Schmidt process and orthogonal projections can be applied to the new image data to maintain a signal-to-noise ratio threshold of 10, considering the increased image resolution and residual error.",
+    "expected_concepts": [
+      "least_squares_regression",
+      "orthogonality_and_projections"
+    ],
+    "overall_score": 0.74,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.6,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the application of both least squares regression and orthogonality/projections, but the student's attempt focuses more on the signal-to-noise ratio calculation and less on the Gram-Schmidt process and orthogonal projections. The question stays within the medical imaging domain and the student's attempt adheres to the learning objectives, but the cognitive load is not perfectly balanced between the two topics."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question is asking us to calculate the new signal-to-noise ratio when the image resolution is increased from 256x256 to 1024x1024 pixels, given that the residual error increases by a factor of 2.",
+      "We need to understand how the signal-to-noise ratio changes with the image resolution and the residual error.",
+      "After finding the new signal-to-noise ratio, we need to describe how the Gram-Schmidt process and orthogonal projections can be applied to maintain a signal-to-noise ratio threshold of 10.",
+      "The Gram-Schmidt process and orthogonal projections can help reduce the dimensionality of the data and remove noise, which can improve the signal-to-noise ratio."
+    ],
+    "attempt": "Let's denote the initial signal-to-noise ratio as SNR1 = 20 and the initial residual error as e1. When the image resolution is increased, the residual error becomes e2 = 2 * e1. Assuming the signal-to-noise ratio is inversely proportional to the residual error, we can write SNR2 = SNR1 * (e1 / e2). Substituting e2 = 2 * e1, we get SNR2 = SNR1 / 2.",
+    "conclusion": "The new signal-to-noise ratio SNR2 would be 10, which is half of the initial signal-to-noise ratio SNR1. To maintain a signal-to-noise ratio threshold of 10, the Gram-Schmidt process can be applied to produce an orthonormal basis for the image data, and orthogonal projections can be used to reduce the dimensionality of the data and remove noise.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides a clear relationship between the signal-to-noise ratio and the residual error."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 514,
+        "output_tokens": 1095,
+        "total_tokens": 1609,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1507,
+        "output_tokens": 393,
+        "total_tokens": 1900,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 524,
+        "output_tokens": 65,
+        "total_tokens": 589,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 1964,
+        "output_tokens": 1441,
+        "total_tokens": 3405,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1934,
+        "output_tokens": 2434,
+        "total_tokens": 4368,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1460,
+        "output_tokens": 165,
+        "total_tokens": 1625,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 7903,
+      "output_tokens": 5593,
+      "total_tokens": 13496,
+      "requests": 8
+    }
+  }
+}

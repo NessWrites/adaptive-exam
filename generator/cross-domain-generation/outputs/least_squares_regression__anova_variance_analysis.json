@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "least_squares_regression",
+    "topic_2": "anova_variance_analysis",
+    "learning_objective_1": "Derive the least squares solution to an overdetermined system and apply it to fit a linear model to data by minimizing residual error.",
+    "learning_objective_2": "Conduct a one-way ANOVA to test whether the means of three or more groups differ significantly, and interpret the F-statistic and associated p-value.",
+    "stratum": "distant",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Optimizing Pharmaceutical Manufacturing",
+    "domain": "Pharmaceuticals",
+    "scenario": "A pharmaceutical company aims to optimize its manufacturing process for a new drug. The process involves multiple stages, each with varying conditions. To minimize costs and maximize yield, the company needs to model the relationship between these conditions and the final product quality. They use least squares regression to derive a linear model that predicts the product quality based on the conditions. However, they also want to determine if different batches of the drug, produced under the same conditions but in different locations, have significantly different quality measures. They conduct a one-way ANOVA to compare the means of the quality measures across these batches.",
+    "overall_score": 0.8400000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.7,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial for optimizing pharmaceutical manufacturing, with least squares regression modeling the relationship between conditions and product quality, and ANOVA comparing batch quality across locations, creating a balanced and coherent scenario."
+  },
+  "best_question": {
+    "question": "A pharmaceutical company has 5 manufacturing stages and produces the drug in 3 different batches. They collect quality measures for each batch: batch 1 has a mean quality of 90 with a standard deviation of 2, batch 2 has a mean quality of 92 with a standard deviation of 1.5, and batch 3 has a mean quality of 89 with a standard deviation of 2.2. Using least squares regression, they derive a linear model that predicts the product quality based on the conditions. The model is Y = 85 + 0.5X, where Y is the product quality and X is the temperature in degrees Celsius. If the company wants to determine if the different batches have significantly different quality measures, what would be the null and alternative hypotheses for the one-way ANOVA, and what would be the predicted product quality for a batch produced at 95 degrees Celsius?",
+    "expected_concepts": [
+      "least_squares_regression",
+      "anova_variance_analysis"
+    ],
+    "overall_score": 0.74,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.6,
+      "decomposability": 0.7,
+      "domain_coherence": 0.9,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to apply least squares regression to predict product quality and then use one-way ANOVA to compare batch means, demonstrating a good reflection of both learning objectives. However, the cognitive load balance is not perfect, as the ANOVA part seems to be a straightforward application, while the regression part is already given. The question triggers a natural breakdown into pieces, such as finding the predicted product quality and determining the null and alternative hypotheses. The domain of pharmaceutical product quality is well-maintained throughout the question, and the student's attempt stays within the learning objective boundary."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking for the null and alternative hypotheses for a one-way ANOVA to compare the quality measures of different batches, as well as the predicted product quality for a batch produced at 95 degrees Celsius using a given linear model.",
+      "The linear model is Y = 85 + 0.5X, where Y is the product quality and X is the temperature in degrees Celsius.",
+      "To find the predicted product quality, I can plug in X = 95 into the linear model.",
+      "For the one-way ANOVA, I need to determine the null and alternative hypotheses, which typically involve the means of the batches being equal or not."
+    ],
+    "attempt": "First, I'll find the predicted product quality for a batch produced at 95 degrees Celsius. Using the linear model Y = 85 + 0.5X, I get Y = 85 + 0.5(95) = 85 + 47.5 = 132.5. Next, for the one-way ANOVA, the null hypothesis is that the means of the quality measures for the different batches are equal, while the alternative hypothesis is that the means are not equal. Specifically, the null hypothesis is H0: \u03bc1 = \u03bc2 = \u03bc3, where \u03bc1, \u03bc2, and \u03bc3 are the means of the quality measures for batches 1, 2, and 3, respectively. The alternative hypothesis is H1: \u03bc1 \u2260 \u03bc2 \u2260 \u03bc3, or at least one of the means is different.",
+    "conclusion": "The predicted product quality for a batch produced at 95 degrees Celsius is 132.5, and the null and alternative hypotheses for the one-way ANOVA are H0: \u03bc1 = \u03bc2 = \u03bc3 and H1: \u03bc1 \u2260 \u03bc2 \u2260 \u03bc3.",
+    "student_confidence": 0.8,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information to determine the predicted product quality and the null and alternative hypotheses for the one-way ANOVA."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 496,
+        "output_tokens": 934,
+        "total_tokens": 1430,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1347,
+        "output_tokens": 379,
+        "total_tokens": 1726,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 493,
+        "output_tokens": 70,
+        "total_tokens": 563,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 519,
+        "output_tokens": 782,
+        "total_tokens": 1301,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 1047,
+        "output_tokens": 1654,
+        "total_tokens": 2701,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 1557,
+        "output_tokens": 204,
+        "total_tokens": 1761,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 5459,
+      "output_tokens": 4023,
+      "total_tokens": 9482,
+      "requests": 6
+    }
+  }
+}

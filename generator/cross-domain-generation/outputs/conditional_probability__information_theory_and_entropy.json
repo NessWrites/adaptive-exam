@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "conditional_probability",
+    "topic_2": "information_theory_and_entropy",
+    "learning_objective_1": "Calculate conditional probabilities using the definition P(A|B) = P(A\u2229B)/P(B) and apply the law of total probability to partition complex probability problems.",
+    "learning_objective_2": "Calculate the Shannon entropy of a discrete probability distribution and interpret it as a measure of uncertainty or information content.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 0,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Genetic Disease Research",
+    "domain": "Medical Research",
+    "scenario": "Researchers are studying the correlation between a specific genetic mutation and the occurrence of a rare disease. They need to calculate the conditional probability of a patient having the disease given that they have the genetic mutation, and then use the law of total probability to account for other factors that may influence the disease's occurrence. Additionally, they want to quantify the uncertainty of their diagnosis using Shannon entropy, which will help them determine the most informative tests to conduct.",
+    "overall_score": 0.8600000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial to understanding the relationship between the genetic mutation and the disease, and the scenario naturally implies measurable structures. The domain of medical research makes the mathematical structure feel natural."
+  },
+  "best_question": {
+    "question": "Suppose the prevalence of the genetic mutation in the population is 0.01 and the prevalence of the disease in the population is 0.005. If the probability of a patient having the disease given the genetic mutation is 0.4, calculate the conditional probability of a patient having the genetic mutation given that they have the disease. Then, interpret the result using Shannon entropy to determine the uncertainty of the diagnosis. Assume that the probability of a patient not having the disease given the genetic mutation is 0.6.",
+    "expected_concepts": [
+      "conditional_probability",
+      "Shannon_entropy"
+    ],
+    "overall_score": 0.805,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.8,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to calculate the conditional probability using Bayes' theorem, which aligns with the first learning objective. Then, it asks to interpret the result using Shannon entropy, which aligns with the second learning objective. The student's attempt shows a clear decomposition of the problem into multiple steps, and the question stays within the domain of probability and information theory."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question is asking for the conditional probability of a patient having the genetic mutation given that they have the disease, and then to interpret the result using Shannon entropy.",
+      "To find the conditional probability, I need to use Bayes' theorem, which requires the probability of the disease given the genetic mutation, the prevalence of the genetic mutation, and the prevalence of the disease.",
+      "The probability of a patient having the disease given the genetic mutation is 0.4, the prevalence of the genetic mutation is 0.01, and the prevalence of the disease is 0.005.",
+      "After finding the conditional probability, I need to calculate the Shannon entropy to determine the uncertainty of the diagnosis."
+    ],
+    "attempt": "Using Bayes' theorem, the conditional probability of a patient having the genetic mutation given that they have the disease is P(G|M) = P(M|G) * P(G) / P(M). However, I realize that I need to use the formula P(G|D) = P(D|G) * P(G) / P(D), where P(D) = P(D|G) * P(G) + P(D|~G) * P(~G). Since P(D|~G) is not directly given, I assume it can be derived from the given probabilities. The probability of a patient not having the disease given the genetic mutation is 0.6, which implies the probability of a patient having the disease given the genetic mutation is 0.4. I will try to calculate P(D|~G) using the law of total probability: P(D) = P(D|G) * P(G) + P(D|~G) * P(~G). Given P(D) = 0.005, P(D|G) = 0.4, P(G) = 0.01, and P(~G) = 1 - P(G) = 0.99, I can solve for P(D|~G).",
+    "conclusion": "P(D|~G) = (P(D) - P(D|G) * P(G)) / P(~G) = (0.005 - 0.4 * 0.01) / 0.99 = (0.005 - 0.004) / 0.99 = 0.001 / 0.99 = 0.00101. Now, using Bayes' theorem: P(G|D) = P(D|G) * P(G) / P(D) = 0.4 * 0.01 / 0.005 = 0.8. To calculate the Shannon entropy, I need the probabilities of having and not having the genetic mutation given the disease, which are P(G|D) = 0.8 and P(~G|D) = 1 - P(G|D) = 0.2. The Shannon entropy H = - (P(G|D) * log2(P(G|D)) + P(~G|D) * log2(P(~G|D))) = - (0.8 * log2(0.8) + 0.2 * log2(0.2)) = - (0.8 * -0.322 + 0.2 * -2.322) = - (-0.2576 - 0.4644) = 0.722.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided enough information to calculate the conditional probability and Shannon entropy, although it required some derivation of intermediate probabilities."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 493,
+        "output_tokens": 914,
+        "total_tokens": 1407,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1327,
+        "output_tokens": 363,
+        "total_tokens": 1690,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 477,
+        "output_tokens": 62,
+        "total_tokens": 539,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 503,
+        "output_tokens": 631,
+        "total_tokens": 1134,
+        "requests": 1
+      },
+      "student_agent": {
+        "input_tokens": 868,
+        "output_tokens": 2047,
+        "total_tokens": 2915,
+        "requests": 1
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2373,
+        "output_tokens": 332,
+        "total_tokens": 2705,
+        "requests": 1
+      }
+    },
+    "total": {
+      "input_tokens": 6041,
+      "output_tokens": 4349,
+      "total_tokens": 10390,
+      "requests": 6
+    }
+  }
+}
