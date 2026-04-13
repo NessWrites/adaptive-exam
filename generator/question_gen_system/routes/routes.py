@@ -49,7 +49,7 @@ async def generator(
     if "error" in result:
         raise HTTPException(
             status_code = 500,
-            detail = result.get("error", "unknown LLM error")
+            detail=f"{result.get('error')} — {result.get('details', 'no details')}"
         )
     
     parsed = LLMQuestionResponse.model_validate(result)
@@ -95,10 +95,6 @@ async def generator(
         success_length = len([s for s in saved_info if "id" in s])
         validator_length = len(validator_response)
 
-
-            
-            
-        
     return {
         "generated_content": {
             "generated_questions" : [row.model_dump() for row in question_rows], 

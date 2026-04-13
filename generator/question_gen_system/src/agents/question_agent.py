@@ -54,7 +54,20 @@ class HydrationAgent:
             response = self.model.generate_content(prompt)
             
             # Gemini returns the string in response.text
-            return json.loads(response.text)
+            result = json.loads(response.text)
+            
+            # Extract tokens
+            prompt_tokens = 0
+            completion_tokens = 0
+            if hasattr(response, "usage_metadata"):
+                prompt_tokens = response.usage_metadata.prompt_token_count
+                completion_tokens = response.usage_metadata.candidates_token_count
+            
+            result["usage"] = {
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens
+            }
+            return result
             
         except Exception as e:
             return {
