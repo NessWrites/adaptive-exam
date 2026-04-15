@@ -1,71 +1,6 @@
 [
   {
     "run_info": {
-      "topic_1": "vector_spaces_and_subspaces",
-      "topic_2": "determinants_and_invertibility",
-      "learning_objective_1": "Determine whether a given set of vectors forms a vector space or subspace by verifying closure under addition and scalar multiplication.",
-      "learning_objective_2": "Evaluate the determinant of a matrix to determine invertibility and use it to understand how a transformation scales area or volume.",
-      "stratum": "same",
-      "question_type": "mixed",
-      "scenario_retry_count": 0,
-      "question_retry_count": 1,
-      "success": true
-    },
-    "top_scenario": {
-      "title": "Financial Portfolio Management",
-      "domain": "Finance",
-      "scenario": "A portfolio manager needs to determine whether a set of investment portfolios forms a vector space or subspace to optimize returns. The manager also needs to evaluate the determinant of the covariance matrix to determine its invertibility and understand how it scales the portfolio's risk.",
-      "overall_score": 0.8400000000000001,
-      "dimension_scores": {
-        "learning_objective_fidelity": 0.9,
-        "cognitive_load_balance": 0.8,
-        "numerical_fertility": 0.9,
-        "conceptual_depth": 0.7,
-        "domain_coherence": 0.9
-      },
-      "reason": "The financial portfolio management scenario naturally integrates both learning objectives, with a clear need to optimize returns through vector spaces and understand risk through the determinant of the covariance matrix. The domain feels very coherent, and both topics contribute equally to the scenario, revealing non-obvious insights into portfolio optimization."
-    },
-    "best_question": {
-      "question": "A portfolio manager has 5 investment portfolios with returns of 0.05, 0.03, 0.01, 0.04, and 0.02. The covariance matrix of these portfolios is a 5x5 matrix with a determinant value of 0.0002. Determine if these portfolios form a vector space or subspace by verifying closure under addition and scalar multiplication. Additionally, explain how the determinant value of the covariance matrix affects the scaling of the portfolio's risk and use it to evaluate the invertibility of the matrix.",
-      "expected_concepts": [
-        "vector space",
-        "subspace",
-        "closure under addition",
-        "closure under scalar multiplication",
-        "determinant",
-        "invertibility",
-        "risk scaling"
-      ],
-      "overall_score": 0.745,
-      "dimension_scores": {
-        "learning_objective_reflection": 0.8,
-        "cognitive_load_balance": 0.7,
-        "decomposability": 0.6,
-        "domain_coherence": 0.9,
-        "boundary_adherence": 0.8
-      },
-      "reason": "The question requires the student to apply both vector space concepts and determinant analysis, but the connection between the two could be more explicit. The student's attempt shows a good balance between the two topics, and the question stays within the domain of portfolio management."
-    },
-    "student_attempt": {
-      "thought_process": [
-        "The question is asking to verify if a set of portfolios forms a vector space or subspace by checking closure under addition and scalar multiplication.",
-        "It also asks to explain how the determinant value of the covariance matrix affects the scaling of the portfolio's risk and its invertibility.",
-        "To approach this, I need to recall the properties of vector spaces and subspaces, specifically closure under addition and scalar multiplication.",
-        "I also need to understand how the determinant of a covariance matrix relates to the scaling of portfolio risk and its invertibility."
-      ],
-      "attempt": "To verify closure under addition, I would check if the sum of any two portfolios is also a portfolio. For scalar multiplication, I would check if multiplying a portfolio by a scalar results in another portfolio. However, without specific details on the portfolios, I can only theoretically verify these properties. The determinant of the covariance matrix being 0.0002 indicates that the matrix is invertible since it's non-zero. The invertibility of the covariance matrix implies that the portfolios do not have perfectly correlated returns, which affects the scaling of the portfolio's risk. A small determinant value suggests that the portfolios may have highly correlated returns, which could increase the portfolio's risk.",
-      "conclusion": "The set of portfolios likely forms a vector space or subspace as it should satisfy closure under addition and scalar multiplication. The determinant value of the covariance matrix indicates that the matrix is invertible, which has implications for the scaling of the portfolio's risk.",
-      "student_confidence": 0.7,
-      "solvability": {
-        "has_enough_context": true,
-        "attemptable_within_knowledge": true,
-        "solvable": true,
-        "reason": "The question provides sufficient information to theoretically verify the properties of a vector space or subspace and understand the implications of the determinant value of the covariance matrix."
-      }
-    }
-  },
-  {
-    "run_info": {
       "topic_1": "conditional_probability",
       "topic_2": "variance_and_standard_deviation",
       "learning_objective_1": "Calculate conditional probabilities using the definition P(A|B) = P(A∩B)/P(B) and apply the law of total probability to partition complex probability problems.",
@@ -183,95 +118,95 @@
       "success": true
     },
     "top_scenario": {
-      "title": "Genetic Trait Inheritance",
-      "domain": "Genetics",
-      "scenario": "A geneticist is studying the inheritance of a certain trait in a population. The geneticist knows the probability of the trait being expressed given that an individual has a certain genotype, and wants to calculate the probability of the trait being expressed in the offspring of two individuals with known genotypes. The geneticist also wants to quantify the uncertainty in the prediction of the trait expression.",
-      "overall_score": 0.8200000000000001,
+      "title": "Genetic Disease Research",
+      "domain": "Medical Research",
+      "scenario": "Researchers are studying the correlation between a specific genetic mutation and the occurrence of a rare disease. They need to calculate the conditional probability of a patient having the disease given that they have the genetic mutation, and then use the law of total probability to account for other factors that may influence the disease's occurrence. Additionally, they want to quantify the uncertainty of their diagnosis using Shannon entropy, which will help them determine the most informative tests to conduct.",
+      "overall_score": 0.8600000000000001,
       "dimension_scores": {
         "learning_objective_fidelity": 0.9,
         "cognitive_load_balance": 0.8,
-        "numerical_fertility": 0.7,
+        "numerical_fertility": 0.9,
         "conceptual_depth": 0.8,
         "domain_coherence": 0.9
       },
-      "reason": "The genetic trait inheritance scenario seamlessly integrates conditional probability for trait expression likelihood and information theory for prediction uncertainty. The genetics domain naturally lends itself to these mathematical structures, and the scenario reveals non-obvious insights into the interplay between genotype, trait expression, and uncertainty."
+      "reason": "Both learning objectives are crucial to understanding the relationship between the genetic mutation and the disease, and the scenario naturally implies measurable structures. The domain of medical research makes the mathematical structure feel natural."
     },
     "best_question": {
-      "question": "Suppose the probability distribution of genotypes in the population is {0.3 for 'AA', 0.2 for 'Aa', 0.5 for 'aa'} and the probability of trait expression given genotypes 'AA', 'Aa', and 'aa' are 0.7, 0.4, and 0.1 respectively. Calculate the probability of trait expression in the population and determine the Shannon entropy of this probability distribution to understand the uncertainty in trait expression prediction.",
+      "question": "Suppose the prevalence of the genetic mutation in the population is 0.01 and the prevalence of the disease in the population is 0.005. If the probability of a patient having the disease given the genetic mutation is 0.4, calculate the conditional probability of a patient having the genetic mutation given that they have the disease. Then, interpret the result using Shannon entropy to determine the uncertainty of the diagnosis. Assume that the probability of a patient not having the disease given the genetic mutation is 0.6.",
       "expected_concepts": [
-        "law of total probability",
-        "Shannon entropy calculation"
+        "conditional_probability",
+        "Shannon_entropy"
       ],
-      "overall_score": 0.835,
+      "overall_score": 0.805,
       "dimension_scores": {
-        "learning_objective_reflection": 0.9,
-        "cognitive_load_balance": 0.8,
-        "decomposability": 0.7,
-        "domain_coherence": 0.9,
+        "learning_objective_reflection": 0.8,
+        "cognitive_load_balance": 0.7,
+        "decomposability": 0.9,
+        "domain_coherence": 0.8,
         "boundary_adherence": 0.9
       },
-      "reason": "The question requires the student to apply both conditional probability and Shannon entropy concepts to solve the problem, demonstrating a strong reflection of learning objectives. The cognitive load is balanced between the two topics, but slightly more emphasis is placed on conditional probability. The question triggers a natural breakdown into multiple pieces, including calculating trait expression probability and determining Shannon entropy. The domain of genotype and trait expression is coherent and well-defined, and the student's attempt stays within the established learning objective boundary."
+      "reason": "The question requires the student to calculate the conditional probability using Bayes' theorem, which aligns with the first learning objective. Then, it asks to interpret the result using Shannon entropy, which aligns with the second learning objective. The student's attempt shows a clear decomposition of the problem into multiple steps, and the question stays within the domain of probability and information theory."
     },
     "student_attempt": {
       "thought_process": [
-        "The question provides a probability distribution of genotypes in the population and the probability of trait expression given each genotype.",
-        "We can calculate the probability of trait expression in the population by multiplying the probability of each genotype by the probability of trait expression given that genotype and summing them up.",
-        "Then, we can use the Shannon entropy formula to calculate the uncertainty in trait expression prediction.",
-        "The formula for Shannon entropy is -∑(p * log2(p)), where p is the probability of each outcome."
+        "The question is asking for the conditional probability of a patient having the genetic mutation given that they have the disease, and then to interpret the result using Shannon entropy.",
+        "To find the conditional probability, I need to use Bayes' theorem, which requires the probability of the disease given the genetic mutation, the prevalence of the genetic mutation, and the prevalence of the disease.",
+        "The probability of a patient having the disease given the genetic mutation is 0.4, the prevalence of the genetic mutation is 0.01, and the prevalence of the disease is 0.005.",
+        "After finding the conditional probability, I need to calculate the Shannon entropy to determine the uncertainty of the diagnosis."
       ],
-      "attempt": "First, we calculate the probability of trait expression in the population: (0.3 * 0.7) + (0.2 * 0.4) + (0.5 * 0.1) = 0.21 + 0.08 + 0.05 = 0.34. Then, we calculate the probability of not expressing the trait, which is 1 - 0.34 = 0.66. The Shannon entropy would be -((0.34 * log2(0.34)) + (0.66 * log2(0.66))).",
-      "conclusion": "The probability of trait expression in the population is 0.34, and the Shannon entropy of this probability distribution is approximately 0.924.",
-      "student_confidence": 0.8,
+      "attempt": "Using Bayes' theorem, the conditional probability of a patient having the genetic mutation given that they have the disease is P(G|M) = P(M|G) * P(G) / P(M). However, I realize that I need to use the formula P(G|D) = P(D|G) * P(G) / P(D), where P(D) = P(D|G) * P(G) + P(D|~G) * P(~G). Since P(D|~G) is not directly given, I assume it can be derived from the given probabilities. The probability of a patient not having the disease given the genetic mutation is 0.6, which implies the probability of a patient having the disease given the genetic mutation is 0.4. I will try to calculate P(D|~G) using the law of total probability: P(D) = P(D|G) * P(G) + P(D|~G) * P(~G). Given P(D) = 0.005, P(D|G) = 0.4, P(G) = 0.01, and P(~G) = 1 - P(G) = 0.99, I can solve for P(D|~G).",
+      "conclusion": "P(D|~G) = (P(D) - P(D|G) * P(G)) / P(~G) = (0.005 - 0.4 * 0.01) / 0.99 = (0.005 - 0.004) / 0.99 = 0.001 / 0.99 = 0.00101. Now, using Bayes' theorem: P(G|D) = P(D|G) * P(G) / P(D) = 0.4 * 0.01 / 0.005 = 0.8. To calculate the Shannon entropy, I need the probabilities of having and not having the genetic mutation given the disease, which are P(G|D) = 0.8 and P(~G|D) = 1 - P(G|D) = 0.2. The Shannon entropy H = - (P(G|D) * log2(P(G|D)) + P(~G|D) * log2(P(~G|D))) = - (0.8 * log2(0.8) + 0.2 * log2(0.2)) = - (0.8 * -0.322 + 0.2 * -2.322) = - (-0.2576 - 0.4644) = 0.722.",
+      "student_confidence": 0.7,
       "solvability": {
         "has_enough_context": true,
         "attemptable_within_knowledge": true,
         "solvable": true,
-        "reason": "All necessary information is provided"
+        "reason": "The question provided enough information to calculate the conditional probability and Shannon entropy, although it required some derivation of intermediate probabilities."
       }
     },
     "token_usage": {
       "per_node": {
         "scenario_generator": {
           "input_tokens": 493,
-          "output_tokens": 821,
-          "total_tokens": 1314,
+          "output_tokens": 914,
+          "total_tokens": 1407,
           "requests": 1
         },
         "scenario_evaluator": {
-          "input_tokens": 1234,
-          "output_tokens": 392,
-          "total_tokens": 1626,
+          "input_tokens": 1327,
+          "output_tokens": 363,
+          "total_tokens": 1690,
           "requests": 1
         },
         "question_type_classifier": {
-          "input_tokens": 445,
-          "output_tokens": 50,
-          "total_tokens": 495,
+          "input_tokens": 477,
+          "output_tokens": 62,
+          "total_tokens": 539,
           "requests": 1
         },
         "question_generator": {
-          "input_tokens": 471,
-          "output_tokens": 632,
-          "total_tokens": 1103,
+          "input_tokens": 503,
+          "output_tokens": 631,
+          "total_tokens": 1134,
           "requests": 1
         },
         "student_agent": {
-          "input_tokens": 858,
-          "output_tokens": 1140,
-          "total_tokens": 1998,
+          "input_tokens": 868,
+          "output_tokens": 2047,
+          "total_tokens": 2915,
           "requests": 1
         },
         "pedagogical_prior_evaluator": {
-          "input_tokens": 1360,
-          "output_tokens": 179,
-          "total_tokens": 1539,
+          "input_tokens": 2373,
+          "output_tokens": 332,
+          "total_tokens": 2705,
           "requests": 1
         }
       },
       "total": {
-        "input_tokens": 4861,
-        "output_tokens": 3214,
-        "total_tokens": 8075,
+        "input_tokens": 6041,
+        "output_tokens": 4349,
+        "total_tokens": 10390,
         "requests": 6
       }
     }
@@ -1452,66 +1387,6 @@
   },
   {
     "run_info": {
-      "topic_1": "integration_and_area_under_curve",
-      "topic_2": "multivariable_optimization",
-      "learning_objective_1": "Evaluate definite integrals using the Fundamental Theorem of Calculus and interpret the result as the net signed area under a curve.",
-      "learning_objective_2": "Use Lagrange multipliers to find the extrema of a multivariable function subject to an equality constraint.",
-      "stratum": "same",
-      "question_type": "mixed",
-      "scenario_retry_count": 0,
-      "question_retry_count": 1,
-      "success": true
-    },
-    "top_scenario": {
-      "title": "Designing a Cost-Effective Supply Chain Network",
-      "domain": "Operations Research",
-      "scenario": "A company wants to design a supply chain network that minimizes costs while meeting demand. The company needs to evaluate the area under the curve of the demand function using the Fundamental Theorem of Calculus to determine the total demand, and then use Lagrange multipliers to optimize the location of warehouses and distribution centers subject to the constraint of limited budget.",
-      "overall_score": 0.8200000000000001,
-      "dimension_scores": {
-        "learning_objective_fidelity": 0.9,
-        "cognitive_load_balance": 0.8,
-        "numerical_fertility": 0.8,
-        "conceptual_depth": 0.7,
-        "domain_coherence": 0.9
-      },
-      "reason": "Both learning objectives are crucial for the scenario and contribute equally. The scenario implies several measurable structures and the domain of operations research makes the mathematical structure feel very natural."
-    },
-    "best_question": {
-      "question": "A company's demand function for a product is given by f(x) = 2x^2 + 3x - 1, where x is the price in dollars. The company wants to evaluate the total demand for the product over a price range from $1 to $4. Using the Fundamental Theorem of Calculus, find the total demand. Then, the company wants to optimize the location of its warehouse and distribution center using Lagrange multipliers, subject to a budget constraint of $100,000. The cost function for the location is given by C(x, y) = x^2 + 2y^2. If the budget constraint is represented as g(x, y) = x^2 + 2y^2 - 100,000, find the optimal location of the warehouse and distribution center that minimizes the cost function while meeting the demand.",
-      "expected_concepts": [
-        "Fundamental Theorem of Calculus",
-        "Lagrange multipliers"
-      ],
-      "overall_score": 0.805,
-      "dimension_scores": {
-        "learning_objective_reflection": 0.8,
-        "cognitive_load_balance": 0.7,
-        "decomposability": 0.9,
-        "domain_coherence": 0.8,
-        "boundary_adherence": 0.9
-      },
-      "reason": "The question requires both learning objectives to be applied, but the demand function and optimization problem feel somewhat disconnected. The student's attempt shows a clear breakdown into multiple pieces, and they stay within the learning objective boundary."
-    },
-    "student_attempt": {
-      "thought_process": [
-        "The question is asking us to find the total demand for a product over a price range from $1 to $4 using the Fundamental Theorem of Calculus, and then optimize the location of the warehouse and distribution center using Lagrange multipliers.",
-        "The demand function is given by f(x) = 2x^2 + 3x - 1, and we need to integrate this function from $1 to $4 to find the total demand.",
-        "After finding the total demand, we need to use Lagrange multipliers to optimize the location of the warehouse and distribution center, subject to a budget constraint of $100,000.",
-        "The cost function for the location is given by C(x, y) = x^2 + 2y^2, and the budget constraint is represented as g(x, y) = x^2 + 2y^2 - 100,000."
-      ],
-      "attempt": "To find the total demand, we need to integrate the demand function from $1 to $4. This can be done using the Fundamental Theorem of Calculus: ∫[1,4] (2x^2 + 3x - 1) dx. Evaluating this integral, we get: [2/3*x^3 + 3/2*x^2 - x] from 1 to 4. Plugging in the values, we get: (2/3*4^3 + 3/2*4^2 - 4) - (2/3*1^3 + 3/2*1^2 - 1) = (2/3*64 + 3/2*16 - 4) - (2/3 + 3/2 - 1) = (128/3 + 24 - 4) - (2/3 + 3/2 - 1) = (128/3 + 20) - (2/3 + 3/2 - 1) = 128/3 + 20 - 2/3 - 3/2 + 1 = 126/3 + 20 - 3/2 + 1 = 42 + 20 - 3/2 + 1 = 62 - 3/2 + 1 = 62 - 1.5 + 1 = 61.5. Now, to optimize the location of the warehouse and distribution center, we need to use Lagrange multipliers. The Lagrangian function is given by L(x, y, λ) = x^2 + 2y^2 - λ(x^2 + 2y^2 - 100,000). Taking the partial derivatives of L with respect to x, y, and λ, and setting them equal to zero, we get: 2x - 2λx = 0, 4y - 4λy = 0, and x^2 + 2y^2 - 100,000 = 0. Solving these equations simultaneously, we get: x = 0, y = 0, or x = ±√50,000, y = 0, or x = 0, y = ±√25,000. However, the solution x = 0, y = 0 is not feasible, as it would mean the warehouse and distribution center are located at the same point. Therefore, the optimal location is x = ±√50,000, y = 0, or x = 0, y = ±√25,000.",
-      "conclusion": "The total demand for the product over the price range from $1 to $4 is 61.5. The optimal location of the warehouse and distribution center is x = ±√50,000, y = 0, or x = 0, y = ±√25,000.",
-      "student_confidence": 0.6,
-      "solvability": {
-        "has_enough_context": true,
-        "attemptable_within_knowledge": true,
-        "solvable": true,
-        "reason": "The question provides enough information to solve the problem, and the concepts of integration and Lagrange multipliers are well-known."
-      }
-    }
-  },
-  {
-    "run_info": {
       "topic_1": "orthogonality_and_projections",
       "topic_2": "integration_and_area_under_curve",
       "learning_objective_1": "Apply the Gram-Schmidt process to produce an orthonormal basis and use orthogonal projections to decompose vectors within a subspace.",
@@ -2475,66 +2350,6 @@
   },
   {
     "run_info": {
-      "topic_1": "differential_equations_odes",
-      "topic_2": "integration_and_area_under_curve",
-      "learning_objective_1": "Solve a first-order ordinary differential equation using separation of variables and interpret the solution as a model of a dynamic system.",
-      "learning_objective_2": "Evaluate definite integrals using the Fundamental Theorem of Calculus and interpret the result as the net signed area under a curve.",
-      "stratum": "same",
-      "question_type": "mixed",
-      "scenario_retry_count": 0,
-      "question_retry_count": 0,
-      "success": true
-    },
-    "top_scenario": {
-      "title": "Epidemiological Modeling of Disease Spread",
-      "domain": "Public Health",
-      "scenario": "A new disease is spreading rapidly across the globe, and health officials need to understand its spread to allocate resources effectively. The spread of the disease can be modeled using a first-order ordinary differential equation, which is solved using separation of variables to predict the number of infected individuals over time. To calculate the total number of individuals affected by the disease, health officials need to evaluate the definite integral of the infection rate over a specific time period, which can be achieved using the Fundamental Theorem of Calculus.",
-      "overall_score": 0.8400000000000001,
-      "dimension_scores": {
-        "learning_objective_fidelity": 0.9,
-        "cognitive_load_balance": 0.8,
-        "numerical_fertility": 0.9,
-        "conceptual_depth": 0.7,
-        "domain_coherence": 0.9
-      },
-      "reason": "Both learning objectives are crucial for understanding the spread of the disease and calculating the total number of individuals affected, making them causally necessary mechanisms. The scenario balances the cognitive load between the two topics, and the numerical entry points provide measurable structures. The intersection of the topics reveals the importance of modeling and calculation in epidemiology, and the public health domain makes the mathematical structure feel natural."
-    },
-    "best_question": {
-      "question": "Suppose the population size is 5000, the initial infection rate is 0.1 people per day, and the disease spread is modeled by the differential equation dy/dt = 0.1y. Using separation of variables, solve for y and then evaluate the definite integral of the infection rate over a 20-day period to determine the total number of individuals affected, considering the result as the net signed area under the curve.",
-      "expected_concepts": [
-        "separation of variables",
-        "net signed area under the curve"
-      ],
-      "overall_score": 0.8250000000000001,
-      "dimension_scores": {
-        "learning_objective_reflection": 0.9,
-        "cognitive_load_balance": 0.8,
-        "decomposability": 0.7,
-        "domain_coherence": 0.9,
-        "boundary_adherence": 0.8
-      },
-      "reason": "The question requires the student to solve a differential equation using separation of variables and then evaluate the definite integral of the infection rate, which naturally triggers a multi-piece breakdown within the boundary of the learning objectives. The student's attempt stays within the scenario domain and adheres to the learning objective boundary, but may not give equal weight to both topics."
-    },
-    "student_attempt": {
-      "thought_process": [
-        "This question is asking to solve a differential equation using separation of variables and then evaluate the definite integral of the infection rate over a specified time period.",
-        "The pieces of this question include the population size, initial infection rate, and the differential equation dy/dt = 0.1y.",
-        "To approach this, I need to first solve the differential equation using separation of variables, then find the definite integral of the infection rate from 0 to 20 days.",
-        "I will need to recall the method of separation of variables and the formula for the definite integral."
-      ],
-      "attempt": "To solve the differential equation dy/dt = 0.1y, I would separate variables: dy/y = 0.1dt. Integrating both sides gives ln(y) = 0.1t + C. Solving for y, I get y(t) = e^(0.1t + C) = e^C * e^(0.1t). Since the initial infection rate is 0.1 people per day, I'll assume the initial condition is y(0) = 0.1. This gives e^C = 0.1, so y(t) = 0.1 * e^(0.1t). Now, I need to evaluate the definite integral of y(t) from 0 to 20 days to find the total number of individuals affected.",
-      "conclusion": "The total number of individuals affected can be found by evaluating the definite integral of y(t) = 0.1 * e^(0.1t) from 0 to 20 days. This gives ∫[0,20] 0.1 * e^(0.1t) dt = [e^(0.1t)] from 0 to 20 = e^2 - 1 ≈ 6.39. However, this calculation assumes the population size is not a limiting factor, which may not be realistic.",
-      "student_confidence": 0.7,
-      "solvability": {
-        "has_enough_context": true,
-        "attemptable_within_knowledge": true,
-        "solvable": true,
-        "reason": "The question provides a clear differential equation and initial conditions, making it possible to arrive at a numerical solution."
-      }
-    }
-  },
-  {
-    "run_info": {
       "topic_1": "optimization_maxima_and_minima",
       "topic_2": "rate_of_change_and_related_rates",
       "learning_objective_1": "Apply the first and second derivative tests to locate and classify local maxima, minima, and saddle points of a differentiable function.",
@@ -3175,67 +2990,6 @@
         "output_tokens": 6550,
         "total_tokens": 14461,
         "requests": 8
-      }
-    }
-  },
-  {
-    "run_info": {
-      "topic_1": "eigenvalues_and_eigenvectors",
-      "topic_2": "markov_chains",
-      "learning_objective_1": "Compute eigenvalues and eigenvectors of a square matrix and interpret their geometric meaning as scaling factors and invariant directions under a linear transformation.",
-      "learning_objective_2": "Construct a transition matrix for a Markov chain and compute the steady-state distribution by finding its dominant eigenvector.",
-      "stratum": "same",
-      "question_type": "mixed",
-      "scenario_retry_count": 0,
-      "question_retry_count": 3,
-      "success": true
-    },
-    "top_scenario": {
-      "title": "Financial Portfolio Optimization",
-      "domain": "Finance",
-      "scenario": "Investment managers use linear transformations to model the performance of financial assets. By computing the eigenvalues and eigenvectors of the transformation matrix, they can identify the most volatile assets and the directions in which the portfolio is sensitive to market fluctuations. Additionally, investment managers construct a Markov chain model to predict the long-term performance of the portfolio. The transition matrix represents the probability of an asset moving from one state to another, and the dominant eigenvector gives the steady-state distribution of the portfolio's returns.",
-      "overall_score": 0.8800000000000001,
-      "dimension_scores": {
-        "learning_objective_fidelity": 0.9,
-        "cognitive_load_balance": 0.9,
-        "numerical_fertility": 0.9,
-        "conceptual_depth": 0.8,
-        "domain_coherence": 0.9
-      },
-      "reason": "The scenario seamlessly integrates both learning objectives, using eigenvalues and eigenvectors to identify volatile assets and Markov chains to predict portfolio performance. The cognitive load is well-balanced, with both topics contributing equally. The numerical entry points, such as asset returns and covariance matrix elements, provide a rich environment for computation. The intersection of the two topics reveals non-obvious insights into the behavior of complex financial systems. The finance domain provides a highly coherent and natural context for the mathematical structures, making the scenario feel authentic and relevant."
-    },
-    "best_question": {
-      "question": "The investment manager wants to optimize the portfolio by allocating the assets to minimize the variance while maintaining a target expected return of 0.07. The covariance matrix is [[0.001, 0.002, 0.003], [0.002, 0.004, 0.005], [0.003, 0.005, 0.006]]. The transition probabilities are [0.6, 0.2, 0.2], [0.3, 0.5, 0.2], and [0.1, 0.3, 0.6]. Compute the eigenvalues and eigenvectors of the covariance matrix, and then use the transition probabilities to construct the transition matrix and find the steady-state distribution. Use the eigenvalues and eigenvectors to identify the optimal asset allocation that meets the target expected return and minimizes the portfolio's variance.",
-      "expected_concepts": [
-        "eigenvalues_and_eigenvectors",
-        "markov_chains"
-      ],
-      "overall_score": 0.875,
-      "dimension_scores": {
-        "learning_objective_reflection": 0.9,
-        "cognitive_load_balance": 0.8,
-        "decomposability": 0.9,
-        "domain_coherence": 0.9,
-        "boundary_adherence": 0.9
-      },
-      "reason": "The question requires a clear application of both concepts to optimize the portfolio, with a well-defined scenario that stays within the domain. The student's attempt shows an excellent breakdown of the problem, with a clear and coherent application of the learning objectives."
-    },
-    "student_attempt": {
-      "thought_process": [
-        "The question asks us to optimize the portfolio by allocating the assets to minimize the variance while maintaining a target expected return of 0.07.",
-        "The covariance matrix is given as [[0.001, 0.002, 0.003], [0.002, 0.004, 0.005], [0.003, 0.005, 0.006]].",
-        "We need to use the eigenvalues and eigenvectors to identify the optimal asset allocation that meets the target expected return and minimizes the portfolio's variance.",
-        "We can use the Markowitz model to optimize the portfolio, which involves finding the optimal weights for each asset that minimize the portfolio's variance while meeting the target expected return.",
-        "The transition probabilities are not directly relevant to this question, but we can use them to construct the transition matrix and find the steady-state distribution if needed."
-      ],
-      "attempt": "To optimize the portfolio, we need to find the optimal weights for each asset that minimize the portfolio's variance while meeting the target expected return. We can use the Markowitz model to do this. The optimal weights can be found by solving the optimization problem min(w^T Σ w) subject to w^T μ = 0.07, where w is the vector of weights, Σ is the covariance matrix, and μ is the vector of expected returns.",
-      "conclusion": "The optimal weights for the portfolio are [0.4, 0.3, 0.3]. The minimum variance is 0.0035. The expected return is 0.07.",
-      "student_confidence": 0.8,
-      "solvability": {
-        "has_enough_context": true,
-        "attemptable_within_knowledge": true,
-        "solvable": true,
-        "reason": "The question provides all the necessary information to solve the problem, and the Markowitz model is a well-known method for optimizing portfolios."
       }
     }
   },
@@ -3984,67 +3738,6 @@
         "output_tokens": 4023,
         "total_tokens": 9482,
         "requests": 6
-      }
-    }
-  },
-  {
-    "run_info": {
-      "topic_1": "law_of_large_numbers",
-      "topic_2": "monte_carlo_simulation",
-      "learning_objective_1": "State the Law of Large Numbers and use it to explain why the sample mean converges to the population mean as the number of trials increases.",
-      "learning_objective_2": "Design a Monte Carlo simulation to estimate a probability or expected value by generating random samples and computing sample statistics.",
-      "stratum": "same",
-      "question_type": "mixed",
-      "scenario_retry_count": 0,
-      "question_retry_count": 0,
-      "success": true
-    },
-    "top_scenario": {
-      "title": "Financial risk management",
-      "domain": "Economics",
-      "scenario": "A financial institution wants to estimate the expected return on investment for a new portfolio. They use a Monte Carlo simulation to generate random samples of possible returns and compute the sample mean. The Law of Large Numbers ensures that the sample mean converges to the true expected return as the number of simulations increases.",
-      "overall_score": 0.8200000000000001,
-      "dimension_scores": {
-        "learning_objective_fidelity": 0.9,
-        "cognitive_load_balance": 0.8,
-        "numerical_fertility": 0.8,
-        "conceptual_depth": 0.7,
-        "domain_coherence": 0.9
-      },
-      "reason": "The financial institution's use of Monte Carlo simulation to estimate expected return on investment, justified by the Law of Large Numbers, is a natural and coherent application of both topics, with a strong balance of cognitive load and conceptual depth."
-    },
-    "best_question": {
-      "question": "A financial institution runs a Monte Carlo simulation with 10,000 samples to estimate the expected return on investment for a new portfolio. If the sample mean return is 8% and the number of simulations is increased to 50,000, how does the Law of Large Numbers explain the convergence of the sample mean to the true expected return, and what can be inferred about the reliability of the estimated expected return?",
-      "expected_concepts": [
-        "Law of Large Numbers",
-        "Monte Carlo simulation"
-      ],
-      "overall_score": 0.745,
-      "dimension_scores": {
-        "learning_objective_reflection": 0.8,
-        "cognitive_load_balance": 0.7,
-        "decomposability": 0.6,
-        "domain_coherence": 0.9,
-        "boundary_adherence": 0.8
-      },
-      "reason": "The question requires the student to apply the Law of Large Numbers to a Monte Carlo simulation, which naturally involves both learning objectives. However, the question is slightly biased towards the Law of Large Numbers, and the student's attempt could have been more detailed in terms of designing the Monte Carlo simulation."
-    },
-    "student_attempt": {
-      "thought_process": [
-        "The question is asking about the Law of Large Numbers and its application to Monte Carlo simulations in finance.",
-        "The Law of Large Numbers states that as the number of trials increases, the average of the results will converge to the expected value.",
-        "In this case, the financial institution is running a Monte Carlo simulation to estimate the expected return on investment for a new portfolio.",
-        "The sample mean return is 8% with 10,000 samples, and the question asks how the Law of Large Numbers explains the convergence of the sample mean to the true expected return when the number of simulations is increased to 50,000.",
-        "I plan to approach this by explaining the Law of Large Numbers, its relevance to Monte Carlo simulations, and how increasing the sample size affects the convergence of the sample mean to the true expected return."
-      ],
-      "attempt": "The Law of Large Numbers states that as the number of trials increases, the average of the results will converge to the expected value. In this case, the financial institution is running a Monte Carlo simulation with 10,000 samples, which gives a sample mean return of 8%. If the number of simulations is increased to 50,000, the Law of Large Numbers suggests that the sample mean will converge closer to the true expected return. This is because the increased sample size reduces the standard error of the sample mean, making it a more reliable estimate of the true expected return. However, without knowing the true expected return, it's difficult to determine the exact reliability of the estimated expected return.",
-      "conclusion": "The Law of Large Numbers explains the convergence of the sample mean to the true expected return as the number of simulations increases. The increased sample size reduces the standard error of the sample mean, making it a more reliable estimate of the true expected return.",
-      "student_confidence": 0.8,
-      "solvability": {
-        "has_enough_context": true,
-        "attemptable_within_knowledge": true,
-        "solvable": true,
-        "reason": "The question provides enough context about the Law of Large Numbers and its application to Monte Carlo simulations, and I have sufficient knowledge to attempt and solve the question."
       }
     }
   },
