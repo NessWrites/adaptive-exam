@@ -30,6 +30,7 @@ This codebase runs isolated as a microservice using Docker, fitting seamlessly i
    This triggers background tasks to generate the specified amount of questions, validate them, and store them directly in the database.
 
 ## Codebase Breakdown
+```
 question_gen_system
 ├── api_endpoint.png
 ├── __init__.py
@@ -64,6 +65,7 @@ question_gen_system
 │   └── schema.py
 ├── tests
 └── utils
+```
 
 
 ### `routes/`
