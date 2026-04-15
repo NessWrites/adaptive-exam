@@ -1,94 +1,111 @@
-## Project Name: Question Generation System
+# Question Generation System
 
-### Overview:
-The Question Generation System is designed to automatically generate assessment questions aligned with the curriculum of the Fusemachines AI Fellowship program. The system focuses on foundational domains relevant to Artificial Intelligence and Machine Learning, particularly Mathematics topics such as Linear Algebra, Calculus, and Probability and Statistics.
+## Overview
+The Question Generation System is an automated pipeline designed to dynamically generate assessment questions aligned with the curriculum of the Fusemachines AI Fellowship program. Focusing on foundational domains like AI, Machine Learning, Linear Algebra, Calculus, and Probability, it crafts questions adhering to the first three cognitive levels of Bloom’s Taxonomy (Remember, Understand, Apply). 
 
-Question generation is guided by the first three cognitive levels of Bloom’s Taxonomy—Remember, Understand, and Apply. A structured question skeleton, containing the base question, Bloom level, context, and constraints, is provided as input to a Large Language Model (LLM) to generate well-formed questions.
+The system utilizes structured question "skeletons" (incorporating the base question, Bloom level, context, and constraints) and offloads them to a Large Language Model (LLM) for expansion. Once generated, questions undergo an automated LLM-as-Judge validation to ensure pedagogical relevance and Bloom level alignment. Validated questions are saved into a PostgreSQL database, ready to be utilized by downstream assessment workflows (such as Mark Scheme Generation).
 
-The generated questions are validated using an LLM-as-Judge mechanism, where a validator agent evaluates them based on their alignment with the intended Bloom level and contextual relevance. Each question receives binary evaluation scores for Bloom alignment and context alignment.
+## Project Setup
 
-Questions that pass validation are stored in a PostgreSQL database and are later retrieved by the Mark Scheme Generator module to produce corresponding marking schemes. This pipeline ensures that the generated questions are contextually accurate, pedagogically aligned, and suitable for automated assessment workflows.
+This codebase runs isolated as a microservice using Docker, fitting seamlessly into the overarching Adaptive Exam ecosystem.
 
-### Objective:
-The primary objective of the Question Generation System is to develop an automated pipeline that generates high-quality educational assessment questions aligned with the curriculum of the Fusemachines AI Fellowship program. The system aims to support structured learning and evaluation in foundational domains required for Artificial Intelligence and Machine Learning.
+1. **Docker Setup**: Ensure you have [Docker](https://docs.docker.com/get-docker/) installed and running on your machine.
+2. **Environment Variables**: 
+   Create a `.env` file within the system and specify necessary API Keys (like `GEMINI_API_KEY` for the `HydrationAgent`) and the `DATABASE_URL` routing to the main database cluster instance.
 
-Specific objectives include:
+## How to Run
 
-Automate question generation using Large Language Models based on structured question skeletons containing base question, context, constraints, and cognitive level.
+1. **Start the API Server via Docker**:
+   Build and start the container instances defined in your project's `docker-compose.yml` to spin up both the Question Gen backend server and its necessary dependencies.
+   ```bash
+   docker-compose up --build
+   ```
+2. **Generate Questions**:
+   Trigger the endpoint specifying domain parameters. Ensure you check `taxonomy/schema.py` for valid values for domain, unit, topic, and Bloom level.
+   
+   **Endpoint Example**:
+   ```http
+   GET /questions/generator?domain=math&unit=Linear%20Algebra&topic=Transformations&level=2&num_questions=5
+   ```
+   This triggers background tasks to generate the specified amount of questions, validate them, and store them directly in the database.
 
-Ensure pedagogical alignment of generated questions with the first three cognitive levels of Bloom’s Taxonomy: Remember, Understand, and Apply.
+## Codebase Breakdown
 
-Validate generated questions automatically using an LLM-as-Judge mechanism to evaluate Bloom level alignment and contextual relevance.
+### `routes/`
+- **`routes.py`**
+  - **Function:** `generator(background_tasks: BackgroundTasks, domain: str, unit: str, topic: str, level: int, num_questions: int, db: Session)`
+  - **Returns:** API response indicating the background task has started.
+  - **Task:** Endpoint to trigger the question generation pipeline. Dispatches validation and saving logic as background tasks.
 
-Maintain a reliable repository of validated questions by storing approved questions in a PostgreSQL database.
+### `src/agents/`
+- **`question_agent.py`**
+  - **Class:** `HydrationAgent`
+  - **Task:** Integrates with the LLM (Gemini) to expand question 'skeletons' into robust, full-text questions.
+  - **Function:** `__init__(self, api_key: str, model_name: str)`
+    - **Returns:** `Any` (Initialized instance)
+    - **Task:** Initializes the Google GenAI interface configurations.
+  - **Function:** `hydrate(self, domain: str, concept: str, level: int, skeleton: str, num_questions: int)`
+    - **Returns:** `Dict`
+    - **Task:** Calls Gemini to turn a basic skeleton prompt into multiple well-structured, solvable questions returned as a JSON dictionary.
+- **`prompt_registry.py`**
+  - **Task:** Holds system prompts and templates for LLM instruction mapping.
 
-Support downstream assessment workflows by supplying validated questions to the mark-scheme generation module for automated marking scheme creation.
+### `src/core/`
+- **`generator.py`**
+  - **Class:** `SkeletonGenerator`
+  - **Task:** Assembles the initial prompt scaffolding using Bloom's Taxonomy contexts.
+  - **Function:** `__init__(self, schema: list)`
+    - **Returns:** `Any` (Initialized instance).
+  - **Function:** `_get_topic_node(self, domain_name: str, unit_name: str, topic_name: str)`
+    - **Returns:** `Dict`
+    - **Task:** Helper function locating specific taxonomic criteria descending through domain, unit, and topic levels.
+  - **Function:** `generate_skeleton(self, domain_name: str, unit_name: str, topic_name: str, level: int)`
+    - **Returns:** `Tuple[str, str, Optional[str]]`
+    - **Task:** Selects randomized axes based on the request's Bloom level and constructs the foundational "skeleton" string.
+- **`taxonomy_loader.py`**
+  - **Task:** Interacts with or parses taxonomic structures.
 
-These objectives collectively ensure the development of a scalable system capable of producing pedagogically consistent and contextually accurate assessment questions.
+### `src/crud.py`
+- **Function:** `save_subjective_question(db: Session, domain: str, unit: str, topic: str, level: int, question: str, total_marks: int)`
+  - **Returns:** `SubjectiveQuestion` (SQLAlchemy model instance)
+  - **Task:** Parses passed LLM outputs and commits the corresponding evaluated questions directly into the PostgreSQL `subjective_questions` table.
 
+### `src/ingestion/`
+- **`schema_loader.py`**
+  - **Function:** `get_schema()`
+    - **Returns:** Schema payload (Dict/List).
+    - **Task:** Loads the structural definitions imported from the taxonomy schema directory.
 
-### System Architecture
-![System Architecture Diagram](item_gen_system_architecture.png)
+### `src/pipeline/`
+- **`batch_buffer.py`**
+  - **Function:** `add_to_buffer(rows: Any)`
+    - **Returns:** `Any`
+    - **Task:** Appends generated question pipelines into an accumulated processing buffer.
+  - **Function:** `current_buffer_size()`
+    - **Returns:** `int`
+    - **Task:** Returns the count of items waiting in the validation queue.
 
-### Project Structure
-```
-generator
-└── question_gen_system 
-    ├── README.md                       # you are here
-    ├── routes
-    │   └── routes.py                   # API endpoints
-    ├── src
-    │   ├── agents
-    │   │   ├── prompt_registry.py      # prompts
-    │   │   └── question_agent.py       # question generator agent
-    │   ├── core
-    │   │   ├── generator.py            # question skeleton generator
-    │   │   └── taxonomy_loader.py      # empty
-    │   ├── crud.py                     # save questions into database
-    │   ├── ingestion
-    │   │   └── schema_loader.py        # schema loader
-    │   ├── pipeline
-    │   │   ├── batch_buffer.py         # buffer creater
-    │   │  
-    │   │       
-    │   ├── schemas
-    │   │   ├── items_schema.py         # pydantic schema for the generated questions
-    │   └── services
-    │       ├── processer.py            # data processor to ensure before validation
-    │       └── validator.py            # question validator
-    ├── taxonomy    
-    │   └── schema.py                   # structured syllabus schema(topics, context)
-    ├── tests                           # empty
-    └── utils                           # empty
-```
+### `src/schemas/`
+- **`items_schema.py`**
+  - **Classes:** `LLMQuestionResponse`, `QuestionRow`
+  - **Task:** Pydantic data models enforcing strict output typing and runtime type checking for the parsed LLM JSONs.
 
-### API Documentation
+### `src/services/`
+- **`validator.py`**
+  - **Function:** `system_prompt(batch: List[Dict])`
+    - **Returns:** Prompt `Str` or messages object.
+    - **Task:** Formulates the rigorous LLM-as-Judge instructions necessary for evaluating the alignment of the batch.
+  - **Function:** `validate_batch(batch: Any)`
+    - **Returns:** Evaluated object batch.
+    - **Task:** Acts as the LLM judge checking Bloom constraints, context alignment scoring, and yielding binary acceptance criteria.
+- **`processer.py`**
+  - **Function:** `split_question(llm_response: Any, domain: Any, unit: Any, topic: Any, context: Any, level: Any)`
+    - **Returns:** Transformed components.
+    - **Task:** Extracts and formats raw text into categorized properties.
+  - **Function:** `create_batches(rows: Any, batch_size: Any)`
+    - **Returns:** Chunked `List` arrays.
+    - **Task:** Segments larger result lists into batched subsets for parallel chunked validation.
 
-Endpoint:
-`GET /questions/generator` <br>
-**Description**: Generates questions based on the specfied domain, unit, topic and Bloom's taxonomy level. You cannot randomly input any values into the parameters. First, you have to look into `taxonomy/schema.py` from there you can choose the domain, unit, topic and bloom's taxonomy(1 or 2 or 3). <br>
-`num_questions`: you can choose integer number to generate 'n' number of questions.
-
-![api endpoint images](api_endpoint.png)
-
-
-```
-"generated_questions": [
-      {
-        "question_id": "9cb42a20-5ed2-4ba6-b806-7d4574fee7af",
-        "domain": "math",
-        "unit": "Linear Algebra",
-        "topic": "Transformations",
-        "context": "Applying geometric transformations to 2D objects in computer graphics.",
-        "bloom_level": 2,
-        "question": "Consider a 2D vector $\\mathbf{v} = \\begin{pmatrix} x \\\\ y \\end{pmatrix}$. Explain how a linear transformation $L: \\mathbb{R}^2 \\to \\mathbb{R}^2$, represented by a $2 \\times 2$ matrix $A$, modifies the components of $\\mathbf{v}$ to produce a new vector $\\mathbf{v}' = A\\mathbf{v}$. Elaborate on how linear transformations inherently preserve the origin and the straightness of lines, thus maintaining certain fundamental geometric structures while generally altering distances and angles.",
-        "bloom_score": null,
-        "context_score": null,
-        "reason": null,
-        "total_marks": null
-      }
-    ]
-```
-
-
-
+### `taxonomy/`
+- **`schema.py`**
+  - **Task:** Dictionary/Lists defining the static ontology holding subjects, concepts. Only domains, topics, and Bloom levels existing here are accepted by the generator.
