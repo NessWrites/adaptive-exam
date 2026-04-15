@@ -30,6 +30,41 @@ This codebase runs isolated as a microservice using Docker, fitting seamlessly i
    This triggers background tasks to generate the specified amount of questions, validate them, and store them directly in the database.
 
 ## Codebase Breakdown
+question_gen_system
+├── api_endpoint.png
+├── __init__.py
+├── item_gen_system_architecture.png
+├── README.md
+├── routes
+│   ├── __init__.py
+│   └── routes.py
+├── src
+│   ├── agents
+│   │   ├── prompt_registry.py
+│   │   └── question_agent.py
+│   ├── calibration
+│   ├── core
+│   │   ├── generator.py
+│   │   ├── __init__.py
+│   │   └── taxonomy_loader.py
+│   ├── crud.py
+│   ├── graph
+│   ├── ingestion
+│   │   ├── __init__.py
+│   │   └── schema_loader.py
+│   ├── pipeline
+│   │   └── batch_buffer.py
+│   ├── schemas
+│   │   └── items_schema.py
+│   └── services
+│       ├── processer.py
+│       └── validator.py
+├── taxonomy
+│   ├── __init__.py
+│   └── schema.py
+├── tests
+└── utils
+
 
 ### `routes/`
 - **`routes.py`**
