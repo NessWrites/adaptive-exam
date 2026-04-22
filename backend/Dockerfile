@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy requirements from backend directory
 COPY backend/backend-requirements.txt ./backend-requirements.txt
 RUN pip install --no-cache-dir -r backend-requirements.txt
-
+RUN pip install --no-cache-dir jinja2
 # copy application code 
 COPY . .
 

@@ -67,3 +67,4 @@ langgraph==0.5.3
 langchain-groq
 matplotlib
 seaborn
+jinja2

@@ -75,7 +75,7 @@ class Response(Base):
 class SubjectiveQuestion(Question):
     __tablename__ = "subjective_questions"
 
-    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key=True)
+    id = Column(Integer, ForeignKey("questions.unique_id", ondelete = "CASCADE"), primary_key=True)
     mark_schema = Column(JSON, nullable=True)
     bloom_level = Column(Float, nullable=False)
     total_marks = Column(Integer, nullable=False)
@@ -92,22 +92,95 @@ class SubjectiveQuestion(Question):
     derived_mcqs = relationship(
         "MCQQuestion",
         back_populates= "source_subjective_question",
-        foreign_keys= "[MCQQuestion.derived_from_subjective_id]")
+        foreign_keys= "[MCQQuestion.derived_from_subjective_id]",
+        cascade="all, delete-orphan",)
     
+
+class CodeQuestion(Question):
+    __tablename__ = "code_questions"
+
+    # Links to the base Question table
+    id = Column(Integer, ForeignKey("questions.unique_id", ondelete="CASCADE"), primary_key=True)
     
+    # --- Code Grader Specific Fields ---
+    
+    # The initial code template shown to the student
+    placeholder = Column(Text, nullable=False, default="def solution():\n    pass")
+    
+    # The exact name of the function the student must implement
+    function_name = Column(String(100), nullable=False) 
+    
+    # JSON containing 'allowed_imports' (List[str]) and 'data_type' (str)
+    # Example: {"allowed_imports": ["import math"], "data_type": "linked_list"}
+    configurations = Column(JSON, nullable=False, default=lambda: {})
+    
+    # JSON array holding the test cases
+    # Example: [{"input": [[1,2]], "expected": [2,1], "hidden": False}]
+    markscheme = Column(JSON, nullable=False, default=lambda: [])
+    
+    # Resource constraints for the Docker sandbox
+    total_marks = Column(Integer, nullable=False)
+    timeout = Column(Integer, nullable=False, default=5)          # seconds
+    memory_limit = Column(String(20), nullable=False, default="128m")
+    
+    # Academic/IRT metadata
+    bloom_level = Column(Float, nullable=False)
+
+    __mapper_args__ = {"polymorphic_identity": "code"}
+
+    # Relationship to easily fetch all MCQs generated from this coding question
+    derived_mcqs = relationship(
+        "MCQQuestion",
+        back_populates="source_code_question",
+        foreign_keys="[MCQQuestion.derived_from_code_id]",
+        cascade="all, delete-orphan"
+    )
+
+
+
+
 class MCQQuestion(Question):
     __tablename__ = 'mcq_questions_converted'
     
-    id = Column(Integer, ForeignKey("questions.unique_id"), primary_key= True)
+    id = Column(Integer, ForeignKey("questions.unique_id", ondelete = "CASCADE"), primary_key= True)
     
     bloom_level = Column(Integer, nullable= False)
-    derived_from_subjective_id = Column(Integer, ForeignKey("subjective_questions.id"), nullable=False)
+    
+    derived_from_subjective_id = Column(Integer, ForeignKey("subjective_questions.id", ondelete ="CASCADE"), nullable=True)
+    derived_from_code_id = Column(Integer, ForeignKey("code_questions.id", ondelete = "CASCADE"), nullable=True)
     
     explanation = Column(Text, nullable = True) 
+    validation_score = Column(JSON, nullable=True)
     
+    mcq_category = Column(String(30), default="text", nullable=False)
+    stem_code = Column(Text, nullable=True)
+
     
+
+    __table_args__ = ( 
+        CheckConstraint(
+            "(derived_from_code_id IS NOT NULL AND derived_from_subjective_id IS NULL) "
+            "OR "
+            "(derived_from_code_id IS NULL AND derived_from_subjective_id IS NOT NULL)",
+            name= "check_exactly_one_parent"
+        ),)
     __mapper_args__ = {"polymorphic_identity": "mcq"}  #
+    
     source_subjective_question = relationship(
         "SubjectiveQuestion",
         back_populates = "derived_mcqs",
-        foreign_keys=[derived_from_subjective_id])
+        foreign_keys=[derived_from_subjective_id],
+        )
+
+    source_code_question = relationship(
+        "CodeQuestion", 
+        back_populates = "derived_mcqs",
+        foreign_keys = [derived_from_code_id],
+        )
+
+
+    #getter for parent 
+    @property 
+    def source_question(self):
+        """returns parent questions if it is code or subjective, returns first it finds"""
+        return self.source_subjective_question or self.source_code_question

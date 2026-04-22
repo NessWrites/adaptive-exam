@@ -1,0 +1,553 @@
+{
+  "questions": [
+    {
+      "core_id": "MATH001",
+      "stem": "What is the value of 7 × 8?",
+      "answer": "56",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "multiplication",
+      "distractors": [
+        {
+          "text": "57",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "55",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.5
+        },
+        {
+          "text": "112",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        },
+        {
+          "text": "28",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "MATH002",
+      "stem": "What is the value of π rounded to two decimal places?",
+      "answer": "3.14",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "constants",
+      "distractors": [
+        {
+          "text": "3.24",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "3.04",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.75
+        },
+        {
+          "text": "6.28",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.25
+        },
+        {
+          "text": "1.57",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Common arithmetic mistake",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "core_id": "MATH003",
+      "stem": "What is the simplified form of 6/12?",
+      "answer": "1/2",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "fractions",
+      "distractors": [
+        {
+          "text": "2/2",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "1/4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "2/4",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.3333333333333333
+        },
+        {
+          "text": "0.5",
+          "type": "numeric_error",
+          "source": "numeric_agent",
+          "rationale": "Fraction simplification mistake",
+          "_sim": 0.0
+        }
+      ]
+    },
+    {
+      "core_id": "STAT003",
+      "stem": "Approximately what percentage of data lies within two standard deviations of the mean in a normal distribution?",
+      "answer": "Approximately 95%",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "normal_distribution",
+      "distractors": [
+        {
+          "text": "Approximately 68%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Misconception that one standard deviation from the mean accounts for the majority of the data, rather than recognizing that about 68% of the data falls within one standard deviation",
+          "_sim": 0.8823529411764706
+        },
+        {
+          "text": "Approximately 80%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Underestimating the proportion of data that falls within two standard deviations due to a lack of understanding of the normal distribution's properties",
+          "_sim": 0.8823529411764706
+        },
+        {
+          "text": "Approximately 99.7%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Confusing the percentage of data within two standard deviations with the percentage within three standard deviations, which is about 99.7%",
+          "_sim": 0.8888888888888888
+        },
+        {
+          "text": "Approximately 50%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Believing that half of the data falls on either side of the mean, ignoring the concept of standard deviation and the normal distribution curve",
+          "_sim": 0.9411764705882353
+        }
+      ]
+    },
+    {
+      "core_id": "STAT004",
+      "stem": "What is the accuracy of the classifier if it correctly predicts 78 out of 100 samples?",
+      "answer": "78%",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "classification_metrics",
+      "distractors": [
+        {
+          "text": "79%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Rounding up the correct percentage due to a minor calculation mistake",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "77%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Rounding down the correct percentage, underestimating the classifier's accuracy",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "80%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Assuming a higher accuracy than achieved, possibly due to a misunderstanding of the sample size",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "70%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly calculating the percentage by misinterpreting the number of correctly predicted samples",
+          "_sim": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "STAT005",
+      "stem": "What is the approximate value of the confidence level used in a 95% confidence interval?",
+      "answer": "95 percent",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "confidence_interval",
+      "distractors": [
+        {
+          "text": "68 percent",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "mistaking the confidence level with the percentage of data that falls within one standard deviation in a normal distribution",
+          "_sim": 0.8
+        },
+        {
+          "text": "80 percent",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "arbitrarily selecting a value that seems reasonably high without understanding the specific confidence level used in the context",
+          "_sim": 0.8
+        },
+        {
+          "text": "99 percent",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "believing that a higher confidence level is always better and defaulting to the highest common value",
+          "_sim": 0.9
+        },
+        {
+          "text": "90 percent",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "confusing the confidence level with a common significance level used in hypothesis testing",
+          "_sim": 0.9
+        }
+      ]
+    },
+    {
+      "core_id": "DL001",
+      "stem": "Why is ReLU preferred over sigmoid in deep neural networks?",
+      "answer": "ReLU helps mitigate the vanishing gradient problem and enables faster training.",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "activation",
+      "distractors": [
+        {
+          "text": "ReLU is used instead of sigmoid because it is less prone to overfitting",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misattribution of the benefits of using ReLU, confusing it with regularization techniques",
+          "_sim": 0.36
+        },
+        {
+          "text": "ReLU is preferred because it is a linear function and easier to compute than sigmoid",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that linearity is the primary reason for preferring ReLU over sigmoid",
+          "_sim": 0.3312883435582822
+        },
+        {
+          "text": "ReLU is preferred over sigmoid because it has a larger output range",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusion between the output range of activation functions and their suitability for deep neural networks",
+          "_sim": 0.2876712328767123
+        },
+        {
+          "text": "ReLU is used more often because it is a non-linear function that introduces more complexity to the model",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding of how non-linearity contributes to the preference for ReLU",
+          "_sim": 0.24043715846994534
+        }
+      ]
+    },
+    {
+      "core_id": "ML002",
+      "stem": "What problem does regularization primarily address in machine learning?",
+      "answer": "It helps reduce overfitting by penalizing model complexity.",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "regularization",
+      "distractors": [
+        {
+          "text": "It helps speed up the training process by simplifying the model",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing regularization with optimization techniques that aim to reduce computational cost",
+          "_sim": 0.5573770491803278
+        },
+        {
+          "text": "It increases model complexity to improve training accuracy",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the purpose of regularization, thinking it adds complexity rather than reduces it",
+          "_sim": 0.41025641025641024
+        },
+        {
+          "text": "It is used to handle missing data in the training set",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "mistaking regularization for a method to deal with data preprocessing issues like missing values",
+          "_sim": 0.39285714285714285
+        },
+        {
+          "text": "It ensures the model is more interpretable by reducing the number of features",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial truth, as regularization can lead to simpler models, but its primary goal is not to increase interpretability",
+          "_sim": 0.25
+        }
+      ]
+    },
+    {
+      "core_id": "DSA001",
+      "stem": "What is the time complexity of binary search?",
+      "answer": "O(log n)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "time_complexity",
+      "distractors": [
+        {
+          "text": "O(1)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "incorrectly assuming binary search can find an element in constant time regardless of the list size",
+          "_sim": 0.5
+        },
+        {
+          "text": "O(n^2)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misapplying the time complexity of algorithms like bubble sort to binary search",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "O(n)",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misunderstanding the divide-and-conquer nature of binary search, thinking it checks each element one by one",
+          "_sim": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "OS001",
+      "stem": "What is the main purpose of a mutex in operating systems?",
+      "answer": "It ensures mutual exclusion by allowing only one thread to access a critical section at a time.",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "concurrency",
+      "distractors": [
+        {
+          "text": "It allows multiple threads to access a critical section simultaneously for improved performance",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "misunderstanding the concept of mutual exclusion",
+          "_sim": 0.5368421052631579
+        },
+        {
+          "text": "It increases the priority of a thread to ensure it gets executed first",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusing mutex with priority scheduling mechanisms",
+          "_sim": 0.46060606060606063
+        },
+        {
+          "text": "It prevents a thread from being interrupted by other threads while executing a critical section",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "partial understanding of mutex, focusing only on thread interruption",
+          "_sim": 0.4105263157894737
+        },
+        {
+          "text": "It is used for inter-process communication to exchange data between threads",
+          "type": "theoretical",
+          "source": "llm",
+          "rationale": "confusing mutex with synchronization primitives for data exchange",
+          "_sim": 0.27058823529411763
+        }
+      ]
+    },
+    {
+      "core_id": "PY001",
+      "stem": "What is the output of the following Python code?\n\nx = [1, 2, 3]\nprint(x[::-1])",
+      "answer": "[3, 2, 1]",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_lists",
+      "distractors": [
+        {
+          "text": "[1, 3, 2]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misunderstanding of slicing syntax, thinking it reverses and then sorts the list",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "[2, 1, 3]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Incorrectly assuming the slice operation only moves the first element to the end",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "[1, 2]",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "Misconception that slicing with a step of -1 removes the last element instead of reversing the list",
+          "_sim": 0.6666666666666666
+        }
+      ]
+    },
+    {
+      "core_id": "PY002",
+      "stem": "What does the `break` statement do in a Python loop?",
+      "answer": "It terminates the loop immediately and exits it.",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_control_flow",
+      "distractors": [
+        {
+          "text": "It restarts the loop from the beginning",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "believing the break statement resets the loop instead of terminating it",
+          "_sim": 0.4827586206896552
+        },
+        {
+          "text": "It only exits the loop if a certain condition is met",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "thinking the break statement is conditional when used without an if statement, which is not its primary function",
+          "_sim": 0.52
+        },
+        {
+          "text": "It pauses the loop and waits for user input",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding the break statement as a means to introduce interactivity or pause execution",
+          "_sim": 0.5714285714285714
+        },
+        {
+          "text": "It skips to the next iteration of the loop",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing the break statement with the continue statement, which skips to the next iteration",
+          "_sim": 0.37777777777777777
+        }
+      ]
+    },
+    {
+      "core_id": "PY003",
+      "stem": "What is the output of the following code?\n\nprint(type({}))",
+      "answer": "<class 'dict'>",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_datatypes",
+      "distractors": [
+        {
+          "text": "<class 'tuple'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrectly identifying dictionary as tuple due to its ability to hold multiple elements",
+          "_sim": 0.7586206896551724
+        },
+        {
+          "text": "<class 'set'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "confusing dictionary with set data type due to their similar use of curly brackets",
+          "_sim": 0.8148148148148148
+        },
+        {
+          "text": "<class 'str'>",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that dictionary is a string because it can contain string keys and values",
+          "_sim": 0.8148148148148148
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE001",
+      "stem": "What is the approximate training accuracy of a model that predicts 45 out of 50 samples correctly?",
+      "answer": "90%",
+      "type": "mathematical",
+      "difficulty": "medium",
+      "concept_tag": "model_evaluation",
+      "distractors": [
+        {
+          "text": "92.5%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Miscalculating the proportion of correctly predicted samples by incorrectly dividing the number of correct predictions by a wrong total",
+          "_sim": 0.5
+        },
+        {
+          "text": "80%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Rounding down the proportion of correctly predicted samples, underestimating the accuracy",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "95%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Overestimating the proportion of correctly predicted samples due to not accounting for the total number of samples",
+          "_sim": 0.6666666666666666
+        },
+        {
+          "text": "85%",
+          "type": "mathematical",
+          "source": "llm",
+          "rationale": "Incorrectly calculating the percentage by misinterpreting the number of correct predictions in relation to the total number of samples",
+          "_sim": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "core_id": "EDGE002",
+      "stem": "What does the Python expression `len(set([1,1,2,2,3]))` return?",
+      "answer": "3",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_sets",
+      "distractors": [
+        {
+          "text": "5",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misconception that set does not remove duplicates",
+          "_sim": 0.0
+        },
+        {
+          "text": "1",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "misunderstanding that set only keeps the first occurrence of each element",
+          "_sim": 0.0
+        },
+        {
+          "text": "0",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "incorrect assumption that set removes all elements if there are duplicates",
+          "_sim": 0.0
+        },
+        {
+          "text": "4",
+          "type": "conceptual",
+          "source": "llm",
+          "rationale": "partial understanding of set, thinking it counts unique pairs or combinations",
+          "_sim": 0.0
+        }
+      ]
+    }
+  ]
+}

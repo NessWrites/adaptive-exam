@@ -1,0 +1,146 @@
+[
+{
+  "core_id": "MATH001",
+  "stem": "What is the value of 7 × 8?",
+  "answer": "56",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "multiplication"
+},
+{
+  "core_id": "MATH002",
+  "stem": "What is the value of π rounded to two decimal places?",
+  "answer": "3.14",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "constants"
+},
+{
+  "core_id": "MATH003",
+  "stem": "What is the simplified form of 6/12?",
+  "answer": "1/2",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "fractions"
+},
+{
+  "core_id": "STAT003",
+  "stem": "Approximately what percentage of data lies within two standard deviations of the mean in a normal distribution?",
+  "answer": "Approximately 95%",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "normal_distribution"
+},
+{
+  "core_id": "STAT004",
+  "stem": "What is the accuracy of the classifier if it correctly predicts 78 out of 100 samples?",
+  "answer": "78%",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "classification_metrics" 
+},
+{
+  "core_id": "STAT005",
+  "stem": "What is the approximate value of the confidence level used in a 95% confidence interval?",
+  "answer": "95 percent",
+  "type": "mathematical",
+  "difficulty": "easy",
+  "concept_tag": "confidence_interval"
+ 
+},
+{
+  "core_id": "DL001",
+  "stem": "Why is ReLU preferred over sigmoid in deep neural networks?",
+  "answer": "ReLU helps mitigate the vanishing gradient problem and enables faster training.",
+  "type": "conceptual",
+  "difficulty": "medium",
+  "concept_tag": "activation"
+  
+},
+{
+  "core_id": "ML002",
+  "stem": "What problem does regularization primarily address in machine learning?",
+  "answer": "It helps reduce overfitting by penalizing model complexity.",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "regularization"
+  
+},
+{
+  "core_id": "DSA001",
+  "stem": "What is the time complexity of binary search?",
+  "answer": "O(log n)",
+  "type": "theoretical",
+  "difficulty": "easy",
+  "concept_tag": "time_complexity"
+ 
+},
+{
+  "core_id": "OS001",
+  "stem": "What is the main purpose of a mutex in operating systems?",
+  "answer": "It ensures mutual exclusion by allowing only one thread to access a critical section at a time.",
+  "type": "theoretical",
+  "difficulty": "medium",
+  "concept_tag": "concurrency"
+  
+},
+{
+  "core_id": "PY001",
+  "stem": "What is the output of the following Python code?\n\nx = [1, 2, 3]\nprint(x[::-1])",
+  "answer": "[3, 2, 1]",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "python_lists"
+  
+},
+{
+  "core_id": "PY002",
+  "stem": "What does the `break` statement do in a Python loop?",
+  "answer": "It terminates the loop immediately and exits it.",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "python_control_flow"
+  
+},
+{
+  "core_id": "PY003",
+  "stem": "What is the output of the following code?\n\nprint(type({}))",
+  "answer": "<class 'dict'>",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "python_datatypes"
+ 
+},
+{
+  "core_id": "EDGE001",
+  "stem": "What is the approximate training accuracy of a model that predicts 45 out of 50 samples correctly?",
+  "answer": "90%",
+  "type": "mathematical",
+  "difficulty": "medium",
+  "concept_tag": "model_evaluation"
+  
+},
+{
+  "core_id": "EDGE002",
+  "stem": "What does the Python expression `len(set([1,1,2,2,3]))` return?",
+  "answer": "3",
+  "type": "conceptual",
+  "difficulty": "easy",
+  "concept_tag": "python_sets"
+  
+}
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

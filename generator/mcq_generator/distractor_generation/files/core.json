@@ -1,0 +1,437 @@
+
+   [
+   {
+      "core_id": "CS020",
+      "stem": "What does CPU stand for?",
+      "answer": "Central Processing Unit",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "computer_fundamentals",
+      "distractors": []
+    },
+    {
+      "core_id": "DSA020",
+      "stem": "What is the worst-case time complexity of binary search?",
+      "answer": "O(log n)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "searching_algorithms",
+      "distractors": []
+    },
+    {
+      "core_id": "CODE020",
+      "stem": "What is the output of the following Python code?\n\nx = 10\ndef f():\n    x = 5\n    return x\nprint(f(), x)",
+      "answer": "5 10",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_scope",
+      "distractors": []
+    },
+    {
+      "core_id": "MATH020",
+      "stem": "What is the derivative of x² with respect to x?",
+      "answer": "2x",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "calculus",
+      "distractors": []
+    },
+    {
+      "core_id": "STAT020",
+      "stem": "What is the mean of the data set: 2, 4, 6, 8?",
+      "answer": "5",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "mean",
+      "distractors": []
+    },
+    {
+      "core_id": "PHY020",
+      "stem": "What is the SI unit of force?",
+      "answer": "Newton",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "physics_units",
+      "distractors": []
+    },
+    {
+      "core_id": "ML020",
+      "stem": "Which algorithm is commonly used for binary classification?",
+      "answer": "Logistic Regression",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "classification",
+      "distractors": []
+    },
+    {
+      "core_id": "DL020",
+      "stem": "Which activation function is most commonly used in hidden layers of deep neural networks?",
+      "answer": "ReLU",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "activation_functions",
+      "distractors": []
+    },
+    {
+      "core_id": "MLOPS020",
+      "stem": "What is the primary purpose of Docker?",
+      "answer": "To containerize applications for consistent deployment",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "docker",
+      "distractors": []
+    },
+    {
+      "core_id": "GIT020",
+      "stem": "Which Git command is used to create a new branch?",
+      "answer": "git branch",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git",
+      "distractors": []
+    },
+    {
+      "core_id": "GENAI020",
+      "stem": "What is the main role of a prompt in large language models?",
+      "answer": "To guide the model's response by providing instructions or context",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "prompt_engineering",
+      "distractors": []
+    },
+    {
+      "core_id": "LLM020",
+      "stem": "What does 'token' mean in the context of LLMs?",
+      "answer": "A unit of text used as input or output by the model",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "llm_basics",
+      "distractors": []
+    },
+    {
+      "core_id": "DATA020",
+      "stem": "Why is data normalization important in machine learning?",
+      "answer": "It ensures features contribute equally to model training",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "data_preprocessing",
+      "distractors": []
+    },
+    {
+      "core_id": "PANDAS020",
+      "stem": "Which pandas function is used to remove missing values?",
+      "answer": "dropna()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_cleaning",
+      "distractors": []
+    },
+    {
+      "core_id": "SQL020",
+      "stem": "Which SQL clause is used to filter rows?",
+      "answer": "WHERE",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_basics",
+      "distractors": []
+    },
+    {
+      "core_id": "EDGE020",
+      "stem": "What is the time complexity of inserting an element at the beginning of a Python list?",
+      "answer": "O(n)",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "time_complexity",
+      "distractors": []
+    },
+    {
+      "core_id": "STAT021",
+      "stem": "What is the variance of a dataset where all values are identical?",
+      "answer": "0",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "variance",
+      "distractors": []
+    },
+    {
+      "core_id": "PHY021",
+      "stem": "What happens to kinetic energy if velocity is doubled?",
+      "answer": "It becomes four times",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "kinetic_energy",
+      "distractors": []
+    },
+    {
+      "core_id": "CODE021",
+      "stem": "What is the output of the following Python code?\n\nprint(len({1, 2, 2, 3}))",
+      "answer": "3",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_sets",
+      "distractors": []
+    },
+    {
+      "core_id": "MATH030",
+      "stem": "What is the value of log₂(8)?",
+      "answer": "3",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "logarithms",
+      "distractors": []
+    },
+    {
+      "core_id": "MATH031",
+      "stem": "What is 15% of 200?",
+      "answer": "30",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "percentage",
+      "distractors": []
+    },
+    {
+      "core_id": "STAT030",
+      "stem": "What is the median of the data: 3, 7, 9, 10, 15?",
+      "answer": "9",
+      "type": "mathematical",
+      "difficulty": "easy",
+      "concept_tag": "median",
+      "distractors": []
+    },
+    {
+      "core_id": "STAT031",
+      "stem": "If two events are independent, what is P(A ∩ B)?",
+      "answer": "P(A) × P(B)",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "probability",
+      "distractors": []
+    },
+    {
+      "core_id": "DSA030",
+      "stem": "What is the best-case time complexity of linear search?",
+      "answer": "O(1)",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "searching_algorithms",
+      "distractors": []
+    },
+    {
+      "core_id": "DSA031",
+      "stem": "Which data structure is used to implement BFS?",
+      "answer": "Queue",
+      "type": "theoretical",
+      "difficulty": "easy",
+      "concept_tag": "graph_traversal",
+      "distractors": []
+    },
+    {
+      "core_id": "CODE030",
+      "stem": "What is the output of the following Python code?\n\nprint(type((1)))",
+      "answer": "<class 'int'>",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_types",
+      "distractors": []
+    },
+    {
+      "core_id": "CODE031",
+      "stem": "What is the output of the following Python code?\n\nprint(type((1,)))",
+      "answer": "<class 'tuple'>",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_tuples",
+      "distractors": []
+    },
+    {
+      "core_id": "CODE032",
+      "stem": "What is the output of the following Python code?\n\nx = [1, 2]\ny = x.copy()\ny.append(3)\nprint(x)",
+      "answer": "[1, 2]",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "python_mutability",
+      "distractors": []
+    },
+    {
+      "core_id": "PHY030",
+      "stem": "What is the value of acceleration due to gravity on Earth (approximate)?",
+      "answer": "9.8 m/s²",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "gravity",
+      "distractors": []
+    },
+    {
+      "core_id": "PHY031",
+      "stem": "Which law states that for every action there is an equal and opposite reaction?",
+      "answer": "Newton's Third Law",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "newton_laws",
+      "distractors": []
+    },
+    {
+      "core_id": "ML030",
+      "stem": "Which metric is best suited for imbalanced classification problems?",
+      "answer": "F1-score",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "evaluation_metrics",
+      "distractors": []
+    },
+    {
+      "core_id": "ML031",
+      "stem": "What problem does regularization mainly address?",
+      "answer": "Overfitting",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "regularization",
+      "distractors": []
+    },
+    {
+      "core_id": "DL030",
+      "stem": "Why are residual connections used in deep networks?",
+      "answer": "To reduce vanishing gradient problems",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "resnet",
+      "distractors": []
+    },
+    {
+      "core_id": "DL031",
+      "stem": "Which layer is typically used for multi-class classification?",
+      "answer": "Softmax",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "output_layers",
+      "distractors": []
+    },
+    {
+      "core_id": "GENAI030",
+      "stem": "What does temperature control in text generation?",
+      "answer": "Randomness of the output",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "generation_parameters",
+      "distractors": []
+    },
+    {
+      "core_id": "GENAI031",
+      "stem": "Which technique improves LLM responses by providing examples?",
+      "answer": "Few-shot prompting",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "prompting",
+      "distractors": []
+    },
+    {
+      "core_id": "MLOPS030",
+      "stem": "Which Docker file instruction specifies the base image?",
+      "answer": "FROM",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "dockerfile",
+      "distractors": []
+    },
+    {
+      "core_id": "MLOPS031",
+      "stem": "Why is CI/CD important in MLOps?",
+      "answer": "To automate testing and deployment of models",
+      "type": "conceptual",
+      "difficulty": "medium",
+      "concept_tag": "mlops_pipeline",
+      "distractors": []
+    },
+    {
+      "core_id": "GIT030",
+      "stem": "Which Git command is used to upload local commits to a remote repository?",
+      "answer": "git push",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git_commands",
+      "distractors": []
+    },
+    {
+      "core_id": "GIT031",
+      "stem": "What is the purpose of .gitignore?",
+      "answer": "To specify files Git should not track",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "git_basics",
+      "distractors": []
+    },
+    {
+      "core_id": "SQL030",
+      "stem": "Which SQL function is used to count rows?",
+      "answer": "COUNT()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_aggregation",
+      "distractors": []
+    },
+    {
+      "core_id": "SQL031",
+      "stem": "Which SQL clause groups rows with the same values?",
+      "answer": "GROUP BY",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "sql_grouping",
+      "distractors": []
+    },
+    {
+      "core_id": "PANDAS030",
+      "stem": "Which pandas function is used to merge two DataFrames?",
+      "answer": "merge()",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_merge",
+      "distractors": []
+    },
+    {
+      "core_id": "PANDAS031",
+      "stem": "What does df.head() do?",
+      "answer": "Displays the first few rows of the DataFrame",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "pandas_basics",
+      "distractors": []
+    },
+    {
+      "core_id": "EDGE030",
+      "stem": "What is the space complexity of a recursive function with depth n?",
+      "answer": "O(n)",
+      "type": "theoretical",
+      "difficulty": "medium",
+      "concept_tag": "space_complexity",
+      "distractors": []
+    },
+    {
+      "core_id": "EDGE031",
+      "stem": "What happens if a Python function has no return statement?",
+      "answer": "It returns None",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_functions",
+      "distractors": []
+    },
+    {
+      "core_id": "EDGE032",
+      "stem": "What is the result of bool(0)?",
+      "answer": "False",
+      "type": "conceptual",
+      "difficulty": "easy",
+      "concept_tag": "python_truthiness",
+      "distractors": []
+    }
+  ]
+
+
+
+
+
+
+
+
+
+  
+
