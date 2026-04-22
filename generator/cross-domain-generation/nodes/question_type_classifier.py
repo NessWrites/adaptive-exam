@@ -32,7 +32,7 @@ def question_type_classifier(state: GraphState) -> GraphState:
     if result["question_type"] not in valid_types:
         return {
             **state,
-            "error": f"Invalid question type returned: {result["question_type"]}"
+            "error": f"Invalid question type returned: {result['question_type']}"
         }
     return {
         **state,

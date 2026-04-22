@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.routes import exam_route
+from backend.app.routes import cross_domain_generation_route
 from backend.app.core.config import get_settings
 from generator.question_gen_system.routes import routes
 from generator.mcq_generator.api.routes import router as mcq_generator_router 
@@ -24,6 +25,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(exam_route.router)
+app.include_router(cross_domain_generation_route.router)
 app.include_router(routes.router, prefix="/questions", tags= ['Question Generator'])
 app.include_router(mcq_generator_router)
 

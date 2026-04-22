@@ -1,7 +1,7 @@
 import json
 from state import GraphState
 
-def load_topics(path: str = "data/topics.json")-> dict:
+def load_topics(path: str = "generator/cross-domain-generation/data/topics.json")-> dict:
     with open(path, "r") as f:
         data = json.load(f)
     return {item["topic"]: item["learning_objective"] for item in data}

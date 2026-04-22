@@ -37,9 +37,10 @@ services:
     ports:
       - "8000:8000"
     # command: python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
-    command: bash -c "python -m alembic -c backend/alembic.ini upgrade head && python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload"
+    command: bash -c "python -m alembic -c backend/alembic.ini upgrade head && python -m backend.app.database.postgresql.seed && python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
       - .:/app
+      - ./quiz_database.sql:/app/quiz_database.sql
     depends_on:
       db:
         condition: service_healthy
