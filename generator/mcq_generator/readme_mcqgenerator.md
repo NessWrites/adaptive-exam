@@ -20,11 +20,15 @@ mcq_generator/
 ├── db/
 │   └── repository.py         # SQLAlchemy repository for polymorphic fetch/save logic
 ├── schemas/
-│   └── mcq_schema.py         # Pydantic models for structured LLM outputs and API responses
+│   ├── mcq_schema.py         # Pydantic models for structured LLM outputs
+│   └── evaluator_schema.py   # Schemas for the LLM evaluation scores
 ├── services/
 │   ├── mcq_service.py        # Orchestration layer tying engines, evaluators, and DB together
 │   ├── distractor_bridge.py  # Connects the core system to the Distractor Manager
-│   └── distractor_manager.py # Specialized agents generating plausible wrong options (Distractors)
+│   └── distractor_config_adapter.py # Bridges Pydantic settings to the Distractor sub-module
+├── distractor_generation/    # Specialized sub-module for agentic distractor generation
+│   ├── distractor_manager.py # Orchestrates agents generating plausible wrong options
+│   └── agents/               # Numeric and Conceptual distractor agents
 └──  readme_mcqgenerator.md   # This documentation file!
 ```
 
@@ -49,7 +53,7 @@ For coding problems (leveraging actual code, test cases, and configurations):
 2. **Fetch Source:** `MCQRepository` fetches the polymorphic `CodeQuestion`.
 3. **Unified Code Generation:** `MCQEngine` uses the **code-specific prompt** to generate the *entire* MCQ at once (Correct Answer + 3 Buggy/Flawed Distractors). 
     - *Why bypass the Distractor Bridge?* Generating buggy code requires full context of the algorithm, which standard distractor agents cannot handle.
-4. **Formatting Options:** Returns a specific `mcq_category` (e.g., `code_fill_blank`, `code_find_bug`) and an optional `stem_code` body.
+4. **Formatting Options:** Returns a specific `mcq_category` (e.g., `code_fill_blank`, `code_find_bug`, `code_implementation`) and an optional `stem_code` body.
 5. **Evaluation & Storage:** Evaluated by the `MCQEvaluator` and persisted with `mcq_category` and `stem_code`, linked directly to the `CodeQuestion` parent via `derived_from_code_id`.
 
 ---
@@ -76,7 +80,7 @@ We use SQLAlchemy's **Polymorphic Inheritance** alongside Foreign Keys to cleanl
 
 - **`Question` (Base Table):** Contains `unique_id`, `domain`, `concept_tag`, `question_text`, etc.
 - **`SubjectiveQuestion` (Child):** Inherits from `Question`. Adds fields like `mark_schema`.
-- **`CodeQuestion` (Child):** Inherits from `Question`. Adds fields like `configurations`, `test_cases`, `function_name`.
+- **`CodeQuestion` (Child):** Inherits from `Question`. Adds fields like `configurations`, `markscheme` (test cases), `function_name`.
 - **`MCQQuestion` (Child):** Inherits from `Question`. Saved in the `mcq_questions_converted` table. Contains fields:
   - `derived_from_subjective_id`: FK to subjective question (Nullable).
   - `derived_from_code_id`: FK to code question (Nullable).
@@ -109,6 +113,7 @@ if (mcq.mcq_category === "text") {
         // Render inside a <pre><code class="language-python"> Highlighting Block
         // code_fill_blank will show ??? where students need to guess
         // code_find_bug will show flawed logic
+        // code_implementation will show the problem statement (stem_code is null)
         renderSyntaxHighlightedBlock(mcq.stem_code);
     }
     
@@ -130,6 +135,8 @@ In your root `.env` file, ensure the following API keys are present:
 ```env
 # Required for core MCQ generation and Evaluation
 GEMINI_API_KEY=your_gemini_key_here
+
+# Optional: Separate key for validation (defaults to GEMINI_API_KEY if not used)
 GEMINI_API_KEY_FOR_VALIDATION=your_gemini_key_here
 
 # Required for the Distractor Engine

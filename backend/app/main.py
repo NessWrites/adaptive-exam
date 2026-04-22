@@ -4,7 +4,10 @@ from backend.app.routes import exam_route
 from backend.app.core.config import get_settings
 from generator.question_gen_system.routes import routes
 from generator.mcq_generator.api.routes import router as mcq_generator_router 
+from backend.app.core.logging import setup_logging
+
 settings = get_settings()
+logger = setup_logging("adaptive_exam_api")
 
 app = FastAPI(
     title="Adaptive Exam API",
@@ -30,6 +33,7 @@ app.include_router(mcq_generator_router)
 @app.get("/")
 async def root():
     """Root endpoint"""
+    logger.info("Accessing root endpoint")
     return {
         "message": "Adaptive Exam API",
         "version": "1.0.0",
