@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "variance_and_standard_deviation",
+    "topic_2": "poisson_process",
+    "learning_objective_1": "Calculate the variance and standard deviation of a random variable from its distribution and interpret them as measures of spread around the mean.",
+    "learning_objective_2": "Model the number of events occurring in a fixed interval using a Poisson distribution and verify when the Poisson process assumptions are satisfied.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 1,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Network Traffic Modeling",
+    "domain": "Computer Networks",
+    "scenario": "A network engineer needs to model the traffic on a network. The engineer uses a Poisson distribution to model the number of packets arriving at a node in a fixed interval and verifies if the Poisson process assumptions are satisfied. Then, the engineer calculates the variance and standard deviation of the packet arrival rate to understand its spread around the mean and optimize network performance.",
+    "overall_score": 0.8800000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.9,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "Both learning objectives are crucial to the network traffic modeling, and the scenario naturally implies measurable structures. The domain of computer networks makes the mathematical structure feel very natural, and the cognitive load is well-balanced between the two topics."
+  },
+  "best_question": {
+    "question": "Suppose the packet size distribution has a significant impact on network bandwidth usage. If the network engineer observes an average packet arrival rate of 20 packets per second with a variance of 25, what can be inferred about the Poisson process assumptions and the resulting standard deviation of the packet arrival rate? How would this information guide the engineer's decision to adjust network bandwidth allocation?",
+    "expected_concepts": [
+      "variance_and_standard_deviation",
+      "poisson_process"
+    ],
+    "overall_score": 0.8450000000000001,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.9,
+      "cognitive_load_balance": 0.8,
+      "decomposability": 0.8,
+      "domain_coherence": 0.8,
+      "boundary_adherence": 0.9
+    },
+    "reason": "The question requires the student to infer about the Poisson process assumptions based on the given variance and average packet arrival rate, which maps to Learning Objective 2, and also calculate the standard deviation, which maps to Learning Objective 1. The question balances the cognitive load between the two topics and stays within the domain of network bandwidth allocation."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "The question provides an average packet arrival rate of 20 packets per second and a variance of 25, and asks what can be inferred about the Poisson process assumptions and the resulting standard deviation of the packet arrival rate.",
+      "I need to recall the properties of a Poisson distribution, where the variance is equal to the mean.",
+      "I should compare the given variance with the average packet arrival rate to determine if the Poisson process assumptions are satisfied.",
+      "I need to calculate the standard deviation using the given variance."
+    ],
+    "attempt": "The given variance is 25, which is not equal to the average packet arrival rate of 20 packets per second. This suggests that the Poisson process assumptions may not be satisfied. The standard deviation is \u221a25 = 5 packets per second. This information can guide the engineer's decision to adjust network bandwidth allocation, as it indicates a higher uncertainty in the packet arrival rate than expected under Poisson assumptions.",
+    "conclusion": "The Poisson process assumptions may not be satisfied, and the standard deviation of the packet arrival rate is 5 packets per second.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provides enough information, and I have the necessary knowledge of Poisson distribution to solve it, but I'm not entirely sure about the implications of the variance not matching the mean."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 489,
+        "output_tokens": 801,
+        "total_tokens": 1290,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1207,
+        "output_tokens": 378,
+        "total_tokens": 1585,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 436,
+        "output_tokens": 56,
+        "total_tokens": 492,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 1105,
+        "output_tokens": 920,
+        "total_tokens": 2025,
+        "requests": 2
+      },
+      "student_agent": {
+        "input_tokens": 1605,
+        "output_tokens": 2148,
+        "total_tokens": 3753,
+        "requests": 2
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 2920,
+        "output_tokens": 488,
+        "total_tokens": 3408,
+        "requests": 2
+      }
+    },
+    "total": {
+      "input_tokens": 7762,
+      "output_tokens": 4791,
+      "total_tokens": 12553,
+      "requests": 9
+    }
+  }
+}

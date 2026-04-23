@@ -1,7 +1,7 @@
 import json
 from config import get_llm, update_token_usage
 from state import GraphState
-from prompts.question_generator import QUESTION_GENERATOR_PROMPT
+from prompts.question_generator import QUESTION_GENERATOR_PROMPT, QUESTION_GENERATOR_PROMPT_V1
 
 
 llm = get_llm(temperature=1)
@@ -45,7 +45,7 @@ def question_generator(state: GraphState) -> GraphState:
     top_scenario = state["top_scenario"]
     feedback = state.get("question_feedback", None)
 
-    prompt = QUESTION_GENERATOR_PROMPT.format(
+    prompt = QUESTION_GENERATOR_PROMPT_V1.format(
         topic_1=state["topic_1"],
         learning_objective_1=state["learning_objective_1"],
         topic_2=state["topic_2"],

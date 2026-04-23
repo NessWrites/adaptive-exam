@@ -1,0 +1,106 @@
+{
+  "run_info": {
+    "topic_1": "variance_and_standard_deviation",
+    "topic_2": "poisson_process",
+    "learning_objective_1": "Calculate the variance and standard deviation of a random variable from its distribution and interpret them as measures of spread around the mean.",
+    "learning_objective_2": "Model the number of events occurring in a fixed interval using a Poisson distribution and verify when the Poisson process assumptions are satisfied.",
+    "stratum": "same",
+    "question_type": "mixed",
+    "scenario_retry_count": 0,
+    "question_retry_count": 2,
+    "success": true
+  },
+  "top_scenario": {
+    "title": "Quality Control in Manufacturing",
+    "domain": "Industrial Engineering",
+    "scenario": "A manufacturing company wants to improve the quality of its products. It models the number of defects in a batch using a Poisson distribution and checks the assumptions. Then, it calculates the variance and standard deviation of the defect sizes to understand the spread around the mean defect size.",
+    "overall_score": 0.8600000000000001,
+    "dimension_scores": {
+      "learning_objective_fidelity": 0.9,
+      "cognitive_load_balance": 0.8,
+      "numerical_fertility": 0.9,
+      "conceptual_depth": 0.8,
+      "domain_coherence": 0.9
+    },
+    "reason": "The scenario tightly integrates both learning objectives, and the industrial engineering domain makes the mathematical structure feel very natural, revealing non-obvious insights into quality control."
+  },
+  "best_question": {
+    "question": "A manufacturing company uses a Poisson distribution to model the number of defects in a batch, with an average defect rate per batch of 5 defects. If the company wants to know the probability of having exactly 3 defects in a batch, calculate this probability using the Poisson distribution. Additionally, given defect size data of 1.2, 1.5, 1.8, 2.1, and 2.3, calculate the variance and standard deviation of the defect sizes and explain how these metrics relate to the quality control process.",
+    "expected_concepts": [
+      "poisson_process",
+      "variance_and_standard_deviation"
+    ],
+    "overall_score": 0.7950000000000002,
+    "dimension_scores": {
+      "learning_objective_reflection": 0.8,
+      "cognitive_load_balance": 0.7,
+      "decomposability": 0.9,
+      "domain_coherence": 0.8,
+      "boundary_adherence": 0.8
+    },
+    "reason": "The question requires the student to use both the Poisson distribution and calculate the variance and standard deviation of the defect sizes, which maps to both learning objectives. The student's thought process and attempt show a clear decomposition of the problem into smaller pieces, but the question may feel slightly forced in terms of domain coherence."
+  },
+  "student_attempt": {
+    "thought_process": [
+      "This question involves two parts: calculating the probability of exactly 3 defects in a batch using the Poisson distribution, and calculating the variance and standard deviation of the given defect sizes.",
+      "For the first part, I need to use the Poisson distribution formula: P(X = k) = (e^(-\u03bb) * (\u03bb^k)) / k!, where \u03bb is the average defect rate per batch and k is the number of defects.",
+      "For the second part, I will follow the same steps as in question 1 to calculate the variance and standard deviation of the defect sizes.",
+      "I also need to relate these metrics to the quality control process."
+    ],
+    "attempt": "First, I calculate the probability of exactly 3 defects in a batch: P(X = 3) = (e^(-5) * (5^3)) / 3! = (0.0067 * 125) / 6 = 0.1396. Then, I calculate the average defect size: (1.2 + 1.5 + 1.8 + 2.1 + 2.3) / 5 = 1.78. The variance is: ((1.2-1.78)^2 + (1.5-1.78)^2 + (1.8-1.78)^2 + (2.1-1.78)^2 + (2.3-1.78)^2) / 5 = ((-0.58)^2 + (-0.28)^2 + (0.02)^2 + (0.32)^2 + (0.52)^2) / 5 = (0.3364 + 0.0784 + 0.0004 + 0.1024 + 0.2704) / 5 = 0.788 + 0.0784 + 0.0004 + 0.1024 + 0.2704 = 1.2388 / 5 = 0.24776. The standard deviation is the square root of the variance: sqrt(0.24776) = 0.4977. In the context of quality control, the probability of exactly 3 defects in a batch can be used to monitor the defect rate, and the variance and standard deviation of defect sizes can be used to monitor the consistency of defect sizes.",
+    "conclusion": "The probability of exactly 3 defects in a batch is approximately 0.1396, the variance of the defect sizes is approximately 0.24776, and the standard deviation is approximately 0.4977.",
+    "student_confidence": 0.7,
+    "solvability": {
+      "has_enough_context": true,
+      "attemptable_within_knowledge": true,
+      "solvable": true,
+      "reason": "The question provided enough information to calculate the probability, variance, and standard deviation, and I have the necessary knowledge to perform these calculations."
+    }
+  },
+  "token_usage": {
+    "per_node": {
+      "scenario_generator": {
+        "input_tokens": 489,
+        "output_tokens": 768,
+        "total_tokens": 1257,
+        "requests": 1
+      },
+      "scenario_evaluator": {
+        "input_tokens": 1174,
+        "output_tokens": 342,
+        "total_tokens": 1516,
+        "requests": 1
+      },
+      "question_type_classifier": {
+        "input_tokens": 421,
+        "output_tokens": 61,
+        "total_tokens": 482,
+        "requests": 1
+      },
+      "question_generator": {
+        "input_tokens": 9568,
+        "output_tokens": 2868,
+        "total_tokens": 12436,
+        "requests": 3
+      },
+      "student_agent": {
+        "input_tokens": 2446,
+        "output_tokens": 3907,
+        "total_tokens": 6353,
+        "requests": 3
+      },
+      "pedagogical_prior_evaluator": {
+        "input_tokens": 4028,
+        "output_tokens": 629,
+        "total_tokens": 4657,
+        "requests": 2
+      }
+    },
+    "total": {
+      "input_tokens": 18126,
+      "output_tokens": 8575,
+      "total_tokens": 26701,
+      "requests": 11
+    }
+  }
+}

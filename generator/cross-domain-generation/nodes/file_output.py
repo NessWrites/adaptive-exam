@@ -62,7 +62,7 @@ def file_output(state: GraphState) -> GraphState:
             }
         }
 
-        filename = os.path.join(OUTPUT_DIR, f"{topic_1}__{topic_2}.json")
+        filename = os.path.join(OUTPUT_DIR, f"qgv1_{topic_1}__{topic_2}.json")
         with open(filename, "w") as f:
             json.dump(output, f, indent=2)
 
