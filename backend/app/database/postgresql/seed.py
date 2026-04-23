@@ -4,6 +4,12 @@ import re
 from io import StringIO
 
 def run_seed():
+    sequences = [
+    "SELECT setval(pg_get_serial_sequence('questions', 'unique_id'), MAX(unique_id)) FROM questions",
+    "SELECT setval(pg_get_serial_sequence('exam_sessions', 'session_id'), MAX(session_id)) FROM exam_sessions",
+    "SELECT setval(pg_get_serial_sequence('responses', 'response_id'), MAX(response_id)) FROM responses",
+    ]
+
     conn = psycopg2.connect(os.getenv("DATABASE_URL"))
     conn.autocommit = True  # each statement runs independently
     cursor = conn.cursor()
@@ -56,6 +62,12 @@ def run_seed():
                 print(f"Loaded: {header[:60]}")
             except Exception as e:
                 print(f"COPY error: {e}")
+        for seq in sequences:
+            try:
+                cursor.execute(seq)
+                print(f"Sequence reset: {seq[:60]}")
+            except Exception as e:
+                print(f"Sequence error: {e}")
 
         print("Seeding complete.")
     else:
