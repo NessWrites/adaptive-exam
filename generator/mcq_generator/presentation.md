@@ -90,23 +90,38 @@ erDiagram
         string domain
         string concept_tag
         text question_text
+        json options
+        json correct_answer
         string question_type "(Discriminator)"
+        float[] a_values "IRT discrimination"
+        float b_value "IRT difficulty"
+        string calibration_status
     }
     SUBJECTIVE_QUESTIONS {
         int id FK
         json mark_schema
+        float bloom_level
+        int total_marks
     }
     CODE_QUESTIONS {
         int id FK
         text placeholder
         string function_name
+        json configurations "allowed_imports, data_type"
+        json markscheme "test cases"
+        int total_marks
+        int timeout
+        float bloom_level
     }
     MCQ_QUESTIONS_CONVERTED {
         int id FK
         int derived_from_subjective_id FK
         int derived_from_code_id FK
+        int bloom_level
         string mcq_category
         text stem_code
+        text explanation
+        json validation_score
     }
     
     QUESTIONS ||--|{ SUBJECTIVE_QUESTIONS : extends
